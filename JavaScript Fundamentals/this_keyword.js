@@ -55,17 +55,39 @@ function Car(name) {
     console.log(this);
   };
 }
-let carObj = new Car("santro");
-carObj.getObj();
+let carObj1 = new Car("santro");
+// carObj1.getObj(); UNCOMMENT - will display Car { name: 'santro', getObj: Function }
+
+let carObj2 = Car("maruti");
+// carObj2.getObj(); UNCOMMENT - will throw "Cannot read properties of undefined" error, since carObj2 here will store the returned value of
+// the Car function (undefined).
 
 /*
 
-	- inside an arrow function (doesn't provide their own "this" binding), "this" retains the "this" value of the enclosing lexical context.
+- Arrow functions do not create their own execution context. Hence, inside an arrow function, "this" retains the "this" value of the enclosing 
+  lexical context, i.e., inherits the "this" value from the outer context "where the arrow function is defined".
 
 */
 
+let arrowFunc = () => {
+  console.log(this);
+};
+arrowFunc(); // UNCOMMENT - will display {} in Node. ???
+
+let arrowCarObj = {
+  name: "scorpio",
+  getName: () => {
+    console.log(this);
+  },
+};
+arrowCarObj.getName(); // UNCOMMENT - will display {} in Node. ???
+
 /* 
 
-NOTE: Function.prototype.bind() can set the value a function's this regardless of how it's called. 
+NOTE: 
+
+    - Arrow functions cannot be used as constructor functions. 
+    - call() and apply() methods of Function type can be used to set the "this" value when calling a function.  
+    - Function.prototype.bind() can set a value to a function's "this" regardless of how the function is called. 
 
 */
