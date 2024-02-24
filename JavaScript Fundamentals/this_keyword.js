@@ -72,7 +72,8 @@ let carObj2 = Car("maruti");
 let arrowFunc = () => {
   console.log(this);
 };
-arrowFunc(); // UNCOMMENT - will display {} in Node. ???
+arrowFunc(); // UNCOMMENT - will display window object in browser. In Node, it will display {} since the properties of the global object
+//                          are shadowed by local variables, making it effectively undefined. ???
 
 let arrowCarObj = {
   name: "scorpio",
@@ -82,11 +83,13 @@ let arrowCarObj = {
 };
 arrowCarObj.getName(); // UNCOMMENT - will display {} in Node. ???
 
+// Example of constructor function using arrow function as property.
+
 /* 
 
 NOTE: 
 
-    - Arrow functions cannot be used as constructor functions. 
+    - Arrow functions should not be used as a method or a constructor function. ???  
     - call() and apply() methods of Function type can be used to set the "this" value when calling a function.  
     - Function.prototype.bind() can set a value to a function's "this" regardless of how the function is called. 
 
