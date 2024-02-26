@@ -1,40 +1,56 @@
-function Vehicle() {
+// -------------------------------------------------------------------------------------------------------------
+// Standalone Function, i.e., function declared in global scope
+// -------------------------------------------------------------------------------------------------------------
+
+// Example 1:
+function Example1() {
   console.log(this);
 }
-// Vehicle(); // UNCOMMENT - will display window object in browser and global object in Node.
 
-/*
+// Example 2:
+let Vehicle = function () {
+  console.log(this);
+};
+Vehicle(); // UNCOMMENT - will display window object in browser and global object in Node.
 
-	2. Inside a method of an object, "this" refers to the object.
+// Example 3:
+const example3 = function () {
+  console.log(this);
+};
+example3();
 
-*/
+// Example 4:
+const example4 = function () {
+  console.log(this);
+};
+example4();
 
-// Object Literals: Example 1
+// -------------------------------------------------------------------------------------------------------------
+// Object Literal
+// -------------------------------------------------------------------------------------------------------------
+
+// Example 1:
 let car = {
   brand: "tata",
-  belongsTo: function () {
-    console.log(this);
-  },
+  belongsTo: Vehicle,
 };
-//car.belongsTo(); // UNCOMMENT -  will display { brand: 'tata', belongsTo: Function }
+car.belongsTo(); // UNCOMMENT -  will display { brand: 'tata', belongsTo: Function }
 
-// Object Literals: Example 2
+// Example 2:
 let bike = {
   name: "Honda",
 };
 bike.belongsTo = car.belongsTo;
 // bike.belongsTo(); // UNCOMMENT - will display { brand: 'Honda', belongsTo: Function }
 
+// Example 3:
 let truck = car.belongsTo;
-// truck(); // UNCOMMENT - will display the window object in browser and global object in Node, since func is being called as a standalone
-// 			   			   function from the global context, not as a method of the car object.
+// truck(); // UNCOMMENT - will display the window object in browser and global object in Node, since truck is being
+//                         called as a standalone function from the global context, not as a method of the car object.
 
-/*
-
-	3. inside a method of a constructor function, "this" refers to the calling object.
-
-*/
-
+// -------------------------------------------------------------------------------------------------------------
+// Constructor Function
+// -------------------------------------------------------------------------------------------------------------
 function Car(name) {
   this.name = name;
   this.getObj = function () {
@@ -48,6 +64,10 @@ let carObj2 = Car("maruti");
 // carObj2.getObj(); UNCOMMENT - will throw "Cannot read properties of undefined" error, since carObj2 here will store the returned value of
 // the Car function (undefined).
 
+// -------------------------------------------------------------------------------------------------------------
+// Arrow Functions
+// -------------------------------------------------------------------------------------------------------------
+
 /*
 
 - Arrow functions do not create their own execution context. Hence, inside an arrow function, "this" retains the "this" value of the enclosing 
@@ -58,7 +78,7 @@ let carObj2 = Car("maruti");
 let arrowFunc = () => {
   console.log(this);
 };
-arrowFunc(); // UNCOMMENT - will display window object in browser. In Node, it will display {} since the properties of the global object
+// arrowFunc(); // UNCOMMENT - will display window object in browser. In Node, it will display {} since the properties of the global object
 //                          are shadowed by local variables, making it effectively undefined. ???
 
 let arrowCarObj = {
@@ -67,7 +87,7 @@ let arrowCarObj = {
     console.log(this);
   },
 };
-arrowCarObj.getName(); // UNCOMMENT - will display {} in Node. ???
+// arrowCarObj.getName(); // UNCOMMENT - will display {} in Node. ???
 
 // Example of constructor function using arrow function as property.
 
