@@ -1,6 +1,6 @@
 /* 
 -------------------------------------------------------------------------------------------------------------------------------------------
-Understanding the binding of "this" keyword in a function execution context:
+
 -------------------------------------------------------------------------------------------------------------------------------------------
 
 - The binding of "this" keyword in a function execution context depends on how the function is invoked (runtime binding). For example: 
