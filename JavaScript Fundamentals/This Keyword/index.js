@@ -1,17 +1,3 @@
-/* 
--------------------------------------------------------------------------------------------------------------------------------------------
-
--------------------------------------------------------------------------------------------------------------------------------------------
-
-- The binding of "this" keyword in a function execution context depends on how the function is invoked (runtime binding). For example: 
-
-	1. Inside a function declared in global context (a.k.a standalone function), "this" refers to:
-		- the "Window" object (exposes the functionalities of the web browser to the webpage) in browser. 
-		- the "Global" object (exposes the functionalities to work with server, for example, access file system or perform network requests) in 
-		  Node.
-
-*/
-
 function Vehicle() {
   console.log(this);
 }
