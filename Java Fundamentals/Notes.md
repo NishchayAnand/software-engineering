@@ -22,6 +22,8 @@ To compile your Java program, open your terminal, navigate to the directory wher
 javac filename.java
 ```
 
+The above command will run the java compiler to compiler your Java program to bytecode and save it in your defined classpath. ???
+
 > For the above command to work, the location of the `./bin` folder of the your JDK directory should be added to your system's path environment variable. adding full directory path of the Java SE SDK bin directory to your PATH environment variable allows you to run the Java compiler and the Java application launcher from any directory. You should have only one bin directory for the JDK in the path at a time (those following the first are ignored). ??
 
 ## Java Virtual Machine (JVM)
