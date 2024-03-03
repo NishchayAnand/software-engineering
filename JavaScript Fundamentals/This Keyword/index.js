@@ -6,24 +6,25 @@
 function Example1() {
   console.log(this);
 }
+// Example1();
 
 // Example 2:
 let Vehicle = function () {
   console.log(this);
 };
-Vehicle(); // UNCOMMENT - will display window object in browser and global object in Node.
+//Vehicle(); // UNCOMMENT - will display window object in browser and global object in Node.
 
 // Example 3:
 const example3 = function () {
   console.log(this);
 };
-example3();
+//example3();
 
 // Example 4:
 const example4 = function () {
   console.log(this);
 };
-example4();
+//example4();
 
 // -------------------------------------------------------------------------------------------------------------
 // Object Literal
@@ -32,9 +33,19 @@ example4();
 // Example 1:
 let car = {
   brand: "tata",
-  belongsTo: Vehicle,
+  belongsTo: () => {
+    console.log(this);
+  },
 };
 car.belongsTo(); // UNCOMMENT -  will display { brand: 'tata', belongsTo: Function }
+
+// Example 2:
+const myObject = {
+  myMethod: () => {
+    console.log(this);
+  },
+};
+//myObject.myMethod();
 
 // Example 2:
 let bike = {

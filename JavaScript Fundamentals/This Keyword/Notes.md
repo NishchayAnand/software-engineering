@@ -1,24 +1,33 @@
-# Understanding "this" Keyword
+# Understanding "this" Keyword in Browser Environment
 
-The binding of "this" keyword in a **function execution context** depends on how the function is invoked (i.e., the binding is decided at runtime).
+The `this` keyword is a reference variable pointing to the object that is currently executing the code. (wrong -> consider arrow function as method of an object)
 
-## Inside a Standalone Function
+In JavaScript, it is usually determined by how a function referencing the "this" keyword is invoked.
 
-Inside a function declared in global context, "this" refers to:
+## In Standalone Regular Functions
 
-- the `Window` object in browser environment.
-- the `Global` object in Node.js environment.
+For a function in the global context, "this" keyword refers to the **global** object.
+
+> In a browser environment, the global object is `window`.
 
 ```
-let Vehicle = function() {
+// Regular Function declared using function expression in the global context.
+
+const Vehicle = function() {
   console.log(this);
 }
 Vehicle();
+
+// Above code will display window object in browser environment and global object in Node.js environment.
 ```
 
-> Above code will display **window object in browser** and **global object in Node**.
+## In Standalone Arrow Functions
 
-## Inside a Method of an Object Literal
+## In Constructor Function
+
+Inside a method of a constructor function, "this" refers to the object instance.
+
+## In Methods of an Object Literal
 
 Inside a method of an object literal, "this" refers to the object itself.
 
@@ -31,5 +40,3 @@ car.belongsTo();
 ```
 
 > Above code will display `{ brand: 'tata', belongsTo: [Function: Vehicle] }`.
-
-## Inside a Constructor Function
