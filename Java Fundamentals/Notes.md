@@ -16,23 +16,27 @@ It is largely open-source, with the `OpenJDK` being the reference implementation
 
 The Java compiler, `javac`, is responsible for translating Java source code (files with .java extension) into **bytecode** (files with .class extension), a low-level representation of the source code.
 
-> **_NOTE:_** The **javac compiler** is typically found in the `bin` directory of the **Java Development Kit (JDK)** installation on your system.
+> **_NOTE:_** The javac compiler is typically found in the `bin` directory of the Java Development Kit (JDK) installation on your system.
 
-To compile a Java program, open your terminal, navigate to the directory where the Java program is saved and run the following command:
+To compile a `HelloWorld.java` file, open your terminal, navigate to the directory where the file is saved and run the following command:
 
 ```
-javac [filename].java
+javac HelloWorld.java
 ```
 
-The javac command will compile `[filename].java` and save the compiled bytecode in a `[filename].class` file in the same directory as `[filename].java`.
+The javac command will compile `HelloWorld.java` and save the compiled bytecode in a `HelloWorld.class` file in the same directory as `HelloWorld.java`.
 
-> **_NOTE:_** The full directory path of the **JDK's bin directory** should be added to your system's PATH environment variable to allow the **javac compiler** to work from any directory.
+> **_NOTE:_** The full directory path of the JDK's bin directory should be added to your system's PATH environment variable to allow the javac compiler to work from any directory.
 
 ## Java Virtual Machine (JVM)
 
-Java Virtual Machine (JVM) is a sophisticated runtime environment that performs several tasks, including bytecode verification, memory management, and execution of the bytecode on the host machine.
+Java Virtual Machine (JVM) is a sophisticated runtime environment whose primary purpose is to execute Java bytecode.
 
-> **_NOTE:_** The primary purpose of **Java Virtual Machine (JVM)** is to execute Java bytecode.
+```
+java HelloWorld.class
+```
+
+that performs several tasks, including bytecode verification, memory management, and execution of the bytecode on the host machine.
 
 Here's a breakdown of what the JVM does with Java bytecode:
 
