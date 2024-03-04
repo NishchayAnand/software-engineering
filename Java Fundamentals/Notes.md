@@ -30,6 +30,26 @@ The javac command will compile `[filename].java` and save the compiled bytecode 
 
 ## Java Virtual Machine (JVM)
 
-Runtime environment responsible for interpreting bytecode into machine understandable code and executing it on your machine.
+Java Virtual Machine (JVM) is a sophisticated runtime environment that performs several tasks, including bytecode verification, memory management, and execution of the bytecode on the host machine.
 
-Includes a comprehensive set of libraries, providing pre-built classes and methods for performing common tasks in Java programming.
+> **_NOTE:_** The primary purpose of **Java Virtual Machine (JVM)** is to execute Java bytecode.
+
+Here's a breakdown of what the JVM does with Java bytecode:
+
+- **Loading**: Loads the bytecode from the `.class` files into memory.
+
+- **Verification**: Verifies the bytecode to ensure it adheres to certain rules. This process helps prevent potential security vulnerabilities and ensures the safety and stability of the Java environment.
+
+- **Memory Management**: The JVM manages memory allocation and deallocation, including garbage collection, to ensure efficient memory usage and prevent memory leaks.
+
+- **Execution**: Executes the verified bytecode using an **execution engine**. This engine may use `interpretation`, `Just-In-Time (JIT) compilation`, or a combination of both to translate the bytecode into **machine code** that can be executed directly by the CPU.
+
+Other advantages offered by JVM include:
+
+- **Security**: The JVM provides a secure execution environment for Java applications, enforcing access controls and preventing unauthorized access to system resources.
+
+- **Portability**: The JVM abstracts away hardware and operating system differences, allowing Java applications to run on any platform that supports the JVM.
+
+## Core Java Libraries
+
+Java Development Kit (JDK) includes a comprehensive set of libraries, providing pre-built classes and methods for performing common tasks in Java programming.
