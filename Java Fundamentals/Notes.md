@@ -21,7 +21,7 @@ The Java compiler, `javac`, is responsible for translating Java source code (fil
 To compile a Java program, open your terminal, navigate to the directory where the Java program is saved and run the following command:
 
 ```
->> javac [filename].java
+javac [filename].java
 ```
 
 The javac command will compile `[filename].java` and save the compiled bytecode in a `[filename].class` file in the same directory as `[filename].java`.
@@ -40,11 +40,13 @@ Here's a breakdown of what the JVM does with Java bytecode:
 
 - **Verification**: Verifies the bytecode to ensure it adheres to certain rules. This process helps prevent potential security vulnerabilities and ensures the safety and stability of the Java environment.
 
-- **Memory Management**: The JVM manages memory allocation and deallocation, including garbage collection, to ensure efficient memory usage and prevent memory leaks.
-
 - **Execution**: Executes the verified bytecode using an **execution engine**. This engine may use `interpretation`, `Just-In-Time (JIT) compilation`, or a combination of both to translate the bytecode into **machine code** that can be executed directly by the CPU.
 
+(continue from here)
+
 Other advantages offered by JVM include:
+
+- **Memory Management**: Performs automatic memory management memory allocation and deallocation, including garbage collection, to ensure efficient memory usage and prevent memory leaks.
 
 - **Security**: The JVM provides a secure execution environment for Java applications, enforcing access controls and preventing unauthorized access to system resources.
 
