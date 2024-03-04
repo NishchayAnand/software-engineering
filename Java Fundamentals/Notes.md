@@ -14,17 +14,19 @@ It is largely open-source, with the `OpenJDK` being the reference implementation
 
 ## Java Compiler
 
-The Java compiler `javac.exe` (present in the `./bin` folder of your JDK directory) is responsible for translating your Java source code (files with `.java` extension) into **bytecode** (files with `.class` extension), a low-level representation of your source code.
+The Java compiler, `javac`, is responsible for translating Java source code (files with .java extension) into **bytecode** (files with .class extension), a low-level representation of the source code.
 
-To compile your Java program, open your terminal, navigate to the directory where your Java program is saved and execute the following command:
+> **_NOTE:_** The **javac compiler** is typically found in the `bin` directory of the **Java Development Kit (JDK)** installation on your system.
+
+To compile a Java program, open your terminal, navigate to the directory where the Java program is saved and run the following command:
 
 ```
-javac filename.java
+>> javac [filename].java
 ```
 
-The above command will run the java compiler to compiler your Java program to bytecode and save it in your defined classpath. ???
+The javac command will compile `[filename].java` and save the compiled bytecode in a `[filename].class` file in the same directory as `[filename].java`.
 
-> For the above command to work, the location of the `./bin` folder of the your JDK directory should be added to your system's path environment variable. adding full directory path of the Java SE SDK bin directory to your PATH environment variable allows you to run the Java compiler and the Java application launcher from any directory. You should have only one bin directory for the JDK in the path at a time (those following the first are ignored). ??
+> **_NOTE:_** The full directory path of the **JDK's bin directory** should be added to your system's PATH environment variable to allow the **javac compiler** to work from any directory.
 
 ## Java Virtual Machine (JVM)
 
