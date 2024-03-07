@@ -1,21 +1,29 @@
-# Understanding JVM
+# Understanding Java Virtual Machine (JVM)
 
-Java Virtual Machine (JVM) is a software which creates a sophisticated runtime environment to execute Java bytecode. It performs several tasks, including bytecode verification, memory management, before executing the Java bytecode on the host machine.
+Java Virtual Machine (JVM) is a software that provides a sophisticated runtime environment for executeing Java bytecode. It abstracts away hardware and operating system differences, allowing Java applications to run on any platform that supports the JVM.
 
-Here's a breakdown of what the JVM does with Java bytecode:
+While the primary purpose of JVM is to execute Java bytecode, its undertakes a range of preparatory tasks before actual execution takes place. These preparatory tasks are essential for ensuring the smooth and secure execution of your program.
 
-- **Loading**: Loads the bytecode from the `.class` files into memory. The JVM knows to look for the class file based on the provided class name and the classpath settings.
+Here's a quick breakdown of what JVM does when you execute a command like `java HelloWorld` in your terminal:
 
-- **Verification**: Verifies the bytecode to ensure it adheres to certain rules. This process helps prevent potential security vulnerabilities and ensures the safety and stability of the Java environment.
+- **Loading:** Looks for the `HelloWorld.class` in the project's CLASSPATH (by default, the directory where the corresponding `HelloWorld.java` file resides) and loads the bytecode from the `.class` file into memory.
 
-- **Execution**: Executes the verified bytecode using an **execution engine**. This engine may use `interpretation`, `Just-In-Time (JIT) compilation`, or a combination of both to translate the bytecode into **machine code** that can be executed directly by the CPU.
+- **Verification:** Verifies the bytecode to ensure it adheres to certain rules. This process helps prevent potential security vulnerabilities (such as illegal access to memory or unauthorized system resource access) and ensures the safety and stability of the runtime environment.
 
-(continue from here)
+- **Memory Allocation:** Allocates memory for storing class metadata (class definition, static variables, method information), objects, the program's variables and data structures.
 
-Other advantages offered by JVM include:
+data areas are specific regions of memory allocated to store different types of data during program execution.
 
-- **Memory Management**: Performs automatic memory management memory allocation and deallocation, including garbage collection, to ensure efficient memory usage and prevent memory leaks.
+allocates memory for various runtime data areas, including the method area for storing class metadata, the heap for object and instance data, the stack for method invocations and local variables, and the native method stack for native method invocations.
 
-- **Security**: The JVM provides a secure execution environment for Java applications, enforcing access controls and preventing unauthorized access to system resources.
+method area is the memory block that stores the class code, variable code(static variable, runtime constant), method code, and the constructor of a Java program.
 
-- **Portability**: The JVM abstracts away hardware and operating system differences, allowing Java applications to run on any platform that supports the JVM.
+    - Heap: It is used to allocate memory to objects at run time.
+
+    - Stack: It is used to store data and partial results which will be needed while returning value for method and performing dynamic linking.
+
+    - Program Counter Register: used for the working of threads. -> (to be discussed in OS)
+
+    - Native method Stacks: used for the working of threads.  -> (to be discussed in OS)
+
+- **Execution**: Use the **execution engine** (may be an `interpretation`, `Just-In-Time (JIT) compilation`, or a combination of both) to translate the bytecode into **machine code** and instruct CPU to execute it.
