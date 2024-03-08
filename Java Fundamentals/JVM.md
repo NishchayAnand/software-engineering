@@ -10,20 +10,11 @@ Here's a quick breakdown of what JVM does when you execute a command like `java 
 
 - **Verification:** Verifies the bytecode to ensure it adheres to certain rules. This process helps prevent potential security vulnerabilities (such as illegal access to memory or unauthorized system resource access) and ensures the safety and stability of the runtime environment.
 
-- **Memory Allocation:** Allocates memory for storing class metadata (class definition, static variables, method information), objects, the program's variables and data structures.
+- **Memory Allocation:** Divides the available memory into distinct regions to store different data types during program execution. Some common regions include:
 
-data areas are specific regions of memory allocated to store different types of data during program execution.
+  - **Heap:** This is a dynamically allocated space where objects are created during program execution. The size of the allocated memory here can vary depending on the object's type and data.
+  - **Stack:** This is a Last-In-First-Out (LIFO) data structure that stores temporary data like function call arguments, local variables within functions, and return addresses. The stack grows and shrinks as functions are called and return.
+  - **Data Segment:** This region stores statically allocated global and static variables that are initialized with a value before program execution.
+  - **Code Segment:** This region stores the program's machine code instructions that the CPU executes. This memory is typically read-only.
 
-allocates memory for various runtime data areas, including the method area for storing class metadata, the heap for object and instance data, the stack for method invocations and local variables, and the native method stack for native method invocations.
-
-method area is the memory block that stores the class code, variable code(static variable, runtime constant), method code, and the constructor of a Java program.
-
-    - Heap: It is used to allocate memory to objects at run time.
-
-    - Stack: It is used to store data and partial results which will be needed while returning value for method and performing dynamic linking.
-
-    - Program Counter Register: used for the working of threads. -> (to be discussed in OS)
-
-    - Native method Stacks: used for the working of threads.  -> (to be discussed in OS)
-
-- **Execution**: Use the **execution engine** (may be an `interpretation`, `Just-In-Time (JIT) compilation`, or a combination of both) to translate the bytecode into **machine code** and instruct CPU to execute it.
+- **Execution**: Instructs the Execution Engine (could be an `interpreter`, `Just-In-Time (JIT) compiler` or a combination of both) to translate the bytecode into machine code that the underlying hardware's CPU can understand and execute.
