@@ -30,3 +30,17 @@ Allows us to:
 - override the implementation of existing methods, i.e., the non-private methods (not defined with the final modifier) of the base class.
 
 Constructors are not inherited in a derived class. Therefore, a child's constructor is responsible for calling the parent's constructor using the super keyword.
+
+Method Overriding: Subclasses can inherit methods from parent classes and redefine them (override) to provide their own implementation. This allows for specialized behavior based on the object's type.
+
+Duck typing is a concept in object-oriented programming that emphasizes the importance of an object's capabilities over its specific class. In Python, which is a dynamically typed language, duck typing plays a significant role. Here's a breakdown of the concept:
+
+Origin and Analogy:
+
+The phrase "duck typing" comes from the proverb "If it walks like a duck and quacks like a duck, then it must be a duck." In the context of programming, it translates to:
+
+If an object has the attributes and methods required for a particular task, it can be used for that task, regardless of the object's actual class.
+
+When you call a method on an object, Python checks if the object has the necessary method defined, not the object's exact class (type).
+
+This allows objects from different classes to be used interchangeably as long as they provide the required functionality.

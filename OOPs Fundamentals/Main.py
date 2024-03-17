@@ -1,14 +1,3 @@
-class Car:
-    # public attributes
-    brand = "Toyota" 
-    model = None
-    __cost = None
-
-my_car = Car()
-print(my_car.brand)
-# print(my_car.__cost) --> will throw error that attribute does not exists
-# print(my_car._Car__cost) --> workaround to access private attributes, but highly discouraged as it breaks data hiding.
-
 #--------------------------------------------------------------------------------------
 class Scooter:
     # constructor
@@ -23,8 +12,8 @@ class Scooter:
        return f"{self.brand} {self.model}"
 
 my_scooter = Scooter("Bajaj", 'X')
-print(my_scooter.brand)
-print(my_scooter.full_name())
+# print(my_scooter.brand)
+# print(my_scooter.full_name())
 # print(my_scooter.__cost) --> will throw error that attribite does not exist
 
 #----------------------------------------------------------------------------------
@@ -41,5 +30,19 @@ class Truck(Vehicle):
     print(self._cost)  # Access from subclass is allowed
 
 truck = Truck()
-print(truck.get_cost())
+# print(truck.get_cost())
 # print(truck._cost)  # works, but not recommended
+
+#-------------------------------------------------------------------------------------
+class Car:
+    # class variables
+    totalCars = 0
+
+    def __init__(self, brand, model):
+       self.brand = brand
+       self.model = model
+       Car.totalCars += 1
+
+Car("Toyota", "Innova")
+Car("Maruti", "Invicto")
+print(Car.totalCars)
