@@ -1,46 +1,72 @@
 # Understanding Inheritance
 
-Inheritance in OOP is like inheriting traits from a family line in real life. In the programming world, it's a mechanism where new classes **(subclasses)** acquire the properties and behaviors of existing classes **(superclasses)**. This promotes code reuse and creation of well-organized object hierarchies.
+Inheritance in OOP is like inheriting traits from a family line in real life. In the programming world, it's a mechanism that allows new classes **(subclasses)** acquire the properties and behaviors of existing classes **(superclasses)**. This promotes code reuse and well-organized object hierarchies.
 
 Here's an example to illustrate inheritance:
 
 ```
 // Superclass (Parent Class)
 class Animal {
-    public void eat() {
-        System.out.println("Animal is eating");
+
+    private String name;
+
+    public Animal(String name) {
+        this.name = name;
     }
+
 }
 
 // Subclass (Child Class)
 class Dog extends Animal {
-    public void bark() {
-        System.out.println("Dog is barking");
+
+    private String breed;
+
+    public Dog(String name, String breed) {
+        super(name);
+        this.breed = breed;
     }
+
 }
 ```
 
-The relationship between a subclass and a superclass is called an `is-a` relationship. For instance, a Dog **_is a_** type of Animal, implying that it inherits all the general characteristics of an Animal (for example, `eat` behavior) but also has its own specific features and behaviors (for example, `bark` behavior) that differentiate it from other Animals.
+## Is-a Relationship
 
-Subclasses inherit public and protected fields and not anything that is called out as private.
+The relationship between a child class and a parent class is called an `is-a` relationship. For instance, a Dog **_is a_** type of Animal, implying that it inherits all the general characteristics of an Animal (for example, `name` attribute) but also has its own specific features and behaviors (for example, `breed` attribute) that differentiate it from other Animals.
 
-Allows us to:
+## No inheritance of Constructors
 
-- access the non-private attributes and methods of the base class.
-- override the implementation of existing methods, i.e., the non-private methods (not defined with the final modifier) of the base class.
+Constructors are not inherited in a child class. This is because constructors are responsible for initializing the object's state, and each class might have different initialization requirements.
 
-Constructors are not inherited in a derived class. Therefore, a child's constructor is responsible for calling the parent's constructor using the super keyword.
+The child's constructor is responsible for calling the parent's constructor.
 
-Method Overriding: Subclasses can inherit methods from parent classes and redefine them (override) to provide their own implementation. This allows for specialized behavior based on the object's type.
+> If the parent class doesn't have an explicitly defined constructor, Java implicitly adds a call to the parent class's default constructor in the child class constructor. However, if the parent class does have an explicitly defined constructor, the child class constructor must explicitly call it using the **super** keyword (should be the first line within the child class constructor).
 
-Duck typing is a concept in object-oriented programming that emphasizes the importance of an object's capabilities over its specific class. In Python, which is a dynamically typed language, duck typing plays a significant role. Here's a breakdown of the concept:
+## Method Overriding
 
-Origin and Analogy:
+Inheritance allows child classes to override the implementation of existing methods (non-private) inherited from the parent class. This allows for specialized behavior based on the object's type.
 
-The phrase "duck typing" comes from the proverb "If it walks like a duck and quacks like a duck, then it must be a duck." In the context of programming, it translates to:
+Here's an example to illustrate method overriding:
 
-If an object has the attributes and methods required for a particular task, it can be used for that task, regardless of the object's actual class.
+```
+// Superclass (Parent Class)
+class Animal {
 
-When you call a method on an object, Python checks if the object has the necessary method defined, not the object's exact class (type).
+    public void makeSound() {
+        System.out.println("Generic Animal Sound");
+    }
 
-This allows objects from different classes to be used interchangeably as long as they provide the required functionality.
+}
+
+// Subclass (Child Class)
+class Dog extends Animal {
+
+    // Override inherited method (specialization)
+    @Override
+    public void makeSound() {
+        System.out.println("Woof!");
+    }
+
+}
+```
+
+Overriding plays a crucial role in achieving `polymorphism`.
