@@ -4,6 +4,8 @@ Method overloading is a feature that lets you define multiple methods within a c
 
 > Method Overloading promotes the **"One Name, Different Behaviors"** philosophy behind polymorphism.
 
+Here’s an example to illustrate method overloading in Java:
+
 ```
 class Calculator {
 
