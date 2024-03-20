@@ -31,7 +31,7 @@ class Cat extends Animal {
 Some crucial aspects to consider about method overriding in Java:
 
 - **Upcasting**
-- **Dynamic or Runtime Polymorphism:**
+- **Dynamic or Runtime Polymorphism**
 
 ## Upcasting
 
@@ -68,4 +68,4 @@ public class Main {
 }
 ```
 
-> **Upcasting** and **runtime polymorphism** work together to create the foundation for **loose coupling** in object-oriented programming. The code that interacts with objects through superclass references doesn't need to be aware of the specific subclass type. It can call methods defined in the superclass, and the appropriate subclass implementation will be executed at runtime.
+> **Upcasting** and **runtime polymorphism** work together to create the foundation for **loose coupling** in Java. The code that interacts with objects through superclass references doesn't need to be aware of the specific subclass type. It can call methods defined in the superclass, and the appropriate subclass implementation will be executed at runtime.
