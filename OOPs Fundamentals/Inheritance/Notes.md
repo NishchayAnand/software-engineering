@@ -75,6 +75,6 @@ Overriding plays a crucial role in achieving `polymorphism`.
 
 Ther are two significant disadvantages of inheriting from classes:
 
-- **Type Coupling:** A subclass becomes tightly coupled to the implementation details of its superclass. If the superclass implementation changes (even if the public interface remains the same), the subclass might break because it depends on the old behavior. This can be a maintenance nightmare, especially with large codebases and frequent updates.
+- **Leads To Type Coupling Between Superclass And Subclasses:** A subclass becomes tightly coupled to the implementation details of its superclass. If the superclass implementation changes (even if the public interface remains the same), the subclass might break because it depends on the old behavior. This can be a maintenance nightmare, especially with large codebases and frequent updates.
 
-- **Multiple Inheritance:** Inheriting from multiple classes can introduce complexities that can make your code harder to understand and maintain.
+- **Does Not Support Multiple Inheritance:** Inheriting from multiple classes can introduce complexities that can make your code harder to understand and maintain.
