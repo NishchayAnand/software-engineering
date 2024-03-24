@@ -1,6 +1,6 @@
-## Understanding Interfaces
+# Understanding Interfaces
 
-Interfaces are blueprints that define what a class can do **(its behaviors)** without specifying how it does it.
+Interfaces are like contracts that specify the functionalities (methods) a class must provide, but they don't dictate how those functionalities are implemented.
 
 > **Analogy:** Imagine you're working at a restaurant. You have a menu that lists all the available dishes **(functionalities)** but doesn't tell you how the chef prepares them **(implementation details)**. That menu acts like an interface in Java.
 
@@ -18,7 +18,7 @@ interface Shape {
 
 - **Constants:** Variables which are implicitly `public`, `static`, and `final`. They must be initialized during their declaration and can be accessed using the interface name (e.g., Math.PI).
 
-- **Method Signatures:** Empty Methods (without method bodies) which are implicitly public and abstract. Any class that implements an interface must provide concrete implementations for all of the interface's methods.
+- **Method Signatures:** Empty Methods (without method bodies) which are implicitly `public` and `abstract`. Any class that implements an interface must provide concrete implementations for all of the interface's methods.
 
 **Example:**
 
@@ -46,3 +46,11 @@ class Circle implements Shape {
     }
 }
 ```
+
+**Key characteristics associated with interfaces:**
+
+- **No Direct Objects:** Since interfaces lack complete implementations, you cannot directly create objects of an interface type.
+
+- **Supports Multiple Inheritance:** A class can implement multiple interfaces, inheriting methods and constants from all of them. This allows for greater flexibility and code reuse.
+
+> Since Java 8, interfaces can have **static** and **default methods** that provide implementations within the interface itself.
