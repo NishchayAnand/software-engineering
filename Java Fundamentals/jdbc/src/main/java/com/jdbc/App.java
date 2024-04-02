@@ -1,6 +1,7 @@
 package com.jdbc;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -9,6 +10,7 @@ public class App {
 
     private static Connection connection;
     private static Statement statement;
+    private static PreparedStatement preparedStatement;
     private static ResultSet resultSet;
 
     public static void main(String[] args) {
@@ -16,9 +18,13 @@ public class App {
 
             connection = DBUtils.getConnection();
 
-            // Creating a statment which can be send as SQL request to the database.
+            // Creating a statement which can be send as SQL request to the database.
             statement = connection.createStatement();
             resultSet = statement.executeQuery("SELECT * FROM customers");
+
+            // Creating a preparedStatement to execute SQL query on the database.
+            preparedStatement = connection.prepareStatement("SELECT * FROM customers");
+            resultSet = preparedStatement.executeQuery();
 
             // Iterating over the resultSet
             while (resultSet.next()) {
@@ -37,6 +43,9 @@ public class App {
                 System.out.println("Error code: " + sqlException.getErrorCode());
                 System.out.println("SQL State: " + sqlException.getSQLState());
             }
+
+            // System.out.print("Stacktrace: ");
+            // e.printStackTrace();
 
         } finally {
 
