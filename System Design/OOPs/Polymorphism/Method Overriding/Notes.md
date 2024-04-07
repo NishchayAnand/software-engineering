@@ -69,3 +69,7 @@ public class Main {
 ```
 
 > **Upcasting** and **runtime polymorphism** work together to create the foundation for **loose coupling** in Java. The code that interacts with objects through superclass references doesn't need to be aware of the specific subclass type. It can call methods defined in the superclass, and the appropriate subclass implementation will be executed at runtime.
+
+EXTRA:
+
+Dynamic Dispatch: The method of selecting at runtime which implementation of a method be called. (the JVM will eventually find an implementation, because the code would not have compile if there was no implementation in present in the class of the static type).

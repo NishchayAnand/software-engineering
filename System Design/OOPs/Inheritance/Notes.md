@@ -78,3 +78,7 @@ Ther are two significant disadvantages of inheriting from classes:
 - **Leads To Type Coupling Between Superclass And Subclasses:** A subclass becomes tightly coupled to the implementation details of its superclass. If the superclass implementation changes (even if the public interface remains the same), the subclass might break because it depends on the old behavior. This can be a maintenance nightmare, especially with large codebases and frequent updates.
 
 - **Does Not Support Multiple Inheritance:** Inheriting from multiple classes can introduce complexities that can make your code harder to understand and maintain.
+
+EXTRA:
+
+- Java.lan.Objects doesn't have any fields to inherit, but it does have methods like `toString` and `equals`, among others, which are inherited by all classes in Java.
