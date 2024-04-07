@@ -101,7 +101,7 @@ public class Order {
 }
 ```
 
-- `OrderCalculator` **class:** This class would take an `Order` object and calculate the total price with taxes. If we need to change how the tax is calculated, we only modify the OrderCalculator class.
+- `OrderCalculator` **class:** This class would take an `Order` object and calculate the total price with taxes. If we need to change how the tax is calculated, for example, incorporate different taxes based on order quantities, we only modify the OrderCalculator class.
 
 ```
 // OrderCalculator class (calculates total price)
