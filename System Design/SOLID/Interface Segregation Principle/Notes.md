@@ -7,4 +7,6 @@
 
 - Maximized Cohesion: The measure of how strong the methods and data of a class belong together: interdependence within a class.
 
-- Minimized Coupling: The meaure of how stronly different classes depend on one another: interdependence between classes.
+- Minimized Coupling: The meaure of how strongly different classes depend on one another: interdependence between classes.
+
+- Closely related to the concept of coupling. When two or more details are intermixed in the same class, it introduces tight coulping between these details. If the details change at different times due to different reasons, it's likely to cause problems in the future.

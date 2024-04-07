@@ -9,3 +9,7 @@ Java EE applications are deployed and run within a Java EE container, which prov
 Link: https://thenewstack.io/spring-rod-johnson-enterprise-java/#:~:text=Unfortunately%20for%20Java%20developers%2C%20Java,and%20voted%20on%20over%20time.
 
 ## Advantages of using Spring Framework over Java EE
+
+Links:
+
+1. https://docs.oracle.com/javaee/6/firstcup/doc/gcrlo.html

@@ -2,7 +2,7 @@
 
 Encapsulation is all about bundling data and the methods that operate on that data together into a single unit, typically a class. It's like creating a self-contained package with its own internal workings.
 
-> The ideology behind designing your class in an object-oriented programming world is quite similar to that of designing your database tables.
+> **_NOTE_:** The ideology behind designing your class in an object-oriented programming world is quite similar to that of designing your database tables.
 
 There are two key aspects to encapsulation:
 
@@ -30,3 +30,5 @@ Encapsulation is typically achieved through:
 - **Modular Design:** Promotes code reusability and maintainability.
 - **Reduced Coupling:** Limits dependencies between different parts of your program.
 - **Flexibility:** You can change the internal implementation of a class without affecting external code that interacts with its public interface.
+
+> **_NOTE:_** Encapsulation complements the Single Responsibility Principle of object-oriented design.
