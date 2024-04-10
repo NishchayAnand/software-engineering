@@ -14,7 +14,7 @@ SRP promotes high `cohesion` within a class. This means all the methods and prop
 
 - **Identify the "Why" Behind Changes:** Consider why the class might need to change in the future. Would changes be driven by modifications to the user interface, data storage mechanisms, or internal calculations? If a single class change could be triggered by multiple reasons, it might have multiple responsibilities.
 
-**Here's an example:**
+**Here's a simple example in Java demonstrating Single Responsibility Principle:**
 
 Imagine a class named `Order` that handles:
 
