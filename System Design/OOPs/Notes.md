@@ -9,4 +9,4 @@ The key building blocks of OOPs include:
 - **Classes:** serves as a blueprint for creating self-contained units.
 - **Objects:** an instance of a class, representing a self-contained unit possessing its own attributes and methods.
 
-The four principles of OOPs – `Inheritance`, `Polymorphism`, `Abstraction`, and `Encapsulation` – serve as the **foundational pillars** that contribute to the creation of robust, maintainable, and scalable software systems.
+The four principles of OOPs – `Inheritance`, `Polymorphism`, `Abstraction`, and `Encapsulation` – serve as the **foundational pillars** that contribute to the creation of well-structured, reusable, and maintainable code.
