@@ -10,6 +10,22 @@ DIP promotes loose `coupling` between classes, allowing you to change implementa
 
 > **Coupling:** Measures how closely different classes are dependent on each other. Remember Coupling as"degree of interdependence between classes".
 
+## How To Achieve Dependency Inversion Principle?
+
+DIP can be achieved using the Dependency Injection (DI) technique.
+
+With DI, the high-level classes (consumers) don't create and manage their own dependency objects. They only declare the interface they rely on. A separate entity, often called an injector, takes on the responsibility of creating and providing the actual implementation of the dependencies.
+
+The injector injects the dependency objects into the consumer class at runtime. This means the consumer gets the exact dependency it needs when it needs it.
+
+Here are some ways to implement DI:
+
+- **Constructor injection:** The dependencies are passed as arguments to the constructor of the consumer class.
+
+- **Setter injection:** Dependencies are injected using setter methods in the consumer class. This approach is less common than the constructor injection.
+
+- **Dependency injection frameworks:** Many frameworks (e.g. Spring) provide built-in DI features that simplify the process of injecting dependencies.
+
 **Here's a simple example in Java demonstrating Dependency Inversion Principle:**
 
 ```
