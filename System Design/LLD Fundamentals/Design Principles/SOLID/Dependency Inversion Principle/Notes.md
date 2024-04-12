@@ -24,8 +24,6 @@ Here are some ways to implement DI:
 
 - **Setter injection:** Dependencies are injected using setter methods in the consumer class. This approach is less common than the constructor injection.
 
-- **Dependency injection frameworks:** Many frameworks (e.g. Spring) provide built-in DI features that simplify the process of injecting dependencies.
-
 **Here's a simple example in Java demonstrating Dependency Inversion Principle:**
 
 ```
