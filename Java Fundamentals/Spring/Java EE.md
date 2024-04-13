@@ -16,9 +16,7 @@ Some of its key features (offered back then) include:
 >
 > - **Web containers:** Responsible for handling HTTP requests and generate dynamic web content.
 
-## Challenges associated with J2EE:
-
-Few of the challenges associated with earlier versions of Java EE include:
+**Few of the challenges associated with earlier versions of Java EE include:**
 
 - **Heavy and Slow Application Servers:** J2EE application servers were built with a monolithic architecture, where all components and services (e.g. security, messaging, database access) were bundled together into a single runtime environment. This resulted in large memory footprints and slower startup times because the server had to load and initialize all components, even if a specific application only needed a small subset of these functionalities.
 
