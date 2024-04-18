@@ -23,3 +23,5 @@ Here's a detailed overview of how a web server operates:
 - **Close Connection (Optional):** Depending on the server's configuration and HTTP version (e.g., HTTP/1.0 vs. HTTP/1.1), the server may choose to keep the TCP connection open for future requests from the same client (HTTP keep-alive) or close the connection after sending the response. Closing the connection releases resources on both the server and client sides.
 
 - **Repeat:** The server returns to listening for incoming connections and repeats the process to handle subsequent client requests. This loop continues indefinitely as long as the server is running and accepting connections.
+
+## How Web Servers handle multiple requests?
