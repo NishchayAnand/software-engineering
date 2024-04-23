@@ -57,6 +57,6 @@ class Circle implements Shape {
 
 EXTRA:
 
--Interfaces cannot contain state. This opens the door to multiple inheritance.
+-Interfaces cannot contain state (whereas Abstract Class can). This opens the door to multiple inheritance.
 
 - Since the component's API is a contract with its clients, a component's owner can't just change it without considering the consequences for the clients.
