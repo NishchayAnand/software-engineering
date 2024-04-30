@@ -8,9 +8,9 @@ J2EE emphasized the development of `multi-tier` `distributed` applications using
 
 - **Standard specifications:** J2EE standardized a range of **enterprise services** by offering a set of well-defined APIs (e.g. JDBC, JNDI, Servlet API, JSP). These APIs served as the foundation for developing enterprise applications, providing a common ground for developers to build robust, scalable, and maintainable applications.
 
-  **Components:** Components serve as the foundational elements that can be combined together to create complex enterprise applications. They are essentially self-contained, reusable pieces of code that perform specific functionalities (e.g. EJBs for business logic or Servlets for handling web requests).
+  **Components:** J2EE introduced a component-based development model for building enterprise applications.
 
-- **Containers:** Containers act as the runtime infrastructure for components, providing a set of pre-built services (e.g. lifecycle management, resource pooling, security) that components could leverage without needing to write them from scratch.
+- **Containers:**
 
 - **Distributed:**
 

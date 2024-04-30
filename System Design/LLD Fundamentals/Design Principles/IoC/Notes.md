@@ -19,3 +19,7 @@ Benefits of using an IoC container:
 - **Maintainability:** Code becomes cleaner and easier to understand as the logic is separated from dependency management and object creation.
 
 > **_NOTE:_** IoC Container abstracts away the details of object creation, allowing the application to focus on its core logic without worrying about the specifics of dependency instantiation.
+
+EXTRA:
+
+While Java interfaces provide perfect separation, there has to be some way of looking up what implementation of an interface we want to use. If it's hard-coded in Java code, much of the advantage of using interfaces is lost.
