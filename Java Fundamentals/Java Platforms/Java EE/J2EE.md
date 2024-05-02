@@ -8,7 +8,11 @@ J2EE emphasized the development of `multi-tier` `distributed` applications using
 
 - **Standard specifications:** J2EE standardized a range of **enterprise services** by offering a set of well-defined APIs (e.g. JDBC, JNDI, Servlet API, JSP). These APIs served as the foundation for developing enterprise applications, providing a common ground for developers to build robust, scalable, and maintainable applications.
 
-  **Components:** J2EE introduced a component-based development model for building enterprise applications.
+- **Components:** While object-oriented development excels at encapsulating individual (finer-grained) concepts, it can be too granular for large-scale projects. J2EE addressed this by introducing **component-based development**, which focuses on encapsulating entire (coarse-grained) services within components. This higher-level approach provides a more manageable view of **functionality**, promoting reusability, maintainability, and scalability for building complex enterprise applications. Some key component models supported by J2EE include:
+
+  - **Web Component Model:** Specifies the standards and guidelines for building server-side components (software entity) that handle web requests and generate web presentation content. `Java Servlets` and `JavaServer Pages (JSPs)` form the core of the web component model in J2EE, providing developers with powerful tools for building dynamic and interactive web applications.
+
+  - **Enterprise JavaBeans Components:** Enterprise JavaBeans (EJBs) are server-side application components adhering to a standard model.
 
 - **Containers:**
 

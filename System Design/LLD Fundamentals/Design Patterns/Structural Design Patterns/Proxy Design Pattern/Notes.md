@@ -1,5 +1,7 @@
 # Understanding Proxy Design Pattern
 
+Proxy patterns provide an intermediate object that is used to make a request to an endpoint object. Clients use the proxy, which, depending on certain configurable parameters, contacts the endpoint object.
+
 Acts as an intermediary for accessing an object. It controls how clients interact with the real object, providing an extra layer of control.
 
 The Proxy Design Pattern provides a way to create a "surrogate" or "wrapper" object that controls access to another object. This proxy object intercepts method calls made on the original object and potentially modifies them before or after execution.
