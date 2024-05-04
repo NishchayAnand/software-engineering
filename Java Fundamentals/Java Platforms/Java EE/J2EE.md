@@ -8,12 +8,16 @@ J2EE emphasized the development of `multi-tier` `distributed` applications using
 
 - **Standard Specifications:** J2EE standardized a range of **enterprise services** by offering a set of well-defined APIs (e.g. JDBC, JNDI, Servlet API, JSP). These APIs served as the foundation for developing enterprise applications, providing a common ground for developers to build robust, scalable, and maintainable applications.
 
-- **Component-Based Development:** While object-oriented development excels at encapsulating individual (finer-grained) concepts, it can be too granular for large-scale projects. J2EE addressed this by introducing **component-based development**, which focuses on encapsulating entire (coarse-grained) services within components. This higher-level approach provides a more manageable view of **functionality**, promoting reusability, maintainability, and scalability for building complex enterprise applications. Some key component models supported by J2EE include:
+- **Components:** While object-oriented development excels at encapsulating individual (finer-grained) concepts, it can be too granular for large-scale projects. J2EE addressed this by introducing **component-based development**, which focuses on encapsulating entire (coarse-grained) services within components. This higher-level approach provides a more manageable view of **functionality**, promoting reusability, maintainability, and scalability for building complex enterprise applications. Some of the key component models supported by J2EE include:
 
   - **Web Component Model:** Specifies the standards and guidelines for building server-side components (software entities) that handle web requests and generate web presentation content. `Java Servlets` and `JavaServer Pages (JSPs)` form the core of the web component model in J2EE, providing built-in declarative support for middleware services such as **Request Handling**, **Session Management**, **Error Handling** and **Security**.
 
-  - **Business Component Model:** Specifies the standards and guidelines for building server-side components (software entities) that handle the business logic of an enterprise application. `Enterprise JavaBeans (EJB)` form the core of the business component model in J2EE, providing built-in declarative support for middleware services such as **Lifecycle Management**, **Transaction Management**, **Concurrency Control**, **Security**, **Remote Access** and **Distribution**.
+  - **Enterprise JavaBeans (EJBs) Component Model:** Specifies the standards and guidelines for building server-side components (software entities) that handle the core business logic of an enterprise application. J2EE promoted `Enterprise JavaBeans (EJBs)` as the core component model for managing business objects, providing built-in declarative support for middleware services such as **Lifecycle Management**, **Transaction Management**, **Concurrency Control**, **Security**, **Remote Access** and **Distribution**.
 
-- **Container-Managed ...:**
+- **Containers:** Containers are the system-level software entities that provide pre-built middleware services that components in enterprise applications can leverage to deal with the low-level infrastructure management tasks. Each component model typically has its corresponding container. Some of the key component containers in J2EE include:
+
+- **Web Container:** Resource (connection) Pooling, Session Management, Request Handling, Error Handling, Security.
+
+- **Enterprise JavaBeans (EJB) Container:** Lookup, Configuration, Lifecycle Managament, Security, Concurrency Control, Remote Access, Transaction Management.
 
 ## Limitations associated with J2EE
