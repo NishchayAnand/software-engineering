@@ -19,7 +19,3 @@ J2EE emphasized the development of `multi-tier` `distributed` applications using
   - **Web Container:** Provide the necessary middleware services to manage the execution of `Servlets` components within web applications.
 
   - **Enterprise JavaBeans (EJB) Container:** Provide the necessary middleware services to manage the execution of `Enterprise JavaBeans (EJBs)` within enterprise applications.
-
-## Understanding Enterprise JavaBeans (EJBs)
-
-## Limitations
