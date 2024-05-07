@@ -1,5 +1,9 @@
 # Understanding Aspect Oriented Programming
 
+- One reason that AOP is a more attractive proposition to deliver such services than EJB is that it imposes fewer requirements on the objects to which it adds enterprise services. For example, they don't usually need to depend on a particular API such as the EJB API.
+
+- EJB owes much of its success to the deserved popularity of declarative middleware services such as container-managed transactions. AOP provides a powerful alternative way of providing such declarative enterprise services without most of the baggage of EJB.
+
 AOP is a programming paradigm that allows you to add functionality (aspects) to existing code without modifying it directly. This is useful for cross-cutting concerns like logging, security, or transaction management.
 
 Traditional AOP often involves manual creation of proxies, which can be complex.

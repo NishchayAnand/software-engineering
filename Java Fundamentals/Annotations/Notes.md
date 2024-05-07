@@ -33,3 +33,5 @@ Can be declared within a class or interface.
 Annotations can optionally have elements. An element is simply a way that we specify a value within an annotation. Elements are declared as if they are methods. Set values similar to fields.
 
 Can specify allowable targets
+
+Marker interface were before annotations were introduced. A marker interface (also called a tag interface) has no methods to implement and exists so that you can announce to the world that, "Yes, I can do this."

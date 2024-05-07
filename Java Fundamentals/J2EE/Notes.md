@@ -6,6 +6,8 @@ J2EE emphasized the development of `multi-tier` `distributed` applications using
 
 - **Multi-tier Architecture:** J2EE broke down complex applications into distinct tiers (presentation, business logic, data access) promoting modularity and reusability of code. This separation of concerns made development easier to manage, test, and maintain.
 
+- **Distributed Architecture:**
+
 - **Standard Specifications:** J2EE standardized a range of **enterprise services** by offering a set of well-defined APIs (e.g. JDBC, JNDI, Servlet API, JSP). These APIs served as the foundation for developing enterprise applications, providing a common ground for developers to build robust, scalable, and maintainable applications.
 
 - **Components:** While object-oriented development excels at encapsulating individual (finer-grained) concepts, it can be too granular for large-scale projects. J2EE addressed this by introducing **component-based development**, which focuses on encapsulating entire (coarse-grained) services within components. This higher-level approach provides a more manageable view of **functionality**, promoting reusability, maintainability, and scalability for building complex enterprise applications. Some of the key component models supported by J2EE include:
