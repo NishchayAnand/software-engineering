@@ -28,18 +28,18 @@ Message-driven beans are **designed to process asynchronous messages** from mess
 
 We typically need three Java source files to implement an enterprise bean:
 
-- **Home Interface:** Defines the methods that allow clients to create, find, and remove instances of the enterprise bean. It acts as a factory for creating instances of the bean. The home interface extends either `javax.ejb.EJBHome` (for remote access) or `javax.ejb.EJBLocalHome` (for local access).
+- **Home Interface:** Defines the methods that allow clients to create, find, and remove instances of the enterprise bean. It acts as a factory for creating instances of the bean. The home interface should either extend `javax.ejb.EJBHome` interface (for remote access) or `javax.ejb.EJBLocalHome` (for local access) interface.
 
-- **Component Interface:** Declares all the business methods that the client can invoke on the bean. It extends either `javax.ejb.EJBObject` (for remote access) or `javax.ejb.EJBLocalObject` (for local access).
+- **Component Interface:** Declares all the business methods that the client can invoke on the bean. The component interface should either extend `javax.ejb.EJBObject` interface (for remote access) or `javax.ejb.EJBLocalObject` interface (for local access).
 
-- **Bean Class:** Provides the actual implementation of the business methods defined in the component interface. It must implement one of the three interfaces: `javax.ejb.SessionBean`, `javax.ejb.EntityBean`or `javax.ejb.MessageDrivenBean`, depending on the chosen bean type.
+- **Bean Class:** Provides the actual implementation of the business methods defined in the component interface. The bean class must implement one of the three interfaces: `javax.ejb.SessionBean`, `javax.ejb.EntityBean`or `javax.ejb.MessageDrivenBean`, depending on the chosen bean type.
 
 The `Home` and `Component` interfaces serve as the primary means of interaction between the client and the enterprise bean. The container generates the implementation classes for these interfaces during deployment.
 
-> **_NOTE:_** A client does not directly access a message-driven bean; instead, a client asynchronously sends a message to a JMS queue or topic. Because message-driven beans have no need to expose their methods to clients, they do not implement component or home interfaces. They also do not maintain state on behalf of a client.
+> **_NOTE:_** Unlike session beans or entity beans, message-driven beans are not directly accessed by clients. Hence, they do not implement component or home interfaces.
 
 ## How does an EJB work?
 
-It is by implementing these interfaces that the container can intercept client calls made on the component interface's methods and inject its services (e.g. security checks, transaction management) before delegating the call to the actual EJB implementation class.
+Instead of directly calling the EJB's code, the client interacts through a component interface. This interface acts like a facade, delegating the call to a container-generated behind-the-scenes class. This hidden class allows the container to intervene before reaching the actual EJB implementation. The container can then perform security checks, manage transactions, and inject resources like database connections before passing the request along to the EJB to execute the business logic.
 
-When a client calls a business method listed in the component interface, the container steps in the middle of every method call from a client to a bean inserts the "services" like security and transaction before calling the business method defined in the enterprise bean class.
+> **_NOTE:_** The bean implementation class can, but shouldn't normally implement the component interface. If the bean class implements the component interface, it would also need to implement the EJBObject interface (or EJBLocalObject for local interfaces). Implementing both interfaces in the bean class can lead to synchronization issues, especially for stateful session beans. This is because updates made within the bean class wouldn't necessarily be reflected in the container-generated implementation, causing inconsistencies.
