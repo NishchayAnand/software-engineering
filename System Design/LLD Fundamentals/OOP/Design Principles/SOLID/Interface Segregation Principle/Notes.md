@@ -1,5 +1,7 @@
 # Understanding Interface Segregation Principle
 
+- Says that "You should define fine-grained interfaces specific to the client that is going to use them. This means that it's better to have many smaller interfaces than fewer bigger interfaces."
+
 - States that "Clients should not be forced to depend upon interfaces that they do not use."
 - By following this principle, you prevent bloated interfaces that define methods for multiple responsibilities, and respecting it helps us also to observe the Single Responsiblity Principle.
 
