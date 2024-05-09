@@ -1,5 +1,7 @@
 # Understanding Creational Design Patterns
 
+There are 5 patterns, related to object instantiation, providing a way to decouple the code that creates the object from the object itself.
+
 In software design, creational design patterns are all about how you create objects. They provide a more flexible and reusable way to instantiate objects compared to just using the new keyword.
 
 Here's why they're useful:

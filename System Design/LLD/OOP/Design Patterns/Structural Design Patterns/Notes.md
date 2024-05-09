@@ -1,1 +1,0 @@
-# Understanding Structural Design Patterns
