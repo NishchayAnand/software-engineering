@@ -9,3 +9,5 @@
 - The Decorator pattern (GoF) allows the addition of custom behavior before and after (around, in AOP terminology) a method invocation.
 
 - The Decorator is a useful pattern, but requires coding a custom decorator per target class.
+
+- Key to decorator pattern is objects wrapping other objects in recursive method calls.

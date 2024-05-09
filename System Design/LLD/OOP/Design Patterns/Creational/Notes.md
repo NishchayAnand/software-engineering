@@ -1,5 +1,9 @@
 # Understanding Creational Design Patterns
 
+- Describes how to abstract the process of creating an object, hiding how object are created and put together when exposing only their interface.
+
+- Out of 5 patterns, only one, the factory method uses inheritance to create objects.Rest 4 use object composition to delegate the creation of instances to another object.
+
 There are 5 patterns, related to object instantiation, providing a way to decouple the code that creates the object from the object itself.
 
 In software design, creational design patterns are all about how you create objects. They provide a more flexible and reusable way to instantiate objects compared to just using the new keyword.
