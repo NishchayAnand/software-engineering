@@ -54,9 +54,3 @@ class Circle implements Shape {
 - **Supports Multiple Inheritance:** A class can implement multiple interfaces, inheriting methods and constants from all of them. This allows for greater flexibility and code reuse.
 
 > Since Java 8, interfaces can have **static** and **default methods** that provide implementations within the interface itself.
-
-EXTRA:
-
--Interfaces cannot contain state (whereas Abstract Class can). This opens the door to multiple inheritance.
-
-- Since the component's API is a contract with its clients, a component's owner can't just change it without considering the consequences for the clients.
