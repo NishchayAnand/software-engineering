@@ -48,11 +48,10 @@ List<Person> people = new ArrayList<>();
 Collections.sort(people, (Person p1, Person p2) -> p1.getAge() - p2.getAge());
 ```
 
-## Benefits:
+## Comparison with Comparable:
 
-- Allows you to sort collections based on any property of the objects, not just their natural ordering.
-- **Separates the sorting logic from the class being sorted.**
+- **Separates the sorting logic from the class being sorted,** allowing you to sort collections based on any property of the objects, not just the ones they use for their natural ordering (defined by `Comparable`). This gives you much more control over the sorting criteria.
 
-## NOTE:
+## Key Points:
 
 Java provides some pre-defined comparators for common types like `String` and `Integer`. You can use these directly or create your own for more complex sorting needs.
