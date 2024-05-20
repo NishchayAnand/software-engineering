@@ -16,5 +16,8 @@
   - RequestDispatcher interface provides a forward() method which can be used to transfer control from a servlet (controller) to a target component.
 
 - Client can share the session ID with the server via:
+
   - Cookies
   - URI rewrite
+
+- **load-on-startup:** this will load the servlet at the time of deployment on server.

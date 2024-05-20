@@ -1,5 +1,15 @@
 # Understanding Lambda Expressions
 
+> **_IMPORTANT NOTE:_** A lambda expression is created without using new. Hence, the JVM does not create a new object every time every time we use a lambda expression.
+
+- A lambda expression is an object without an identity. Hence, a lambda expression should not be used as a normal object.
+
+- It is **not mandatory** to provide the type of the parameters when defining lambda expressions.
+
+- Type of lambda expression is the type of the functional interface it is implementing.
+
+- Since lambda expressions can be put in a variable, a lambda can be taken as a method parameter, and can be returned by a method.
+
 - One issue with anonymous classes is that if the implementation of your anonymous class is very simple, such as an interface that contains only one method, then the syntax of anonymous classes may seem unwieldy and unclear. In these cases, **you're usually trying to pass functionality as an argument to another method**, such as what action should be taken when someone clicks a button.
 
 - For classes with only one method, even an anonymous class seems a bit excessive and cumbersome.
