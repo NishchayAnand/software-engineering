@@ -12,6 +12,11 @@ They act like folders in a file system, essentially grouping together code that 
 
 - Package names should always start with a lowercase letter. This convention helps to distinguish package names from class names, which typically start with an uppercase letter.
 
-(e.g., `java.lang`, `org.apache.commons.lang`).
+## Advantages of using Packages:
 
 - **Namespace Management:** Packages act as namespaces, preventing naming conflicts between classes with the same name from different packages. For example, you can have a `java.util.ArrayList` and a separate `com.mycompany.util.ArrayList` without any clashes.
+
+## Key Points:
+
+- **Maven** expects source files to be in `src/main/java` by default.
+- The following command can be used to compile specific .java files in your project: `javac -d target/classes src/main/java/com/example/model/Customer.java src/main/java/com/example/model/Order.java`
