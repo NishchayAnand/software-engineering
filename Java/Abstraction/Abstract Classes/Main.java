@@ -1,5 +1,5 @@
 
-//Abstract Class as a blueprint for shapes
+// Abstract Class as a blueprint for shapes
 abstract class Shape {
     private String name;
 

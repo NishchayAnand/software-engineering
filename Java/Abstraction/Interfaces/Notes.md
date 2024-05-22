@@ -6,7 +6,7 @@ Interfaces are like contracts that specify the functionalities (methods) a class
 
 Interfaces can be declared using the `interface` keyword followed by the interface name.
 
-**Example:**
+#### Example:
 
 ```
 interface Shape {
@@ -14,13 +14,13 @@ interface Shape {
 }
 ```
 
-**Interfaces can contain:**
+#### Interfaces can contain:
 
 - **Constants:** Variables which are implicitly `public`, `static`, and `final`. They must be initialized during their declaration and can be accessed using the interface name (e.g., Math.PI).
 
 - **Method Signatures:** Empty Methods (without method bodies) which are implicitly `public` and `abstract`. Any class that implements an interface must provide concrete implementations for all of the interface's methods.
 
-**Example:**
+#### Example:
 
 ```
 interface Shape {
@@ -47,7 +47,7 @@ class Circle implements Shape {
 }
 ```
 
-**Key characteristics associated with interfaces:**
+#### Key characteristics associated with interfaces:
 
 - **No Direct Objects:** Since interfaces lack complete implementations, you cannot directly create objects of an interface type.
 
@@ -55,30 +55,25 @@ class Circle implements Shape {
 
 ## New Advancements in Java 8 - Static and Default Methods:
 
-- Since Java 8, interfaces can have **static** and **default methods** that provide implementations within the interface itself.
+Since Java 8, interfaces can have **static** and **default** methods to provide enhanced flexibility and functionality in interface design.
 
-### Default Methods:
+### Default Methods: Enhancing Interfaces with New Methods Without Breaking Existing Implementations
 
-- Default methods can be accessed using an instance of a class implementing the interface.
+Default methods allow developers to **add new methods** to interfaces without forcing all implementing classes to provide an implementation. This **ensures backward compatibility**, meaning existing code that implements an interface won't break when new methods are added to the interface.
 
-- Implementing classes can override the default implementation of a method to provide their own behavior.
+#### Key Points:
 
-- **Use Cases:**
-  - **Backward Compatibility:** Default methods allow you to add new methods to interfaces without breaking existing implementations. The default implementation ensures the interface remains usable even for older code.
-  - **Providing Common Functionality:** Default methods can offer a base implementation for a method that can be overridden by subclasses if needed.
+- Default methods can provide common **functionality that multiple classes can use**, reducing code duplication.
+- Default methods are **associated with instances** of the implementing classes.
+- Implementing classes **can override the default methods** to provide their own behavior.
 
 ### Static Methods:
 
-- Static methods can also be added to interfaces along with the static final variables. They are associated with the interface itself, not with any instances of classes implementing the interface.
+Static methods allow developers to **provide utility or helper methods** that provide common operations related to the interface.
 
-- Static methods can provide utility functions that can be used by any class implementing the interface or even by other parts of your code.
+#### Key Points:
 
-- Static methods can be final or abstract. -> ??
+- Static methods are **related to the interface** itself rather than any instance of the interface.
+- Static methods are not inherited by the implementing classes.
 
-- **Use Cases:**
-  - **Utility Methods:** Static methods can provide utility functions that can be used by any class implementing the interface or even by other parts of your code.
-  - **Constants:** Interfaces can now hold constants that can be accessed globally using the interface name.
-
-## After Java 8, What was the difference between abstract classes and interfaces?
-
-- Interfaces cannot hold any object specific state whereas abstract class can.
+> **_NOTE:_** Abstract methods are implicitly public. Default and static methods must have an explicit public modifier.
