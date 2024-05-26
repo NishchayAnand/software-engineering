@@ -1,33 +1,32 @@
 # Understanding Consumer Functional Interface
 
-- Contains a single abstract method called `accept` that can takes an object of any type `T` as parameter and do some processing on it.
+- Part of the `java.util.function` package.
+- Represents an operation.
+- Contains one abstract method called `accept` which takes an object of type `T` as a parameter and performs an operation on it.
+- Contains a default method called `andThen` which allows chaining of multiple Consumer operations. It takes another Consumer as an argument and returns a **composed Consumer** that performs, in sequence, the operation of the current Consumer followed by the operation of the argument Consumer.
 
 ```
 @FunctionalInterface
 public interface Consumer<T> {
+
     void accept(T t);
-    ... (contains default methods such as 'andThen' that allows us to chain method calls) ??
+
+    default Consumer<T> andThen(Consumer<T> after) {
+        Objects.requireNonNull(after);
+        Consumer<T> output = (T t) -> {
+            accept(t);
+            after.accept(t);
+        };
+        return output;
+    }
+
 }
-```
-
-- Can be implemented using a lambda expression.
-
-```
-Consumer<T> c = p -> System.out.println(p);
-```
-
-OR
-
-```
-Consumer<T> c = System.out::println;
 ```
 
 - Often used with Stream API **to consume stream.** For example:
 
 ```
 List<Person> persons = ...;
-Stream<Person> strm = persons.stream();
-strm.forEach(person -> System.out.println(person));
+Stream<Person> personStream = persons.stream();
+personStream.forEach(System.out::person);
 ```
-
-The `forEach` method in the above example takes an instance of the `Consumer` **functional interface** as an argument.

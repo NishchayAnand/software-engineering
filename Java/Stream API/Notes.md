@@ -16,8 +16,8 @@ Stream operations fall into two categories:
 
 - **Intermediate operations:** These operations transform a stream into another stream. For example:
 
-  - `filter(Predicate<T> predicate)`: Filters elements that match the given predicate.
-  - `map(Function<T, R> mapper)`: Transforms each element using the provided function.
+  - `filter(Predicate<T> predicate)`: **Filters elements** that match the given predicate.
+  - `map(Function<T, R> mapper)`: **Transforms each element** using the provided function.
   - `sorted(Comparator<T> comparator)`: Sorts the elements using a comparator.
   - `distinct()`: Removes duplicate elements.
   - `limit(long maxSize)`: Truncates the stream to a given number of elements.
@@ -27,7 +27,7 @@ Stream operations fall into two categories:
 
   - `collect(Collector<T, A, R> collector)`: Aggregates the elements into a collection, such as a `List`, `Set`, or `Map`.
   - `reduce(BinaryOperator<T> accumulator)`: Combines the elements into a single value using an associative accumulation function.
-  - `forEach(Consumer<T> action)`: Performs an action for each element.
+  - `forEach(Consumer<T> action)`: **Performs an action for each element**.
   - `toArray()`: Converts the stream into an array.
   - `findFirst()`: Returns the first element of the stream, if present.
   - `count()`: Returns the number of elements in the stream.
@@ -49,6 +49,6 @@ A key feature of Streams is laziness. This means that operations are not physica
 
 ## Parallel Processing
 
-- Streams can leverage multi-core architectures without you having to write a single line of multithread code.
+Streams can leverage multi-core architectures without you having to write a single line of multithread code.
 
 Just replace `stream()` with `parallelStream()` and the Streams API will internally decompose your query to leverage the multiple cores on your computer.

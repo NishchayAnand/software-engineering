@@ -1,36 +1,43 @@
 # Understanding Predicate Functional Interface
 
-- It contains a single abstract method called `test` that takes an object as a parameter and returns a **boolean**.
+- Contains one abstract method called `test` which evaluates a condition on an input argument of type `T` and returns a boolean value.
+- Commonly used for filtering data and making decisions based on conditions.
+- Includes several default methods for combining predicates, such as `and`, `or`, and `negate`.
 
 ```
 @FunctionalInterface
 public interface Predicate<T> {
+
     boolean test(T t);
-    ... (contains a bunch of default methods such as 'and', 'or', 'negate' to peform basic operations such as AND, OR, NEGATE on 2 or more predicates).
+
+    default Predicate<T> and(Predicate<T> other) {
+        Objects.requireNonNull(other);
+        Predicate<T> output = (t) -> test(t) && other.test(t);
+        return output;
+    }
+
+    default Predicate<T> or(Predicate<T> other) {
+        Objects.requireNonNull(other);
+        Predicate<T> output = (t) -> test(t) || other.test(t);
+        return output;
+    }
+
+    default Predicate<T> negate() {
+        Predicate<T> output = (t) -> !test(t);
+        return output;
+    }
+
 }
 ```
 
-```
-Predicate<Person> p = person -> person.getAge() > 20;
-```
+## Application
+
+Used with the `Stream` API in Java for filtering elements in a stream.
 
 ```
-Predicate<Integer> p1 = person -> i -> i>20;
-Predicate<Integer> p1 = person -> i -> i<30;
-Predicate<Integer> p = p1.and(p2);
-```
-
-## Sample Examples:
-
-- Take a list of strings, filter few of them out and add he filtered elements to another list:
-
-```
-Stream<String> stream = Stream.of("one", "two", "three", "four");
-Predicate<String> p1 = Predicate.isEqual("two");
-Predicate<String> p2 = Predicate.isEqual("three");
-List<String> list = new ArrayList<>();
-stream
-    .peek(System.out::println);
-    .filter(p1.or(p2));
-    .forEach(list::add);
+Predicate<Integer> isEven = num -> num % 2 == 0;
+List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+numbers.stream()
+    .filter(isEven)
+    .forEach(System.out::println);
 ```
