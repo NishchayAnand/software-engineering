@@ -1,83 +1,54 @@
 # Understanding Stream in Java
 
-Streams offer a way to perform complex data processing operations on a sequence of elements in a declarative and concise manner. They support a wide range of SQL-like operations (e.g. `filter`, `map`, `reduce`, `find`, `match`, `sorted`) that enable functional-style processing of sequences, making it easier to write clean and efficient code.
+Streams offer a way to perform complex data processing operations on a **sequence of elements** in a declarative and concise manner. They support a wide range of SQL-like operations (e.g. `filter`, `map`, `reduce`, `find`, `match`, `sorted`) that enable functional-style processing of sequences, making it easier to write clean and efficient code.
 
-Streams don't store the data themselves but rather act as a processing abstraction on top of existing data sources like collections (List, Set, etc.), arrays, or even I/O channels.
+## Difference between Collections and Streams
+
+A collection is an in-memory data structure, which holds all the values that the data structure currently has—every element in the collection has to be computed before it can be added to the collection.
+
+In contrast, a stream is a conceptually fixed data structure in which elements are computed on demand. In reality, streams **don't store the data themselves** but rather act as a processing abstraction on top of existing data sources like collections (List, Set, etc.), arrays, or even I/O channels.
 
 > NOTE: Collections are about data and streams are about computations.
 
-A collection is an in-memory data structure, which holds all the values that the data structure currently has—every element in the collection has to be computed before it can be added to the collection. In contrast, a stream is a conceptually fixed data structure in which elements are computed on demand.
+## Operations
 
-## Lazy Streams
+Stream operations fall into two categories:
 
-Stream operations that can be connected are called intermediate operations. They can be connected together because their return type is a Stream. Operations that close a stream pipeline are called terminal operations. They produce a result from a pipeline such as a List, an Integer, or even void (any non-Stream type).
+- **Intermediate operations:** These operations transform a stream into another stream. For example:
 
-You might be wondering why the distinction is important. Well, intermediate operations do not perform any processing until a terminal operation is invoked on the stream pipeline; they are “lazy.”
+  - `filter(Predicate<T> predicate)`: Filters elements that match the given predicate.
+  - `map(Function<T, R> mapper)`: Transforms each element using the provided function.
+  - `sorted(Comparator<T> comparator)`: Sorts the elements using a comparator.
+  - `distinct()`: Removes duplicate elements.
+  - `limit(long maxSize)`: Truncates the stream to a given number of elements.
+  - `skip(long n)`: Skips the first n elements.
 
----
+- **Terminal operations:** These operations consume the entire stream and produce a result or side effect. For example:
 
-- A typed interface
+  - `collect(Collector<T, A, R> collector)`: Aggregates the elements into a collection, such as a `List`, `Set`, or `Map`.
+  - `reduce(BinaryOperator<T> accumulator)`: Combines the elements into a single value using an associative accumulation function.
+  - `forEach(Consumer<T> action)`: Performs an action for each element.
+  - `toArray()`: Converts the stream into an array.
+  - `findFirst()`: Returns the first element of the stream, if present.
+  - `count()`: Returns the number of elements in the stream.
+  - `anyMatch(Predicate<T> predicate)`: Returns true if any elements match the predicate.
+  - `allMatch(Predicate<T> predicate)`: Returns true if all elements match the predicate.
+  - `noneMatch(Predicate<T> predicate)`: Returns true if no elements match the predicate.
 
-- Stream is an object on which one can define operations such as map, filter, reduce.
+## Chaining
 
-- **A stream object does not hold any data.**
+Stream operations are designed to be chained together to form a stream pipeline.
 
-- A Stream object should not change the data it processes.
+Intermediate operations are the building blocks of a stream pipeline. They process the stream and return a new stream as the output. This allows you to chain multiple operations together, creating a sequence of transformations on the data.
 
-- It is an object which is optimized from the algorithm point of view, and able to process data in parallel.
+Terminal operations are the final step in the pipeline. They consume the entire stream produced by the chain of intermediate operations. Unlike intermediate operations, terminal operations typically return a non-Stream result (like a count, a collection, or even nothing void) and close the stream. This means you cannot perform further operations on the stream after a terminal operation is called.
 
-- Gives ways to efficiently process large amounts of data... and also smaller ones.
+## Laziness
 
-- It can automatically process the data in parallel, leveraging the computing power of multicore CPUs.
+A key feature of Streams is laziness. This means that operations are not physically executed **until a terminal operation is called.** This allows for efficient processing, especially for large datasets, because only the required operations are performed.
 
-- Why have Stream API if we already had Collection API?
-  - Because developer wanted to add new and efficient way of processing data and didn't want to alter the existing Collection API.
+## Parallel Processing
 
-## How it's Used?
+- Streams can leverage multi-core architectures without you having to write a single line of multithread code.
 
-- Example 1: Using the `stream()` method added in Collection API.
-
-```
-List<Person> persons = ...;
-Stream<Person> strm = persons.stream();
-```
-
-## Different operations supported by streams
-
-- **ForEach Operation:**
-
-```
-strm.forEach(person -> System.out.println(person));
-```
-
-The `forEach` method in the above example takes an instance of the `Consumer` **functional interface** as an argument.
-
-- **Filter Operation:**
-
-```
-Stream<Person> filtered = strm.filter(person -> person.getAge() > 20);
-```
-
-The `filter` method in the above example takes an instance of the `Predicate` **functional interface** as an argument.
-
-- An operation on a Stream that returns a Stream is called an **intermediary operation**.
-
-- **Map Operation:**
-
-- Returns a stream, so it is an intermediary operation.
-
-- Takes mappers as parameters
-
-- **Reduction Operation:**
-
-- There are 2 kinds of reduction in the Stream API:
-
-  - aggregation: `min`, `max`, `sum`, `average` etc.
-
-- Takes in an object of BinaryOperator type
-
-## Extra:
-
-- All methods of Stream that return another Stream are lazy.
-- `peek(Consumer)` is a alternative option of `forEach(Consumer)` operation that returns a stream.
-- `forEach` is a **final** operation whereas `filter`, `peek` are **intermediary** operations.
+Just replace `stream()` with `parallelStream()` and the Streams API will internally decompose your query to leverage the multiple cores on your computer.
