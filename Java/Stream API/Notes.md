@@ -25,8 +25,8 @@ Stream operations fall into two categories:
 
 - **Terminal operations:** These operations consume the entire stream and produce a result or side effect. For example:
 
-  - `collect(Collector<T, A, R> collector)`: Aggregates the elements into a collection, such as a `List`, `Set`, or `Map`.
-  - `reduce(BinaryOperator<T> accumulator)`: Combines the elements into a single value using an associative accumulation function.
+  - `collect(Collector<T, A, R> collector)`: **Aggregates the elements into a collection**, such as a `List`, `Set`, or `Map`.
+  - `reduce(BinaryOperator<T> accumulator)`: **Combines the elements** into a single value using an associative accumulation function.
   - `forEach(Consumer<T> action)`: **Performs an action for each element**.
   - `toArray()`: Converts the stream into an array.
   - `findFirst()`: Returns the first element of the stream, if present.
