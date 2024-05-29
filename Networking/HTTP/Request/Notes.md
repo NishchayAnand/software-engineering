@@ -14,4 +14,8 @@
 
 - Other rarely used methods include `HEAD`, `TRACE`, `PUT`, `DELETE`, `OPTIONS`, and `CONNECT`.
 
-> **_NOTE:_** You can send a little data with HTTP GET. However, the amount of data you can send with the GET is limited. The data you send with a GET is appended to the URL up in the browser bar, so whatever you send is exposed.
+## Key differences between GET and POST request methods
+
+- You can send a little data with HTTP GET. However, the amount of data you can send with the GET is limited. The data you send with a GET is appended to the URL up in the browser bar, so whatever you send is exposed.
+
+- POST is intended for actions that result in a change on the server, unlike GET which is used for idempotent requests that should not alter the server state.
