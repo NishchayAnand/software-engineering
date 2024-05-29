@@ -1,5 +1,9 @@
 # Understanding Servlets API in Java
 
+-
+
+---
+
 - Implement methods to handle initialization of the servlet and handling requests messages.
 
 - Without configuration, a servlet does not have an accessible URL. Beginning with Servlet 3.0 (Java EE 6), annotations can be used to map URLs to servlets (before that web.xml file was used).
