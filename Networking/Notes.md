@@ -14,6 +14,18 @@ IP (Internet Protocol) is the underlying protocol that moves/routes the chunks (
 
 **HTTP runs on top of TCP/IP.** Basically, it depends on TCP/IP to get the complete request and response from one place to another.
 
+Every resource on the web has its own unique address, in the URL format.
+
+## Ports
+
+The internet web (HTTP) server software usually runs on port 80 (it's `443` for `HTTPS`). Think of ports as unique identifiers. A port represents a **logical connection** to a particular piece of software running on the server hardware.
+
+> **_NOTE:_** Ports do not represent a place to plug in physical devices. They're just numbers representing a server application.
+
+Without port numbers, the server would have no way of knowing which application a client wanted to connect to.
+
+If you're writin services (server programs) to run on a company network, you should check with the sys-admins to find out which ports are already taken.
+
 ---
 
 ## EXTRA:
