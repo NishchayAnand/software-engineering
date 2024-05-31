@@ -1,5 +1,7 @@
 # Understanding Exception Handling in Java
 
+The Java programming language uses exceptions to handle errors and other exceptional events.
+
 ## Types of Exceptions:
 
 ### Checked exceptions:
@@ -12,3 +14,7 @@
 
 - Come up when the program is running.
 - Example: `ArrayIndexOutOfBoundsException`
+
+## Try-Catch Block
+
+## Try-With-Resource Block

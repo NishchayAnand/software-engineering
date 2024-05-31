@@ -1,7 +1,5 @@
 # Understanding Servlets API in Java
 
--
-
 ---
 
 - Implement methods to handle initialization of the servlet and handling requests messages.
