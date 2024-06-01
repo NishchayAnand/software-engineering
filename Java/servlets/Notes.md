@@ -1,5 +1,13 @@
 # Understanding Servlets API in Java
 
+- Servlets don't have a `main()` method. They're under the control of another Java application called a **Container.**
+
+- Tomcat is an example of a Container.
+
+- When your web server (like `Apache`) gets a request for a `servlet` (as opposed to, say, a plain old static `HTML` page), the server hands the request **not to the servlet itself**, **but to the Container** in which the `servlet` is deployed. **It's the Container that gives the servlet the `HTTP` request and response, and it's the Container that calls the servlet's methods (like `doPost()` or `doGet()`).**
+
+-
+
 ---
 
 - Implement methods to handle initialization of the servlet and handling requests messages.

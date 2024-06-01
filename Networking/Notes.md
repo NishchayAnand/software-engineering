@@ -26,6 +26,24 @@ Without port numbers, the server would have no way of knowing which application 
 
 If you're writin services (server programs) to run on a company network, you should check with the sys-admins to find out which ports are already taken.
 
+**To establish a secure SSL/TLS connection:**
+
+- **Client Hello:** The client (e.g., web browser) initiates the SSL/TLS handshake by sending a "Client Hello" message to the server.
+
+- **Server Hello:** The server responds with a "Server Hello" message and its SSL/TLS certificate.
+
+- **Certificate Validation:** The client verifies the authenticity and integrity of the server's SSL/TLS certificate, i.e., checks if the certificate is signed by a trusted Certificate Authority (CA), if it is not expired or revoked, and if the domain name matches the server's identity.
+
+- **Public Key Exchange:** Once the client validates the certificate, it extracts the server's public key from the certificate. The client generates a random session key, encrypts it using the server's public key, and sends it back to the server.
+
+- **Session Key Establishment:** The server receives the encrypted session key from the client and uses its private key (kept secret on the server) to decrypt the session key. Both the client and the server now possess the same session key, which can be used for symmetric encryption during the session.
+
+- **Secure Communication:** With the session key established, the client and server can encrypt and decrypt data using symmetric encryption algorithms. This ensures that data exchanged between them is encrypted, making it unreadable to anyone intercepting the communication.
+
+- **Handshake Completion:** The SSL/TLS handshake is complete, and the client and server can proceed with secure communication. They can exchange encrypted data, such as web pages, form submissions, or other application data, using the established secure channel.
+
+> NOTE: Secure Sockets Layer (SSL) and Transport Layer Security (TLS) certificates are used to establish a secure and encrypted connection between a client (such as a web browser) and a server (such as a website or application). - SSL/TLS certificates are issued by trusted Certificate Authorities (CAs).
+
 ---
 
 ## EXTRA:
