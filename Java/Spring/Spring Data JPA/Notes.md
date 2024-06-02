@@ -1,5 +1,17 @@
 # Understanding Spring Data JPA
 
+Java Persistence API (JPA) - An API that helps to standarize the Java Persistence world.
+
+- `ApplicationContext ctx = ClassPathXmlApplicationContext("datasources-beans.xml");` creates a container forming the beans from the datasource xml file.
+
+- The JPA defines an `EntityManager` interface, which is basically the heart of API. It is similar to Hibernate's `Session`, forming the core of the application to perform database operations.
+
+> NOTE: Create `persistence.xml` file under a folder named `META-INF`.
+
+A domain object is also known as a persistence entity.
+
+---
+
 - JPA stands for Java Persistance API. JPA focused on object-relational mapping or commonly referred to as just an ORM design principle.
 
 - Originally, it was part of the J2EE specification, but was later extracted out to be available just on its own.

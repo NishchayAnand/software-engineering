@@ -1,5 +1,9 @@
 # Understanding Template Design Pattern
 
+The templates design pattern hides away all boilerplate code and allows the developer to concentrate solely on business logic.
+
+---
+
 - Encapsulate Algorithms
 
 - It defines the steps of an algorithm, allowing subclasses to provide the implementation for one or more steps.

@@ -35,3 +35,5 @@ The Three Kinds of Exceptions: `Checked`, `Error`, `Runtime`.
 ## User Defined Exceptions
 
 **If a client can reasonably be expected to recover from an exception, make it a checked exception. If a client cannot do anything to recover from the exception, make it an unchecked exception.**
+
+> **_NOTE:_ Always think of exception handling from client's perspective.**
