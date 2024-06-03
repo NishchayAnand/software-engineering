@@ -1,5 +1,33 @@
 # Understanding SpringBoot
 
+**Three foundational features of Spring Boot:**
+
+1. Simplified Dependency Management
+2. Simplified Deployment
+3. Autoconfiguration
+
+## Simplified Dependency Management
+
+Each primary dependency incorporates numerous other secondary dependencies in order to fulfill its promised functionality.
+
+Using libraries together requires a certain degree of rigor, as on eversion of particular dependency may have been tested (or even function correctly) only with a specific version of another dependency.
+
+When it comes to chasing down and bashing bigs from mismatches that popup between dependencies, there are no prizes, only elusive conclusive diagnoses and hours wasted pursuing them.
+
+Spring boot starters, called **Bills of Materials (BOMs)** built around the proven premise that vast majority of times you provide a particular capability, you do it in nearly the same way, nearly every time.
+
+For example, each time we build an API, we expose endpoints, listen for requests, process requests, convert to and from objects, exchange information in 1+ standard formats, send an receive data over the wire using a particular protocol, and more.
+
+Adding a single starter: `spring-boot-starter-web` provides all of those related functionalities in a **single application dependency.** All dependencies encompassed by that starter are version-synchronized too, meaning that they've been tested successfully together and the included version of library A is proven to function properly with the included version of library B, C, D, etc.
+
+## Autoconfiguration
+
+Spring and Spring Boot projects follow the _convention over configuration_ mantra.
+
+As developers, we are most productive when we focus on the task at hand and not a million setup chores.
+
+---
+
 - In 2014, SpringBoot was launched.
 
 - Based on Spring, it allows creation of standalone Spring apps aiming microservices.
