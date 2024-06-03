@@ -1,10 +1,22 @@
 # Understanding JPA
 
-You cannote persist Java objects without having to format them in a shape that the database can understand and accept.
+Java objects work with classes and objects and represent data as interconnected graph of objects.
+
+**Object-Relational impedance mismatch or the paradigm mismatch means that the object-oriented model and relational model do not fit together.**
+
+**Object-Relational Mapping (ORM)** is the programming technique to connect the object-oriented model and the relational model.
+
+You cannot persist Java objects without having to format them in a shape that the database can understand and accept.
 
 Working with Java Objects instead of relational databases is a good thing in the object-oriented programming realm.
 
 JPA is the answer for the following question, **How easy would it be if I could save the object by simply calling a save method instead of writing JDBC code?**
+
+JPA is a specification defining an API that takes care of managing the persistence of objects and object-relational mapping. Hibernate is the most popular implementation of this specification.
+
+> NOTE: JPA tells what to do to persist objects, while Hibernate tells how to do it.
+
+JPA provides the advantage of allowing programmers to work only at level of objects while generating the SQL queries and the boilerplate code for basic CRUD operations: `CREATE`, `READ`, `UPDATE`, `DELETE`. This makes the database access more abstract and portable, also speeds up the development.
 
 ## ORM (Object-Relational Mapping)
 

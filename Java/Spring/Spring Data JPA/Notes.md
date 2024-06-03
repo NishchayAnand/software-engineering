@@ -1,5 +1,15 @@
 # Understanding Spring Data JPA
 
+Spring Data provides support for interacting with repositories.
+
+The central interface astracting the Spring Data repository is named exactly `Repository<T, ID>`.
+
+The purpose of the query methods from the repositories is to retrieve information from the database. Spring Data provides a **query builder mechanism** that will create the bahavior of the repository methods based on their names.
+
+The `Java Persistence Query Language (JPQL)` is a platform independent object-oriented query language part of JPA.
+
+---
+
 Java Persistence API (JPA) - An API that helps to standarize the Java Persistence world.
 
 - `ApplicationContext ctx = ClassPathXmlApplicationContext("datasources-beans.xml");` creates a container forming the beans from the datasource xml file.
