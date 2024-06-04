@@ -1,9 +1,5 @@
 # Understanding SpringBoot
 
-- `SpringApplication.run(MySpringBootApplication.class, args);`
-
-- `@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})`
-
 **Three foundational features of Spring Boot:**
 
 1. Simplified Dependency Management

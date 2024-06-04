@@ -25,6 +25,14 @@ JPA doesn't provide its own annotations for entity field validation. However, it
 
 ---
 
-- @EnableAutoConfiguration
+**Q4. Explain `SpringApplication.run(MySpringBootApplication.class, args);`**
 
-  - how to exclude a class
+When you run the application with `SpringApplication.run(MySpringBootApplication.class, args);`, the following steps occur:
+
+1. **Bootstrapping the Application:** Spring Boot initializes the application context. The `@Configuration` annotated class registers the beans.
+
+2. **Auto-Configuration:** Spring Boot scans the classpath and applies default configurations based on the dependencies. For example, if `spring-boot-starter-web` is present, it configures an embedded web server.
+
+3. **Component Scanning:** Spring Boot scans the package and its sub-packages for `components`, `services`, `repositories`, and `controllers` and registers these components in the application context.
+
+---
