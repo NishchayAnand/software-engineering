@@ -28,3 +28,5 @@ There are two parts in any JDBC client program: one part gets the connection, cr
 Frameworks like Spring Data hides away the non-business code effeciently in the templates while allowing us to concentrate on the business logic.
 
 > **_NOTE:_** The database driver translates the retrieved data structure into a ResultSet object within your Java application. The retrieved data structure is generally an internal, intermediate format specific to the database driver.
+
+Use `executeUpdate()` for executing `INSERT`, `UPDATE`, and `DELETE` statements.
