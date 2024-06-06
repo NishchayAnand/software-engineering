@@ -1,4 +1,12 @@
-# Understanding Spring Data JPA
+# Understanding Spring Data
+
+Provides the basic tools ypu can use to connect to SQL databases to implement persistence layer of your app.
+
+The **Spring Data** enables you to easily connect to databases and use the persistence layer with a minimum number of lines of code written.
+
+> **NOTE:** We have **Spring Data Access**, which is a module of Spring Core, and we also have an independent project in the Spring ecosystem named **Spring Data**.
+
+---
 
 Spring Data provides support for interacting with repositories.
 

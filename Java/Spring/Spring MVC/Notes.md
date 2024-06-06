@@ -1,4 +1,8 @@
-# Understanding Spring MVC
+# Understanding Spring
+
+The part of the Spring framework that enables you to develop web applications that serve HTTP requests.
+
+---
 
 - Flexible when compared to other web development models.
 - Can leverage the features of Core Spring

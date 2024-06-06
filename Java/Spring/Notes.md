@@ -1,13 +1,7 @@
 # Understanding Spring Framework
 
-Spring is an Application Framework, not a layer framework so it can be used at different levels of an application.
+Spring Framework is a popular open-source framework for building enterprise applications in Java.
 
-Spring includes several separate frameworks, including Spring MVC, Spring Data, Spring Rest, etc.
+The first version of Spring, released in October 2002, was introduced as a lightweight alternative to J2EE. It provided a simpler and more flexible approach to enterprise Java development.
 
-The basic idea behind Spring is to simplify the traditional approach to design enterprise applications.
-
-Spring handles the infrastructure so that you can focus on building your application. It also enables you to build applications from **plain old Java objects.**
-
-The core problem for which the Spring framework provides support is **how do we assemble different services into an application?**
-
-Objects from a Java application have dependencies between them. The Spring framework allows the possibility to define dependencies via configuration.
+## Main problems with J2EE that Spring effectively solved

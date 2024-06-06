@@ -1,5 +1,7 @@
 # Understanding SpringBoot
 
+Spring Boot introduced the concept of **"convention over configuration".** The main idea of this concept is that instead of setting up all the configurations of a framework yourself, Spring Boot offers you a default configuration that you can customize as needed.
+
 **Three foundational features of Spring Boot:**
 
 1. Simplified Dependency Management
