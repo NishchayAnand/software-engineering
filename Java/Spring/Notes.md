@@ -18,22 +18,16 @@ Spring introduced a more lightweight and modular ecosystem, splitting each conce
 
 **With J2EE, the developers had to learn and manage separate configuration mechanisms for both web and EJB components.**
 
-Spring took a different approach by promoting a unified configuration for everything. Once you learned the basic configuration style, you could be able to apply it in many areas. Resources, middle tier objects, and web components, all could be set up using the same bean configuration mechanism. You could combine your entire configuration in one single bean definition file or split it by application modules or layers. There is no need for diverse configuration files in a variety of formats, spread out across the application.
+Spring took a different approach by introducing a unified configuration style. This consistency meant developers only needed to learn one approach for configuring various components (resources, middle-tier objects, web components).
 
-### Increased Boilerplate Code Due to Container-Generated Classes
+> **NOTE:** While Spring offers a unified approach, it doesn't restrict developers to a single file. They can split configuration across multiple files for better organization, allowing for flexibility and control over the configuration process.
 
-**Each EJB required creating a `component` interface, a `home` interface, and a `bean implementation` class. The EJB container would generated the additional classes required to handle functionalities like _lifecycle management_ during deployment. This resulted in multiple source files per EJB, making the overall codebase larger and harder to maintain.**
+### Restrictive Programming Model
 
-## Restrictive Programming Model
+**Each EJB required creating a `component` interface, a `home` interface, and a `bean implementation` class. The EJB container would generated the additional classes required to handle functionalities like _lifecycle management_ during deployment. Additonally, the EJB container offered no support for managing relationships between EJBs. We had to perform `JNDI` lookups within an EJB to access to another EJB. This introduced extra complexity and boilerplate code in the EJB implementation, making the overall codebase larger and harder to maintain.**
 
-**EJBs, being coarse-grained components, typically relied on multiple fine-grained objects for their working However, the EJB container didn't provide any built-in support for managing the lifecycle or dependencies of these fine-grained objects.**
+Spring simplified this process by using **`POJOs` (Plain Old Java Objects)** and **dependency injection (DI)**, eliminating the need for the complex interface and class structures required by EJBs. With Spring, developers could create simple POJOs to encapsulate business logic and then wire them together using DI, which significantly reduced the number of required classes and interfaces.
 
-The Spring AOP framework provides AOP support for method interception on any class managed by a Spring lightweight container. It supports easy proxying of beans (dynamic proxies) in a bean factory, seamlessly weaving in interceptors and other advice at runtime. The main use of the Spring AOP framework is to provide declarative enterprise services for POJOs.
+Additionally, Spring's **Aspect-Oriented Programming (AOP)** provided a declarative way to handle cross-cutting concerns **(aspects)** like **transaction management**, **security**, and **logging** without needing to generate additional classes. This approach kept the codebase smaller, more maintainable, and easier to understand.
 
-Declarative enterprise services can be provided to POJOs using AOP, thus taking one of the best features of EJB and applying it without most of the complexity of EJB.
-
-One reason that AOP is a more attractive proposition to deliver such services than EJB is that it imposes fewer requirements on the objects to which it adds enterprise services. For example, they don't usually need to depend on a particular API such as the EJB API.
-
-Dependency Injection flavor of Inversion of Control for configuring managed objects: An approach in which the container takes responsibility for configuring application objects running within it, "without the need for lookups in application code".
-
-With Spring, objects express their dependencies on collaborators through ordinary Java JavaBean properties or constructor arguments, leaving the IoC container to resolve them at runtime, eliminating any need for tedious-to-implement and hard-to-test lookups in application code.
+> **NOTE:** Spring uses a technique called **"weaving"** at runtime to apply the aspects to POJOs. This weaving process intercepts method calls or other events within the POJOs and inserts the logic defined in the aspects at the appropriate points (no additional code is generated or added directly to POJOs).
