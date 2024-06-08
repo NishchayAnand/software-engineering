@@ -69,4 +69,30 @@ The thread scheduler can move a running thread into a blocked state. For example
 
 > **NOTE:** The scheduler implementations are different for different JVM's, and even running the same program on the same machine can give you different results.
 
+## Putting a thread to sleep
+
 Putting a thread to sleep, even for a few milliseconds, forces the currently-running thread to leave the running state, thus giving another thread a chance to run.
+
+Calling `Thread` class static `sleep()` method, passing in the sleep duration (in milliseconds), will knock a thread out of the running state, and keep it out of the runnable state for 2 seconds.
+
+Sample Code:
+
+```
+Thread.sleep(2000);
+```
+
+A bit unfortunately, the sleep throws an `InterruptedException`, a checked exception, so all calls to sleep must be wrapped in a `try/catch`.
+
+Sample Code:
+
+```
+try {
+    Thread.sleep(2000);
+} catch(InterruptedException ex) {
+    ex.printStackTrace();
+}
+```
+
+> **NOTE:** Your thread will probably never be interrupted from sleep. The exception is in the API to support a thread communication mechanism that almost nobody uses in the Real World. But, you still have to obey the handle or declare law, so you need to get used to wrapping your `sleep()` calls in a `try/catch`.
+
+The thread won't wake up at the designated time and become the currently-running thread. When a thread wakes up, the thread is once again at the mercy of the thread scheduler.
