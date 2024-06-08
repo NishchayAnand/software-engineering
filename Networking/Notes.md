@@ -1,5 +1,15 @@
 # Understanding Networking
 
+Three things we have to learn to get the client working are:
+
+1. How to establish the initial connection between the client and server.
+2. How to send messages to the server.
+3. How to receive messages from the server.
+
+Establishing a connection is a one-time operation (that either works or fails). But after that, the client wants to _send outgoing messages_ and **simultaneously** _receive incoming messages_ from the server.
+
+---
+
 Browser is the piece of software that knows how to communicate with the server. The browsers other big job is to interpret the HTML code and render the web page for the user.
 
 Servers often send the browser a set of instructions written in HTML. The HTML tells the browser how to present the content to the user.
@@ -15,6 +25,8 @@ IP (Internet Protocol) is the underlying protocol that moves/routes the chunks (
 **HTTP runs on top of TCP/IP.** Basically, it depends on TCP/IP to get the complete request and response from one place to another.
 
 Every resource on the web has its own unique address, in the URL format.
+
+> **NOTE:** If you try to bind a program to a port that is already in use, you'll get a `BindException`.
 
 ## Ports
 
