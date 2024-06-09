@@ -96,3 +96,11 @@ try {
 > **NOTE:** Your thread will probably never be interrupted from sleep. The exception is in the API to support a thread communication mechanism that almost nobody uses in the Real World. But, you still have to obey the handle or declare law, so you need to get used to wrapping your `sleep()` calls in a `try/catch`.
 
 The thread won't wake up at the designated time and become the currently-running thread. When a thread wakes up, the thread is once again at the mercy of the thread scheduler.
+
+## Threads can lead to Concurrency Issues
+
+Concurrency issues lead to race condition. Race conditions lead to data corruption.
+
+**It all comes down to one potentially deadly scenario: _"two or more threads have access to a single object's data"_. In other words, methods executing on two different stacks are both calling, say, getters or setters on a single object on the heap.**
+
+> **NOTE:** When a thread is not running, and in runnable (or blocked) it's essentially knocked unconscious. When it becomes the currently-running thread again, it doesn't know that it ever stopped.
