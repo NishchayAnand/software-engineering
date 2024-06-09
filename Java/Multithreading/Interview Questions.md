@@ -9,3 +9,11 @@ The `Thread` object might still be on the heap, as a living object that you call
 > **NOTE:** There are design patterns for making a pool of threads that you can keep using to perform different jobs. However, you don't do it by restarting a dead thread.
 
 ---
+
+**Q2. What are thread priorities?**
+
+Thread priorities are numerical values that tell the scheduler how important a thread is to you. The scheduler can kick a lower priority thread out of the runnable state if a higher priority threas suddenly becomes runnable.
+
+It's important to note that thread priorities might help you influence the scheduler, but they still **don't offer any guarantee**. We recommend that you use priorities only if you want to influence performance, but never, ever reliy on them for program correctness.
+
+---

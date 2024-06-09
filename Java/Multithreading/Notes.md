@@ -47,9 +47,9 @@ Here, `MyThreadJob` is the class that implements the Runnable interface (defines
 
 > **NOTE:** Runnable is the job a thread is supposed to run.
 
-## 3 States of a new Thread
+## Three States of a new Thread
 
-1. `Thread t = new Thread(r);`: A `Thread` instance has been created but not started. In other words, there's a `Thread` object, but no thread of execution.
+1. `Thread t = new Thread(r);`: A `Thread` instance has been created but not started **(initial state)**. In other words, there's a `Thread` object, but no thread of execution.
 
 2. `t.start();`: When you start the thread, it moves to the **Runnable state**. This means the thread is ready to run and just waiting for its chance to be selected for execution. At this point, there is a new call stack for this thread.
 
@@ -104,3 +104,28 @@ Concurrency issues lead to race condition. Race conditions lead to data corrupti
 **It all comes down to one potentially deadly scenario: _"two or more threads have access to a single object's data"_. In other words, methods executing on two different stacks are both calling, say, getters or setters on a single object on the heap.**
 
 > **NOTE:** When a thread is not running, and in runnable (or blocked) it's essentially knocked unconscious. When it becomes the currently-running thread again, it doesn't know that it ever stopped.
+
+Use the `synchronized` keyword to modify a method so that only one thread at a time can access it.
+
+> **NOTE:** We can use the synchronized keyword to synchronize at the more fin-grained level of one or more statements, rather than at the whole-method level.
+
+## Lock
+
+Every object has a lock. When an object has one or more synchronized methods, a thread can enter a synchronized method **only if the thread can get the key to the object's lock.**
+
+While a thread is holding the key, **no other threads can enter any of that object's synchronized methods** (because the one key for that object won't be available).
+
+> **NOTE:** Locks are not per _method_, they are per _object_.
+
+## Problems with Synchronizations
+
+1. A synchronized method forces other threads to get in line and wait their turn. This will lead to a performance hit, though you'd never notice it.
+
+2. **Dead Lock:** Thread deadlock happens when you have two threads, both of which are holding a key the other thread wants. There's no way out of this scenario, so the two threads sit and wait.
+
+> **NOTE:** A good rule of thumb is to synchronize only the bare minimum that should be synchronized.
+
+Links:
+
+1. Head First Java
+2. Java Threads by Scott Oaks and Henry Wong
