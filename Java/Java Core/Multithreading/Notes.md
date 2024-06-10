@@ -1,5 +1,23 @@
 # Understanding Multithreading in Java
 
+Multithreading is the way to obtain fast, lightweight **concurrency** within a single process space.
+
+On single-processor machines, threads can give the illusion of multitasking even though at any given point in time the CPU is executing only one thread. Each thread gets a slice of time on the CPU and then gets switched out either because it initiates a task which requires waiting and not utilizing the CPU or it completes its time slot on the CPU.
+
+Applications can take advantage of multi-core architectures and have a dedicated CPU run each thread.
+
+It is possible to have the overhead of context switching among threads steal away any throughput gains and result in worse performance than a single-threaded scenario. However such cases are unlikely and an exception, rather than the norm.
+
+Web servers that use threads instead of creating new processes when fielding web requests, consume far fewer resources.
+
+## Problems with Multithreading
+
+1. Usually very hard to find bugs.
+2. Higher cost of code maintenance since the code inherently becomes harder to reason about.
+3. Increased utilization of system resources. Creation of each thread consumes additional memory, CPU cycles for book-keeping and waste of time in context switches.
+4. Programs may experience slowdown as coordination amongst threads comes at a price.
+5. Acquiring and releasing locks adds to program execution time. Threads fighting over acquiring locks cause lock contention.
+
 ## Main Thread
 
 Every Java application starts up a main thread - the thread that puts the main() method on the bottom of the stack. The JVM is responsible for starting the main thread (and other threads, as it chooses, including the garbage collection thread).

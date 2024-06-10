@@ -17,3 +17,21 @@ Thread priorities are numerical values that tell the scheduler how important a t
 It's important to note that thread priorities might help you influence the scheduler, but they still **don't offer any guarantee**. We recommend that you use priorities only if you want to influence performance, but never, ever reliy on them for program correctness.
 
 ---
+
+**Q3. What is the difference between running multiple threads on a single-core processor and a multi-core processor?**
+
+When a program with multiple threads is running on a multi-core processor, multiple threads can truly execute concurrently on different cores, leading to significant performance gains.
+
+When running on a single core, the operating system can rapidly switch between threads, giving the illusion of concurrency. This context switching comes with some overhead, but it allows the program to make progress on multiple tasks seemingly at the same time.
+
+---
+
+**Q4. Difference between Class and Object locks?**
+
+Locks, also known as synchronizers, are mechanisms used to control access to shared resources between threads. They prevent multiple threads from modifying the same data simultaneously, which can lead to data corruption or inconsistencies.
+
+**Class Lock:** A class level lock is achieved by **using the `synchronized` keyword with `static` methods in a class.** This lock restricts any thread from entering any static synchronized method of that class.
+
+- **Object Lock:** An object level lock is achieved by **using the `synchronized` keyword with `instance` methods or `code blocks`** within a class. This lock restricts other threads from entering synchronized methods or blocks on the same object instance.
+
+---
