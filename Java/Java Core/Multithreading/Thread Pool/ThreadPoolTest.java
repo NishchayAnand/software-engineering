@@ -23,6 +23,9 @@ public class ThreadPoolTest {
         int nTasks = 10;
         int tpSize = 10;
 
+        // Here: LinkedBlockingQueue will make sure that adding a task to the queue
+        // always suceeds, which means that the thread pool never reaches more than the
+        // core size and never rejects a task.
         ThreadPoolExecutor tpe = new ThreadPoolExecutor(tpSize, tpSize, 50000L, TimeUnit.MILLISECONDS,
                 new LinkedBlockingQueue<Runnable>());
 

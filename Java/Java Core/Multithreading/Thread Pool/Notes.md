@@ -25,4 +25,8 @@ To use a thread pool, you must do 2 things:
 
 ## What affects a Thread Pool?
 
-The 2 fundamental things that affect the thread pool are its size and the queue used for the tasks.
+The 2 fundamental things that affect the thread pool are its **size** and the **queue** used for the tasks. These parameters allow considerable flexibility in the way the thread pool operates.
+
+The basic principle is that the thread pool tries to keep its minimum number of threads active. If it gets too busy, it adds threads until the maximum number of threads is reached, at which point it doesn't allow any more tasks to be queued.
+
+> **NOTE:** If you use a thread pool, there is no magic formula that you can use to determine its **optimal size** and **queuing strategy**. When the operations are strictly CPU-bound, use only as many threads as there are CPUs. For more complex operations, choosing a thread pool size is a matter of testing different values to see which gives you the best program performance.
