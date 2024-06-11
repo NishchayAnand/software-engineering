@@ -83,4 +83,4 @@ This removed the need for a new thread for every I/O Socket. Instead, you can ha
 
 Depending on the operations the server has to perform, it may need (or want) to spawn some additional threads to assist with this processing, but the new I/O classes allow you to handle thousands of clients in a single thread.
 
-However, dealing with nonblocking I/O is much harder than dealing with blocking I/O. For example, when you use nonblocking I/O, it's your responsibility to be prepared for a situation in which **all the data you requested may not be immediately available. It's this programming that makes nonblocking I/O more difficult to use**.
+However, dealing with nonblocking I/O is much harder than dealing with blocking I/O. For example, when you use nonblocking I/O, it's your responsibility to be prepared for a situation in which **all the data you requested may not be immediately available. It's this programming that makes nonblocking I/O more difficult to use**. However, the changes of such a situation is very rare.
