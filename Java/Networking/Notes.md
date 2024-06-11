@@ -63,3 +63,24 @@ In JDK 1.4, this situation changed. Java introduced the NIO (Non-Blocking I/O) p
 ## Traditional I/O Server
 
 A network server would start a new thread for every client that attaches to the server. **By having a thread associated with each client, we no longer need to worry about other clients within any single thread. We can code our classes as if we were handling a single client at a time.**
+
+The issue with creating a new thread for every new client is that this **can handle only a finite number of clients.**
+
+Two factors limit the number of clients a multithreaded server can handle:
+
+1. The server can start only a certain number of threads.
+2. With too many active threads, the total **throughput** of the program suffers (all requests take a very long time).
+
+This approach works only for applications in which the client connections are **short-lived**. It depends on the fact that the threads in the server do not block because they do not read from the client.
+
+This approach could also work if you don't care whether new clients are not always able to connect.
+
+## NIO (Non-Blocking I/O) Server
+
+The traditional I/O server cannot scale up to thousands of clients. Because of this, Java introduced a new I/O package (`java.nio`) in JDK 1.4. The I/O classes in this package allow you to use **nonblocking I/O**.
+
+This removed the need for a new thread for every I/O Socket. Instead, you can have a **single thread that processes all client sockets**. That thread can check to see which sockets have data available, process that data, and then check again for data on all sockets.
+
+Depending on the operations the server has to perform, it may need (or want) to spawn some additional threads to assist with this processing, but the new I/O classes allow you to handle thousands of clients in a single thread.
+
+However, dealing with nonblocking I/O is much harder than dealing with blocking I/O. For example, when you use nonblocking I/O, it's your responsibility to be prepared for a situation in which **all the data you requested may not be immediately available. It's this programming that makes nonblocking I/O more difficult to use**.

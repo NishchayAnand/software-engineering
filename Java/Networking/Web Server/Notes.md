@@ -21,3 +21,5 @@ A single-threaded web server can only handle one client connection at a time. **
 To handle multiple client, a web server can start a new thread for every client that attaches (connects) to the server.
 
 **By having a thread associated with each client, we no longer need to worry about other clients within any single thread. We can code our classes as if we were handling a single client at a time.**
+
+> **NOTE:** Creating and managing too many threads can consume resources and lead to performance issues. Thread pool mechanisms can help manage threads efficiently.

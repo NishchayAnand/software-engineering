@@ -41,7 +41,7 @@ class ClientHandler {
     }
 }
 
-public class Server {
+public class SingleThreadedServer {
 
     private static final int PORT = 8080;
 
@@ -64,7 +64,7 @@ public class Server {
 
     public static void main(String[] args) {
 
-        Server server = new Server();
+        SingleThreadedServer server = new SingleThreadedServer();
         server.go();
 
     }
