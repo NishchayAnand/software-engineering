@@ -49,3 +49,17 @@ writer.println("message to send");
 ```
 
 Here, `PrintWriter` acts as its own bridge between character data and bytes it gets from the Socket's low-level output stream. By chaining `PrintWriter` to the **Socket's** output stream, we can write **Strings** to the **Socket** connection.
+
+## Threads and I/O
+
+The are where you're most likely to encounter threads in Java is dealing with I/O, and particularly in dealing with network I/O.
+
+In early versions of Java, all I/O was blocking. If your program attempted to read data from a socket and no data was present, the `read()` method would block until at least some data was available.
+
+**Because early versions of Java did not have a way to handle nonblocking I/O, Java servers would typically start a new thread for every client that connected to them.** Java clients would typically start a new thread to send requests to the server so that the rest of the program would remain active while the client was waiting for the response.
+
+In JDK 1.4, this situation changed. Java introduced the NIO (Non-Blocking I/O) package, which allowed developers to utilize nonblocking I/O in their programs.
+
+## Traditional I/O Server
+
+A network server would start a new thread for every client that attaches to the server. **By having a thread associated with each client, we no longer need to worry about other clients within any single thread. We can code our classes as if we were handling a single client at a time.**

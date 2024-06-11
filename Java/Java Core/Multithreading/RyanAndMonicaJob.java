@@ -1,4 +1,3 @@
-package Java.Multithreading;
 /*
     Problem Statement: Couple Ryan and Monica have a joint bank account. They should be 
                        able to withdraw money from the bank's ATM simultaneously. Make sure
