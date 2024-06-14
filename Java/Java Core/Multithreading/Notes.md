@@ -1,5 +1,9 @@
 # Understanding Multithreading in Java
 
+A concurrent program is one that can be decomposed into constituent parts and each part can be executed out of order or in partial order without affecting the final outcome.
+
+> **NOTE:** With concurrency, the execution of two programs or units of the same program may not happen simultaneously.
+
 Multithreading is the way to obtain fast, lightweight **concurrency** within a single process space.
 
 On single-processor machines, threads can give the illusion of multitasking even though at any given point in time the CPU is executing only one thread. Each thread gets a slice of time on the CPU and then gets switched out either because it initiates a task which requires waiting and not utilizing the CPU or it completes its time slot on the CPU.
@@ -116,6 +120,8 @@ try {
 The thread won't wake up at the designated time and become the currently-running thread. When a thread wakes up, the thread is once again at the mercy of the thread scheduler.
 
 ## Threads can lead to Concurrency Issues
+
+With multithreading, multiple threads of a program can be executing different sections of the program code. However, caution should be exercised when threads of the same program attempt to execute the same portion of code.
 
 Concurrency issues lead to race condition. Race conditions lead to data corruption.
 

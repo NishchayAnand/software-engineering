@@ -1,6 +1,10 @@
 # Multithreading Interview Questions
 
-**Q1.Can you reuse a Thread object? Can you give it a new job to do and restart it by calling start() again?**
+**Q. What do we mean by a thread-unsafe class?**
+
+In Java, a thread-unsafe class refers to a class that contains data or methods that _can't be accessed safely by multiple threads concurrently_. This means if multiple threads access the same instance of a thread-unsafe class simultaneously, there's a _risk of data corruption or inconsistencies_.
+
+**Q.Can you reuse a Thread object? Can you give it a new job to do and restart it by calling start() again?**
 
 No. Once a thread's `run()` method has completed, the thread can never be restarted. In fact, at that point the thread moves into a **dead state**.
 
@@ -10,7 +14,7 @@ The `Thread` object might still be on the heap, as a living object that you call
 
 ---
 
-**Q2. What are thread priorities?**
+**Q. What are thread priorities?**
 
 Thread priorities are numerical values that tell the scheduler how important a thread is to you. The scheduler can kick a lower priority thread out of the runnable state if a higher priority threas suddenly becomes runnable.
 
@@ -18,7 +22,7 @@ It's important to note that thread priorities might help you influence the sched
 
 ---
 
-**Q3. What is the difference between running multiple threads on a single-core processor and a multi-core processor?**
+**Q. What is the difference between running multiple threads on a single-core processor and a multi-core processor?**
 
 When a program with multiple threads is running on a multi-core processor, multiple threads can truly execute concurrently on different cores, leading to significant performance gains.
 
@@ -26,7 +30,7 @@ When running on a single core, the operating system can rapidly switch between t
 
 ---
 
-**Q4. Difference between Class and Object locks?**
+**Q. Difference between Class and Object locks?**
 
 Locks, also known as synchronizers, are mechanisms used to control access to shared resources between threads. They prevent multiple threads from modifying the same data simultaneously, which can lead to data corruption or inconsistencies.
 
