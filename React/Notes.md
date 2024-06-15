@@ -1,5 +1,13 @@
 # Understanding React
 
+React is a library for building composable user interfaces. It encourages the creation of reusable UI components which present data that changes over time.
+
+Traditionally, web application UIs were built using templates or HTML directives. These templates dictate the full set of abstractions that you are allowed to use to build your UI.
+
+React approaches building user interfaces differently by breaking them into **components**.
+
+---
+
 React is a JavaScript library for building user interfaces (UIs) for web applications. It was built by Facebook to address the challenges of building complex and interactive user interfaces on the client-side.
 
 In a typical React application, the initial page load involves serving a static HTML template from the server. Once the static HTML is loaded in the browser, React takes over the control of rendering and updating the UI dynamically without requiring frequent page reloads.
@@ -9,6 +17,8 @@ React is relatively unopinionated about how you build and structure your applica
 By library, we mean `React` provides helpful functions to build UI, but leaves it up to the developer where to use those functions in their application.
 
 ## Virtual DOM
+
+In a traditional JavaScript application, you need to look at what data chnaged and imperatively make changes to the DOM to keep it up-to-date. Even `AngularJS`, which provides a declarative interface via **directives** and data binding requires a linking function to manually update DOM nodes.
 
 When using imperative DOM manipulation APIs, you typically need to make multiple DOM manipulation calls to achieve the desired changes (state). Multiple DOM manipulation calls made in quick succession can add up to increased overhead and slower performance.
 

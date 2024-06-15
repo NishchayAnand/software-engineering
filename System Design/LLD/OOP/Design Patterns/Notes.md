@@ -1,5 +1,7 @@
 # Understanding Design Patterns
 
+Design patterns provide a **common vocabulary** to structure code, making it easier to understand.
+
 - Patterns are discovered, not created.
 
 - Behavior can also be encapsulated.

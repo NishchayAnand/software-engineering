@@ -33,3 +33,9 @@ For subsequent updates, such as navigating to other pages, only the data needed 
 Web applications employing CSR usually have a single `HTML` page serving as the application's container, which is why they are often termed **Single Page Applications (SPAs)**.
 
 The development of SPAs has indeed seen the emergence of multiple libraries and frameworks (for example, `Angular`, `React`), each with its own set of ideologies and approaches.
+
+---
+
+## EXTRA:
+
+In client-side rendering (CSR), the server renders only the bare bones HTML container for a page. The logic, data fetching, templating, and routing required to display content on the page are handled by JavaScript code that executes on the client. CSR became popular as a method of building SPAs.
