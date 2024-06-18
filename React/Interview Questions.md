@@ -9,3 +9,9 @@ The JavaScript required to make the UI interactive is loaded after this. The eve
 React checks the current DOM nodes and hydrates them with the corresponding JavaScript.
 
 ---
+
+**Q. Why jQuery has fallen out of favor?**
+
+One of the significant criticisms of jQuery is its size. Integrating the full jQuery library into web projects adds extra weight, which can be especially taxing for websites aiming for fast load times.
+
+As the web evolved, so did web browsers. Many features that made jQuery a must-have, such as consistent _DOM manipulation_ or _network-oriented functionality around data fetching_, are now natively and consistently supported across modern browsers. Using jQuery for these tasks in contemporary web development can be seen as redundant, adding an unnecessary layer of complexity.

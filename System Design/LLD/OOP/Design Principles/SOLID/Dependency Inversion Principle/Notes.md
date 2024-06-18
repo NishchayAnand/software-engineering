@@ -14,6 +14,8 @@ DIP promotes loose `coupling` between classes, allowing you to change implementa
 
 DIP can be achieved using the Dependency Injection (DI) technique.
 
+> **NOTE:** Dependency injection (DI) is a design pattern where an object receives its dependencies instead of creating them.
+
 With DI, the high-level classes (consumers) don't create and manage their own dependency objects. They only declare the interface they rely on. A separate entity, often called an injector, takes on the responsibility of creating and providing the actual implementation of the dependencies.
 
 The injector injects the dependency objects into the consumer class at runtime. This means the consumer gets the exact dependency it needs when it needs it.
