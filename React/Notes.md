@@ -37,3 +37,7 @@ When using imperative DOM manipulation APIs, you typically need to make multiple
 React optimizes the UI update process by employing the concept of the **Virtual DOM**. The Virtual DOM is a lightweight, in-memory representation of the actual DOM. When the state of a component changes, React updates the Virtual DOM first. It then efficiently determines the minimal set of changes needed to update the real DOM, applying these changes in a batch. This approach significantly reduces the overhead and improves performance, ensuring smoother and faster UI updates.
 
 ## JSX
+
+JSX is a **syntax extension for JavaScript** that allows us to write HTML-like code within our JavaScript code.
+
+> **NOTE:** JSX is not a separate language, but rather a syntax extension that is transformed into regular JavaScript code by a compiler or transpiler.
