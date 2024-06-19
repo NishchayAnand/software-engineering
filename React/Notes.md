@@ -26,4 +26,14 @@ Unidirectional data flow maintains a clear and predictable data flow, making the
 
 ## Declarative UI
 
+React adopts a **declarative approach** to UI manipulation. This means you describe the different states your UI component can have and design the component's rendering logic to handle these states. React automatically takes care of re-rendering the affected parts of the UI whenever the state of your component changes, typically using event handlers.
+
+This declarative approach simplifies reasoning about how your UI will behave at any given moment, making it easier to maintain and understand.
+
 ## Virtual DOM
+
+When using imperative DOM manipulation APIs, you typically need to make multiple DOM manipulation calls to achieve the desired state changes. Multiple DOM manipulation calls made in quick succession can lead to increased overhead and slower performance.
+
+React optimizes the UI update process by employing the concept of the **Virtual DOM**. The Virtual DOM is a lightweight, in-memory representation of the actual DOM. When the state of a component changes, React updates the Virtual DOM first. It then efficiently determines the minimal set of changes needed to update the real DOM, applying these changes in a batch. This approach significantly reduces the overhead and improves performance, ensuring smoother and faster UI updates.
+
+## JSX
