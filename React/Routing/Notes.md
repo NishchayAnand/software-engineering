@@ -26,4 +26,8 @@ When the URL changes, React Router compares the current URL pathname with the pa
 
 ## Link
 
+`<Link>` component is used to create navigation links that allow users to navigate between different routes in a React application.
+
+Unlike traditional anchor tags (`<a>`), the `<Link>` component ensures that the application does not reload the page when navigating to a new route. Instead, it leverages React Router's client-side routing to **update the URL and render the appropriate components without a full page refresh.**
+
 ## Redirect
