@@ -32,3 +32,8 @@ Some common values of the `display` property include:
   - **Often used for hiding elements.**
 
 - **flex:**
+
+  - A **_one-dimensional layout model_** that provides an efficient way to align and distribute space among items (`flex items`) in a container (`flex container`).
+
+- **grid:**
+  - A **_two-dimensional layout model_** that provides an efficient way to arrange elements in rows and columns within a container.
