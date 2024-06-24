@@ -41,3 +41,9 @@ React optimizes the UI update process by employing the concept of the **Virtual 
 JSX is a **syntax extension for JavaScript** that allows us to write HTML-like code within our JavaScript code.
 
 > **NOTE:** JSX is not a separate language, but rather a syntax extension that is transformed into regular JavaScript code by a compiler or transpiler.
+
+---
+
+## EXTRA
+
+One of the great features of React is that it has, in many ways, gotten simpler over time. React hooks and the move away from class-based components have removed boilerplate and reduced the amount of code.
