@@ -1,14 +1,26 @@
 # Understanding SpringBoot
 
-Spring Boot introduced the concept of **"convention over configuration".** The main idea of this concept is that instead of setting up all the configurations of a framework yourself, Spring Boot offers you a default configuration that you can customize as needed.
+Spring started as a lightweight alternative to Java Enterprise Edition (JEE, J2EE as it was known at the time). Rather than develop components as heavyweight Enterprise JavaBeans (EJBs), Spring offered a simpler approach to enterprise Java development, utilizing **dependency injection** and **aspect-oriented programming** to achieve the capabilities of EJB with plain old Java objects (POJOs).
 
-**Three foundational features of Spring Boot:**
+While Spring was lightweight in terms of component code, it was heavyweight in terms of configuration. Initially, Spring was configured with `XML`. Spring 2.5 introduced **annotation-based component-scanning**, which eliminated a greate deal of explicit XML configuration. Spring 3.0 introduced a **Java-based configuration** as a type-safe and refactorable option to XML.
 
-1. Simplified Dependency Management
-2. Simplified Deployment
-3. Autoconfiguration
+Component-scanning reduced configuration and Java configuration made it less awkward, but Spring still required a lot of configuration. Enabling certain Spring features such as transaction management and Spring MVC required explicit configuration, either in XML or Java.
+
+**All the configuration represents development friction.** Any time spent writing configuration is time spent not writing application logic. The mental shift required to think about configuring a Spring feature distracts from solving the business problem.
+
+**Dependency management is another form of friction.** Deciding what dependencies (libraries) need to be part of the project build is tricky enough. But it's even more challenging to know which versions of whose libraries will play well with others.
+
+Spring Boot brings a great deal of magic to Spring application development. However, **three foundational features of Spring Boot include:**
+
+1. Auto-Configuration
+2. Simplified Dependency Management
+3. Simplified Deployment
+
+## Auto-Configuration
 
 ## Simplified Dependency Management
+
+It can be challenging to add dependencies to a project's build. **What library do you need? What are its group and artifact? Which version do you need? Will that version play well with other dependencies in the same project?**
 
 Each primary dependency incorporates numerous other secondary dependencies in order to fulfill its promised functionality.
 
@@ -16,85 +28,14 @@ Using libraries together requires a certain degree of rigor, as on eversion of p
 
 When it comes to chasing down and bashing bigs from mismatches that popup between dependencies, there are no prizes, only elusive conclusive diagnoses and hours wasted pursuing them.
 
-Spring boot starters, called **Bills of Materials (BOMs)** built around the proven premise that vast majority of times you provide a particular capability, you do it in nearly the same way, nearly every time.
+Spring Boot offers help with project dependency management by way of starter dependences. Spring boot starters, called **Bills of Materials (BOMs)** built around the proven premise that vast majority of times you provide a particular capability, you do it in nearly the same way, nearly every time.
 
-For example, each time we build an API, we expose endpoints, listen for requests, process requests, convert to and from objects, exchange information in 1+ standard formats, send an receive data over the wire using a particular protocol, and more.
+For example, each time we build an API, we expose endpoints, listen for requests, process requests, convert to and from objects, exchange information in 1+ standard formats, send and receive data over the wire using a particular protocol, and more.
 
-Adding a single starter: `spring-boot-starter-web` provides all of those related functionalities in a **single application dependency.** All dependencies encompassed by that starter are version-synchronized too, meaning that they've been tested successfully together and the included version of library A is proven to function properly with the included version of library B, C, D, etc.
+Adding a single starter: `spring-boot-starter-web` provides all of those related functionalities in a **single application dependency.**
 
-## Autoconfiguration
+Spring Boot's starter dependencies free you from worrying about which versions of the libraries you need. All dependencies encompassed by a starter are version-synchronized, meaning that they've been tested successfully together and the included version of library A is proven to function properly with the included version of library B, C, D, etc.
 
-Spring and Spring Boot projects follow the _convention over configuration_ mantra.
+## Simplified Deployment
 
-As developers, we are most productive when we focus on the task at hand and not a million setup chores.
-
----
-
-- In 2014, SpringBoot was launched.
-
-- Based on Spring, it allows creation of standalone Spring apps aiming microservices.
-
-- Spring Boot provides a lot of magic and assume a lot of default approaches (magic may be cumbersome when you don't want the default behavior).
-
-- MicroProfile Specifications came up.
-
-- Spring Boot made integrating Spring MVC very easy, allowing developers to simply code the business logic.
-
-- Spring Boot handles the integration of Spring MVC and then it sets up the Jackson JSON library so that when we send the shipreck info across the HTTP connection, Spring Boot and Spring MVC are automatically marshalling the JSON into and out of the Java objects.
-
-- Spring Boot automatically sets up View Resolvers, which determines how to respond based off the content type.
-
-- Spring Boot can automatically configure and tell Spring MVC that is should serve out static resources that are located at the root of the classpath in the `static`, `public` or `resources` path.
-
-- Spring Boot sets up some standard Spring MVC `HTTPMessageConverters` so that it can use sensible defaults to convert JSON objects into Java ones and vice-versa.
-
-- Basic string encoding is set to UTF-8 out of the box by Spring Boot and Spring MVC.
-
-- Spring Boot also automatically setup your datasaource pooling for you. For enterprise applications, having a strong connection pool can greatly improve your **database throughout** and performance (`tomcat-jdbc` is the default pooling strategy used by Spring Boot as it provides good performance and concurrency out of the box).
-
-- `Hibernate` act as the EntityManager.
-
-- **Even though we can do a lot of configuration in the Spring Boot properties in application properties file, we may find a need to do some configuration for your application that falls outside of the auto-configuration options.**
-
-## Application Properties
-
-Spring Boot provides an easy way to handle environment configuration changes as you move your application from one environment to another.
-
-- `application.properties`: Spring Boot will load it to apply any property configurations to your application when your application starts up. Can be placed at the root of your classpath at `src/main/resources` folder.
-
-- `application.yml`: SpringBoot will accept YAML files if you have **SnakeYAML** dependency on your classpath.
-
-- `application-{profile}.properties`: Additional properties file that have profile embedded in the name of the file. For example, we can create `application-dev.properties` file that has development environment specific configuration in it. These profile-specific property files will be loaded over the main application properties file and any environment-specific properties will be overridden and set for that particular environment.
-
-## Major Spring Boot Dependencies
-
-- `spring-boot-starter-web`
-- `spring-boot-starter-data-jpa`
-
-## Major Annotations used in Spring Boot
-
-- `@RestController`
-- `@RequestBody`
-- `@RequestMapping`
-- `@PathVariable`
-
-## How to provide custom configuration with Spring Boot?
-
-Any configuration Java class that has public methods with the `@Bean` annotation gets loaded on app startup and the return values of these methods will theh be set as beans inside the Spring context.
-
-```
-@Configuration
-public class PersistenceConfiguration {
-
-    @Bean // --> tell Spring and Spring Boot that the return value of this method, which is a DataSource needs to be setup and stored as a Spring bean in the Spring context.
-
-    @ConfigurationProperties(prefix="spring.datasource") // --> tells the DataSourceBuilder to use the connection and pooling properties located in the application.properties file where the properties began with the "spring.datasource" prefix.
-
-    @Primary // tells Spring Boot to use this datasource as the primary data source if there's ever any ambiguity when wiring up a DataSource in the application.
-
-    public DataSource dataSource() {
-        return DataSourceBuilder.create().build();
-    }
-
-}
-```
+Embedded Tomcat Server

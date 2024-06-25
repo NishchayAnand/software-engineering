@@ -1,6 +1,14 @@
 # Understanding @SpringBootApplication in Spring Boot
 
-`@SpringBootApplication` is composite annotation that combines three crucial annotations: `@Configuration`, `@EnableAutoConfiguration`, and `@ComponentScan`. This single annotation can be used to set up a Spring Boot application with minimal configuration.
+`@SpringBootApplication` is composite annotation that combines three crucial annotations:
+
+1. `@Configuration`
+2. `@EnableAutoConfiguration`
+3. `@ComponentScan`
+
+This single annotation can be used to set up a Spring Boot application with minimal configuration.
+
+Here's a sample code using `@SpringBootApplication` annotation.
 
 ```
 import org.springframework.boot.SpringApplication;
