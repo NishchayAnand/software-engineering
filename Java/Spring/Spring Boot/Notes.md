@@ -18,6 +18,10 @@ Spring Boot brings a great deal of magic to Spring application development. Howe
 
 ## Auto-Configuration
 
+Spring Boot can automatically configure beans based on the libraries present in your application's classpath. For example, if a `JDBC` driver is on the classpath, Spring Boot will auto-configure a `DataSource` bean.
+
+We no longer have to manually configure beans for common functionalities such as database connections or a web server, Spring Boot can do this for us.
+
 ## Simplified Dependency Management
 
 It can be challenging to add dependencies to a project's build. **What library do you need? What are its group and artifact? Which version do you need? Will that version play well with other dependencies in the same project?**
@@ -38,4 +42,16 @@ Spring Boot's starter dependencies free you from worrying about which versions o
 
 ## Simplified Deployment
 
-Embedded Tomcat Server
+Spring Boot comes with an embedded servlet container (`Tomcat`, `Jetty`, or `Undertow`) that allows us to create web applications as self-executable JAR files that can be run on the command line without deploying applications to a conventional Java application server.
+
+> **NOTE:** Spring Boot is just Spring. Inside, Spring Boot is doing the same kind of bean configuration in Spring that you might do on your own if Spring Boot didn't exist. Thankfully, because Spring Boot does exist, you're freed from dealing with explicit boilerplate configuration and are able to focus on the logic that makes your application unique.
+
+---
+
+## EXTRA
+
+### Build Plugins
+
+Spring Boot provides build plugins for both Gradle and Maven to assist in building Spring Boot projects. For example, the Spring Boot Maven plugin provides a `spring-boot:run` goal that achieves the same thing if you're using a Maven build.
+
+The main feature of the build plugins is that they're able to package the project as an executable JAR (often referred to as a **fat JAR** or **uber JAR**). This includes packing all of the application's dependencies within the JAR and adding a manifest to the JAR with entries that specify the main class and other necessary information, making it possible to run the application with `java -jar`.
