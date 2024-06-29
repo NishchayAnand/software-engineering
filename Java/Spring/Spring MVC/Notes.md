@@ -1,4 +1,4 @@
-# Understanding Spring
+# Understanding Spring MVC
 
 The part of the Spring framework that enables you to develop web applications that serve HTTP requests.
 

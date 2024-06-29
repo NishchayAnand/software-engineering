@@ -1,12 +1,12 @@
 # Understanding @SpringBootApplication Annotation in Spring Boot
 
-`@SpringBootApplication` enables Spring **component-scanning** and Spring **auto-configuration**. It is actually a composite annotation that combines three crucial annotations:
+`@SpringBootApplication` enables Spring **component-scanning** and Spring **auto-configuration**. It is a composite annotation that combines three crucial annotations:
 
-1. Spring's `@Configuration`: Designates a class as a configuration class using Spring's Java-based configuration.
+1. **Spring's `@Configuration`:** Designates a class as a configuration class using Spring's Java-based configuration.
 
-2. Spring's `@ComponentScan`: Enables component-scanning so that the web controller classes and other components you write will be automatically discovered and registered as beans in the Spring Application Context.
+2. **Spring's `@ComponentScan`:** Enables component-scanning so that the web controller classes and other components you write will be automatically discovered and registered as beans in the Spring Application Context.
 
-3. Spring Boot's `@EnableAutoConfiguration`: This humble little annotation might as well be named **@abracadabra** because it's the one line of configuration that enables the magic of Spring Boot auto-configuration. This one line keeps you from having to write the pages of configuration that would be required otherwise.
+3. **Spring Boot's `@EnableAutoConfiguration`:** This humble little annotation might as well be named **@abracadabra** because it's the one line of configuration that enables the magic of Spring Boot auto-configuration. This one line keeps you from having to write the pages of configuration that would be required otherwise.
 
 > **NOTE:** In older versions of Spring Boot, you'd have annotated the `Application.java` class with all three of these annotations. But since Spring Boot 1.2.0, `@SpringBootApplication` is all you need.
 
