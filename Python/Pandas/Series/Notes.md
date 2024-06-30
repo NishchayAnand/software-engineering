@@ -13,7 +13,7 @@ my_series = pd.Series(data)
 print(my_series)
 ```
 
-It's a fundamental data structure similar to a `list` or `NumPy` array, but with some key advantages:
+**It's a fundamental data structure similar to a `list` or `NumPy` array, but with some key advantages:**
 
 1. Each element in a Pandas Series is associated with a label, allowing for intuitive and easy data access. You can access elements using labels instead of numerical indices, making the data more understandable.
 
@@ -35,3 +35,5 @@ my_series = my_series*2;
 4. Integrates seamlessly with `NumPy`, allowing for the use of NumPy functions on Series objects.
 
 5. Facilitates easy data import (reading) and export (writing) to various formats (e.g. CSV, Excel, SQL databases), streamlining the data workflow.
+
+> **NOTE:** Series can store only homogenous data, meaning that all elements within one pandas Series must be of the same data type.

@@ -28,4 +28,4 @@ student_df_with_column_names = pd.DataFrame(student_data, columns=column_names)
 
 # Display students with age > 20
 filtered_df = df.loc[df["Age"]>20]
-print(filtered_df)
+#print(filtered_df)
