@@ -1,21 +1,15 @@
 # Pandas Library Interview Questions
 
-**Q. What is a Pandas DataFrame?**
+**Q. How to write a DataFrame to an Excel file and open it immediately without saving it permanently to disk?**
 
-A dataframe is a `2D mutable` and `tabular` structure for representing data labelled with axes - rows and columns.
+Unfortunately, pandas' `to_excel` function itself doesn't have a built-in option to directly open the Excel file without saving it to disk. However, you can achieve this using **an in-memory buffer** and **temporary file handling**.
 
-The syntax for creating a basic dataframe:
+Here's a step-by-step guide:
 
-```
-import pandas as pd
-df = pd.DataFrame(data,
-                  index -> optional argument for row labels,
-                  columns -> optional argument for column labels,
-                  dtype -> optional argument to define data type of each column)
-```
+1. Use `io.BytesIO` functionality to create an in-memory file-like object (a.k.a buffer) that can be used to store and manipulate binary data.
 
----
+2. Write DataFrame content to the buffer object.
 
-**Q. How can we combine two DataFrames horizontally?**
+3. Open a temporary Excel file in write binary mode and write the buffer content to it.
 
-We can use the \_append() method of
+4. Open the temporary file with the default application associated with Excel files on your system.
