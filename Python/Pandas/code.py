@@ -1,6 +1,16 @@
-from data_utils import relation
+from datautils import relation
 
-rel = relation(["Column1", "Column2"], [[1,1],
-                                        [2,2]])
+data = {
+    "Name": ["Nishchay", "Vridhi"],
+    "Age": [26, 19],
+}
 
+rel_dict = relation(data)
+print(rel_dict)
+
+rel = relation(["Name", "Age"], [["Nishchay", "Vridhi"], [26,29]])
 print(rel)
+
+
+
+
