@@ -43,3 +43,32 @@ An architecture that scales well for a particular application is built around as
 > **NOTE:** In an early-stage startup, it's usually more important to be able to interate quickly on product features than it is to scale to some hypothetical future load.
 
 Even though scalable architectures are specific to a particular application, they are nevertheless usually built from general-purpose building blocks, arranged in familier patterns.
+
+## Data Storage Architectures
+
+Shared disk and shared nothing are two different approaches to data storage and access in distributed systems.
+
+### Shared Disk
+
+All nodes in a cluster same the same storage space. This means that any node can access any piece of data on the disk.
+
+**Benefits:**
+
+- No need to partition data across nodes.
+- Easier to implement failover to another node during failures.
+
+**Drawbacks:**
+
+- Adding more nodes increases load on the shared storage, limiting scalability.
+- Network traffic can become a bottleneck as all nodes access the shared disk.
+- If the shared storage fails, entire system goes down.
+
+### Shared Nothing
+
+Each node has its own local storage. Data is partitioned and distributed across the nodes.
+
+**Benefits:**
+
+- Adding nodes increases processing power and storage capacity linearly.
+- Less network traffic as nodes access their local storage.
+- Failure of a node doesn't affect the entire system.
