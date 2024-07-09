@@ -32,3 +32,9 @@ Design patterns provide a **common vocabulary** to structure code, making it eas
 - `NOTE: `**Most of the OOP design patterns are irrelevant in functional programming. In many cases, the language itself provides operators that do the same thing that patterns do.**
 
 - `NOTE: `**It's like design principles are low-level and design patterns are high-level, functional programmming is at higher level of abstraction.**
+
+## EXTRA
+
+The best way to use patterns is to load your brain with them and then recognize places in your designs and existing applications where you can apply them.
+
+Instead of code reuse, with patterns you get experience reuse.
