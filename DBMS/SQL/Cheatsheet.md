@@ -8,4 +8,6 @@
 
 > NOTE: **_INNER JOIN_** is the default join type. If you simply specify **_JOIN_** after the table name, it's implicitly treated as an inner join.
 
-- `GROUP BY`: 
+- `GROUP BY`:
+
+- `HAVING`:
