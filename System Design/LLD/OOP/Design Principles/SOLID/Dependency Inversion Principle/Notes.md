@@ -1,5 +1,11 @@
 # Understanding Dependency Inversion Principle
 
+**DEFINITION:** Depend upon abstractions. Do not depend upon concrete classes.
+
+At first, this priciple sounds a lot like **Program to an interface, not an implementation.** It is similar, however, the **Dependency Inversion Principle** makes an even stronger statement about abstraction. It suggests that our high-level components should not depend on our low-level components, rather, they should both depend on the abstractions.
+
+---
+
 The Dependency Inversion Principle (DIP) states that **"High-level modules should not depend on low-level modules."** This means that high-level classes should interact with low-level classes through `interfaces`, rather than concrete implementations.
 
 > **High-level modules:** These are classes that are typically more abstract and concern themselves with the core business logic of the application. Examples: order processing service, payment processing service, user authentication service.
