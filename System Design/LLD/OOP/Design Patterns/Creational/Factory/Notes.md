@@ -30,15 +30,27 @@ If we have large large number of objects to create, this method can become a nig
 
 **DEFINITION:** Defines an interface for creating an object, but lets subclass decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses.
 
-The Factory Method Pattern encapsulates object creation by letting subclasses decide what objects to create.
-
-All the responsibility of instantiation can be moved into a **method** that acts as a **factory**.
+The Factory Method Pattern encapsulates object creation by letting subclasses decide what objects to create. All the responsibility of instantiation can be moved into a **method** that acts as a **factory**.
 
 A **factory method** handles object creation and encapsulates it in a subclass. This decouples the client code in the superclass from the object creation code in the subclass.
 
 **A factory method isolates the client code in the superclass from knowing what kind of concrete product is actually created.**
 
 Allows for more modular and extensible code. New object types can be added by creating new subclasses without modifying the main factory interface or client code.
+
+**CRUX:** With Factory Method, you're using a subclass to do your creation for you. In that way, clients only need to know the abstract type they are using, the subclass worries about the concrete type. In other words, it keeps clients decoupled from the concrete types.
+
+## Abstract Factory
+
+**DEFINITION:** Provides an interface for creating families of related or dependent objects without specifying their concrete classes.
+
+An abstract factory defines the interface that all concrete factories must implement, which consists of a set of methods for producing products. Each method in that interface is responsible for creating a concrete product, and we implement a subclass of the abstract factory to supply those implementations. So, abstract methods are a natural way to implement your product methods in your abstract factories.
+
+An abstract factory provides an interface for a family of products. By writing code that uses this interface, we decouple our code from the actual factory that creates the products.
+
+From abstract factory, we define one or more concrete factories that produce the same products, but with different implementations.
+
+> NOTE: The interface needs to change if new products needs to be added.
 
 ## Advantages of Factory Pattern
 

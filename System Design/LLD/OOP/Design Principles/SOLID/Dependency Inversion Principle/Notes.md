@@ -4,6 +4,8 @@
 
 At first, this priciple sounds a lot like **Program to an interface, not an implementation.** It is similar, however, the **Dependency Inversion Principle** makes an even stronger statement about abstraction. It suggests that our high-level components should not depend on our low-level components, rather, they should both depend on the abstractions.
 
+High-level component is a class with behavior defined in terms of low-level components.
+
 ---
 
 The Dependency Inversion Principle (DIP) states that **"High-level modules should not depend on low-level modules."** This means that high-level classes should interact with low-level classes through `interfaces`, rather than concrete implementations.

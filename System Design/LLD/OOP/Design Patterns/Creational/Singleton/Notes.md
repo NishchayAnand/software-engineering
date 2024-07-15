@@ -1,4 +1,6 @@
-# Understanding Singleton Design Pattern
+# Understanding Singleton Pattern
+
+---
 
 - The intention of this pattern is to ensure a class only has one instance, providing a global point of access to it.
 
