@@ -6,6 +6,8 @@
 
 **Algorithm:**
 
-1. Performing a self-join on the `Weather` table will create a Cartesian product of the table with itself: `SELECT w1.id FROM Weather w1 JOIN Weather w2`.
+1. Perform a self-join on the `Weather` table to create a Cartesian product of the table with itself: `SELECT w1.id FROM Weather w1 JOIN Weather w2`. This allows us to compare each record in w1 with each record in w2.
 
-2. We then use the `DATEDIFF` function to restrict these pairs to only include consecutive days. Lastly, we filter these pairs of consecutive days further to only include pairs where the temperature is higher on the second day. The resulting ids represent the days where the temperature was higher than the previous day.
+2. Use `DATEDIFF(w1.recordDate, w2.recordDate) = 1` as the join condition to find pairs of records where the `recordDate` differs by exactly one day.
+
+3. Use `WHERE w1.temperature > w2.temperature` to filter the records where the temperature on a day (represented by a record in w1) is greater than the temperature on the previous day (represented by a record in w2).

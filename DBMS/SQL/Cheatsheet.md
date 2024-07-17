@@ -26,3 +26,7 @@ FROM Sales
 GROUP BY Product
 HAVING SUM(Price) > 1000;
 ```
+
+## Restrict Data
+
+- `ENUM`: A data type used to restrict a column's values to a predefined set of options. Sample Syntax: `marital_status ENUM('Single', 'Married')`.
