@@ -1,4 +1,4 @@
-# Understanding Reactive Design Patterns
+# Understanding Reactive Programming Paradigm
 
 - Reactive Programmming is a style of programming. It is event-driven, and it focuses in the flow of data.
 
