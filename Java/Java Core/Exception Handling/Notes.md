@@ -12,6 +12,10 @@ After a method throws an exception, the runtime system attempts to find somethin
 
 If the runtime system exhaustively searches all the methods on the call stack without finding an appropriate exception handler, the runtime system terminates.
 
+If the methods in an interface declare exceptions, any code calling methods on a reference of that type (interface type) must handle or declare the exceptions.
+
+If your superclass constructor throws an exception, you have no choice but to declare that your constructor also throws an exception.
+
 ## Advantages of Exceptions
 
 1. **Separates error handling code from regular code.**
