@@ -2,14 +2,14 @@
 
 ## Create a DataFrame
 
-### From a dictionary
+**We can use a dictionary to create dataframes in Pandas.**
 
 ```
 my_dict = {"Name": ["Nishchay", "Vridhi", "Archie"], "Age": [26, 19, 1]}
 df = pd.DataFrame(my_dict)
 ```
 
-### From a 2D list
+**We can use a 2D list to create dataframes in Pandas.**
 
 ```
 student_data = [
@@ -49,7 +49,7 @@ print(df.shape)
 `head()` function: Returns the first n rows. If n is omitted, it defaults to returning the first 5 rows. **Sample Syntax:** `df.head(n)`.
 
 ```
-#print(df.head(3))
+print(df.head(3))
 ```
 
 ## Select Data
