@@ -1,5 +1,13 @@
 # Pandas Cheatsheet
 
+## Data Types
+
+Pandas inherits its data types primarily from NumPy. Some of the fundamental data types you'll encounter in Pandas include:
+
+- **int64**: 64-bit integer
+- **float64**: 64-bit floating point number
+- **object**: This is a catch-all data type. It's often used for strings but can hold other Python objects as well.
+
 ## Create a DataFrame
 
 **We can use a dictionary to create dataframes in Pandas.**
@@ -214,3 +222,16 @@ For the above example,
 - `value_vars=['quarter_1', 'quarter_2', 'quarter_3', 'quarter_4']` means we're taking the data from these columns and reshaping it into two new columns.
 - `var_name='quarter'` will create a new column named quarter, and each entry in this column will be the column name from where the sales data was taken (e.g., quarter_1, quarter_2, etc.).
 - `value_name='sales'` will create a new column named sales, which will store the actual sales values.
+
+## Join DataFrames
+
+`pd.merge` is a powerful function in Pandas for combining DataFrames based on shared columns or indexes, similar to joins in SQL.
+
+**Sample Syntax:** `merged_df = pd.merge(left_df, right_df, how='inner', on='common_column')`
+
+Where:
+
+- **how:** The type of merge to perform (default is 'inner'). Other options include: `left`, `right`, `outer`.
+- **on:** Column or index names to join on. Must be present in both DataFrames.
+
+**Example:** `result_df = pd.merge(employee, bonus, on='empId', how='left')`

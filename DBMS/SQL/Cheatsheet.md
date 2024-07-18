@@ -1,5 +1,9 @@
 # SQL Cheatsheet
 
+## Referential Integrity
+
+- **Foreign Key:** Foreign keys guarantee that data in one table corresponds to valid data in another table. In other words, it prevents situations where a record in one table references a non-existent record in another table. Sample Syntax: `FOREIGN KEY (column3) REFERENCES other_table_name(column_name)`.
+
 ## Remove Duplicates
 
 - `DISTINCT`: Used to retrieve unique values from a selected column or set of columns in your query results. You can specify multiple columns after **DISTINCT** to ensure uniqueness across all of them.
