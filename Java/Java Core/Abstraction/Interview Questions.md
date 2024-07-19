@@ -1,20 +1,20 @@
 # Interview Questions
 
-Q1. What is the difference between **Abtraction** and **Encapsulation**?
+**Q1. What is the difference between `Abtraction` and `Encapsulation`?**
 
 - `Encapsulation` is all about **bundling data and the methods** that operate on that data together **into a single unit**. Encapsulation helps **shield the internal data (properties)** of an object from direct external access.
 
-- Abstraction states that the **external behavior (interface)** of an object **should be kept separate from the implementation details** of how that behavior is achieved. It gives us the **freedom to modify the internal workings** of an object without impacting any code using that object.
+- `Abstraction` states that the **external behavior (interface)** of an object **should be kept separate from the implementation details** of how that behavior is achieved. It gives us the **freedom to modify the internal workings** of an object without impacting any code using that object.
 
 - Encapsulation **"protects what's inside"** of an object (data), whereas, Abstraction focuses on **"how to use"** that object (functionalities).
 
 ---
 
-Q2. What were the differences between **Abstract Classes** and **Interfaces** before Java 8?
+**Q2. What were the differences between `Abstract Classes` and `Interfaces` before Java 8?**
 
 Before Java 8, the differences between abstract classes and interfaces in Java were more pronounced. Here are the key distinctions:
 
-## Abstract Classes
+### Abstract Classes
 
 1. **Abstract classes can have both abstract methods (methods without an implementation) and concrete methods (methods with an implementation).** Concrete methods in abstract classes can provide a default behavior that subclasses can use or override.
 
@@ -26,7 +26,7 @@ Before Java 8, the differences between abstract classes and interfaces in Java w
 
 5. Though Abstract classes cannote be instantiated, they can have constructors, which can be used to initialize fields in the abstract class. Subclasses can call the constructor of the abstract class using super().
 
-## Interfaces
+### Interfaces
 
 1. Interfaces could only have abstract methods (methods without an implementation).
 
@@ -40,7 +40,7 @@ Before Java 8, the differences between abstract classes and interfaces in Java w
 
 ---
 
-Q3. What are the differences between **Abstract Classes** and **Interfaces** after Java 8?
+**Q3. What are the differences between `Abstract Classes` and `Interfaces` after Java 8?**
 
 After Java 8, the distinctions between abstract classes and interfaces have narrowed due to the introduction of `default` and `static` methods in interfaces. Here are the key distinctions:
 

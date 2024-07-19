@@ -19,7 +19,7 @@ A **parking lot** is a designated area for parking vehicles and is a feature fou
 
 ## Use Case Diagram
 
-**System:** Parking Lot Management System
+**System:** Parking Lot System
 
 **Primary Actors:** `Customer` and `Parking Agent: Assist Customer with parking ticket and payment`
 
@@ -36,7 +36,25 @@ A **parking lot** is a designated area for parking vehicles and is a feature fou
 
 - The `Parking Agent` has a generalization relationship with the `Customer` since the parking agent can perform all those tasks that a customer can perform.
 
-`Pay using Cash` and `Pay using Credit/Debit card` use cases are used for payments. Hence, both have a generalization relationship with the `Pay ticket` use case.
+- `Pay using Cash` and `Pay using Credit/Debit card` use cases are used for payments. Hence, both have a generalization relationship with the `Pay ticket` use case.
+
+## Class Diagram
+
+**Components:**
+
+- The Vehicle can be a `Car` or a `Motorcycle`. The `Vehicle` can be represented as an **abstract class** in the system. `Car` and `Motorcycle` will represent the derived child classes for the `Vehicle` class.
+
+- The Parking Lot will have Parking Spots for each Vehicle type. The `ParkingSpot` can be represented as an **abstract class** in the system. `CarParkingSpot` and `MotorcycleParkingSpot` will represent the derived child classes for the `ParkingSpot` class.
+
+- Multiple Display Boards will exist in the Parking Lot to display the availability of each parking slot type. `DisplayBoard` can be represented as a simple **class**.
+
+- A Parking Ticket keeps track of the entrance and exit times of the vehicles, the amount, and the payment status. `ParkingTicket` can be represented as a simple **class**.
+
+- `Payment` can be done using `Cash` or `Card`. `Payment` can be represented as an **abstract class**. `Cash` and `Card` will represent the derived child classes for the `Payment class`.
+
+**Relationships:**
+
+- Each `Vehicle` will be assigned a `ParkingSpot`. The `ParkingSpot`
 
 ## EXTRA
 
