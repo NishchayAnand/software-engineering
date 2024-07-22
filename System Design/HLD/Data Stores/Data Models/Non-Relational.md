@@ -4,7 +4,7 @@ Non-Relational databases are also called `NoSQL` databases (e.g. `Cassandra`, `A
 
 ## Super-Low Latency
 
-**Your application requires super-low lacency.**
+**Your application requires super-low lacency.** Can be easily scaled.
 
 ## Unstructured Data
 
@@ -13,3 +13,5 @@ Non-Relational databases are also called `NoSQL` databases (e.g. `Cassandra`, `A
 ## Large Dataset
 
 You need to store a massive amount of data.
+
+##

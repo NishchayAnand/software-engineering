@@ -42,7 +42,7 @@ A **parking lot** is a designated area for parking vehicles and is a feature fou
 
 **Components:**
 
-- The Vehicle can be a `Car` or a `Motorcycle`. The `Vehicle` can be represented as an **abstract class** in the system. `Car` and `Motorcycle` will represent the derived child classes for the `Vehicle` class.
+- The `Vehicle` can be a `Car` or a `Motorcycle`. The `Vehicle` can be represented as an **abstract class** in the system. `Car` and `Motorcycle` will represent the derived child classes for the `Vehicle` class.
 
 - The Parking Lot will have Parking Spots for each Vehicle type. The `ParkingSpot` can be represented as an **abstract class** in the system. `CarParkingSpot` and `MotorcycleParkingSpot` will represent the derived child classes for the `ParkingSpot` class.
 
@@ -54,7 +54,17 @@ A **parking lot** is a designated area for parking vehicles and is a feature fou
 
 **Relationships:**
 
-- Each `Vehicle` will be assigned a `ParkingSpot`. The `ParkingSpot`
+- Each `Vehicle` **will HAVE** a `ParkingSpot` assigned to it. The `ParkingSpot` has a **one-way association** with `Vehicle`.
+
+- Each `ParkingTicket` **will HAVE** a `Vehicle` assigned to it. The `Vehicle` has a **one-way association** with `ParkingTicket`.
+
+- `Car` and `Motorcycle` **IS a** type of `Vehicle`. `Car` and `Motorcycle` are inherited from the `Vehicle` abstract class.
+
+- `Cash` and `Card` **IS a** mode of `Payment`. `Cash` and `Card` are inherited from the `Payment` abstract class.
+
+## Sequence Diagram
+
+## Activity Diagram
 
 ## EXTRA
 
