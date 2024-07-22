@@ -42,3 +42,16 @@ Here,
 The body holds the `HTML`, or other content to be rendered.
 
 **Verbal translation of the above HTTP response:** Here's my response to your request. Its type is text/html.
+
+## Response Status
+
+Different response statuses are used to indicate the outcome of an HTTP request. Few of the common HTTP response status codes are listed below:
+
+- **200 OK:** The request was successful, and the server returned the requested resource.
+- **400 Bad Request:** The server could not understand the request due to invalid syntax.
+- **401 Unauthorized:** The client must authenticate itself to get the requested response.
+- **403 Forbidden:** The client does not have access rights to the content.
+- **404 Not Found:** The server cannot find the requested resource.
+- **500 Internal Server Error:** The server encountered a situation it doesn't know how to handle.
+- **502 Bad Gateway:** The server received an invalid response from the upstream server.
+- **504 Gateway Timeout:** The server did not received a timely response from the upstream server.
