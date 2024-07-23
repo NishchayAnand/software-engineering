@@ -23,9 +23,7 @@ Good system design questions:
 1. **If the system grows in a particular way, what are our options for coping with the growth?**
 2. **How can we add computing resources to handle the additional load?**
 
-Load can be described with a few numbers which we can _load parameters_.
-
-### Load Parameters
+Load can be described with a few numbers using few of parameters, often termed as **load parameters**:
 
 1. Requests per second to a web server.
 2. Ratio of reads to writes in a database.
@@ -43,6 +41,14 @@ An architecture that scales well for a particular application is built around as
 > **NOTE:** In an early-stage startup, it's usually more important to be able to interate quickly on product features than it is to scale to some hypothetical future load.
 
 Even though scalable architectures are specific to a particular application, they are nevertheless usually built from general-purpose building blocks, arranged in familier patterns.
+
+### Vertical Scaling (Scaling Up)
+
+Scaling by adding more power (CPU, RAM, DISK, etc) to an existing machine.
+
+### Horizontal Scaling (Scaling Down)
+
+Horizontal Scaling, also known as **Sharding**, is the practice of adding more servers.
 
 ## Data Storage Architectures
 

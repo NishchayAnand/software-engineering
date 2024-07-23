@@ -18,3 +18,13 @@ The **load/response time** can be improved by adding a cache layer and shifting 
 A stateful server remembers client data (state) from one request to the next. One of the issue with stateful architecture is that every request from the same client must be routed to the same server.
 
 In a stateless architecture, HTTP requests from users can be sent to any web servers, which **fetch state data from a shared data store.** State data is stored in a shared data store and kept out of web servers.
+
+## How to Scale Your System to Support Millions of Users
+
+1. Keep Web Tier stateless.
+2. Cache data as much as possible.
+3. Support multiple data centers.
+4. Host static assets in CDN.
+5. Scale your data tier by sharding.
+6. **Split tiers into individual services (microservices).**
+7. Monitor your system and use automation tools.

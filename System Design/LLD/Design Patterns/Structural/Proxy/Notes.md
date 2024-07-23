@@ -38,6 +38,8 @@ Make sure that the arguments and return types of a remote method must be **Primi
 
 The virtual proxy act as a representative for an object that is expensive to create.
 
+## Protection Proxy
+
 ## EXTRA
 
 Dynamic proxies leverage the Proxy Design Pattern principles by providing a more convenient and standardized way to implement them in Java. They offer a powerful mechanism for adding functionalities like security, logging, or performance monitoring without modifying the target object's code.
