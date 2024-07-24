@@ -14,11 +14,13 @@
 
 - `INNER JOIN`: Selects records that have matching values in both tables.
 
+- `CROSS JOIN`: Combines every row from one table with every row from another table, i.e., returns _Cartesian Product_ of two tables.
+
 > NOTE: **_INNER JOIN_** is the default join type. If you simply specify **_JOIN_** after the table name, it's implicitly treated as an inner join.
 
 ## Filter Data
 
-- `GROUP BY`: Used to group together rows that have the same values in one or more columns. This allows you to perform aggregate functions on those groups of rows.
+- `GROUP BY`: Used to group together rows that have the same values in one or more columns. This allows you to perform _aggregate functions_ on those groups of rows.
 
 - `HAVING`: Allows you to filter the data after it's been grouped. It's positioned after the **GROUP BY** clause and allows you to specify a condition that the groups must meet to be included in the final result.
 
