@@ -10,6 +10,5 @@
 
 ## Algorithm
 
-1. Perform `CROSS JOIN` between `Students` and `Subjects` table to get metadata **(Cartesian Product)** highlighting each student took every course offered by the school.
-2. Perform `COUNT(*)` on `Examinations` to aggregate the number of times each student gave the same subject exam.
-3. Perform `LEFT JOIN` between 2 views obtained from step 1 and 2.
+1. Perform `CROSS JOIN` between `Students` and `Subjects` table to create all possible combinations of students and subjects.
+2. Perform `COUNT(*)` on `Examinations` to aggregate the number of times each student gave the same subject exam. 3. 3. Perform `LEFT JOIN` between 2 views obtained from step 1 and 2.
