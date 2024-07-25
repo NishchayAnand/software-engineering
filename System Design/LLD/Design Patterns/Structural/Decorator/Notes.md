@@ -1,49 +1,117 @@
-# Understanding Decorator Design Pattern
+# Understanding Decorator Pattern
 
-**DEFINITION:** The Decorator pattern attaches additioanl responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality.
+**DEFINITION: The Decorator pattern attaches additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality.**
 
-Gives solution to the typical overuse of inheritance - **decorate your classes at runtime using a form of object composition**.
+The primary intent of a `Decorator` to give an object new responsibilities without making any code changes to its underlying class.
 
-Once you know the techniques of decorating, you'll be able to give your objects new responsibilities without making any code changes to the underlying classes.
+The java.io package is largely based on Decorator Pattern. For example, `FileInputStream` is decorated with `BufferedInputStream`.
 
-**Composition** and **Delegation** are the ways of inheriting behavior at runtime.
+## How it work?
 
-## Composition
+In the Decorator pattern, you wrap an object with another object. The wrapper, or decorator, contains (or "composes") an instance of the original object. This is **composition**.
 
-**Composition** allows us to extend an object's behavior dynamically at runtime. You can add multiple new responsibilities to objects through this technique, including responsibilities that were not even thought of by the designer of the superclass.
+The decorator forwards **(delegates)** requests to the wrapped object, potentially adding its own behavior before or after forwarding the request. This means the decorator can modify or enhance the behavior of the original object dynamically.
 
-By dynamically composing objects, I can add new functionalities by writing new code rather than altering existing code. Because I'm not changing existing code, the chances of introducing bugs or causing unintended side effects in pre-existing code are much reduced.
+Decorators implement the same interface or abstract class as the objects they decorate. This ensures that the decorated objects can be used interchangeably with undecorated ones.
 
-**REMEMBER:** Code should be closed to change, yet open to extension (Open-Close Principle).
+> **NOTE:** The Decorator Pattern promotes `Open-Close Principle` and `Liskov Subsitution Principle`.
 
-## Properties of a Decorator
+## Sample Code: Java
 
-1. **Decorators have the same supertype as the objects they decorate**, i.e., Decorators implement the same interface or abstract class as the component they are going to decorate.
+A text editor where we want to add different formatting options such as bold, italic, and underline to a piece of text.
 
-2. **The Decorator adds its own behavior before and/or after delegating to the component (object) it decorates to do the rest of the job**, i.e., Decorators can add new methods, however, new behavior is typically added by doing computation before or after an existing method in the component.
+```
+// Component Interface
+public interface Text {
+    String getText();
+}
 
-3. We can pass a decorated object in place of the original (wrapped) object.
+// Concrete Component
+public class PlainText implements Text {
+    private String text;
 
-4. You can use one or more decorators to wrap an object.
+    public PlainText(String text) {
+        this.text = text;
+    }
 
-> **NOTE:** Think of Decorator objects as _"wrappers"_.
+    @Override
+    public String getText() {
+        return text;
+    }
+}
 
-## How to implement Decorator Pattern?
+// Decorator Class
+public abstract class TextDecorator implements Text {
+    protected Text decoratedText;
 
-## Real-World Decorators
+    public TextDecorator(Text text) {
+        this.decoratedText = text;
+    }
 
-The java.io package is largely based on Decorator Pattern. For example, `FileInputStream` is decorated with `BufferedInputStream` which in turn is decorated with `ZipInputStream`.
+    @Override
+    public String getText() {
+        return decoratedText.getText();
+    }
+}
 
-## Disadvantages of Decorator Pattern
+// Concrete Decorators
+public class BoldDecorator extends TextDecorator {
+
+    public BoldDecorator(Text text) {
+        super(text);
+    }
+
+    @Override
+    public String getText() {
+        return "<b>" + decoratedText.getText() + "</b>";
+    }
+}
+
+public class ItalicDecorator extends TextDecorator {
+
+    public ItalicDecorator(Text text) {
+        super(text);
+    }
+
+    @Override
+    public String getText() {
+        return "<i>" + decoratedText.getText() + "</i>";
+    }
+}
+
+public class UnderlineDecorator extends TextDecorator {
+
+    public UnderlineDecorator(Text text) {
+        super(text);
+    }
+
+    @Override
+    public String getText() {
+        return "<u>" + decoratedText.getText() + "</u>";
+    }
+}
+
+// Usage
+public class Main {
+    public static void main(String[] args) {
+        Text text = new PlainText("Hello, World!");
+
+        System.out.println("Plain Text: " + text.getText());
+
+        text = new BoldDecorator(text);
+        System.out.println("Bold Text: " + text.getText());
+
+        text = new ItalicDecorator(text);
+        System.out.println("Bold and Italic Text: " + text.getText());
+
+        text = new UnderlineDecorator(text);
+        System.out.println("Bold, Italic, and Underlined Text: " + text.getText());
+    }
+}
+```
+
+## Disadvantages
 
 Designs using Decorator Pattern often result in a large number of small classes that can be overwhelming to a developer trying to use the Decorator-based API.
 
 > **NOTE:** We typically create decorators by using other patterns like **Factory** and **Builder**.
-
-## EXTRA
-
-When we inherit behavior by subclassing, that behavior is set statically at compile time. In other words, we get only whatever behavior the superclass gives us or that we override.
-
-With composition, we can implement new decorators at any time to add new behavior. If we relied on inheritance, we may have to modify the existing code every time we wish to add new behavior.
-
-It's important that the decorators have the same type as the objects they are going to decorate. We may use inheritance to achieve **type matching**, but shouldn't use it to get behavior. We can acquire new behavior not by _inheriting_ it from a superclass, but by _composing_ objects together.
