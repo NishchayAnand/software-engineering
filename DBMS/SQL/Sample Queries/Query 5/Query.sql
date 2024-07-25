@@ -42,6 +42,7 @@ values (1, 'Math'),
     
 select * from Examinations;
 
+## Query 1
 SELECT 
     v1.student_id, 
     v1.student_name, 
@@ -69,4 +70,24 @@ ON
     v1.student_id = v2.student_id AND v1.subject_name = v2.subject_name
 ORDER BY 
     v1.student_id, v1.subject_name;
+   
+## Optimized Query
+SELECT 
+    st.student_id, 
+    st.student_name, 
+    su.subject_name, 
+    count(e.student_id) as attended_exams 
+FROM
+	Students st 
+CROSS JOIN Subjects su
+LEFT JOIN Examinations e ON e.student_id = st.student_id AND e.subject_name = su.subject_name
+GROUP BY 
+	st.student_id, su.subject_name
+ORDER BY 
+    st.student_id, su.subject_name;
 
+SELECT * 
+FROM Students st CROSS JOIN Subjects su
+LEFT JOIN Examinations e ON e.student_id = st.student_id AND e.subject_name = su.subject_name
+GROUP BY st.student_id, su.subject_name
+ORDER BY st.student_id, su.subject_name;
