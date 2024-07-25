@@ -8,7 +8,9 @@ The java.io package is largely based on Decorator Pattern. For example, `FileInp
 
 ## How it work?
 
-In the Decorator pattern, you wrap an object with another object. The wrapper, or decorator, contains (or "composes") an instance of the original object. This is **composition**.
+The Decorator Pattern use **composition** and **delegation** to dynamically add new behavior to an existing object.
+
+You wrap an object with another object. The wrapper, or decorator, contains (or "composes") an instance of the original object. This is **composition**.
 
 The decorator forwards **(delegates)** requests to the wrapped object, potentially adding its own behavior before or after forwarding the request. This means the decorator can modify or enhance the behavior of the original object dynamically.
 
@@ -16,17 +18,19 @@ Decorators implement the same interface or abstract class as the objects they de
 
 > **NOTE:** The Decorator Pattern promotes `Open-Close Principle` and `Liskov Subsitution Principle`.
 
-## Sample Code: Java
+---
+
+## EXTRA
+
+**Sample Code: Java**
 
 A text editor where we want to add different formatting options such as bold, italic, and underline to a piece of text.
 
 ```
-// Component Interface
 public interface Text {
     String getText();
 }
 
-// Concrete Component
 public class PlainText implements Text {
     private String text;
 
@@ -40,7 +44,6 @@ public class PlainText implements Text {
     }
 }
 
-// Decorator Class
 public abstract class TextDecorator implements Text {
     protected Text decoratedText;
 
@@ -54,7 +57,6 @@ public abstract class TextDecorator implements Text {
     }
 }
 
-// Concrete Decorators
 public class BoldDecorator extends TextDecorator {
 
     public BoldDecorator(Text text) {
