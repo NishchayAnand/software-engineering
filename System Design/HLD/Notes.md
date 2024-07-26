@@ -1,5 +1,7 @@
 # Understanding High Level System Design
 
+The frontend deals with the user interface and experience, while the backend handles data processing, business logic, and database interactions.
+
 Designing a system that supports million of users is challenging, and it is a journey that requires continuous refinement and endless improvement.
 
 The traffic to your web server comes form 2 sources: web application and mobile application.
