@@ -30,3 +30,19 @@ In a stateless architecture, HTTP requests from users can be sent to any web ser
 5. Scale your data tier by sharding.
 6. **Split tiers into individual services (microservices).**
 7. Monitor your system and use automation tools.
+
+## Eventual Consistency
+
+## Throughput
+
+It is defined as the amount of work done by a machine in a given particular time. We measure the throughput of the server by how many API Calls it serves in a unit of time.
+
+Generally, we measure throughput in **GBps**, **MBps**, **KBps**.
+
+## BandWidth
+
+Maximum data that can be transferred over different Networks is known as Bandwidth.
+
+## Response Time
+
+When we say our system serves 100 requests per second, it means response time is 0.01 sec for a request.

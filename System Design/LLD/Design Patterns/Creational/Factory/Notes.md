@@ -8,11 +8,11 @@ We aren't supposed to program to an implementation, but every time we use the **
 
 If your code is written to an interface, then it will work with any new class implementing that interface (through polymorphism). However, when you have code that makes use of lots of concrete classes, the code may have to be changed as new concrete classes are added. To extend your code with new concrete types, you'll have to reopen it for modification, violating the **open-close principle.**
 
+> **NOTE:** Factory Pattern promotes **Open-Close Principle** and **Dependency Inversion Principle**.
+
 ## What is a Factory?
 
-Factories handle the details of object creation.
-
-All factory patterns encapsulate object creation.
+Factories handle the details of object creation. All factory patterns **encapsulate object creation**.
 
 ## Simple Factory Pattern
 
@@ -22,13 +22,13 @@ The Simple Factory isn't actually a design Pattern, it's more of a programming i
 
 There is more to making objects than just using the new operator. Instantiation is an activity that shouldn't be done in public, because it can lead to coupling problems.
 
-If we have large large number of objects to create, this method can become a nightmare to maintain. The solution is to create a hierarchy of factory classes, defining a supertype, usually an abstract class and then create **simple factory** class for each object type.
+If we have large number of objects to create, this method can become a nightmare to maintain. The solution is to create a hierarchy of factory classes, defining a supertype, usually an abstract class and then create **simple factory** class for each object type.
 
 **Issue with Simple Factory:** Often relies on complex conditional statements to determine the type of object to create. As the number of object types increases, the factory method becomes cumbersome to maintain and less readable. Also, it violates the **Dependency Inversion Principle.**
 
 ## Factory Method Pattern
 
-**DEFINITION:** Defines an interface for creating an object, but lets subclass decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses.
+**DEFINITION: Defines an interface for creating an object, but lets subclass decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses.**
 
 The Factory Method Pattern encapsulates object creation by letting subclasses decide what objects to create. All the responsibility of instantiation can be moved into a **method** that acts as a **factory**.
 

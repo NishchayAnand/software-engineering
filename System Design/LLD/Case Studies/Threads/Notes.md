@@ -20,7 +20,7 @@ Threads is a social media platform. Key features **(services)** provided by Thre
 
 - **Search** posts, users, and other content.
 
-## Requirements
+## Functional Requirements
 
 - **Create Threads:** Users can compose a new `text-based` post.
 
@@ -33,3 +33,5 @@ Threads is a social media platform. Key features **(services)** provided by Thre
 - `User` sends a `postThread` request to the **server**. The server receives the **POST Request** with the `Thread` data and stores it in the **database**. The `followers` of the `User` receive `Notification` and see new `Thread` in their `Feed`.
 
 - When `User` navigates to the `Feed`, a `getFeed` request is sent to the **server**. The server receives the **GET Request** and queries the **database** for recent posts and activities relevant to the user. The `Feed` compiles the data, sorts it by recency or relevance, and sends it back to the client.
+
+## Class Diagram
