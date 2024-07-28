@@ -1,6 +1,6 @@
-# Understanding Dependency Inversion Principle
+# Dependency Inversion Principle
 
-**DEFINITION:** Depend upon abstractions. Do not depend upon concrete classes.
+**DEFINITION: Depend upon abstractions. Do not depend upon concrete classes.**
 
 At first, this priciple sounds a lot like **Program to an interface, not an implementation.** It is similar, however, the **Dependency Inversion Principle** makes an even stronger statement about abstraction. It suggests that our high-level components should not depend on our low-level components, rather, they should both depend on the abstractions.
 
@@ -41,7 +41,9 @@ Here are some ways to implement DI:
 interface PaymentGateway {
     void processPayment(double amount);
 }
+```
 
+```
 // Concrete implementation of PaymentGateway for PayPal
 class PayPalGateway implements PaymentGateway {
     @Override
@@ -50,7 +52,9 @@ class PayPalGateway implements PaymentGateway {
         System.out.println("Processing payment of $" + amount + " via PayPal");
     }
 }
+```
 
+```
 // High-level class that depends on PaymentGateway abstraction
 class PaymentProcessor {
     private PaymentGateway paymentGateway;
