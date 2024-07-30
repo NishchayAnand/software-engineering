@@ -10,7 +10,7 @@ It's a good practice to implement an expiration policy. Once the data is expired
 
 > **NOTE:** If a cache server starts, all the data in memory is lost.
 
-Once the cache is full, any requests to add items to the cache might cause existing items to be removed. This is called cache eviction. **Least-recently-used (LRU)** is the most popular cache eviction policy.
+Once the cache is full, any requests to add items to the cache might cause existing items to be removed. This is called cache eviction. **Least-Recently-used (LRU)** is the most popular cache eviction policy.
 
 ## How does the Cache Tier works?
 

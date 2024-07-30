@@ -30,8 +30,16 @@ Threads is a social media platform. Key features **(services)** provided by Thre
 
 ## Use Case Diagram
 
-- `User` sends a `postThread` request to the **server**. The server receives the **POST Request** with the `Thread` data and stores it in the **database**. The `followers` of the `User` receive `Notification` and see new `Thread` in their `Feed`.
+- `User` sends a `createThread` request to the **server**. The server receives the **POST Request** with the `Thread` data and stores it in the **database**. The `followers` of the `User` receive `Notification` and see new `Thread` in their `Feed`.
 
 - When `User` navigates to the `Feed`, a `getFeed` request is sent to the **server**. The server receives the **GET Request** and queries the **database** for recent posts and activities relevant to the user. The `Feed` compiles the data, sorts it by recency or relevance, and sends it back to the client.
 
 ## Class Diagram
+
+- `User(-userId, -username, -email, -password)`:
+
+- `ThreadService(-ThreadRepository, +saveThread(Thread):boolean)`:
+
+- `Thread(threadId, content, userId)`:
+
+## Sequence Diagram

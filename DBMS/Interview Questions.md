@@ -1,5 +1,13 @@
 # DBMS Interview Questions
 
+**Q. When to use Relational and when to use Non-relational?**
+
+A Relational database should be used where we have well-defined, predictable data, where transactions are important to us, where we find value in keeping the relationships between our tables.
+
+A Non-Relational database should be used where we have unstructured information, where pure performance is more important than ACID transactions and where we may need to scale quickly.
+
+---
+
 **Q. What do you mean by "No Schema"?**
 
 No Schema means that arbitrary keys and values can be added to a document, and when reading, clients have no guarantees as to what fields the documents may contain.

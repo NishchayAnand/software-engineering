@@ -86,6 +86,7 @@ GROUP BY
 ORDER BY 
     st.student_id, su.subject_name;
 
+## Restructed Optimized Query
 SELECT * 
 FROM Students st CROSS JOIN Subjects su
 LEFT JOIN Examinations e ON e.student_id = st.student_id AND e.subject_name = su.subject_name
