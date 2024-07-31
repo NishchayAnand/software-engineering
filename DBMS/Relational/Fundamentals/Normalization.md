@@ -81,6 +81,8 @@ Products Table:
 
 It advises the removal of fields in a table that are independent of the key, guaranteeing that the non-prime attributes are not dependent on other non-prime attributes.
 
+**Every non-key attribute in a table should depend on the key, the whole key, and nothing but the key.**
+
 - **Second Normal Form Compliance**: The table must be in 2NF.
 - **Eliminate Transitive Dependency**: Ensure that non-key attributes are not dependent on other non-key attributes.
 
