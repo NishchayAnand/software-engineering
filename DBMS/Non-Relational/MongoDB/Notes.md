@@ -39,3 +39,8 @@ A document is stored as a single continuous string, encoded as JSON, XML, or a b
 - MongoDB is a transactional database which means you means you can use mongoDB for your transactional applications.
 
 - Some MongoDB drivers automatically resolve database references (effectively performing a client-side join, although this is likely to be slower than a join performed in the database since it requires additional network round-trips and is less optimized).
+
+## Links:
+
+- **Data Modeling with MongoDB**: https://www.youtube.com/watch?v=3GHZd0zv170
+- **Schema Designing in MongoDB**: https://www.youtube.com/watch?v=QAqK-R9HUhc&list=PL4RCxklHWZ9tB00Sh2nMftVIBaVG_-bmY&index=2
