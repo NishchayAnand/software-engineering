@@ -1,9 +1,7 @@
-# Understanding Liskov Substitution Principle
+# Liskov Substitution Principle
 
-- The Liskov Substitution principle states that "Wherever a superclass object is expected, you can always use the subclass object instead." This principle is the ideology behind runtime polymorphism.
+**DEFINITION: Subtypes must be substitutable for their base types.**
 
-- Says that when you inherit from a class, yoy must be able to substitute the subclass for base class without things going wrong.
+The idea is that wherever a superclass object is expected, you can always use the subclass object instead. This principle is the ideology behind **runtime polymorphism**
 
-- When you use inheritance, your subclass gets almost all the methods and fields from the superclass. If you use inheritance incorrectly, you're going to end up with methods and fields that probably don't make sense or you don't need on your subclass.
-
-For example, **Can you use a SUVCar class instead of the more generic Car class?**.
+Liskov Substitution Principle provides the guidance on how to properly use inheritance in object-oriented programming. It states that the **IS-A relationship is insufficient and should be replaced with IS-SUBSTITUTABLE-FOR.**

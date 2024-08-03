@@ -10,6 +10,8 @@
 
 ## Principle of Least Knowledge
 
+## Hollywood Principle: Don't call us, we'll call you.
+
 Guides us to reduce the interactions between objects to just a few close "friends". It means when you are designing a system, for any object, be careful of the number of classes it interacts with and also how it comes to interact with those classes.
 
 This principle prevents us from creating designs that have a large number of classes coupled together so that changes in one part of the system cascade to other parts. When you build a lot of dependencies between many classes, you are building a fragile system that will be costly to maintain and complex for others to understand.
