@@ -22,24 +22,44 @@ Threads is a social media platform. Key features **(services)** provided by Thre
 
 ## Functional Requirements
 
-- **Create Threads:** Users can compose a new `text-based` post.
+- **Create Threads (ThreadService):** Users can compose a new `text-based` post.
 
-- **Live Feed:** Users receive a continuous stream of fresh content in their feed.
+- **Live Feed (NewsFeedService):** Users receive a continuous stream of fresh content in their feed.
 
-- **Get Notifications:** Users receive notifications about `activities` (interactions) such as `new posts`.
+- **Get Notifications (NotificationService):** Users receive notifications about `activities` (interactions) such as `new posts`.
 
 ## Use Case Diagram
 
 - `User` sends a `createThread` request to the **server**. The server receives the **POST Request** with the `Thread` data and stores it in the **database**. The `followers` of the `User` receive `Notification` and see new `Thread` in their `Feed`.
 
+- **Fanout on write** or **Fanout on read** ??
+
 - When `User` navigates to the `Feed`, a `getFeed` request is sent to the **server**. The server receives the **GET Request** and queries the **database** for recent posts and activities relevant to the user. The `Feed` compiles the data, sorts it by recency or relevance, and sends it back to the client.
 
 ## Class Diagram
 
-- `User(-userId, -username, -email, -password)`:
+- `User(-userId: int, -username: string, -email: string, -password: string, -friends: List<User>)`:
+
+- `Thread(-threadId: int, -content: string, userId: int)`:
 
 - `ThreadService(-ThreadRepository, +saveThread(Thread):boolean)`:
 
-- `Thread(threadId, content, userId)`:
+- `FeedService`:
+
+- `NotificationService`:
 
 ## Sequence Diagram
+
+- When a user **signs up** for the first time, servers collect the `User` info and stores it in the `User database`.
+
+- The `User` sends a **POST request** to the `ThreadService` to publish a new `Thread` to the `Post database`.
+
+- `FeedService` fetches `User` `friends` list from the `User Database` and sends it to the **message queue**.
+
+- `NotificationService` pull notification events from message queue an send them to the corresponding users.
+
+- The fully hydrated ``Feed` is returned in JSON format back to the client for rendering.
+
+## EXTRA
+
+Cache is extremely important for a news feed system.
