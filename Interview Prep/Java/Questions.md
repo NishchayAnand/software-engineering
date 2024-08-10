@@ -1,8 +1,14 @@
-# Java Interview Questions
+# Interview Questions
 
 **Q. Why is Java a platform independent language?**
 
 Java is a compile-type language. The compiled code, i.e, bytecode can run on various operating systems and hardware infrastructures without requiring modifications.
+
+---
+
+**Q. What is Stack Memory?**
+
+Stack memory is a specific area of memory in a computer's RAM (Random Access Memory) that stores temporary variables created by each function.
 
 ---
 
@@ -16,7 +22,7 @@ The `classpath` is an **environment variable** that tells the Java compiler and 
 
 Before Java 8, the differences between abstract classes and interfaces in Java were more pronounced. Here are the key distinctions:
 
-### Abstract Classes
+**Abstract Classes:**
 
 1. **Abstract classes can have both abstract methods (methods without an implementation) and concrete methods (methods with an implementation).** Concrete methods in abstract classes can provide a default behavior that subclasses can use or override.
 
@@ -28,7 +34,7 @@ Before Java 8, the differences between abstract classes and interfaces in Java w
 
 5. Though Abstract classes cannote be instantiated, they can have constructors, which can be used to initialize fields in the abstract class. Subclasses can call the constructor of the abstract class using super().
 
-### Interfaces
+**Interfaces:**
 
 1. Interfaces could only have abstract methods (methods without an implementation).
 
@@ -49,5 +55,21 @@ After Java 8, the distinctions between abstract classes and interfaces have narr
 1. **Abstract Classes can have instance variables that maintain instance-specific `state`, whereas Interfaces cannot.**
 
 2. A class can only implement one Abstract Class whereas it can implement multiple Interfaces. **If a class implements multiple interfaces that have `default` methods with the same signature, the class must override the method to resolve the conflict.**
+
+---
+
+**Q. Difference between equals() method and equals operator:**
+
+An object may contain multiple types of data. Using the equals (`==`) operator does not work for comparison of objects. Hence, we need to use equals() method. The equals() method compares the value.
+
+---
+
+**Q. What is Constant Pool?**
+
+The constant pool is a special area in memory where constant values are stored.
+
+For strings, the constant pool plays a crucial role in memory management and performance optimization. When you create a **string literal (e.g., String s = "hello")**, the JVM first checks the constant pool. If the string already exists there, a reference to it is assigned to the variable s. If not, the string is added to the constant pool, and then a reference is assigned.
+
+> **NOTE:** When you create a string using the **new keyword (e.g., String s = new String("hello"))**, a new string object is created in the heap memory, regardless of whether the string already exists in the constant pool.
 
 ---
