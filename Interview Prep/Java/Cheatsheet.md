@@ -17,3 +17,7 @@
 - `Single Responsibility Principle`: S in SOLID Principles -> A module should have only one reason to change -> promotes high cohesion.
 
 - `Facade Pattern`: provide simplified interface to a subsystem -> core idea: keep number of interactions between classes to a minimum (low coupling).
+
+- `Composition`: represent association between two classes -> models a "has-a" relationship -> represent part-whole hierarchy -> lifetime of the composed objects (part) is tied to the lifetime of the composite object (whole) -> each part object is typically owned by only one whole object.
+
+- `Aggregation`: represents association between two classes -> models a "has-a" relationship -> represents part-whole hierarhy -> part can exist independently of the whole -> lifetime of the part is not tied to the whole -> multiple whole parts may contain references to the same part object.

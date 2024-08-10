@@ -2,39 +2,54 @@
 
 Aggregation represents a "has-a" relationship between objects. One class (the whole) contains a reference to another class (the part), but the part can still exist independently.
 
-Example: Car and Engine
+**Example: Department and Employee**
 
-A car has-an engine, but the engine can potentially be used in other vehicles or for other purposes.
+Consider a Department class and an Employee class. A department "has" employees, but employees can exist independently of the department.
 
 ```
-class Engine {
-  private String type;
+class Employee {
+    private String name;
 
-  public Engine(String type) {
-    this.type = type;
-  }
+    public Employee(String name) {
+        this.name = name;
+    }
 
-  public String getType() {
-    return type;
-  }
+    public String getName() {
+        return name;
+    }
 }
 
-class Car {
-  private String model;
-  private Engine engine;
+class Department {
+    private String name;
+    private List<Employee> employees;
 
-  public Car(String model, Engine engine) {
-    this.model = model;
-    this.engine = engine;
-  }
+    public Department(String name) {
+        this.name = name;
+        this.employees = new ArrayList<>();
+    }
 
-  public String getModel() {
-    return model;
-  }
+    public void addEmployee(Employee employee) {
+        employees.add(employee);
+    }
 
-  public Engine getEngine() {
-    return engine;
-  }
+    public void listEmployees() {
+        System.out.println("Department: " + name);
+        for (Employee employee : employees) {
+            System.out.println("Employee: " + employee.getName());
+        }
+    }
 }
 
+public class Main {
+    public static void main(String[] args) {
+        Employee emp1 = new Employee("John");
+        Employee emp2 = new Employee("Jane");
+
+        Department dept = new Department("HR");
+        dept.addEmployee(emp1);
+        dept.addEmployee(emp2);
+
+        dept.listEmployees();
+    }
+}
 ```

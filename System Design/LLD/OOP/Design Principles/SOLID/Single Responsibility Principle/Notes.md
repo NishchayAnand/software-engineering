@@ -148,6 +148,88 @@ Of course, the COO's team doesn't know that this is happening. The HR personnel 
 
 **SRP says to separate the code that different actors depend on.**
 
-The most obvious way to solve the problem is to **separate the data from the functions.** Create three classes that share access to `EmployeeData`, which is a simple data structure with no methods.
+The most obvious way to solve the problem is to **separate the data from the functions (separation of concerns principle).** Create three classes that share access to `EmployeeData`, which is a simple data structure with no methods.
 
-The downside of this solution is that developers now have three classes that they have to instantiate and track. A common solution to this dilemma is to use **FACADE PATTERN**.
+```
+interface HoursCalculator {
+    int calculateRegularHours(Employee employee);
+}
+
+class DefaultHoursCalculator implements HoursCalculator {
+    @Override
+    public int calculateRegularHours(Employee employee) {
+        // Default implementation of calculating regular hours
+        return employee.getRegularHours();
+    }
+}
+
+class Employee {
+    private int regularHours;
+    // ... other employee attributes
+
+    public int getRegularHours() {
+        return regularHours;
+    }
+    // ... other employee methods
+}
+
+class PayrollCalculator {
+    private final HoursCalculator hoursCalculator;
+
+    public PayrollCalculator(HoursCalculator hoursCalculator) {
+        this.hoursCalculator = hoursCalculator;
+    }
+
+    public double calculatePay(Employee employee) {
+        int regularHours = hoursCalculator.calculateRegularHours(employee);
+        // ... calculate pay based on regular hours
+        return calculatedPay;
+    }
+}
+
+class TimeTracker {
+    private final HoursCalculator hoursCalculator;
+
+    public TimeTracker(HoursCalculator hoursCalculator) {
+        this.hoursCalculator = hoursCalculator;
+    }
+
+    public void reportHours(Employee employee) {
+        int regularHours = hoursCalculator.calculateRegularHours(employee);
+        // ... report hours based on regular hours
+    }
+}
+
+class EmployeeDataRepository {
+    // Methods for saving and retrieving employee data
+}
+```
+
+The downside of this solution is that developers (clients) now have three classes that they have to instantiate and track. A common solution to this dilemma is to use **FACADE PATTERN**.
+
+```
+public class EmployeeFacade {
+    private final PayrollCalculator payrollCalculator;
+    private final TimeTracker timeTracker;
+    private final EmployeeDataRepository employeeDataRepository;
+
+    public EmployeeFacade() {
+        // Dependency injection or creation of components here
+        payrollCalculator = new PayrollCalculator(new DefaultHoursCalculator());
+        timeTracker = new TimeTracker(new DefaultHoursCalculator());
+        employeeDataRepository = new EmployeeDataRepository();
+    }
+
+    public double calculatePay(Employee employee) {
+        return payrollCalculator.calculatePay(employee);
+    }
+
+    public void reportHours(Employee employee) {
+        timeTracker.reportHours(employee);
+    }
+
+    public void saveEmployee(Employee employee) {
+        employeeDataRepository.saveEmployee(employee);
+    }
+}
+```
