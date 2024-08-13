@@ -1,5 +1,7 @@
 # Understanding Microservices Architecture
 
+Microservices architecture is a design approach where a large application is broken down into `smaller`, `independently deployable` services. Each service focuses on a specific business capability and **communicates with others through well-defined APIs over the network**.
+
 A service is a piece of software that provides functionality to other pieces of software within your system.
 
 > NOTE: Essentially the differences between web applications and other applications are confined to the presentation tier. The service layer should be identical.
@@ -67,11 +69,6 @@ your machine.
 - Microservices can talk to each other using asynchronous communication using components like "message broker".
 
 ## EXTRA
-
-- Backend for frontend APIs (BFFs)
-
-  - can provide all the functionalities that an API Gateway can provide and can even contain custom logic that you write, for example, take one request and call multiple
-    downstream microservices.
 
 - Synchronous Communication:
 

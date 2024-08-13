@@ -22,13 +22,37 @@ Threads is a social media platform. Key features **(services)** provided by Thre
 
 ## Functional Requirements
 
-- **Live Feed (`NewsFeedService`):**
-  - Users can publish text-based posts.
-  - Users recieve a continuous stream of fresh content in their feed **(Fanout on Write - Push Model)**.
+- **Create Thread (`PostService`)**: Users can publish text-based posts.
 
-## Use Case Diagram
+- **Follow / Unfollow People (`FollowService`)**: Users can follow new people or unfollow existing followees.
 
-- `User` sends a **POST request** to the `ThreadService` to publish a new `Thread` in the database. The `FeedService` executes `User.getFollowers()` to fetch the list of followers who should see the new `Thread`.
+- **Live Feed (`NewsFeedService`):** Users can request a stream of fresh content in their feed **(Fanout on Read - Pull Model)**.
+
+## DB Schema Modeling
+
+- `User(userId, name, email)`
+
+- `post(postId, userId, imageId, caption)`
+
+- `image(imageId, imageUrl)`
+
+- `follow(follower, followee)`: followee is the person who is being followed by another user.
+
+## Use Case Diagram (Design API structure)
+
+Understand what services we need to incorporate in our design to fulfill our requirement.
+
+- `User` sends a **POST request** to the `PostService` to publish a new `Thread` in the database.
+
+- `User` sends a **POST request** to the `FollowService` to add a new followee for the user. The `followDAO` will add a new (userId, followeeId) row in the `follow` table.
+
+- `User` sends a **GET request** to the `FeedService` to fetch latest `Thread` posted by its **followees**.
+
+- `FeedService` -> followees = `FollowService`.getUsersFollowerBy(`User`) -> posts = forEach(followee -> `PostService`.getPostsByUser(`User`))
+
+- `FollowService` will answer 2 important questions:
+  1. list of people who are following me.
+  2. list of people who I'm following.
 
 ## Class Diagram
 
@@ -44,6 +68,16 @@ Threads is a social media platform. Key features **(services)** provided by Thre
 
 **Relationships:**
 
+## Sample Code
+
+## Optimizations
+
+1. Add another functionality PostService.getPostsByUsers({`User`, `User`, `User`}) to avoid querying posts for each followee separately.
+
+2. Limit post fetched from the database to 20.
+
+3. Use `fanout on Write` to pre-compute the user feed. When a post is saved in the database, the `PostService` should send a notification to the `FeedService` to get followers = getFollowers(`User`) and then forEach(follower -> FeedService.addPost(`Post`))
+
 ## EXTRA
 
 - When a user **signs up** for the first time, the servers collect the `User` info and stores it in the **user database**.
@@ -51,3 +85,14 @@ Threads is a social media platform. Key features **(services)** provided by Thre
 - **Get Notifications (`NotificationService`)**: Users receive notifications about activities (interactions) such as new posts.
 
 - Cache is extremely important for a **news feed service**.
+
+- `FollowService` will answer 2 important questions:
+
+  1. list of people who are following me.
+  2. list of people who I'm following.
+
+- ImageService(imageId, url) -> Distributed File System (DFS)
+
+## Links
+
+- https://www.youtube.com/watch?v=QmX2NPkJTKg&t=200s

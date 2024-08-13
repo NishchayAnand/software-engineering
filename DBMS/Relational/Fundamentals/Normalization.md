@@ -1,6 +1,18 @@
 # Normalization
 
-Normalization is the process of dividing data into multiple tables, each with a specific purpose.
+Normalization is the process of organizing data in the database.
+
+One of the key driving factors behind normalization is to **reduce data redundancy**.
+
+Normalization is achieved through a series of steps, each defined by a **normal form**.
+
+## EXTRA
+
+Normalization is the process of organizing the data in a table. Normalization implies creating a specific data model consisting of `tables` and `relationships`. Normalization is the process of organizing data in the database. Normalization is the process of dividing data into multiple tables, each with a specific purpose.
+
+Redundant data wastes space and causes maintenance issues. Normalization allows us to avoid data redundancy between tables.
+
+The key feature of the term **normal form** is that it eliminates transitive dependency.
 
 It is a crucial concept in relational databases that helps design table structure within the database. It applies certain principles and concepts to ensure efficient data storage.
 
@@ -10,8 +22,6 @@ One of the key driving factors behind normalization is **reduction of data redun
 
 Normalization allows us to structure the data in such a way that it can't express redundant information.
 
-## How does Normalization works?
-
 Normalization is achieved through a series of steps, each defined by a **"normal form"**. Each subsequent normal form builds upon the previous one, adding more rules and constraints to achieve a higher degree of normalization.
 
 - **Prime Attributes**: A unique identifier for an entity. It is a minimal set of attributes that can uniquely identify any record within a table. They play a crucial role in connecting and organizing data.
@@ -19,6 +29,12 @@ Normalization is achieved through a series of steps, each defined by a **"normal
 - **Non-prime Attributes**: Any attribute which is not prime. It is a descriptive characteristic of an entity that may not be unique. They depend on prime attributes for identification. The purpose of a non-prime attribute is to add details, however, it does not serve as the main identifier.
 
 ### First Normal Form (1NF)
+
+We need to get data into rows, and all rows need to have same attributes in the same order. Each attribute also has to be the same data type across all rows. For example, if an attribute is integer type in one row, it must be integer in all other rows.
+
+Each row should have a primary key.
+
+Cannot have an attribute that contains a list or a table or an array. It has to be a single value.
 
 This rule ensures that each column in a table constains only `atomic` values, i.e., **no multi-valued attributes (mixed datatypes) in a column.**
 
@@ -45,7 +61,9 @@ Non-1NF Table:
 
 ### Second Normal Form (2NF)
 
-Second Normal Form is about how a table's non-key columns relate to the primary key. **Each non-key attribute must depend on the whole primary key, not just part of it**.
+Every attribute in a row should be dependent on the primary key. If it doesn't depend on the entire key, then it doesn't belong in the row, i.e., it doesn't belong in that entity.
+
+Second Normal Form is about how a table's non-key columns relate to the primary key. **Each non-key attribute `must depend on the whole primary key, not just part of it`**.
 
 Designed to tackle partial dependencies.
 
@@ -81,7 +99,7 @@ Products Table:
 
 It advises the removal of fields in a table that are independent of the key, guaranteeing that the non-prime attributes are not dependent on other non-prime attributes.
 
-**Every non-key attribute in a table should depend on the key, the whole key, and nothing but the key.**
+**Every non-key attribute in a table should `depend on the key, the whole key, and nothing but the key`.**
 
 - **Second Normal Form Compliance**: The table must be in 2NF.
 - **Eliminate Transitive Dependency**: Ensure that non-key attributes are not dependent on other non-key attributes.
@@ -106,6 +124,8 @@ Suppliers Table:
 | 201        | Supplier X   |
 | 202        | Supplier Y   |
 ```
+
+> **NOTE:** There are higher normal forms such as fourth and fifth, however, achieving third normal form is considered necessary in most cases.
 
 ## Links
 

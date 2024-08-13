@@ -35,3 +35,5 @@ Here are some ways to implement DI:
 - **Low-level components:** These are classes that handle more specific, detailed tasks. They tend to be more concrete and deal with implementation details. Examples: Database access layer, Utility functions (string manipulation, date/time formatting), Algorithm implementations (sorting algorithm, searching algorithm).
 
 - **Coupling:** Measures how closely different classes are dependent on each other. Remember Coupling as **degree of interdependence between classes**.
+
+- `Factory Pattern` promotes Dependency Inversion Principle.
