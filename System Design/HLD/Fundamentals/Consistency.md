@@ -1,4 +1,4 @@
-# Understanding Consistency in Distributed Systems
+# Understanding Consistency
 
 Consistency in distributed systems refers to the guarantee that all replicas of a shared data store have the same data at any given time. In other words, it ensures that all users see the same data simultaneously.
 
@@ -15,3 +15,7 @@ Given enough time, all replicas in the system will converge to the same value. F
 ## Read-Your-Writes Consistency
 
 A user will always read their own writes. This ensures that after a user updates a data item, they will always see their updates. For example, after posting a status update on social media, the user will see their post immediately.
+
+Understanding and choosing the right consistency model depends on the specific needs and constraints of the system being designed. For example, systems requiring immediate data accuracy might prioritize **strong consistency**, while systems needing high availability might opt for **eventual consistency**.
+
+## Quorum Consensus

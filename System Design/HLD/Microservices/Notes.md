@@ -68,6 +68,34 @@ your machine.
 - Monolithic Architecture Disadvantages: An appliation or service has way too much functionality and data contained within one package.
 - Microservices can talk to each other using asynchronous communication using components like "message broker".
 
+## What is a Bounded Context?
+
+## What are Transactional Boundaries?
+
+Transactions allow us to say **_"these events either all happen together, or none of them happen"_**. They let us update multiple tables at once, knowing that if anything fails, everything gets rolled back, ensuring our data doesn't get into an inconsistent state.
+
+Simply put, a transaction allows us to group together multiple different activities that take our system from one consistent state to another - **everything works or nothing works**.
+
+> NOTE: Transactions don't just apply to databases, although we must often use them in that context. Message brokers, for example, have long allowed you to post and receive messages within transactions too.
+
+With a monolithic schema, all our create and updates will probably be done within a single transactional boundary. When we split apart our databases, we lose the safety afforded to us by having a single transaction. For example, when creating an order, I want to update the `order` table stating that a customer order has been created, and also put an entry into a table for the warehouse team so it knows where is an order that needs to be picked for dispatch. Within a single transaction in a monolithic schema, creating the order and inserting the record for the warehouse team takes place within a single transaction. But if we have pulled apart the schema into two separate schemas, one for customer-related data including our order table, and another for the warehouse, we have lost this transactional safety. **The order placing process now spans two separate transactional boundaries**.
+
+**If our insert into the order table fails, we can clearly stop everything, leaving us in a consistent state. But what happens when the insert into the order table works, but the insert into the picking table fails?**
+
+1. The fact that the order was captured and placed might be enough for us, and we may decide to retry the insertion into the warehouse's picking table at a later stage (retry). In many ways, this is another form of what is called **eventual consistency**. Rather than using a transactional boundary to ensure that the system is in a consistent state when the transaction completes, instead we accept that the system will get itself into a consistent state at some point in the future. **This approach is especially useful with business operations that might be long-lived (??)**.
+
+2. Another option is to reject the entire operation. In this case, we have to put the system back into a consistent state. The picking table is easy, as that insert failed, but we have a committed transaction in the order table. We need to unwind this. What we have to do is issue a **compensating transaction**, kicking off a new transaction to wind back what just happened. That could be somthing as simple as issuing a **DELETE** statement to remove the order from the database. **However, in a distributed architecture, we don't know if the logic to handle the compensating transaction live in the `Customer` service, the `Order` service, or somewhere else? What happens if we have three, four, or five operations in a transaction? Handling compensating transactions for each failure mode becomes quite challenging to comprehend, let alone implement.** An alternative to manually orchestrating compensating transactions is to use **distributed transactions**.
+
+## Splitting the Monolith
+
+1. **Identify Service Boundaries**: Sort code into domain-oriented packages.
+
+2. **Find seams in the Database**: Require splitting up the repository layer into several parts. To remove foreign key relationship between tables used by different services, expose data via API calls between services (foreign key relationship would need to be managed by resulting services rather than in the database level). This may mean that we need to implement our own consistency chek across services.
+
+3. **Create Separate Service for Shared Mutable Data**: For example, `Warehouse` and `Finance` services need to work with Customer data. Both services would write to, and probably occasionally read from the Customer table. What we have here is something you'll see often - **a domain concept that isn't modeled in the code, and is infact implicitly modeled in the database.**. In such cases, we need to make the current abstract concept of the Customer concrete, i.e, create a new package called `Customer`. We can then use an API to expose `Customer` code to other packages, such as `Finance` and `Warehouse`. Rolling this all the way forward, we may end up with a distinct `Customer` service.
+
+4. **Staging the Break**: It is actually recommended that you split out the schema but keep the service together before splitting the application code out into separate microservices. With a separate schema, we'll be potentially increasing the number of database calls to perform a single action. Where before we might have been able to have all the data we wanted in a single **SELECT** statement, now we may need to **pull the data back from two locations and join in memory**. Also, we end up breaking **transactional integrity** when we move to two schemas, which could have significant impact on our applications. By splitting the schema out but keeping the application code together, we give ourselves the ability to revert our changes or continue to tweak things without impacting any customers of our service. Once we are satisfied that the DB separation makes sense, we can think about splitting out the application code into two services.
+
 ## EXTRA
 
 - Synchronous Communication:

@@ -1,11 +1,15 @@
 # Understanding CAP Theorem
 
-The CAP theorem states that in any distributed data store, you can only achieve two out of the following three guarantees simultaneously:
+The CAP theorem states that it is impossible for a distributed system to simultaneously provide more than two of these 3 guarantees: `consistency`, `availability` and `partition tolerance`.
 
-- **Consistency:** All nodes see the same data at the same time.
+- **Consistency:** All clients see the same data at the same time no matter which node they connect to.
 
-- **Availability:** Every request receives a (non-error) response, without guarantee that it contains the most recent write.
+- **Availability:** Any client which requests data gets a response even if some of the nodes are down.
 
-- **Partition Tolerance:** The system continues to operate despite an arbitrary number of messages being dropped or delayed by the network between nodes.
+- **Partition Tolerance:** A partition indicates a communication breakdown between two nodes. Partition tolerance means the system continues to operate despite network partitions.
 
-Understanding and choosing the right consistency model depends on the specific needs and constraints of the system being designed. For example, systems requiring immediate data accuracy might prioritize **strong consistency**, while systems needing high availability might opt for **eventual consistency**.
+In a distributed system, partitions cannot be avoided. When a partition occurs, we must choose between consistency and availability.
+
+If we choose consistency over availability (CP), we must block all write operations to avoid data inconsistency among nodes (servers), which makes the system unavailable. For example, **Bank systems usually have extremely high consistent requirements.**
+
+If we choose availability over consistency (AP), the system keeps accepting reads, even though it might return stale data.

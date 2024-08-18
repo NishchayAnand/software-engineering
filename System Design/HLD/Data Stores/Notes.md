@@ -78,3 +78,7 @@ Each node has its own local storage. Data is partitioned and distributed across 
 - Adding nodes increases processing power and storage capacity linearly.
 - Less network traffic as nodes access their local storage.
 - Failure of a node doesn't affect the entire system.
+
+## Links and References
+
+1. Refactoring Databases by Scott J. Ambler and Pramod J. Sadalage (Addison Wesley).

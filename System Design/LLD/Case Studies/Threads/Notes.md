@@ -58,7 +58,7 @@ Understand what services we need to incorporate in our design to fulfill our req
 
 **Components:**
 
-- `User(-userId: int, -username: string, -email: string, -password: string, -followers: List<User>)`:
+- `User(-userId: int, -username: string, -email: string)`:
 
 - `Thread(-threadId: int, -content: string, userId: int)`:
 
