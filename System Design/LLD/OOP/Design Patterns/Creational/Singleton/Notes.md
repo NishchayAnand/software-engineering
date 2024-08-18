@@ -1,6 +1,6 @@
 # Understanding Singleton Pattern
 
-**DEFINITION:** Ensures a class has only one instance, and provides a global point of access to it.
+**DEFINITION: Ensures a class has only one instance, and provides a global point of access to it.**
 
 The **Singleton Pattern** is a convention for ensuring one and only one object is instantiated for a given class.
 
