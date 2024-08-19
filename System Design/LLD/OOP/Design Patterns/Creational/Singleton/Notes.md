@@ -2,11 +2,81 @@
 
 **DEFINITION: Ensures a class has only one instance, and provides a global point of access to it.**
 
+## Basic Implementation
+
+```
+public class Singleton {
+
+    private static Singleton obj = null;
+
+    private Singleton() {
+        System.out.println("Creating an object of Singleton class");
+    }
+
+    public static Singleton getInstance() {
+        if (obj == null) {
+            obj = new Singleton();
+        }
+        return obj;
+    }
+}
+```
+
+The above implementation is not thread-safe. Multiple threads could potentially enter the getInstance() method simultaneously, and both could end up creating separate instances of the Singleton class, violating the Singleton pattern's guarantee of a single instance.
+
+## How to make the Singleton Class Thread-Safe.
+
+1. **Synchronized Method**: You can synchronize the getInstance() method to ensure that only one thread can access it at a time.
+
+   ```
+   public class Singleton {
+        private static Singleton obj = null;
+
+        private Singleton() {
+            System.out.println("Creating an object of Singleton class");
+        }
+
+        public static synchronized Singleton getInstance() {
+            if (obj == null) {
+                obj = new Singleton();
+            }
+            return obj;
+        }
+   }
+   ```
+
+   The method is `synchronized`, which can lead to performance overhead since every call to getInstance() will be synchronized, even after the instance has been created.
+
+2. **Double-Checked Locking**: To avoid the performance cost of synchronized methods, you can use double-checked locking. This ensures that synchronization happens only when the instance is null and is not required for every subsequent call to getInstance().
+
+   ```
+   public class Singleton {
+        private static volatile Singleton obj = null;
+
+        private Singleton() {
+            System.out.println("Creating an object of Singleton class");
+        }
+
+        public static Singleton getInstance() {
+            if (obj == null) {
+                synchronized (Singleton.class) {
+                    if(obj == null) {
+                        obj = new Singleton();
+                    }
+                }
+            }
+            return obj;
+        }
+   }
+   ```
+
+   NOTE: The `volatile` keyword would ensure that the writes to obj are visible to all threads.
+
+---
+
 The **Singleton Pattern** is a convention for ensuring one and only one object is instantiated for a given class.
 
-Singleton Pattern gives us a global point of access, just like global variable.
-
-With Singleton Pattern, we can create objects only when they are needed.
+Singleton Pattern gives us a global point of access, just like global variable. However, with Singleton Pattern, we can create objects only when they are needed.
 
 ## How to implement Singleton Pattern?
 

@@ -19,7 +19,23 @@ public class CustomComparator implements Comparator<String> {
 }
 ```
 
-### HashMap in Java is not thread-safe. Comment.
+### HashMap is not thread-safe. Comment.
+
+---
+
+### Strings are immutable. Comment.
+
+It means that once a String object is created, its value cannot be changed. When you perform operations on strings, such as concatenation, substring, or replace, the original string remains unchanged, and a new string is returned with the desired modifications.
+
+> NOTE: Strings in Java are stored as an array of characters internally (char[]), which is declared as final.
+
+Since strings are immutable, they are inherently thread-safe. Multiple threads can share the same string object without worrying about synchronization issues.
+
+---
+
+### What is a String Pool?
+
+A special memory area within the heap where string literals are stored. It is used to optimize memory usage and improve performance when dealing with string literals by avoiding the creation of multiple identical `String` objects.
 
 ---
 
@@ -84,15 +100,5 @@ After Java 8, the distinctions between abstract classes and interfaces have narr
 ### Q. State the differences between equals() method and equals operator.
 
 An object may contain multiple types of data. Using the equals (`==`) operator does not work for comparison of objects. Hence, we need to use equals() method. The equals() method compares the value.
-
----
-
-### Q. What is Constant Pool?
-
-The constant pool is a special area in memory where constant values are stored.
-
-For strings, the constant pool plays a crucial role in memory management and performance optimization. When you create a **string literal (e.g., String s = "hello")**, the JVM first checks the constant pool. If the string already exists there, a reference to it is assigned to the variable s. If not, the string is added to the constant pool, and then a reference is assigned.
-
-> **NOTE:** When you create a string using the **new keyword (e.g., String s = new String("hello"))**, a new string object is created in the heap memory, regardless of whether the string already exists in the constant pool.
 
 ---

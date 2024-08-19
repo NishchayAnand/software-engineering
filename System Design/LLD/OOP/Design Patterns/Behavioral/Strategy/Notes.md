@@ -1,5 +1,11 @@
 # Understanding Strategy Pattern
 
+**DEFINITION: Strategy Pattern defines a family of algorithms and encapsulatess each one and makes them interchangeable.**
+
+Think of strategies as behaviors.
+
+---
+
 - Encapsulate behavior in a object to delegate functionality.
 
 - The idea of the Strategy Pattern is for a given interface to assign different variants of an algorithm to different implementations with the choice of which to choose being made at runtime.
