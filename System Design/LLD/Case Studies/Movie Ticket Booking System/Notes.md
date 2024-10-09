@@ -1,78 +1,22 @@
-# Movie Ticket Booking System 
+# Movie Ticket Booking System Low Level Design
 
-A system that allows customers to book movies online. For example, **BookMyShow**, **PayTM Insider**.  
+An online platform or application that allows users to browse, select, and purchase (book) tickets for movies currently showing in theaters. 
 
-## Functional Requirements
+## Key Features and Services
 
-- User a.k.a Customer should be able to:
-    - search a movie,
-    - reserve a seat,
-    - pay for the booking.
+- **User Registration and Login:** Should allow users to create an account and authenticate themselves to access the platform's services.
 
-- System should be able to: 
-    - display the show availablility, 
-    - display the seating layout highlighting all the booked and available seats,
-    - sends a booking confirmation notification.  
+- **Movie Listings:** Displays the list of currently running and upcoming movies along with details like genre, duration, rating, and trailers.
 
-## Non-Functional Requirements
+- **Theater and Showtime Selection:** Users should be able to view all available theaters and their showtimes based on their preferred date and location.
 
-- The system needs to make sure no two users can book the same seat.    
+- **Seat Selection:** Shows a seat map for the selected theater and allows users to choose their preferred seats, with real-time availability updates.
 
-## Storage Requirements
+- **Pricing:** Provides ticket pricing based on factors like seat location and time of show.
 
-- Should hold information of all cinemas across the catered regions.
-- Should maintain a movies' database.
+- **Payment:** Integrates with payment gateways to allow secure transactions via credit/debit cards, digital wallets, or net banking.
 
-## Use Case Diagram
+- **Notification:** Generates a booking confirmation after successful payment, often with a digital ticket (QR code), sent via email, SMS, or within the app.
 
-- Customer can search for a particular movie based on the following criterias: `title`, `language`, `genre`, `release date`.
-- Customer can book one or more movie tickets for any movie. 
-- Customer can cancel the booking. 
-- Customer can pay via `Credit Card`, `Debit Card,` or `UPI`. 
-
-## Class Diagram
-
-- **Abstract Classes**:
-
-    - `Seat`: 
-        - -seatNo: string,
-        - -rate: double, 
-        - -isAvailable: boolean; 
-        - +isAvailable(): boolean;
-
-- **Concrete Classes**:
-
-    - `NormalSeat` extends `Seat`
-
-    - `PremiumSeat` extends `Seat`
-    
-    - `Show`:
-        - -showID: int,
-        - -startTime: datetime
-        - -date: date
-        - -duration: int
-        - -seats: List(Seats);
-        - +showAvailableSeats(): void
-
-    - `Hall`:
-        - -hallId: int,
-        - shows: List(Show);
-
-    - `Cinema`:
-        - cinemaID: int,
-        - halls: list(Hall),
-        - state: string,
-        - city: string,
-        - address: string,
-        - pinCode: string;
-
-    - `Movie`:
-        - 
-
-    
-
-
-## Sequence Diagram
-
-## Activity Diagram
+## Functional Requirement
 

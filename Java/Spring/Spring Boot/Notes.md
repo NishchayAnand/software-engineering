@@ -2,7 +2,7 @@
 
 Spring started as a lightweight alternative to Java Enterprise Edition (JEE, J2EE as it was known at the time). Rather than develop components as heavyweight Enterprise JavaBeans (EJBs), Spring offered a simpler approach to enterprise Java development, utilizing **dependency injection** and **aspect-oriented programming** to achieve the capabilities of EJB with plain old Java objects (POJOs).
 
-While Spring was lightweight in terms of component code, it was heavyweight in terms of configuration. Initially, Spring was configured with `XML`. Spring 2.5 introduced **annotation-based component-scanning**, which eliminated a greate deal of explicit XML configuration. Spring 3.0 introduced a **Java-based configuration** as a type-safe and refactorable option to XML.
+While Spring was lightweight in terms of component code, it was heavyweight in terms of configuration. Initially, Spring was configured with `XML`. Spring 2.5 introduced **annotation-based component-scanning**, which eliminated a great deal of explicit XML configuration. Spring 3.0 introduced a **Java-based configuration** as a type-safe and refactorable option to XML.
 
 Component-scanning reduced configuration and Java configuration made it less awkward, but Spring still required a lot of configuration. Enabling certain Spring features such as transaction management and Spring MVC required explicit configuration, either in XML or Java.
 
