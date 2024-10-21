@@ -1,4 +1,4 @@
-# Query 5: Students and Examinations
+# Students and Examinations
 
 **Problem Statement:** Given tables: `Students(student_id -> pk, student_name)`: stores the ID and name of each student in the school, `Subjects(subject_name -> pk)`: stores all the subjects taught in the school and `Examinations(student_id -> Students_fk, subject_name -> Subjects_fk)`: stores the examination details of students, write a solution to find the number of times each student attended each exam.
 
