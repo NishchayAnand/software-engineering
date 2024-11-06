@@ -1,4 +1,4 @@
-# Movie Ticket Booking System Low Level Design
+# Movie Ticket Booking System
 
 An online platform or application that allows users to browse, select, and book tickets for movies currently showing in theaters. For example, `BookMyShow`, `PayTMInsider`.
 
@@ -63,8 +63,6 @@ Assume the logic that allows system to display the list of currently running mov
 
 1. `MovieService`:
     - **Public Member Functions**: `List<Show>` getShows(movieId, date, location)
-
-## Relationships (Optional)
 
 
 
