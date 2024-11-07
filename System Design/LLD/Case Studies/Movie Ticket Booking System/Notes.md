@@ -63,8 +63,8 @@ Assume the logic that allows system to display the list of currently running mov
     - **Public Member Functions**: All Getters and Setters.
 
 7. `Booking`:
-    - **Private Data Members**:
-    - **Public Member Functions**:
+    - **Private Data Members**: `int` bookingId, `int` showId.
+    - **Public Member Functions**: All Getters and Setters.
 
 ## Services
 
