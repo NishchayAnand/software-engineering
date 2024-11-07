@@ -39,30 +39,43 @@ Assume the logic that allows system to display the list of currently running mov
 ## Entities
 
 1. `Customer`:
-    - **Private Data Members**: `int` customerId, `String` name, `String`email, `String` location, `String`  phone, `List<Booking>` bookings
-
-    - **Public Member Functions**: All Getters and Setters, 
+    - **Private Data Members**: `int` customerId, `String` name, `String`email, `String` address, `String`  phone, `List<Booking>` bookings.
+    - **Public Member Functions**: All Getters and Setters.
 
 2. `Movie`:
-    - **Private Data Members**: movieId(`int`), title(`String`), genre(`String`), releaseDate(`String`), duration(`String`), languages(`List<String>`), shows(`List<Show>`).
-
-    - **Public Member Functions**: All Getters and Setters
+    - **Private Data Members**: `int` movieId, `String` title, `String` genre, `String` releaseDate, `String` duration, `List<String>` languages, `List<Show>`.
+    - **Public Member Functions**: All Getters and Setters.
 
 3. `Show`:
-    - **Private Data Members**: showId(`int`), movie(`Movie`), theatre(`Theatre`), screen(`Screen`), date(`datetime`), showTime(`datetime`), seats(`List<Seat>`)
+    - **Private Data Members**: `int` showId, `int` movieId, `int` theatreId, `int` screenId, `LocalDateTime` showTime, `List<Seat>` bookedSeats.
+    - **Public Member Functions**: All Getters and Setters.
 
-    - **Public Member Functions**: All Getters and Setters, `List<Seat>` getAvailableSeats(), `List<Seat>` getBookedSeats()
-
-4. `Theatre`:
+4. `Seat`:
+    - **Private Data Members**: `int` seatId, `int` theatreId, `int` screenId. 
+    - **Public Member Functions**: All Getters and Setters.
 
 5. `Screen`:
+    - **Private Data Members**: `int` screenId, `int` theatreId, `List<Seat>` seats.
+    - **Public Member Functions**: All Getters and Setters. 
 
-6. `Seat`:
+6. `Theatre`:
+    - **Private Data Members**: `int` theatreId, `String` address, `List<Screen>` screens.
+    - **Public Member Functions**: All Getters and Setters.
+
+7. `Booking`:
+    - **Private Data Members**:
+    - **Public Member Functions**:
 
 ## Services
 
 1. `MovieService`:
-    - **Public Member Functions**: `List<Show>` getShows(movieId, date, location)
+    - **Public Member Functions**: `List<Show>` getShows(movieId, date, location), `Map<Seat, isBooked>` getAvailableSeats(`Show`), bookTickets(`Show`, `List<Seat>`).
+
+2. `PaymentService`:
+    - **Public Member Functions**: `String` processPayment(paymentAmount).
+
+3. `NotificationService`:
+    - **Public Member Functions**: sendConfirmation(`Customer`, `Booking`), notifyFailure(`Customer`).
 
 
 
