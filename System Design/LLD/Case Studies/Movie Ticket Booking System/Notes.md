@@ -24,17 +24,13 @@ Assume the logic that allows system to display the list of currently running mov
 
 ## Use Cases
 
-1. A `Customer` selects a `Movie` based on his/her preferred **location** and **date**. The frontend sends a **GET request** to the `MovieService.getShows(movieId, date, location)` to fetch the `List<Show>` for the selected `Movie` and displays it to the `Customer`.
+1. The **customer** selects his/her preferred **location**. A **GET request** is sent to **fetch the list of movies currently running** in the theatres.
 
-2. The `Customer` selects a `Show`. The frontend sents a **GET request** to the `MovieService.getAvailableSeats(Show)` to fetch the `Map<Seat, isBooked>` and displays the theater seating layout along with the available and booked seats to the `Customer`. 
+2. The **customer** selects a **movie** and his/her preferred **date**. A **GET request** is sent to **fetch the list of available shows for the selected movie on the preferred date**.
 
-3. The `Customer` selects his/her preferred `List<Seat>`. The frontend sends a **POST request** to the `MovieService.bookTickets(Show, List<Seat>)` to: 
+3. The **Customer** selects a **show**. A **GET request** is sent to **fetch the details of booked and available seats for the selected show**. 
 
-    - **update the `Map<Seat, isBooked>`**: to lock `List<Seat>` for the selected `Show`,
-
-    - **calculate the `paymentAmount`**: based on `size(List<Seat>)` and `SeatType`,
-
-    - **call `TransactionStatus = PaymentService.processPayment(paymentAmount)`**: If **TransactionStatus == SUCCESS**, call `NotificationService.sendConfirmation(Customer, Booking)` to share `bookingId` with the `Customer`. If **TransactionStatus == Fail**, update the `Map<Seat, isBooked>` to unlock `List<Seat>` for the selected `Show` and call `NotificationService.notifyFailure(Customer)` to update the `Customer`.
+4. The **customer** selects his/her preferred **seats**. A **POST request** is sent to **book the selected seats**.
 
 ## Entities
 
@@ -43,24 +39,30 @@ Assume the logic that allows system to display the list of currently running mov
     - **Public Member Functions**: All Getters and Setters.
 
 2. `Movie`:
-    - **Private Data Members**: `int` movieId, `String` title, `String` genre, `String` releaseDate, `String` duration, `List<String>` languages, `List<Show>`.
+    - **Private Data Members**: `int` movieId, `String` title, `String` genre, `String` releaseDate, `int` duration, `List<Show>` shows.
     - **Public Member Functions**: All Getters and Setters.
 
 3. `Show`:
-    - **Private Data Members**: `int` showId, `int` movieId, `int` theatreId, `int` screenId, `LocalDateTime` showTime, `List<Seat>` bookedSeats.
+    - **Private Data Members**: `int` showId, `Movie` movie, `Screen` screen, `LocalDateTime` showTime, `List<Seat>` bookedSeats.
     - **Public Member Functions**: All Getters and Setters.
 
-4. `Seat`:
+> NOTE: 
+
+4. `Screen`:
+    - **Private Data Members**: `int` screenId, `Theatre` theatre, `List<Seat>` seats.
+    - **Public Member Functions**: All Getters and Setters. 
+
+5. `Theatre`:
+    - **Private Data Members**: `int` theatreId, `String` address, `List<Screen>` screens.
+    - **Public Member Functions**: All Getters and Setters.
+
+6. `Seat`:
     - **Private Data Members**: `int` seatId, `int` theatreId, `int` screenId. 
     - **Public Member Functions**: All Getters and Setters.
 
-5. `Screen`:
-    - **Private Data Members**: `int` screenId, `int` theatreId, `List<Seat>` seats.
-    - **Public Member Functions**: All Getters and Setters. 
 
-6. `Theatre`:
-    - **Private Data Members**: `int` theatreId, `String` address, `List<Screen>` screens.
-    - **Public Member Functions**: All Getters and Setters.
+
+
 
 7. `Booking`:
     - **Private Data Members**: `int` bookingId, `int` showId.
@@ -77,5 +79,8 @@ Assume the logic that allows system to display the list of currently running mov
 3. `NotificationService`:
     - **Public Member Functions**: sendConfirmation(`Customer`, `Booking`), notifyFailure(`Customer`).
 
+## Relationships (optional)
 
+1. A `Customer` can have multiple `Booking`. A `Booking` is associated to a single `Customer`. 
+2. A `Movie` can have multiple `Show`. A `Show` is associated to a single `Movie`.
 
