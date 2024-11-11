@@ -24,7 +24,7 @@ Assume the logic that allows system to display the list of currently running mov
 
 ## Use Cases
 
-1. The **customer** selects his/her preferred **location**. A **GET request** is sent to **fetch the list of movies currently running** in the theatres.
+1. The **customer** selects his/her preferred **location**. A **GET request** is sent to **fetch the list of movies currently running in the theatres at the preferred location**.
 
 2. The **customer** selects a **movie** and his/her preferred **date**. A **GET request** is sent to **fetch the list of available shows for the selected movie on the preferred date**.
 
@@ -35,30 +35,34 @@ Assume the logic that allows system to display the list of currently running mov
 ## Entities
 
 1. `Customer`:
-    - **Private Data Members**: `int` customerId, `String` name, `String`email, `String`  phone, `List<Booking>` bookings.
+    - **Private Data Members**: `int` customerId, `String` name, `Location` location, `String` email, `String` phone, `List<Booking>` bookings.
     - **Public Member Functions**: All Getters and Setters.
 
-2. `Movie`:
+2. `Location`:
+    - **Private Data Members**: `String` street, `String` city, `String` state, `String` country, `String` postalCode.
+    - **Public Member Functions**: All Getters and Setters.
+
+3. `Movie`:
     - **Private Data Members**: `int` movieId, `String` title, `String` genre, `String` releaseDate, `int` duration, `List<Show>` shows.
     - **Public Member Functions**: All Getters and Setters.
 
-3. `Show`:
+4. `Show`:
     - **Private Data Members**: `int` showId, `Movie` movie, `Screen` screen, `LocalDateTime` showTime, `List<Seat>` bookedSeats.
     - **Public Member Functions**: All Getters and Setters. 
 
-4. `Screen`:
+5. `Screen`:
     - **Private Data Members**: `int` screenId, `String` screenName, `Theatre` theatre, `List<Seat>` seats, `List<Show>` shows.
     - **Public Member Functions**: All Getters and Setters. 
 
-5. `Theatre`:
-    - **Private Data Members**: `int` theatreId, `String` address, `List<Screen>` screens.
+6. `Theatre`:
+    - **Private Data Members**: `int` theatreId, `Location` location, `List<Screen>` screens.
     - **Public Member Functions**: All Getters and Setters.
 
-6. `Seat`:
+7. `Seat`:
     - **Private Data Members**: `int` seatId, `int` seatNumber, `Screen` screen, `SeatType` seatType. 
     - **Public Member Functions**: All Getters and Setters.
 
-7. `Booking`:
+8. `Booking`:
     - **Private Data Members**: `int` bookingId, `Customer` customer, `Show` show, `List<Seat>` bookedSeats, `double` totalAmount, `PaymentStatus` paymentStatus, `BookingStatus` bookingStatus.
     - **Public Member Functions**: All Getters and Setters.
 
@@ -73,10 +77,4 @@ Assume the logic that allows system to display the list of currently running mov
 ## Services
 
 1. `MovieService`:
-    - **Public Member Functions**: `List<Show>` getShows(movieId, date, location), `Map<Seat, isBooked>` getAvailableSeats(`Show`), bookTickets(`Show`, `List<Seat>`).
-
-2. `PaymentService`:
-    - **Public Member Functions**: `String` processPayment(paymentAmount).
-
-3. `NotificationService`:
-    - **Public Member Functions**: sendConfirmation(`Customer`, `Booking`), notifyFailure(`Customer`).
+    - **Public Member Functions**: `List<Movie>` getMovies(Location location)

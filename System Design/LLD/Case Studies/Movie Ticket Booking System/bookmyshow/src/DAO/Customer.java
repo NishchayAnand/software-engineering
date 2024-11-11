@@ -5,13 +5,15 @@ import java.util.List;
 public class Customer {
     private int customerId;
     private String name;
+    private Location location;
     private String email;
     private String phone;
     private List<Booking> bookings; // All bookings done by this customer
 
-    public Customer(int customerId, String name, String email, String phone, List<Booking> bookings) {
+    public Customer(int customerId, String name, Location location, String email, String phone, List<Booking> bookings) {
         this.customerId = customerId;
         this.name = name;
+        this.location = location;
         this.email = email;
         this.phone = phone;
         this.bookings = bookings;
@@ -31,6 +33,14 @@ public class Customer {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     public String getEmail() {

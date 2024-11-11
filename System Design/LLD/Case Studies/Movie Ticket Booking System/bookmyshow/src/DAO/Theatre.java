@@ -4,10 +4,10 @@ import java.util.List;
 
 public class Theatre {
     private int theatreId;
-    private String address;
+    private Address address;
     private List<Screen> screens; // All screens for this Theatre
 
-    public Theatre(int theatreId, String address, List<Screen> screens) {
+    public Theatre(int theatreId, Address address, List<Screen> screens) {
         this.theatreId = theatreId;
         this.address = address;
         this.screens = screens;
@@ -21,11 +21,11 @@ public class Theatre {
         this.theatreId = theatreId;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 
