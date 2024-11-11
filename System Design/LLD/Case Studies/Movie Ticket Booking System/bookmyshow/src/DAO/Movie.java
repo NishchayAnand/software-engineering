@@ -4,12 +4,21 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Movie {
-    int movieId;
-    String title;
-    String genre;
-    LocalDate releaseDate;
-    int duration;
-    List<Show> shows;
+    private int movieId;
+    private String title;
+    private String genre;
+    private LocalDate releaseDate;
+    private int duration;
+    private List<Show> shows; // List of available shows
+
+    public Movie(int movieId, String title, String genre, LocalDate releaseDate, int duration, List<Show> shows) {
+        this.movieId = movieId;
+        this.title = title;
+        this.genre = genre;
+        this.releaseDate = releaseDate;
+        this.duration = duration;
+        this.shows = shows;
+    }
 
     public int getMovieId() {
         return movieId;

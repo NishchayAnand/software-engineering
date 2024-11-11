@@ -215,5 +215,16 @@ public class Person {
         
     }
 }
-
 ```
+
+---
+
+Q. Difference between `float` and `double`.
+
+Both `float` and `double` are used to represent floating-point numbers (numbers with decimal points), but they differ in precision and size:
+
+- `float`: It is a 32-bit floating-point data type (occupies 4 bytes in memory). It has a precision of about 6-7 decimal digits.
+
+- `double`: It is a 64-bit floating-point data type (occupies 8 bytes in memory). It has a precision of about 15-16 decimal digits, making it more accurate than float.
+
+> NOTE: Java treats decimal literals as double by default, so if you want to use a literal as a float, you need to append f or F (e.g., 3.14f). 
