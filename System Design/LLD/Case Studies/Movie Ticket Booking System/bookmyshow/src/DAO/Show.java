@@ -8,14 +8,12 @@ public class Show {
     private Movie movie; // Movie being shown
     private Screen screen; // Screen where the show will take place
     private LocalDateTime showTime; // Date and time of the show
-    private List<Seat> bookedSeats; // Seats booked for this show
 
-    public Show(int showId, Movie movie, Screen screen, LocalDateTime showTime, List<Seat> bookedSeats) {
+    public Show(int showId, Movie movie, Screen screen, LocalDateTime showTime) {
         this.showId = showId;
         this.movie = movie;
         this.screen = screen;
         this.showTime = showTime;
-        this.bookedSeats = bookedSeats;
     }
 
     public int getShowId() {
@@ -48,13 +46,5 @@ public class Show {
 
     public void setShowTime(LocalDateTime showTime) {
         this.showTime = showTime;
-    }
-
-    public List<Seat> getBookedSeats() {
-        return bookedSeats;
-    }
-
-    public void setBookedSeats(List<Seat> bookedSeats) {
-        this.bookedSeats = bookedSeats;
     }
 }

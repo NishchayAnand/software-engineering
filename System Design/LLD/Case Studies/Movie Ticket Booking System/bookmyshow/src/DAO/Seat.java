@@ -3,14 +3,16 @@ package DAO;
 public class Seat {
     private int seatId;
     private String seatNumber;
-    private SeatType seatType;
     private Screen screen; // Belongs to a specific screen
+    private SeatType seatType;
+    private boolean isBooked; // Tells if seat is available or booked
 
-    public Seat(int seatId, String seatNumber, SeatType seatType, Screen screen) {
+    public Seat(int seatId, String seatNumber, SeatType seatType, Screen screen, boolean isBooked) {
         this.seatId = seatId;
         this.seatNumber = seatNumber;
         this.seatType = seatType;
         this.screen = screen;
+        this.isBooked = isBooked;
     }
 
     public int getSeatId() {
@@ -43,5 +45,13 @@ public class Seat {
 
     public void setScreen(Screen screen) {
         this.screen = screen;
+    }
+
+    public boolean isBooked() {
+        return isBooked;
+    }
+
+    public void setBooked(boolean booked) {
+        isBooked = booked;
     }
 }

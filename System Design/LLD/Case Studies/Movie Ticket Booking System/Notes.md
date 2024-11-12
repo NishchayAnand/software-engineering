@@ -47,7 +47,7 @@ Assume the logic that allows system to display the list of currently running mov
     - **Public Member Functions**: All Getters and Setters.
 
 4. `Show`:
-    - **Private Data Members**: `int` showId, `Movie` movie, `Screen` screen, `LocalDateTime` showTime, `List<Seat>` bookedSeats.
+    - **Private Data Members**: `int` showId, `Movie` movie, `Screen` screen, `LocalDateTime` showTime.
     - **Public Member Functions**: All Getters and Setters. 
 
 5. `Screen`:
@@ -59,7 +59,7 @@ Assume the logic that allows system to display the list of currently running mov
     - **Public Member Functions**: All Getters and Setters.
 
 7. `Seat`:
-    - **Private Data Members**: `int` seatId, `int` seatNumber, `Screen` screen, `SeatType` seatType. 
+    - **Private Data Members**: `int` seatId, `int` seatNumber, `Screen` screen, `SeatType` seatType, `boolean` isBooked. 
     - **Public Member Functions**: All Getters and Setters.
 
 8. `Booking`:
@@ -77,4 +77,8 @@ Assume the logic that allows system to display the list of currently running mov
 ## Services
 
 1. `MovieService`:
-    - **Public Member Functions**: `List<Movie>` getMovies(Location location)
+    - **Public Member Functions**: `List<Movie>` getMovies(`Location` customerLocation), `List<Show>` getAvailableShows(`Movie` movie, `LocalDate` date), `Booking` bookSeats(`Customer` customer, `List<Seat>` seats).
+
+## Non-Functional Requirements
+
+1. Scope of `MovieService`?
