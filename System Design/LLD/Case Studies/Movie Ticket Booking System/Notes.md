@@ -81,4 +81,4 @@ Assume the logic that allows system to display the list of currently running mov
 
 ## Non-Functional Requirements
 
-1. Scope of `MovieService`?
+1. Scope of `MovieService`: how will `MovieService.bookSeats(Customer, List<Seat> seats)` handle concurrency?
