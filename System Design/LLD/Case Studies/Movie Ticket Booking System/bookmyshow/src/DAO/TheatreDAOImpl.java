@@ -8,7 +8,7 @@ import java.util.List;
 
 public class TheatreDAOImpl implements TheatreDAO {
     @Override
-    public List<Theatre> getTheatreByLocation(Location location) {
+    public List<Theatre> getTheatresByLocation(Location location) {
         String sql = String.format("select * from theatre where city = %s and " +
                 "state = %s and country = %s", location.getCity(), location.getState(),
                 location.getCountry());
