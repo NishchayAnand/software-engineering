@@ -1,6 +1,6 @@
 package Service;
 
-import DAO.*;
+import Model.*;
 
 import java.time.LocalDate;
 import java.util.List;

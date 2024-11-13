@@ -10,6 +10,8 @@ The Model is responsible for the data and the business rules of the application.
 
 A common practice is to have a **repository layer**, backed by some sort of framework like Hibernate, to bind your code to the database, making it easy to map objects or data structures to and from the database.
 
+- `DAO`: Each DAO is responsible for performing CRUD (Create, Read, Update, Delete) operations and managing data for a specific entity.
+
 ## View
 
 The View represents the user interface of the application. It displays data from the Model to the user and sends user commands to the Controller. The View is passive, meaning it waits for the Model to provide data to display and does not fetch or save data directly. The View also does not handle user interaction on its own, but delegates this responsibility to the next component: the Controller.

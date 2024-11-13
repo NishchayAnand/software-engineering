@@ -1,22 +1,22 @@
-package DAO;
+package Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Customer {
-    private int customerId;
+    private int customerId; // Should be auto-generated
     private String name;
     private Location location;
     private String email;
     private String phone;
-    private List<Booking> bookings; // All bookings done by this customer
+    private final List<Booking> bookings; // All bookings done by this customer
 
-    public Customer(int customerId, String name, Location location, String email, String phone, List<Booking> bookings) {
+    public Customer(int customerId, String name, String email, String phone) {
         this.customerId = customerId;
         this.name = name;
-        this.location = location;
         this.email = email;
         this.phone = phone;
-        this.bookings = bookings;
+        this.bookings = new ArrayList<>();
     }
 
     public int getCustomerId() {
@@ -63,7 +63,7 @@ public class Customer {
         return bookings;
     }
 
-    public void setBookings(List<Booking> bookings) {
-        this.bookings = bookings;
+    public void addBooking(Booking booking) {
+        bookings.add(booking);
     }
 }

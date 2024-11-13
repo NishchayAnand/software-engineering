@@ -1,4 +1,4 @@
-package DAO;
+package Model;
 
 public class Location {
     private String street;

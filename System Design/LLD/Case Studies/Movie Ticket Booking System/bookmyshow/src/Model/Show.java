@@ -1,7 +1,6 @@
-package DAO;
+package Model;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class Show {
     private int showId;

@@ -1,16 +1,15 @@
-package DAO;
+package Model;
 
 import java.util.List;
 
 public class Theatre {
     private int theatreId;
-    private Address address;
+    private Location location;
     private List<Screen> screens; // All screens for this Theatre
 
-    public Theatre(int theatreId, Address address, List<Screen> screens) {
+    public Theatre(int theatreId, Location location) {
         this.theatreId = theatreId;
-        this.address = address;
-        this.screens = screens;
+        this.location = location;
     }
 
     public int getTheatreId() {
@@ -21,12 +20,12 @@ public class Theatre {
         this.theatreId = theatreId;
     }
 
-    public Address getAddress() {
-        return address;
+    public Location getLocation() {
+        return location;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setAddress(Location location) {
+        this.location = location;
     }
 
     public List<Screen> getScreens() {

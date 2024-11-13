@@ -1,4 +1,4 @@
-import DAO.*;
+import Model.*;
 import Service.MovieService;
 import Service.MovieServiceImpl;
 
@@ -9,18 +9,20 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-        // Can be attained from session details
-        Location location = new Location("Model Town", "New Delhi",
-                "Delhi", "India", "110045");
-
-        // Can be attained from session details
+        // Define a Customer object.
         Customer customer = new Customer(1, "Nishchay Anand",
-                location, "nishchay.anand@gmail.com", "9876543210", new ArrayList<>());
+                "nishchay.anand@gmail.com", "9876543210");
 
         MovieService movieService = new MovieServiceImpl();
 
-        // Use Case 1: Fetch the list of movies currently running in the theatres at the preferred
-        // location.
+        // Use Case 1:
+
+        // Customer adds his/her preferred location.
+        Location custLocation = new Location("", "Delhi", "Delhi",
+                "India", "");
+        customer.setLocation(custLocation);
+
+        // Fetch movies that have shows in the current week in the theatres near customer's location.
         List<Movie> movies = movieService.getMovies(customer.getLocation());
         if(movies.isEmpty()) return;
 
@@ -29,7 +31,7 @@ public class Main {
         List<Show> shows = movieService.getAvailableShows(selectedMovie, LocalDate.now());
         if(!shows.isEmpty()) return;
 
-        // Use Case 3:
+        // Use Case 3: Fetch available seats for the selected show.
         Show show = shows.getFirst();
         List<Seat> availableSeats = movieService.getAvailableSeats(show);
         if(!availableSeats.isEmpty()) return;

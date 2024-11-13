@@ -20,13 +20,13 @@ An online platform or application that allows users to browse, select, and book 
 
 ## Functional Requirement
 
-Assume the logic that allows system to display the list of currently running movies is already implemented. You are required to implement the **Seat Selection**, **Pricing**, **Payment** and **Notification** services.
+Assume the logic that allows system to display the list of currently running movies is already implemented. You are required to implement the **Show Selection**, **Seat Selection**, **Pricing**, **Payment** and **Notification** services.
 
 ## Use Cases
 
-1. The **customer** selects his/her preferred **location**. A **GET request** is sent to **fetch the list of movies currently running in the theatres at the preferred location**.
+1. The **customer** selects his/her preferred **location (city)**. A **GET request** is sent to **fetch the list of upcoming and playing movies, i.e., movies that have shows in the current week in the theatres near the preferred location (city)**.
 
-2. The **customer** selects a **movie** and his/her preferred **date**. A **GET request** is sent to **fetch the list of available shows for the selected movie on the preferred date**.
+2. The **customer** selects a **movie** and his/her preferred **date** and **location**. A **GET request** is sent to **fetch the list of available shows for the selected movie on the preferred date**.
 
 3. The **Customer** selects a **show**. A **GET request** is sent to **fetch the details of booked and available seats for the selected show**. 
 
@@ -79,6 +79,18 @@ Assume the logic that allows system to display the list of currently running mov
 1. `MovieService`:
     - **Public Member Functions**: `List<Movie>` getMovies(`Location` customerLocation), `List<Show>` getAvailableShows(`Movie` movie, `LocalDate` date), `Booking` bookSeats(`Customer` customer, `List<Seat>` seats).
 
+## Schema Design
+
+1. `Customer`: `int` customerId, `varchar` name, `varchar` city, `varchar` state, `varchar` country, `varchar` email, `varchar` phone.
+2. `Movie`: `int` movieId, `varchar` title, `varchar` genre, `date` releaseDate, `int` duration.
+3. `Show`: `int` showId, `int` movieId, `int` screenId, `date` showTime.
+4. `Theatre`: `int` theatreId, `varchar` street, `varchar` city, `varchar` state, `varchar` country, `varchar` postalCode.
+5. `Screen`: `int` screenId, `varchar` screenName, `int` theatreId. 
+
 ## Non-Functional Requirements
 
-1. Scope of `MovieService`: how will `MovieService.bookSeats(Customer, List<Seat> seats)` handle concurrency?
+1. Ids should be auto-generated. 
+2. Should bookings attribute in Customer class be final?
+3. How to handle concurrency when multiple Customers try to book a same Seat?
+4. **How to get instance of TheatreDAO and ShowDAO in MovieService class? Should instance of TheatreDAO and ShowDAO be final in MovieService class?**
+5. How to map RelationalEntity(showId, movieId, screenId, showTime) to Show(showId, Movie, Screen, showTime)?
