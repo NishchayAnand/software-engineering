@@ -12,7 +12,7 @@ public class TheatreDAOImpl implements TheatreDAO {
         String sql = String.format("select * from theatre where city = %s and " +
                 "state = %s and country = %s", location.getCity(), location.getState(),
                 location.getCountry());
-        // map each RelationalEntity(theatreId, street, city, state, country, postalCode) to
+        // map each ResultSet(theatreId, street, city, state, country, postalCode) to
         // Theatre(theatreId, Location).
         return new ArrayList<>();
     }

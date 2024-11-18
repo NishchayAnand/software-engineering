@@ -15,11 +15,10 @@ public class Main {
 
         MovieService movieService = new MovieServiceImpl();
 
-        // Use Case 1:
+        // Use Case 1
 
         // Customer adds his/her preferred location.
-        Location custLocation = new Location("", "Delhi", "Delhi",
-                "India", "");
+        Location custLocation = new Location("New Delhi", "Delhi", "India");
         customer.setLocation(custLocation);
 
         // Fetch movies that have shows in the current week in the theatres near customer's location.
