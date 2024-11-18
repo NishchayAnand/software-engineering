@@ -1,23 +1,27 @@
 package Service;
 
 import DAO.*;
-import Model.*;
+import DTO.*;
+import Entity.ScreenEntity;
+import Entity.ShowEntity;
+import Entity.TheatreEntity;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class MovieServiceImpl implements MovieService {
 
     private final TheatreDAO theatreDAO;
     private final ShowDAO showDAO;
     private final MovieDAO movieDAO;
+    private final ScreenDAO screenDAO;
 
     public MovieServiceImpl() {
         this.theatreDAO = new TheatreDAOImpl();
         this.showDAO = new ShowDAOImpl();
         this.movieDAO = new MovieDAOImpl();
+        this.screenDAO = new ScreenDAOImpl();
     }
 
     private LocalDate getNextSunday(LocalDate currDate) {
@@ -28,22 +32,23 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public List<Movie> getMovies(Location location) {
 
-        // Step 1: Fetch list of theatres where theatreLocation.City = location.City and
-        // theatreLocation.State = location.State and theatreLocation.Country = location.Country
-        List<Theatre> theatres = theatreDAO.getTheatresByLocation(location);
+        // Step 1: Fetch list of theatres at the specified location(city, state, country)
+        List<TheatreEntity> theatres = theatreDAO.getTheatresByLocation(location);
 
-        // Step 2: Fetch movieIds from the list of shows playing in the current week in the theatres
-        // fetched in Step 1.
+        // Step 2: Fetch list of shows playing in the current week in the nearby theatres
         LocalDate startDate = LocalDate.now();
         LocalDate endDate = getNextSunday(startDate);
-        List<List<Integer>> allMovieIds = new ArrayList<>();
-        for(Theatre theatre: theatres) {
-            List<Integer> movieIds = showDAO.getMovieIdsByTheatreAndShowTimeBetween(theatre,
-                    startDate, endDate);
-            allMovieIds.add(movieIds);
-        }
+        List<List<ShowEntity>> allShows = new ArrayList<>();
+        for(TheatreEntity theatre: theatres) {
+            List<ScreenEntity> screens = screenDAO.getScreensByThreatreId(theatre.getTheatreId());
+            for(ScreenEntity screen: screens) {
+                List<ShowEntity> shows = showDAO.getShowsByScreenIdAndShowTimeBetween(screen.getScreenId(),
+                        startDate, endDate);
+                allShows.add(shows);
+            }
 
-        List<Integer> movieIds = allMovieIds.stream().flatMap(List::stream).toList();
+        }
+        List<ShowEntity> shows = allShows   .stream().flatMap(List::stream).toList();
 
         // Step 3: Fetch list of movies corresponding to each movieId fetched in Step 2.
         return movieDAO.getMoviesById(movieIds);

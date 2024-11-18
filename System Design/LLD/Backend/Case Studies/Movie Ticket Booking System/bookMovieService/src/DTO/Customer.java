@@ -1,30 +1,20 @@
-package Model;
+package DTO;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Customer {
-    private int customerId; // Should be auto-generated
     private String name;
     private Location location;
     private String email;
     private String phone;
     private final List<Booking> bookings; // All bookings done by this customer
 
-    public Customer(int customerId, String name, String email, String phone) {
-        this.customerId = customerId;
+    public Customer(String name, String email, String phone) {
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.bookings = new ArrayList<>();
-    }
-
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
     }
 
     public String getName() {

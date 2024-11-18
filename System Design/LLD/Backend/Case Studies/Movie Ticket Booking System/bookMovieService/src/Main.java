@@ -1,4 +1,4 @@
-import Model.*;
+import DTO.*;
 import Service.MovieService;
 import Service.MovieServiceImpl;
 
@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
 
         // Define a Customer object.
-        Customer customer = new Customer(1, "Nishchay Anand",
+        Customer customer = new Customer("Nishchay Anand",
                 "nishchay.anand@gmail.com", "9876543210");
 
         MovieService movieService = new MovieServiceImpl();

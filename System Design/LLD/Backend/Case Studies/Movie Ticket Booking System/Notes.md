@@ -24,7 +24,7 @@ Assume the logic that allows system to display the list of currently running mov
 
 ## Use Cases
 
-1. The **customer** selects his/her preferred **location (city)**. A **GET request** is sent to **fetch the list of upcoming and playing movies, i.e., movies that have shows in the current week in the theatres near the preferred location (city)**.
+1. The **customer** selects his/her preferred **location**. A **GET request** is sent to **fetch the list of movies that have shows in the current week in the theatres near the preferred location**.
 
 2. The **customer** selects a **movie** and his/her preferred **date** and **location**. A **GET request** is sent to **fetch the list of available shows for the selected movie on the preferred date**.
 
@@ -32,10 +32,10 @@ Assume the logic that allows system to display the list of currently running mov
 
 4. The **customer** selects his/her preferred **seats**. A **POST request** is sent to **book the selected seats**.
 
-## Entities
+## Data Tranfer Objects (DTOs)
 
 1. `Customer`:
-    - **Private Data Members**: `int` customerId, `String` name, `Location` location, `String` email, `String` phone, `List<Booking>` bookings.
+    - **Private Data Members**: `String` name, `Location` location, `String` email, `String` phone, `List<Booking>` bookings.
     - **Public Member Functions**: All Getters and Setters.
 
 2. `Location`:
@@ -43,30 +43,28 @@ Assume the logic that allows system to display the list of currently running mov
     - **Public Member Functions**: All Getters and Setters.
 
 3. `Movie`:
-    - **Private Data Members**: `int` movieId, `String` title, `String` genre, `String` releaseDate, `int` duration, `List<Show>` shows.
+    - **Private Data Members**: `String` title, `String` genre, `String` releaseDate, `int` duration, `List<Show>` shows.
     - **Public Member Functions**: All Getters and Setters.
 
 4. `Show`:
-    - **Private Data Members**: `int` showId, `Movie` movie, `Screen` screen, `LocalDateTime` showTime.
+    - **Private Data Members**: `Movie` movie, `Screen` screen, `LocalDateTime` showTime.
     - **Public Member Functions**: All Getters and Setters. 
 
 5. `Screen`:
-    - **Private Data Members**: `int` screenId, `String` screenName, `Theatre` theatre, `List<Seat>` seats, `List<Show>` shows.
+    - **Private Data Members**: `String` screenName, `Theatre` theatre, `List<Seat>` seats, `List<Show>` shows.
     - **Public Member Functions**: All Getters and Setters. 
 
 6. `Theatre`:
-    - **Private Data Members**: `int` theatreId, `Location` location, `List<Screen>` screens.
+    - **Private Data Members**: `Location` location, `List<Screen>` screens.
     - **Public Member Functions**: All Getters and Setters.
 
 7. `Seat`:
-    - **Private Data Members**: `int` seatId, `int` seatNumber, `Screen` screen, `SeatType` seatType, `boolean` isBooked. 
+    - **Private Data Members**: `int` seatNumber, `Screen` screen, `SeatType` seatType, `boolean` isBooked. 
     - **Public Member Functions**: All Getters and Setters.
 
 8. `Booking`:
-    - **Private Data Members**: `int` bookingId, `Customer` customer, `Show` show, `List<Seat>` bookedSeats, `double` totalAmount, `PaymentStatus` paymentStatus, `BookingStatus` bookingStatus.
+    - **Private Data Members**: `Customer` customer, `Show` show, `List<Seat>` bookedSeats, `double` totalAmount, `PaymentStatus` paymentStatus, `BookingStatus` bookingStatus.
     - **Public Member Functions**: All Getters and Setters.
-
-> **NOTE:** In object-oriented design, including an object as a data member rather than just its identifier (e.g., keeping `Movie` object as data member in `Show`, rather than `movieId`) enables direct access to related details, promoting better encapsulation and enhancing code readability.
 
 ## Enums
 
@@ -79,7 +77,7 @@ Assume the logic that allows system to display the list of currently running mov
 1. `MovieService`:
     - **Public Member Functions**: `List<Movie>` getMovies(`Location` customerLocation), `List<Show>` getAvailableShows(`Movie` movie, `LocalDate` date), `Booking` bookSeats(`Customer` customer, `List<Seat>` seats).
 
-## Schema Design
+## Entities
 
 1. `Customer`: `int` customerId, `varchar` name, `varchar` city, `varchar` state, `varchar` country, `varchar` email, `varchar` phone.
 2. `Movie`: `int` movieId, `varchar` title, `varchar` genre, `date` releaseDate, `int` duration.

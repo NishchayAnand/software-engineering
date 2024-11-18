@@ -1,6 +1,6 @@
 package DAO;
 
-import Model.Movie;
+import DTO.Movie;
 
 import java.util.List;
 
