@@ -1,9 +1,10 @@
 package DAO;
 
 import DTO.Movie;
+import Entity.MovieEntity;
 
 import java.util.List;
 
 public interface MovieDAO {
-    List<Movie> getMoviesById(List<Integer> movieIds);
+    List<MovieEntity> getMoviesById(int movieId);
 }

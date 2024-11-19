@@ -27,7 +27,7 @@ public class Main {
 
         // Use Case 2: Fetch the list of available shows for the selected movie on the preferred date.
         Movie selectedMovie = movies.getFirst();
-        List<Show> shows = movieService.getAvailableShows(selectedMovie, LocalDate.now());
+        List<Show> shows = movieService.getAvailableShows(selectedMovie);
         if(!shows.isEmpty()) return;
 
         // Use Case 3: Fetch available seats for the selected show.

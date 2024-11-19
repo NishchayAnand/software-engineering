@@ -9,7 +9,6 @@ public class Movie {
     private String genre;
     private LocalDate releaseDate;
     private int duration;
-    private List<Show> shows; // List of available shows
 
     public Movie(int movieId, String title, String genre, LocalDate releaseDate, int duration) {
         this.movieId = movieId;
@@ -59,11 +58,4 @@ public class Movie {
         this.duration = duration;
     }
 
-    public List<Show> getShows() {
-        return shows;
-    }
-
-    public void setShows(List<Show> shows) {
-        this.shows = shows;
-    }
 }

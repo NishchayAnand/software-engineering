@@ -52,3 +52,4 @@ A key feature of Streams is laziness. This means that operations are not physica
 Streams can leverage multi-core architectures without you having to write a single line of multithread code.
 
 Just replace `stream()` with `parallelStream()` and the Streams API will internally decompose your query to leverage the multiple cores on your computer.
+

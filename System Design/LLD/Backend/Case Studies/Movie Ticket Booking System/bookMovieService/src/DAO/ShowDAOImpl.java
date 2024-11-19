@@ -9,11 +9,8 @@ import java.util.List;
 
 public class ShowDAOImpl implements ShowDAO {
     @Override
-    public List<ShowEntity> getShowsByScreenIdAndShowTimeBetween(int screenId, LocalDate startDate,
-                                                                 LocalDate endDate) {
-        String sql = String.format("SELECT * FROM show WHERE screenId = %d AND " +
-                "showTime BETWEEN %s AND %s)", screenId, startDate.toString(),
-                endDate.toString());
+    public List<ShowEntity> getShowsByScreenId(int screenId) {
+        String sql = String.format("SELECT * FROM show WHERE screenId = %d", screenId);
         // map resultSet to ShowEntity;
         return new ArrayList<>();
     }

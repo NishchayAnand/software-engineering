@@ -7,6 +7,5 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface ShowDAO {
-    List<ShowEntity> getShowsByScreenIdAndShowTimeBetween(int screenId, LocalDate startDate,
-                                                          LocalDate endDate);
+    List<ShowEntity> getShowsByScreenId(int screenId);
 }

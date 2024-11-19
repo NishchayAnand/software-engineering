@@ -24,7 +24,7 @@ Assume the logic that allows system to display the list of currently running mov
 
 ## Use Cases
 
-1. The **customer** selects his/her preferred **location**. A **GET request** is sent to **fetch the list of movies that have shows in the current week in the theatres near the preferred location**.
+1. The **customer** selects his/her preferred **location**. A **GET request** is sent to **fetch the list of movies currently showing in the theatres near the preferred location**.
 
 2. The **customer** selects a **movie** and his/her preferred **date** and **location**. A **GET request** is sent to **fetch the list of available shows for the selected movie on the preferred date**.
 
@@ -43,7 +43,7 @@ Assume the logic that allows system to display the list of currently running mov
     - **Public Member Functions**: All Getters and Setters.
 
 3. `Movie`:
-    - **Private Data Members**: `String` title, `String` genre, `String` releaseDate, `int` duration, `List<Show>` shows.
+    - **Private Data Members**: `String` title, `String` genre, `String` releaseDate, `int` duration.
     - **Public Member Functions**: All Getters and Setters.
 
 4. `Show`:

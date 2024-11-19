@@ -228,3 +228,19 @@ Both `float` and `double` are used to represent floating-point numbers (numbers 
 - `double`: It is a 64-bit floating-point data type (occupies 8 bytes in memory). It has a precision of about 15-16 decimal digits, making it more accurate than float.
 
 > NOTE: Java treats decimal literals as double by default, so if you want to use a literal as a float, you need to append f or F (e.g., 3.14f). 
+
+--- 
+
+Q. What is Stream API?
+
+The Stream API, introduced in Java 8, is a powerful tool for **processing collections of data in a declarative and functional style**. It allows for efficient and clean manipulation of data without modifying the original data source. 
+
+---
+
+Q. Why was `Stream` API introduced if we already had `Collection` API?
+
+Because developer wanted to add new and efficient way of processing data and didn't want to alter the existing Collection API.
+
+---
+
+
