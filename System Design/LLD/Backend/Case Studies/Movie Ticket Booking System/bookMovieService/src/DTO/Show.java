@@ -4,13 +4,15 @@ import java.time.LocalDateTime;
 
 public class Show {
     private int showId;
-    private Movie movie; // Movie being shown
-    private Screen screen; // Screen where the show will take place
-    private LocalDateTime showTime; // Date and time of the show
+    private Movie movie;
+    private Theatre theatre;
+    private Screen screen;
+    private LocalDateTime showTime;
 
-    public Show(int showId, Movie movie, Screen screen, LocalDateTime showTime) {
+    public Show(int showId, Movie movie, Theatre theatre, Screen screen, LocalDateTime showTime) {
         this.showId = showId;
         this.movie = movie;
+        this.theatre = theatre;
         this.screen = screen;
         this.showTime = showTime;
     }
@@ -29,6 +31,14 @@ public class Show {
 
     public void setMovie(Movie movie) {
         this.movie = movie;
+    }
+
+    public Theatre getTheatre() {
+        return theatre;
+    }
+
+    public void setTheatre(Theatre theatre) {
+        this.theatre = theatre;
     }
 
     public Screen getScreen() {

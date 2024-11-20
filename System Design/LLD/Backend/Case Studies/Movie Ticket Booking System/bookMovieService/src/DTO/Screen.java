@@ -6,14 +6,11 @@ public class Screen {
     private int screenId;
     private String screenName;
     private Theatre theatre;
-    private List<Seat> seats; // All seats for this screen
-    private List<Show> shows; // All shows scheduled on this screen
 
-    public Screen(int screenId, Theatre theatre, List<Seat> seats, List<Show> shows) {
+    public Screen(int screenId, String screenName, Theatre theatre) {
         this.screenId = screenId;
+        this.screenName = screenName;
         this.theatre = theatre;
-        this.seats = seats;
-        this.shows = shows;
     }
 
     public int getScreenId() {
@@ -24,27 +21,19 @@ public class Screen {
         this.screenId = screenId;
     }
 
+    public String getScreenName() {
+        return screenName;
+    }
+
+    public void setScreenName(String screenName) {
+        this.screenName = screenName;
+    }
+
     public Theatre getTheatre() {
         return theatre;
     }
 
     public void setTheatre(Theatre theatre) {
         this.theatre = theatre;
-    }
-
-    public List<Seat> getSeats() {
-        return seats;
-    }
-
-    public void setSeats(List<Seat> seats) {
-        this.seats = seats;
-    }
-
-    public List<Show> getShows() {
-        return shows;
-    }
-
-    public void setShows(List<Show> shows) {
-        this.shows = shows;
     }
 }

@@ -15,10 +15,10 @@ public class Location {
         this.postalCode = postalCode;
     }
 
-    public Location(String city, String state, String country) {
+    public Location(String city, String state) {
         this.city = city;
         this.state = state;
-        this.country = country;
+        this.country = "India";
     }
 
     public String getStreet() {

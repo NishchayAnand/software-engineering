@@ -35,7 +35,7 @@ Assume the logic that allows system to display the list of currently running mov
 ## Data Tranfer Objects (DTOs)
 
 1. `Customer`:
-    - **Private Data Members**: `String` name, `Location` location, `String` email, `String` phone, `List<Booking>` bookings.
+    - **Private Data Members**: `int` customerId, `String` name, `Location` location, `String` email, `String` phone, `List<Booking>` bookings.
     - **Public Member Functions**: All Getters and Setters.
 
 2. `Location`:
@@ -43,23 +43,23 @@ Assume the logic that allows system to display the list of currently running mov
     - **Public Member Functions**: All Getters and Setters.
 
 3. `Movie`:
-    - **Private Data Members**: `String` title, `String` genre, `String` releaseDate, `int` duration.
+    - **Private Data Members**: `int` movieId, `String` title, `String` genre, `String` releaseDate, `int` duration.
     - **Public Member Functions**: All Getters and Setters.
 
 4. `Show`:
-    - **Private Data Members**: `Movie` movie, `Screen` screen, `LocalDateTime` showTime.
+    - **Private Data Members**: `int` showId, `Movie` movie, `Theatre` theatre, `Screen` screen, `LocalDateTime` showTime.
     - **Public Member Functions**: All Getters and Setters. 
 
 5. `Screen`:
-    - **Private Data Members**: `String` screenName, `Theatre` theatre, `List<Seat>` seats, `List<Show>` shows.
+    - **Private Data Members**: `int` screenId, `String` screenName, `Theatre` theatre.
     - **Public Member Functions**: All Getters and Setters. 
 
 6. `Theatre`:
-    - **Private Data Members**: `Location` location, `List<Screen>` screens.
+    - **Private Data Members**: `int` theatreId, `Location` location.
     - **Public Member Functions**: All Getters and Setters.
 
 7. `Seat`:
-    - **Private Data Members**: `int` seatNumber, `Screen` screen, `SeatType` seatType, `boolean` isBooked. 
+    - **Private Data Members**: int `seatId`, `String` seatNumber, `Screen` screen, `SeatType` seatType, `boolean` isBooked. 
     - **Public Member Functions**: All Getters and Setters.
 
 8. `Booking`:
@@ -69,7 +69,9 @@ Assume the logic that allows system to display the list of currently running mov
 ## Enums
 
 1. `SeatType`: NORMAL(price: 250), PREMIUM(price: 400), VIP(price: 550).
+
 2. `PaymentStatus`: PENDING, COMPLETED, FAILED.
+
 3. `BookingStatus`: COMPLETED, CANCELED.
 
 ## Services
@@ -77,12 +79,16 @@ Assume the logic that allows system to display the list of currently running mov
 1. `MovieService`:
     - **Public Member Functions**: `List<Movie>` getMovies(`Location` customerLocation), `List<Show>` getAvailableShows(`Movie` movie, `LocalDate` date), `Booking` bookSeats(`Customer` customer, `List<Seat>` seats).
 
-## Entities
+## Entities (Database Schema)
 
 1. `Customer`: `int` customerId, `varchar` name, `varchar` city, `varchar` state, `varchar` country, `varchar` email, `varchar` phone.
+
 2. `Movie`: `int` movieId, `varchar` title, `varchar` genre, `date` releaseDate, `int` duration.
+
 3. `Show`: `int` showId, `int` movieId, `int` screenId, `date` showTime.
+
 4. `Theatre`: `int` theatreId, `varchar` street, `varchar` city, `varchar` state, `varchar` country, `varchar` postalCode.
+
 5. `Screen`: `int` screenId, `varchar` screenName, `int` theatreId. 
 
 ## Non-Functional Requirements
