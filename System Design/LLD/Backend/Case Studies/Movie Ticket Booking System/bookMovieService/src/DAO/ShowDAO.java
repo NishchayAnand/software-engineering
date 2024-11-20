@@ -17,7 +17,7 @@ public class ShowDAO {
         this.screenDAO = screenDAO;
     }
 
-    public List<Show> getShowsByMovieAndDate(int movieId, LocalDate date) {
+    public List<Show> getShowsByMovieIdAndDate(int movieId, LocalDate date) {
         String sql = "SELECT * FROM show WHERE movieId = ? and showTime = ?";
         /*
         List<Show> shows = new ArrayList<>();

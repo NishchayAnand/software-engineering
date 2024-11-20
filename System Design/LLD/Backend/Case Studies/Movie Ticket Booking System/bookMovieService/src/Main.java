@@ -1,9 +1,8 @@
-import DAO.MovieDAO;
-import DAO.ScreenDAO;
-import DAO.ShowDAO;
-import DAO.TheatreDAO;
+import DAO.*;
 import DTO.*;
 import Service.MovieService;
+import Service.NotificationService;
+import Service.PaymentService;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,11 +11,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-        MovieDAO movieDAO = new MovieDAO();
-        ScreenDAO screenDAO = new ScreenDAO();
-        ShowDAO showDAO = new ShowDAO(movieDAO, screenDAO);
-
-        MovieService movieService = new MovieService(movieDAO, showDAO);
+        MovieService movieService = getMovieService();
 
         // Define a Customer object.
         Customer customer = new Customer("Nishchay Anand",
@@ -51,10 +46,29 @@ public class Main {
         List<Seat> availableSeats = movieService.getAvailableSeats(show);
         if(!availableSeats.isEmpty()) return;
 
-        // Use Case 4: Book the selected seats.
-        List<Seat> selectedSeats = new ArrayList<>();
-        selectedSeats.add(availableSeats.getFirst());
-        Booking booking = movieService.bookSeats(customer, selectedSeats);
+        // Use Case 4
 
+        // Customer selects preferred seats.
+        List<Seat> seats = new ArrayList<>();
+        seats.add(availableSeats.getFirst());
+
+        // Book the selected seats for the customer.
+        Booking booking = movieService.bookSeats(customer, show, seats);
+        customer.addBooking(booking);
+
+    }
+
+    private static MovieService getMovieService() {
+        MovieDAO movieDAO = new MovieDAO();
+        ScreenDAO screenDAO = new ScreenDAO();
+        ShowDAO showDAO = new ShowDAO(movieDAO, screenDAO);
+        SeatDAO seatDAO = new SeatDAO();
+        BookingDAO bookingDAO = new BookingDAO();
+
+        PaymentService paymentService = new PaymentService();
+        NotificationService notificationService = new NotificationService();
+
+        return new MovieService(movieDAO, showDAO, seatDAO, bookingDAO,
+                paymentService, notificationService);
     }
 }

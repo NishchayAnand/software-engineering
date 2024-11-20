@@ -4,21 +4,20 @@ import java.util.List;
 
 public class Booking {
     private int bookingId;
-    private Customer customer; // The customer who made the booking
-    private Show show; // The show for which tickets are booked
-    private List<Seat> bookedSeats; // List of seats booked
-    private double totalAmount; // Total amount for the booking
-    private PaymentStatus paymentStatus; // Status of the payment
-    private BookingStatus bookingStatus; // Status of the booking
+    private Customer customer;
+    private Show show;
+    private List<Seat> bookedSeats;
+    private double totalAmount;
+    private BookingStatus status;
 
-    public Booking(int bookingId, Customer customer, Show show, List<Seat> bookedSeats, double totalAmount, PaymentStatus paymentStatus, BookingStatus bookingStatus) {
+    public Booking(int bookingId, Customer customer, Show show, List<Seat> bookedSeats,
+                   double totalAmount, BookingStatus status) {
         this.bookingId = bookingId;
         this.customer = customer;
         this.show = show;
         this.bookedSeats = bookedSeats;
         this.totalAmount = totalAmount;
-        this.paymentStatus = paymentStatus;
-        this.bookingStatus = bookingStatus;
+        this.status = status;
     }
 
     public int getBookingId() {
@@ -61,19 +60,11 @@ public class Booking {
         this.totalAmount = totalAmount;
     }
 
-    public PaymentStatus getPaymentStatus() {
-        return paymentStatus;
-    }
-
-    public void setPaymentStatus(PaymentStatus paymentStatus) {
-        this.paymentStatus = paymentStatus;
-    }
-
     public BookingStatus getBookingStatus() {
-        return bookingStatus;
+        return status;
     }
 
-    public void setBookingStatus(BookingStatus bookingStatus) {
-        this.bookingStatus = bookingStatus;
+    public void setBookingStatus(BookingStatus status) {
+        this.status = status;
     }
 }

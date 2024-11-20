@@ -1,6 +1,6 @@
 package DTO;
 
 public enum BookingStatus {
-    COMPLETED,
+    CONFIRMED,
     CANCELED;
 }

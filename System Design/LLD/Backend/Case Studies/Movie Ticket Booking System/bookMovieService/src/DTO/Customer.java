@@ -8,7 +8,7 @@ public class Customer {
     private Location location;
     private String email;
     private String phone;
-    private final List<Booking> bookings; // All bookings done by this customer
+    private final List<Booking> bookings;
 
     public Customer(String name, String email, String phone) {
         this.name = name;

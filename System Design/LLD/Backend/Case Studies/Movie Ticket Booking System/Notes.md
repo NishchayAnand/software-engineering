@@ -28,57 +28,138 @@ Assume the logic that allows system to display the list of currently running mov
 
 2. The **customer** selects a **movie** and his/her preferred **date** and **location**. A **GET request** is sent to **fetch the list of available shows for the selected movie on the preferred date**.
 
-3. The **Customer** selects a **show**. A **GET request** is sent to **fetch the details of booked and available seats for the selected show**. 
+3. The **Customer** selects a **show**. A **GET request** is sent to **fetch the lits of available seats for the selected show**. 
 
 4. The **customer** selects his/her preferred **seats**. A **POST request** is sent to **book the selected seats**.
+
+## Services
+
+1. `MovieService`:
+
+    - **Private Data Members**: `MovieDAO` movieDAO, `ShowDAO` showDAO, `SeatDAO` seatDAO, `PaymentService` paymentService, `NotificationService` notificationService, `BookingDAO` bookingDAO.
+
+    - **Public Member Functions**: 
+
+        - `List<Movie>` getMovies(`Location` location): fetch the list of movies currently showing in the theatres near the preferred location.
+
+        - `List<Show>` getShows(`Movie` movie, `LocalDate` date): fetch the list of available shows for the selected movie on the preferred date.
+
+        - `List<Seat>` getAvailableSeats(`Show` show): fetch the list of available seats for the selected show.
+
+        - `Booking` bookSeats(`Customer` customer, `Show` show, `List<Seat>` seats): book the selected seats for the customer in the selected show. 
+
+2. `PaymentService`:
+
+    - **Public Member Functions**: 
+
+        - `boolean` processPayment(`Customer` customer, `double` amount)
+
+3. `NotificationService`:
+
+    - **Public Member Functions**: 
+
+        - notifyPaymentFailure(`Customer` customer)
+
+        - sendBookingConfirmation(`Customer` customer, `Booking` booking)
 
 ## Data Tranfer Objects (DTOs)
 
 1. `Customer`:
+
     - **Private Data Members**: `int` customerId, `String` name, `Location` location, `String` email, `String` phone, `List<Booking>` bookings.
+
     - **Public Member Functions**: All Getters and Setters.
 
 2. `Location`:
+
     - **Private Data Members**: `String` street, `String` city, `String` state, `String` country, `String` postalCode.
+
     - **Public Member Functions**: All Getters and Setters.
 
 3. `Movie`:
+
     - **Private Data Members**: `int` movieId, `String` title, `String` genre, `String` releaseDate, `int` duration.
+
     - **Public Member Functions**: All Getters and Setters.
 
 4. `Show`:
+
     - **Private Data Members**: `int` showId, `Movie` movie, `Theatre` theatre, `Screen` screen, `LocalDateTime` showTime.
+
     - **Public Member Functions**: All Getters and Setters. 
 
 5. `Screen`:
+
     - **Private Data Members**: `int` screenId, `String` screenName, `Theatre` theatre.
+
     - **Public Member Functions**: All Getters and Setters. 
 
 6. `Theatre`:
+
     - **Private Data Members**: `int` theatreId, `Location` location.
+
     - **Public Member Functions**: All Getters and Setters.
 
 7. `Seat`:
-    - **Private Data Members**: int `seatId`, `String` seatNumber, `Screen` screen, `SeatType` seatType, `boolean` isBooked. 
+
+    - **Private Data Members**: int `seatId`, `String` seatNumber, `SeatType` seatType, `boolean` isBooked. 
+
     - **Public Member Functions**: All Getters and Setters.
 
 8. `Booking`:
-    - **Private Data Members**: `Customer` customer, `Show` show, `List<Seat>` bookedSeats, `double` totalAmount, `PaymentStatus` paymentStatus, `BookingStatus` bookingStatus.
+
+    - **Private Data Members**: `int` bookingId, `Customer` customer, `Show` show, `List<Seat>` bookedSeats, `double` totalAmount, `BookingStatus` status.
+
     - **Public Member Functions**: All Getters and Setters.
+
+**NOTE:**
+
+- Do not include `Show` directly in the `Seat` class. Instead, use a `Booking` class to manage the relationship between Seats and Shows.
 
 ## Enums
 
 1. `SeatType`: NORMAL(price: 250), PREMIUM(price: 400), VIP(price: 550).
 
-2. `PaymentStatus`: PENDING, COMPLETED, FAILED.
+2. `BookingStatus`: CONFIRMED, CANCELED.
 
-3. `BookingStatus`: COMPLETED, CANCELED.
+## Data Access Objects (DAOs)
 
-## Services
+1. `MovieDAO`:
 
-1. `MovieService`:
-    - **Public Member Functions**: `List<Movie>` getMovies(`Location` customerLocation), `List<Show>` getAvailableShows(`Movie` movie, `LocalDate` date), `Booking` bookSeats(`Customer` customer, `List<Seat>` seats).
+    - **Public Member Functions**:
 
+        - `List<Movie>` getMoviesByLocation(`String` city, `String` state): SELECT DISTINCT m.movieId, m.title, m.genre, m.releaseDate, m.duration FROM movie m JOIN show s ON m.movieId = s.movieId JOIN theatre t ON s.theatreId = t.theatreId WHERE t.city = ? and t.state = ?.
+
+        - `Movie` getMovieById(`int` movieId): SELECT * FROM movie WHERE movieId = ?.
+
+2. `ShowDAO`:
+
+    - **Private Data Members**: `MovieDAO` movieDAO, `ScreenDAO` screenDAO. 
+
+    - **Public Member Functions**:
+
+        - `List<Show>` getShowsByMovieIdAndDate(int movieId, LocalDate date): SELECT * FROM show WHERE movieId = ? and showTime = ?.
+
+3. `ScreenDAO`:
+
+    - **Public Member Functions**:
+
+        - `Screen` getScreenById(`int` screenId): SELECT * FROM screen WHERE screenId = ?.
+
+4. `SeatDAO`:
+
+    - **Public Member Functions**:
+
+        - `List<Seat>` getSeatsByShowId(`int` showId): SELECT * FROM seat WHERE showId = ?.
+
+        - updateSeatBookingStatus(`int` seatId, `boolean` isBooked): UPDATE seat SET isBooked = ? WHERE seatId = ?.
+
+5. `BookingDAO`:
+
+    - **Public Member Functions**: 
+
+        - addBooking(`Booking` booking): INSERT INTO booking (bookingId, customerId, showId, amount, status) VALUES (?,?,?,?,?).
+        
 ## Entities (Database Schema)
 
 1. `Customer`: `int` customerId, `varchar` name, `varchar` city, `varchar` state, `varchar` country, `varchar` email, `varchar` phone.
@@ -91,10 +172,13 @@ Assume the logic that allows system to display the list of currently running mov
 
 5. `Screen`: `int` screenId, `varchar` screenName, `int` theatreId. 
 
-## Non-Functional Requirements
+6. `Seat`: `int` seatId, `varchar` seatNumber, `varchar` seatType, `int` showId, `boolean` isBooked.
 
-1. Ids should be auto-generated. 
-2. Should bookings attribute in Customer class be final?
-3. How to handle concurrency when multiple Customers try to book a same Seat?
-4. **How to get instance of TheatreDAO and ShowDAO in MovieService class? Should instance of TheatreDAO and ShowDAO be final in MovieService class?**
-5. How to map RelationalEntity(showId, movieId, screenId, showTime) to Show(showId, Movie, Screen, showTime)?
+7. `Booking`: `int` bookingId, `int` customerId, `int` showId, `int` totalAmount, `varchar` status.
+
+## Non-Functional Requirements
+ 
+
+
+
+
