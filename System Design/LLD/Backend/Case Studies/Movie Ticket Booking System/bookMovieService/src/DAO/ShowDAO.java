@@ -1,7 +1,6 @@
 package DAO;
 
 import DTO.Show;
-import DTO.Theatre;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -9,12 +8,25 @@ import java.util.List;
 
 public class ShowDAO {
 
-    private MovieDAO movieDAO;
-    private ScreenDAO screenDAO;
+    private static volatile ShowDAO showDAO;
 
-    public ShowDAO(MovieDAO movieDAO, ScreenDAO screenDAO) {
-        this.movieDAO = movieDAO;
-        this.screenDAO = screenDAO;
+    private final MovieDAO movieDAO;
+    private final ScreenDAO screenDAO;
+
+    private ShowDAO() {
+        this.movieDAO = MovieDAO.getInstance();
+        this.screenDAO = ScreenDAO.getInstance();
+    }
+
+    // Double-Checked Locking: Synchronization is performed only when the instance is null, reducing
+    // performance overhead.
+    public static ShowDAO getInstance() {
+        if(showDAO == null) {
+            synchronized (ShowDAO.class) {
+                if(showDAO==null) showDAO = new ShowDAO();
+            }
+        }
+        return showDAO;
     }
 
     public List<Show> getShowsByMovieIdAndDate(int movieId, LocalDate date) {

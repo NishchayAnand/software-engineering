@@ -177,6 +177,13 @@ Assume the logic that allows system to display the list of currently running mov
 7. `Booking`: `int` bookingId, `int` customerId, `int` showId, `int` totalAmount, `varchar` status.
 
 ## Non-Functional Requirements
+
+1. **Handle Concurrency:** How to handle multiple customers booking the same seat simultaneously?
+
+2. **Improve Maintenance:** Adopting the **singleton pattern for service and DAO classes** reduces the overhead of creating and managing resources, ensures thread safety, maintains consistency in business logic or database operations, minimizes dependency management complexity, and simplifies the overall code structure.
+
+
+
  
 
 

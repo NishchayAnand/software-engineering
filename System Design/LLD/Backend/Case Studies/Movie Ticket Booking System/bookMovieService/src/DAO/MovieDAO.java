@@ -8,6 +8,17 @@ import java.util.List;
 
 public class MovieDAO {
 
+    private static MovieDAO movieDAO;
+
+    private MovieDAO() {}
+
+    // Lazy Initialization: Not thread-safe. Multiple threads can create multiple instances if
+    // accessed simultaneously.
+    public static MovieDAO getInstance() {
+        if(movieDAO == null) movieDAO = new MovieDAO();
+        return movieDAO;
+    }
+
     public Movie getMovieById(int movieId) {
         String sql = "SELECT * FROM movie WHERE movieId = ?";
         return new Movie(movieId, "Da Vinci Code", "Thriller", LocalDate.now(), 120);

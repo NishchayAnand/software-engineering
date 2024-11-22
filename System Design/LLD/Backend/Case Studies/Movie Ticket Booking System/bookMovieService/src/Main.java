@@ -1,8 +1,6 @@
-import DAO.*;
+
 import DTO.*;
 import Service.MovieService;
-import Service.NotificationService;
-import Service.PaymentService;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,7 +9,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-        MovieService movieService = getMovieService();
+        MovieService movieService = MovieService.getInstance();
 
         // Define a Customer object.
         Customer customer = new Customer("Nishchay Anand",
@@ -54,21 +52,8 @@ public class Main {
 
         // Book the selected seats for the customer.
         Booking booking = movieService.bookSeats(customer, show, seats);
-        customer.addBooking(booking);
+        if(booking != null) customer.addBooking(booking);
 
     }
 
-    private static MovieService getMovieService() {
-        MovieDAO movieDAO = new MovieDAO();
-        ScreenDAO screenDAO = new ScreenDAO();
-        ShowDAO showDAO = new ShowDAO(movieDAO, screenDAO);
-        SeatDAO seatDAO = new SeatDAO();
-        BookingDAO bookingDAO = new BookingDAO();
-
-        PaymentService paymentService = new PaymentService();
-        NotificationService notificationService = new NotificationService();
-
-        return new MovieService(movieDAO, showDAO, seatDAO, bookingDAO,
-                paymentService, notificationService);
-    }
 }

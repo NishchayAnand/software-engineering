@@ -4,11 +4,18 @@ import DTO.Location;
 import DTO.Screen;
 import DTO.Theatre;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
 public class ScreenDAO {
+
+    private static ScreenDAO screenDAO;
+
+    private ScreenDAO() {}
+
+    // Thread-Safe: Overhead due to synchronized access, especially in scenarios with frequent calls
+    // to getInstance().
+    public static synchronized ScreenDAO getInstance() {
+        if(screenDAO == null) screenDAO = new ScreenDAO();
+        return screenDAO;
+    }
 
     public Screen getScreenById(int screenId) {
         String sql = "SELECT * FROM screen WHERE screenId = ?";

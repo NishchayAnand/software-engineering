@@ -7,6 +7,19 @@ import java.util.List;
 
 public class SeatDAO {
 
+    private static volatile SeatDAO seatDAO;
+
+    private SeatDAO() {}
+
+    public static SeatDAO getInstance() {
+        if(seatDAO == null) {
+            synchronized (SeatDAO.class) {
+                if(seatDAO == null) seatDAO = new SeatDAO();
+            }
+        }
+        return seatDAO;
+    }
+
     public List<Seat> getSeatsByShowId(int showId) {
         String sql = "SELECT * FROM seat WHERE showId = ?";
         /*

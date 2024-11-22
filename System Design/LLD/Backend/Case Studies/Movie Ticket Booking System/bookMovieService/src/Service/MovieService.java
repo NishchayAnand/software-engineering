@@ -4,7 +4,6 @@ import DAO.*;
 import DTO.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MovieService {
@@ -16,14 +15,23 @@ public class MovieService {
     private final PaymentService paymentService;
     private final NotificationService notificationService;
 
-    public MovieService(MovieDAO movieDAO, ShowDAO showDAO, SeatDAO seatDAO, BookingDAO bookingDAO,
-                        PaymentService paymentService, NotificationService notificationService) {
-        this.movieDAO = movieDAO;
-        this.showDAO = showDAO;
-        this.seatDAO = seatDAO;
-        this.bookingDAO = bookingDAO;
-        this.paymentService = paymentService;
-        this.notificationService = notificationService;
+    // Eager Initialization: Single instance is created at the time of class loading (created even if
+    // it’s not used, which may lead to resource wastage).
+    private static final MovieService movieService = new MovieService();
+
+    // Private constructor to prevent instantiation
+    private MovieService() {
+        this.movieDAO = MovieDAO.getInstance();
+        this.showDAO = ShowDAO.getInstance();
+        this.seatDAO = SeatDAO.getInstance();
+        this.bookingDAO = BookingDAO.getInstance();
+        this.paymentService = PaymentService.getInstance();
+        this.notificationService = NotificationService.getInstance();
+    }
+
+    // Public method to provide access to the instance
+    public static MovieService getInstance() {
+        return movieService;
     }
 
     public List<Movie> getMovies(Location location) {
@@ -50,6 +58,7 @@ public class MovieService {
         boolean paymentSuccess = paymentService.processPayment(customer, totalAmount);
         if(!paymentSuccess) {
             notificationService.notifyPaymentFailure(customer);
+            return null;
         }
 
         // Update seats as booked in the database
