@@ -68,7 +68,14 @@ The volatile keyword prevents **instruction reordering** by guaranteeing:
 
 - **Memory Consistency:** All threads see the same value of the volatile variable at all times.
 
---- 
+---
+
+Q. What is optimistic and pessimistic locking at the database level?
+
+---
+
+
+
 
 
 

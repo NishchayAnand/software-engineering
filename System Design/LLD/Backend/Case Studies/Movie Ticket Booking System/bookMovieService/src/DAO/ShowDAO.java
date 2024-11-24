@@ -10,8 +10,8 @@ public class ShowDAO {
 
     private static volatile ShowDAO showDAO;
 
-    private final MovieDAO movieDAO;
-    private final ScreenDAO screenDAO;
+    private MovieDAO movieDAO;
+    private ScreenDAO screenDAO;
 
     private ShowDAO() {
         this.movieDAO = MovieDAO.getInstance();
