@@ -178,12 +178,11 @@ Assume the logic that allows system to display the list of currently running mov
 
 ## Non-Functional Requirements
 
-1. **Improve Maintenance:** Adopting the **singleton pattern for service and DAO classes** reduces the overhead of creating and managing resources, ensures thread safety, maintains consistency in business logic or database operations, minimizes dependency management complexity, and simplifies the overall code structure.
+1. **Handle Concurrency:** During a `MovieService.bookSeats(customer, show, seats)` request, lock the rows corresponding to the selected seats until the database transaction completes. This ensures thread safety and consistency when multiple customers attempt to book the same seats simultaneously.
 
-2. **Handle Concurrency:** `bookSeats` functionality of `MovieService` should handle concurrency to avoid multiple customers booking the same seat simultaneously.
-    - The entire booking operation runs within a transaction to maintain consistency.
+2. **Error Handling:** If any part of the booking process fails (e.g., payment or seat update), the method throws an exception, ensuring the transaction is rolled back.
 
-3. **Error Handling:** If any part of the booking process fails (e.g., payment or seat update), the method throws an exception, ensuring the transaction is rolled back.
+3. **Improve Maintenance:** Adopting the singleton pattern for service and DAO classes reduces the overhead of creating and managing resources, ensures thread safety, maintains consistency in business logic or database operations, minimizes dependency management complexity, and simplifies the overall code structure.
 
 ## FUTURE ENHANCEMENTS 
 
