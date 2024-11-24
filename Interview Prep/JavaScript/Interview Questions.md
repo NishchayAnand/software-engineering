@@ -4,10 +4,17 @@ Q. Explain the phrase "JavaScript is single-threaded".
 
 JavaScript itself does not provide the capability to directly create or manage additional threads. Instead, the browser or Node.js runtime handles the heavy lifting by running background tasks in separate threads.
 
-> NOTE: The threads used by the browser or Node.js runtime do not run JavaScript code but instead handle tasks like network requests or file I/O. For example, browsers handle network requests using low-level programming languages that interact closely with system-level networking APIs. Commonly, C++, C, or sometimes Rust are used to implement the networking layer in modern browsers. 
+> NOTE: The threads used by the browser or Node.js runtime do not run JavaScript code but instead handle tasks like network requests or file I/O. 
 
 ---
 
+Q. How does browsers handle network requests?
+
+Browsers handle network requests using low-level programming languages that interact closely with system-level networking APIs. 
+
+> NOTE: Commonly, C++, C, or sometimes Rust are used to implement the networking layer in modern browsers. 
+
+---
 Q. What are Web APIs in browser?
 
 Web APIs provided of the browser act as auxiliary systems for handling time-consuming tasks asynchronously.
