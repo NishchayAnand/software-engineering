@@ -70,9 +70,16 @@ The volatile keyword prevents **instruction reordering** by guaranteeing:
 
 ---
 
-Q. What is optimistic and pessimistic locking at the database level?
+Q. Can we start a database transaction from the service layer?
+
+Yes, it is generally acceptable to start a transaction from the service layer, and in many cases, it is considered a best practice. 
+
+The service layer is a logical place to manage transactions because it encapsulates business logic and coordinates multiple DAO (Data Access Object) operations. 
+
+Starting transactions at this level allows the business logic to dictate the boundaries of a transaction, ensuring consistency and atomicity across multiple database operations.
 
 ---
+
 
 
 
