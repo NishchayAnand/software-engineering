@@ -56,11 +56,14 @@ Assume the logic that allows system to display the list of currently running mov
 
 3. `NotificationService`:
 
-    - **Public Member Functions**: 
+    - **Public Member Functions**:
+
+        - notifySeatUnavailable(`Customer` customer, `Seat` seat) 
 
         - notifyPaymentFailure(`Customer` customer)
 
         - sendBookingConfirmation(`Customer` customer, `Booking` booking)
+
 
 ## Data Tranfer Objects (DTOs)
 
@@ -152,7 +155,7 @@ Assume the logic that allows system to display the list of currently running mov
 
         - `List<Seat>` getSeatsByShowId(`int` showId): SELECT * FROM seat WHERE showId = ?.
 
-        - updateSeatBookingStatus(`int` seatId, `boolean` isBooked): UPDATE seat SET isBooked = ? WHERE seatId = ?.
+        - `boolean` updateSeatBookingStatus(`int` seatId, `boolean` isBooked): UPDATE seat SET isBooked = ? WHERE seatId = ?.
 
 5. `BookingDAO`:
 
@@ -179,6 +182,8 @@ Assume the logic that allows system to display the list of currently running mov
 ## Non-Functional Requirements
 
 1. **Handle Concurrency:** During a `MovieService.bookSeats(customer, show, seats)` request, lock the rows corresponding to the selected seats until the database transaction completes. This ensures thread safety and consistency when multiple customers attempt to book the same seats simultaneously.
+
+    - **Pessimistic Locking:** Apply a **"SELECT FOR UPDATE"** query when checking availability. This locks the row, preventing other transactions from booking the same seat. The lock is released when the transaction commits or rolls back.
 
 2. **Error Handling:** If any part of the booking process fails (e.g., payment or seat update), the method throws an exception, ensuring the transaction is rolled back.
 

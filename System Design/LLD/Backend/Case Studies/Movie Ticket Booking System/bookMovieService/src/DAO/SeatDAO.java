@@ -38,7 +38,8 @@ public class SeatDAO {
         return new ArrayList<>();
     }
 
-    public void updateSeatBookingStatus(int seatId, boolean isBooked) {
+    public boolean updateSeatBookingStatus(int seatId, boolean isBooked) {
         String sql = "UPDATE seat SET isBooked = ? WHERE seatId = ?";
+        return true;
     }
 }

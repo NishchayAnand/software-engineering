@@ -49,33 +49,57 @@ public class MovieService {
 
     public Booking bookSeats(Customer customer, Show show, List<Seat> seats) {
 
-        // Calculate total price
-        double totalAmount = seats.stream()
-                .mapToDouble(seat->seat.getSeatType().getPrice())
-                .sum();
+        // Begin a transaction
+        try {
+            // Fetch all available seats
+            List<Seat> availableSeats = seatDAO.getSeatsByShowId(show.getShowId())
+                    .stream().filter(seat -> !seat.isBooked()).toList();
 
-        // Process payment
-        boolean paymentSuccess = paymentService.processPayment(customer, totalAmount);
-        if(!paymentSuccess) {
-            notificationService.notifyPaymentFailure(customer);
-            return null;
+            // Check if selected seats are available
+            for (Seat selectedSeat : seats) {
+                boolean isAvailable = availableSeats
+                        .stream()
+                        .anyMatch(availableSeat -> availableSeat.getSeatId() == selectedSeat.getSeatId());
+                if(!isAvailable) {
+                    notificationService.notifySeatUnavailable(customer, selectedSeat);
+                    throw new RuntimeException("One or more seats are already booked.");
+                }
+            }
+
+            // Mark seats as booked using atomic database operations -> ??
+            for(Seat seat: seats) {
+                boolean updateSuccess = seatDAO.updateSeatBookingStatus(seat.getSeatId(), true);
+                if(!updateSuccess) {
+                    throw new RuntimeException("Failed to book: " + seat.getSeatNumber());
+                }
+            }
+
+            // Calculate total price
+            double totalAmount = seats.stream()
+                    .mapToDouble(seat->seat.getSeatType().getPrice())
+                    .sum();
+
+            // Process payment
+            boolean paymentSuccess = paymentService.processPayment(customer, totalAmount);
+            if(!paymentSuccess) {
+                notificationService.notifyPaymentFailure(customer);
+                throw new RuntimeException("Payment Failed.");
+            }
+
+            // Add a booking record to the database
+            Booking booking = new Booking(1, customer, show, seats, totalAmount, BookingStatus.CONFIRMED);
+            bookingDAO.addBooking(booking);
+
+            // Send booking confirmation to the customer
+            notificationService.sendBookingConfirmation(customer, booking);
+
+            // commit the transaction
+            return booking;
+        } catch (Exception e) {
+            // rollback transaction if any error occurs
+            throw new RuntimeException("Booking Failed: " + e.getMessage());
         }
 
-        // Update seats as booked in the database
-        for(Seat seat: seats) {
-            seat.setBooked(true);
-            seatDAO.updateSeatBookingStatus(seat.getSeatId(), true);
-        }
-
-        // Add a booking record to the database
-        Booking booking = new Booking(1, customer, show, seats, totalAmount,
-                BookingStatus.CONFIRMED);
-        bookingDAO.addBooking(booking);
-
-        // Send booking confirmation to the customer
-        notificationService.sendBookingConfirmation(customer, booking);
-
-        return booking;
     }
 
 }

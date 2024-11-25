@@ -2,6 +2,7 @@ package Service;
 
 import DTO.Booking;
 import DTO.Customer;
+import DTO.Seat;
 
 public class NotificationService {
 
@@ -15,6 +16,11 @@ public class NotificationService {
 
     public static NotificationService getInstance() {
         return NotificationServiceHelper.notificationService;
+    }
+
+    public void notifySeatUnavailable(Customer customer, Seat seat) {
+        String message = seat.getSeatNumber() + " not available.";
+        //sendEmail(customer, message);
     }
 
     public void notifyPaymentFailure(Customer customer) {
