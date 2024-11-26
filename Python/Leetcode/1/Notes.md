@@ -1,4 +1,4 @@
-# Query 4: Employees Bonus
+# Query: Employees Bonus
 
 **Problem Statement:** Given tables: `Employee(empId, name, supervisor, salary)` and `Bonus(emp_id, bonus)`, return a dataframe containing the name and bonus amount of employees whose bonus is less than 1000.
 

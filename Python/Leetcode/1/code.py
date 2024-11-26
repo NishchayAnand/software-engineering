@@ -1,6 +1,6 @@
 import pandas as pd
 
-# Query 4: Employee Bonus
+# Query: Employee Bonus
 data = [[3, 'Brad', None, 4000], [1, 'John', 3, 100], [2, 'Don', 3, 2000], [4, 'Thomas', 3, 4000]]
 employee = pd.DataFrame(data, columns=['empId', 'name', 'supervisor', 'salary'])
 employee.astype({

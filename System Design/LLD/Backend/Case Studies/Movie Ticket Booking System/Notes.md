@@ -197,7 +197,9 @@ Assume the logic that allows system to display the list of currently running mov
 
 ## Links:
 
-- Handle concurrency: https://codeminion.hashnode.dev/how-does-bookmyshow-handle-concurrent-bookings#heading-db-locking
+- Concurrency: https://codeminion.hashnode.dev/how-does-bookmyshow-handle-concurrent-bookings#heading-db-locking
+
+- Concurrency: conhttps://www.youtube.com/watch?v=ohdu6TUoE5s
  
 
 
