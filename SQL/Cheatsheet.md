@@ -1,5 +1,15 @@
 # SQL Cheatsheet
 
+### Create Table
+
+```
+CREATE TABLE Employee (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    department VARCHAR(50)
+);
+```
+
 - `DISTINCT`: Used to retrieve unique values from a selected column or set of columns in your query results. You can specify multiple columns after **DISTINCT** to ensure uniqueness across all of them.
 
 - `ENUM`: A data type used to restrict a column's values to a predefined set of options. Sample Syntax: `marital_status ENUM('Single', 'Married')`.

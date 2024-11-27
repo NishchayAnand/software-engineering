@@ -51,11 +51,9 @@ public class MovieService {
 
         // Begin a transaction
         try {
-            // Fetch all available seats
-            List<Seat> availableSeats = seatDAO.getSeatsByShowId(show.getShowId())
-                    .stream().filter(seat -> !seat.isBooked()).toList();
 
-            // Check if selected seats are available
+            // Check if selected seats are still available
+            List<Seat> availableSeats = getAvailableSeats(show);
             for (Seat selectedSeat : seats) {
                 boolean isAvailable = availableSeats
                         .stream()
