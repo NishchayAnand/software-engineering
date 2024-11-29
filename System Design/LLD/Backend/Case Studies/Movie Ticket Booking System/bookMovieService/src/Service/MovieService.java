@@ -64,7 +64,7 @@ public class MovieService {
                 }
             }
 
-            // Mark seats as booked using atomic database operations -> ??
+            // Mark seats as booked
             for(Seat seat: seats) {
                 boolean updateSuccess = seatDAO.updateSeatBookingStatus(seat.getSeatId(), true);
                 if(!updateSuccess) {
@@ -84,7 +84,7 @@ public class MovieService {
                 throw new RuntimeException("Payment Failed.");
             }
 
-            // Add a booking record to the database
+            // Add booking to the database
             Booking booking = new Booking(1, customer, show, seats, totalAmount, BookingStatus.CONFIRMED);
             bookingDAO.addBooking(booking);
 
@@ -94,7 +94,7 @@ public class MovieService {
             // commit the transaction
             return booking;
         } catch (Exception e) {
-            // rollback transaction if any error occurs
+            // rollback transaction
             throw new RuntimeException("Booking Failed: " + e.getMessage());
         }
 

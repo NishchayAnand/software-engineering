@@ -30,7 +30,7 @@ To handle concurrency, DBMSs provide isolation levels:
 
 - **Read Uncommitted:** Transactions can read uncommitted changes from other transactions (may cause **dirty reads**).
 
-- **Read Committed:** Transactions can only read committed changes.
+- **Read Committed:** Ensures that only committed data is read during the transaction (default in most databases).
 
 - **Repeatable Read:** Ensures that if a transaction reads the same data twice, the result will not change. This prevents non-repeatable reads (also known as inconsistent reads).
 

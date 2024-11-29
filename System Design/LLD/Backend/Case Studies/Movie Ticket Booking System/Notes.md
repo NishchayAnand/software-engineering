@@ -181,9 +181,7 @@ Assume the logic that allows system to display the list of currently running mov
 
 ## Non-Functional Requirements
 
-1. **Handle Concurrency:** During a `MovieService.bookSeats(customer, show, seats)` request, lock the rows corresponding to the selected seats until the database transaction completes. This ensures thread safety and consistency when multiple customers attempt to book the same seats simultaneously.
-
-    - **Pessimistic Locking:** Apply a **"SELECT FOR UPDATE"** query when checking availability. This locks the row, preventing other transactions from booking the same seat. The lock is released when the transaction commits or rolls back.
+1. **Handle Concurrency:** The `MovieService.bookSeats(customer, show, seats)` functionality can leverage database transactions and locking mechanisms (e.g. pessimistic locking) to ensure data consistency when multiple customers attempt to book the same seats simultaneously.
 
 2. **Error Handling:** If any part of the booking process fails (e.g., payment or seat update), the method throws an exception, ensuring the transaction is rolled back.
 
