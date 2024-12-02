@@ -348,5 +348,12 @@ Because developer wanted to add new and efficient way of processing data and did
 
 ---
 
+Q. Explain nested classes in Java.
 
+Nested inner classes are classes defined within another class. They can be categorized into static and non-static types:
 
+- **Static Nested Class**: A static nested class is declared with the static keyword. It does not require an instance of the outer class and can access only the static members of the outer class.
+
+- **Non-Static Inner Class**: A non-static inner class (also called an instance inner class) does not use the static keyword. It is associated with an instance of the enclosing class and can access all members (static and instance) of the outer class.
+
+---
