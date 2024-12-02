@@ -29,3 +29,15 @@ The `@GetMapping` annotation in Spring MVC is a specialized version of `@Request
 ---
 
 Q. Explain `@RequestBody` annotation.
+
+The `@RequestBody` annotation in Spring MVC is used to **map the HTTP request body to a Java object**. 
+
+> NOTE: Works with `HttpMessageConverter` to automatically bound the data in the HTTP request body to the fields of the Java object (based on property names).
+
+---
+
+Q. Explain ResponseEntity
+
+---
+
+Q. Explain `@Valid` annotation.
