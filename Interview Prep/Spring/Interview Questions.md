@@ -20,4 +20,12 @@ The `@RequestMapping` annotation in Spring MVC is **used to map HTTP requests to
 
 ---
 
+Q. Explain `@GetMapping` annotation.
 
+The `@GetMapping` annotation in Spring MVC is a specialized version of `@RequestMapping` that **simplifies mapping HTTP GET requests to specific handler methods**.
+
+> NOTE: Use `@GetMapping("/example")` instead of `@RequestMapping(value="/example", method = RequestMethod.GET)` to make the code more concise and readable.
+
+---
+
+Q. Explain `@RequestBody` annotation.
