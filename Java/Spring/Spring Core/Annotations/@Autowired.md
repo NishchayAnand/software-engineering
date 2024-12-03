@@ -19,7 +19,7 @@ public class UserService {
 }
 ```
 
-2. **Constructor Injection (Recommended Approach)**: Promotes immutability, easier to test, dependencies are explicit.
+2. **Constructor Injection (Recommended Approach)**: Promotes immutability, easier to test, dependencies are explicit (ensure that the required dependencies are provided during object creation).
 
 ```
 @Service
