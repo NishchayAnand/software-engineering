@@ -1,4 +1,4 @@
-package com.bookmymovie.movingbookingservice.dto;
+package com.bookmyshow.bookmovie.dto;
 
 public class User {
     private String emailId;

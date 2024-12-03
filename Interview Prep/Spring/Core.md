@@ -36,8 +36,14 @@ The `@RequestBody` annotation in Spring MVC is used to **map the HTTP request bo
 
 ---
 
-Q. Explain ResponseEntity
+Q. Explain `@Autowired` annotation.
+
+- The `@Autowired` annotation in Spring is used for dependency injection. It allows Spring to **automatically resolve and inject a bean into a class**. It can be used on fields, constructors and setter methods.
+
+> NOTE: By default, `@Autowired` performs injection by type. 
 
 ---
 
-Q. Explain `@Valid` annotation.
+Q. Explain `@Qualifier` annotation.
+
+---

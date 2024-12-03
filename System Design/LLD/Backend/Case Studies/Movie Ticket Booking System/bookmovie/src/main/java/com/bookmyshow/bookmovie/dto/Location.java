@@ -1,4 +1,4 @@
-package com.bookmymovie.movingbookingservice.dto;
+package com.bookmyshow.bookmovie.dto;
 
 public class Location {
     private String street;

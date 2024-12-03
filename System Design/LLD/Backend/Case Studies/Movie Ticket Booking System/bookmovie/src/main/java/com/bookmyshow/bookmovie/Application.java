@@ -1,4 +1,4 @@
-package com.bookmymovie.movingbookingservice;
+package com.bookmyshow.bookmovie;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

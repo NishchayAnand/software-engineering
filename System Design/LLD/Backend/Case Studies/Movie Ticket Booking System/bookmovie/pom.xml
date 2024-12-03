@@ -8,10 +8,10 @@
 		<version>3.4.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.bookmymovie</groupId>
-	<artifactId>movingbookingservice</artifactId>
+	<groupId>com.bookmyshow</groupId>
+	<artifactId>bookmovie</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>movingbookingservice</name>
+	<name>bookMovie</name>
 	<description>Movie Booking Microservice</description>
 	<url/>
 	<licenses>
