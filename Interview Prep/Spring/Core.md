@@ -38,7 +38,7 @@ The `@RequestBody` annotation in Spring MVC is used to **map the HTTP request bo
 
 Q. Explain `@Autowired` annotation.
 
-- The `@Autowired` annotation in Spring is used for dependency injection. It allows Spring to **automatically resolve and inject a bean into a class**. It can be used on fields, constructors and setter methods.
+The `@Autowired` annotation in Spring is used to automate the dependency injection process. It's a declarative way to instruct Spring to automatically resolve and inject a bean into a class. It can be used on fields, constructors and setter methods.
 
 > NOTE: By default, `@Autowired` performs injection by type. 
 
@@ -49,6 +49,12 @@ Q. "Field Injection using `@Autowired` makes the class mutable, increasing the r
 When you use field injection, the injected **dependencies** cannot be declared as `final` because they **are assigned by the Spring container after the object is created**. Without `final`, there's no guarantee that the dependency won't be reassigned or modified accidentally elsewhere in the code.
 
 When testing a class with field injection, dependencies are typically injected using reflection or test utilities. These tools bypass normal object initialization, which can lead to unexpected behavior or unintentional overwriting of dependencies during tests.
+
+---
+
+Q. How does Constructor Injection using `@Autowired` promotes immutability?
+
+Constructor injection ensures that all dependencies are explicitly defined and provided during object creation. This approach allows the class to declare its dependencies as `final`, making the object immutable and enhancing its reliability.
 
 ---
 

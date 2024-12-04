@@ -4,7 +4,7 @@ The `@Autowired` annotation in Spring is used to automate the dependency injecti
 
 ## How to Use
 
-1. **Field Injection (Least Recommended)**: Field-injected dependencies are not final, meaning they can be modified after the object is created. This makes the class mutable, increasing the risk of unintended side effects during testing or debugging.
+1. **Field Injection (Least Recommended)**: Field-injected dependencies are not `final`, meaning they can be modified after the object is created. This makes the class mutable, increasing the risk of unintended side effects during testing or debugging.
 
 ```
 @Service
@@ -19,7 +19,7 @@ public class UserService {
 }
 ```
 
-2. **Constructor Injection (Recommended Approach)**: Promotes immutability, easier to test, dependencies are explicit (ensure that the required dependencies are provided during object creation).
+2. **Constructor Injection (Recommended Approach)**: It promotes immutability, simplifies testing, and ensures that all dependencies are explicitly defined and provided during object creation.
 
 ```
 @Service
@@ -38,7 +38,7 @@ public class UserService {
 }
 ```
 
-3. **Setter Injection**: Useful for optional or dynamically changing dependencies.
+3. **Setter Injection**: Allows dependencies to be reassigned, increasing the risk of unintended side effects during runtime. This makes the object mutable and less thread-safe.
 
 ```
 @Service

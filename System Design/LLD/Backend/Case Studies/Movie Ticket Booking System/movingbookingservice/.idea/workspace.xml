@@ -4,24 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0692f9cb-c9d4-467e-8df2-405b5e79c859" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../../../../../Interview Prep/Spring/Interview Questions.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../../Interview Prep/SpringBoot/Interview Questions.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bookmymovie/movingbookingservice/Application.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bookmymovie/movingbookingservice/controller/MovieController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bookmymovie/movingbookingservice/dto/Customer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bookmymovie/movingbookingservice/dto/Location.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bookmymovie/movingbookingservice/dto/Movie.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bookmymovie/movingbookingservice/dto/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/bookmymovie/movingbookingservice/MovingbookingserviceApplicationTests.java" beforeDir="false" />
-    </list>
+    <list default="true" id="0692f9cb-c9d4-467e-8df2-405b5e79c859" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -76,21 +59,6 @@
     &quot;last_opened_file_path&quot;: &quot;/Users/nishchayanand/Documents/DEV/System Design/LLD/Backend/Case Studies/Movie Ticket Booking System/movingbookingservice&quot;
   }
 }</component>
-  <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="bookmovie" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="bookmovie" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
