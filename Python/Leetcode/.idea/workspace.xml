@@ -4,12 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="063abb2a-2524-4d2f-96bf-fd7f82161222" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/temp.py" beforeDir="false" />
+    <list default="true" id="83444d25-ec10-4fda-9d6a-358acb65ae30" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/Leetcode.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Case Studies/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Case Studies/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Case Studies/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Case Studies/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Case Studies/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Case Studies/temp.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Case Studies.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1/Notes.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/1/code.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../System Design/LLD/Backend/Case Studies/Movie Ticket Booking System/bookmovie/src/main/java/com/bookmyshow/bookmovie/controller/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../System Design/LLD/Backend/Case Studies/Movie Ticket Booking System/bookmovie/src/main/java/com/bookmyshow/bookmovie/controller/MovieController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -27,22 +33,23 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 8
-}</component>
-  <component name="ProjectId" id="2pNTWk3KC6AzEMuY4sOJ1niJs4G" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 0
+}]]></component>
+  <component name="ProjectId" id="2pk8Wy14uqzsAYIRG3DtJs24Oem" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.temp.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/nishchayanand/Documents/DEV/Python/Case Studies&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.code.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/nishchayanand/Documents/DEV/Python/Leetcode"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -53,11 +60,11 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="063abb2a-2524-4d2f-96bf-fd7f82161222" name="Changes" comment="" />
-      <created>1732605566575</created>
+      <changelist id="83444d25-ec10-4fda-9d6a-358acb65ae30" name="Changes" comment="" />
+      <created>1733298748412</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1732605566575</updated>
+      <updated>1733298748412</updated>
     </task>
     <servers />
   </component>
