@@ -165,19 +165,27 @@ Assume the logic that allows system to display the list of currently running mov
         
 ## Entities (Database Schema)
 
-1. `Customer`: `int` customerId, `varchar` name, `varchar` city, `varchar` state, `varchar` country, `varchar` email, `varchar` phone.
+1. `customer`: `int` customerId, `varchar` name, `varchar` city, `varchar` state, `varchar` country, `varchar` email, `varchar` phone.
 
-2. `Movie`: `int` movieId, `varchar` title, `varchar` genre, `date` releaseDate, `int` duration.
+2. `movie`: `int` movieId, `varchar` title, `varchar` genre, `date` releaseDate, `int` duration.
 
-3. `Show`: `int` showId, `int` movieId, `int` screenId, `date` showTime.
+3. `show`: `int` showId, `int` movieId, `int` theatreId, `int` screenId, `date` showTime.
 
-4. `Theatre`: `int` theatreId, `varchar` street, `varchar` city, `varchar` state, `varchar` country, `varchar` postalCode.
+4. `theatre`: `int` theatreId, `varchar` street, `varchar` city, `varchar` state, `varchar` country, `varchar` postalCode.
 
-5. `Screen`: `int` screenId, `varchar` screenName, `int` theatreId. 
+5. `screen`: `int` screenId, `varchar` screenName, `int` theatreId. 
 
-6. `Seat`: `int` seatId, `varchar` seatNumber, `varchar` seatType, `int` showId, `boolean` isBooked.
+6. `seat`: `int` seatId, `varchar` seatNumber, `varchar` seatType, `int` showId, `boolean` isBooked.
 
-7. `Booking`: `int` bookingId, `int` customerId, `int` showId, `int` totalAmount, `varchar` status.
+7. `booking`: `int` bookingId, `int` customerId, `int` showId, `int` totalAmount, `varchar` status.
+
+**Constraints:**
+
+- When a theatre is removed from the `theatre` table, all the screens belonging to that theatre should also be removed from the `screen` table.
+
+- When a movie is removed from the `movie` table, all the shows corresponding to that movie should also be removed from the `show` table.
+
+- When a theatre is removed from the `theatre` table, all the shows running in that theatre should also be removed from the `show` table. 
 
 ## Non-Functional Requirements
 

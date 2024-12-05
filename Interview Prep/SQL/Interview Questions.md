@@ -26,7 +26,21 @@ Q. What is the significance of **FOREIGN KEY**?
 
 ---
 
-Q. Explain `ON DELETE` and `ON UPDATE` clauses. 
+Q. Explain `ON DELETE` clause. 
+
+The `ON DELETE` clause allows you to control what happens to the rows in a child table when the corresponding row in the parent table is deleted.
+
+It is part of the FOREIGN KEY constraint and specifies the action to take on the child table when a delete operation occurs on the parent table. You can specify one of below mentioned actions using the `ON DELETE` clause:
+
+1. `CASCADE`: When a row in the parent table is deleted, all corresponding rows in the child table (that reference the parent table via the foreign key) are also deleted. For example, deleting a user record should automatically delete all associated orders.
+
+2. `SET NULL`: When a row in the parent table is deleted, the foreign key in the child table is set to NULL. For example, if a product is deleted from the inventory, you may want to set the **product_id** of related orders to **NULL**, indicating that the product is no longer available.
+
+3. `RESTRICT`: Prevents the deletion of a row in the parent table if any child records are referencing it. 
+
+> NOTE: When you define a foreign key constraint and don’t specify an `ON DELETE` action, it defaults to `RESTRICT` in most databases.
+
+--- 
 
 Q. Different types of JOIN operations supported by SQL.
 

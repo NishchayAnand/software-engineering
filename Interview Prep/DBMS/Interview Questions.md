@@ -1,5 +1,12 @@
 # DBMS Interview Questions
 
+Q. What is a schema?
+
+A schema is a logical structure within a database that organizes and groups database objects (like tables, views, stored procedures, and indexes) under a common namespace.
+
+---
+
+
 **Q. When to use Relational and when to use Non-relational?**
 
 A Relational database should be used where we have well-defined, predictable data, where transactions are important to us, where we find value in keeping the relationships between our tables.
