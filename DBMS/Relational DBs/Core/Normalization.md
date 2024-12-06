@@ -1,10 +1,16 @@
 # Normalization
 
-Normalization is the process of organizing data in the database.
+Normalization is a systematic approach to organizing data in a database to **reduce redundancy (duplicate data)** and improve data integrity. It involves dividing a database into smaller tables and defining relationships between them to ensure that data is logically stored and can be efficiently retrieved.
 
-One of the key driving factors behind normalization is to **reduce data redundancy**.
+## Normal Forms (NFs)
 
-Normalization is achieved through a series of steps, each defined by a **normal form**.
+Normalization is performed in stages called Normal Forms (NFs). Each form builds on the previous one to further reduce redundancy and improve structure. Below are the commonly used Normal Forms:
+
+### First Normal Form (1NF)
+
+- Ensure that each column contains atomic (indivisible) values.
+
+- Ensure that each row is unique.
 
 ## EXTRA
 
@@ -46,18 +52,7 @@ This rule ensures that each column in a table constains only `atomic` values, i.
 
 > NOTE: There is no such thing as row order within a relational database table.
 
-```
-Non-1NF Table:
-| OrderID | Product | Quantity |
-|---------|---------|----------|
-| 1       | A, B    | 2, 3     |
 
-1NF Table:
-| OrderID | Product | Quantity |
-|---------|---------|----------|
-| 1       | A       | 2        |
-| 1       | B       | 3        |
-```
 
 ### Second Normal Form (2NF)
 
@@ -104,26 +99,7 @@ It advises the removal of fields in a table that are independent of the key, gua
 - **Second Normal Form Compliance**: The table must be in 2NF.
 - **Eliminate Transitive Dependency**: Ensure that non-key attributes are not dependent on other non-key attributes.
 
-```
-Non-3NF Table:
-| ProductID | ProductName | SupplierID | SupplierName |
-|-----------|-------------|------------|--------------|
-| 101       | A           | 201        | Supplier X   |
-| 102       | B           | 202        | Supplier Y   |
 
-3NF Tables:
-Products Table:
-| ProductID | ProductName | SupplierID |
-|-----------|-------------|------------|
-| 101       | A           | 201        |
-| 102       | B           | 202        |
-
-Suppliers Table:
-| SupplierID | SupplierName |
-|------------|--------------|
-| 201        | Supplier X   |
-| 202        | Supplier Y   |
-```
 
 > **NOTE:** There are higher normal forms such as fourth and fifth, however, achieving third normal form is considered necessary in most cases.
 
