@@ -1,10 +1,10 @@
 # Java Persistence API (JPA) Interview Questions
 
-Q. What is an Entity?
+Q. Explain DAO (Data Access Object) pattern.
 
-An Entity represents a real-world object or concept that has a distinct identity and is typically mapped to a row in a database table. This mapping can be done manually or with an ORM (Object-Relational Mapping) tool.
+The Data Access Object (or DAO) pattern is a structural design pattern used to separate a data resource's client interface from its data access mechanisms. This allows data access mechanisms to change independently of the code that uses the data.
 
-> NOTE: Each entity instance is uniquely identifiable, typically using a primary key (e.g., id in a database).
+> NOTE: DAO can be used when working with a simple application or when direct database operations are the primary concern (ideal for small-scale projects or when the complexity of domain logic is low).
 
 ---
 
@@ -16,8 +16,13 @@ A Data Transfer Object (DTO) is a plain object designed to carry data between la
 
 ---
 
-Q. Explain DAO (Data Access Object) pattern.
+Q. What is an Entity?
 
-The Data Access Object (or DAO) pattern is a structural design pattern used to separate a data resource's client interface from its data access mechanisms. This allows data access mechanisms to change independently of the code that uses the data.
+An Entity represents a real-world object or concept that has a distinct identity and is typically mapped to a row in a database table. This mapping can be done manually or with an ORM (Object-Relational Mapping) tool.
 
-> NOTE: DAO can be used when working with a simple application or when direct database operations are the primary concern (ideal for small-scale projects or when the complexity of domain logic is low).
+> NOTE: Each entity instance is uniquely identifiable, typically using a primary key (e.g., id in a database).
+
+---
+
+
+
