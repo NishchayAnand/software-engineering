@@ -50,5 +50,21 @@ Q. Different types of JOIN operations supported by SQL.
 
 3. `RIGHT JOIN (or RIGHT OUTER JOIN)`: Returns all rows from the right table, and the matching rows from the left table. Non-matching rows from the left table are filled with **NULL**.
 
-4. `FULL JOIN (or FULL OUTER JOIN)`: 
+4. `FULL JOIN (or FULL OUTER JOIN)`: Returns all rows from both tables, filling in **NULL** values where matches do not exist.
+
+5. `CROSS JOIN`: Returns the Cartesian product of the two tables. 
+
+> NOTE: Joins in SQL (except `CROSS JOIN`) use the condition specified in the `ON` clause to match rows between two tables.
+
+---
+
+Q. What is `COALESCE`?
+
+The `COALESCE` function in SQL is used to return the first non-NULL value from a list of expressions. It is often used to handle NULL values and provide default values in queries.
+
+---
+
+
+
+
 

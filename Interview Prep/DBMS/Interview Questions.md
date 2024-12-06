@@ -6,6 +6,10 @@ A schema is a logical structure within a database that organizes and groups data
 
 ---
 
+Q. What is normalization?
+
+---
+
 
 **Q. When to use Relational and when to use Non-relational?**
 
