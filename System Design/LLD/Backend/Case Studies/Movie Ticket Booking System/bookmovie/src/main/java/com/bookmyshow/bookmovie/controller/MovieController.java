@@ -1,7 +1,7 @@
 package com.bookmyshow.bookmovie.controller;
 
 import com.bookmyshow.bookmovie.dto.Location;
-import com.bookmyshow.bookmovie.dto.Movie;
+import com.bookmyshow.bookmovie.model.Movie;
 import com.bookmyshow.bookmovie.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,7 +1,7 @@
 package com.bookmyshow.bookmovie.service;
 
 import com.bookmyshow.bookmovie.dto.Location;
-import com.bookmyshow.bookmovie.dto.Movie;
+import com.bookmyshow.bookmovie.model.Movie;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.bookmyshow.bookmovie.dto;
+package com.bookmyshow.bookmovie.model;
 
 public class User {
     private String emailId;
