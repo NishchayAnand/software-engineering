@@ -66,4 +66,4 @@ By default, `@Autowired` performs injection by type. However, when multiple bean
 
 ---
 
-Q. 
+Q. Explain `@Transactional` annotation.
