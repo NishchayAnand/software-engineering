@@ -25,21 +25,47 @@ The browser offloads Web API calls to different threads or subsystems, allowing 
 
 Q. What is a `Callback`?
 
-A callback is a function that is passed as an argument to another function and is executed after some operation has been completed. 
+A callback is a function that is passed as an argument to another function and is executed after some operation (usually asynchronous) has been completed. 
 
 ---
 
 Q. What is Callback Hell?
 
+Callback hell refers to the situation when you have multiple nested callbacks, making the code difficult to read, understand, and maintain. This often occurs when asynchronous functions are chained together without proper structure.
 
+```
+function task1(callback) {
+    setTimeout(() => {
+        console.log('Task1 completed.');
+        callback();
+    }, 1000); // Simulating an async operation
+}
+
+function task2(callback) {
+    setTimeout(() => {
+        console.log('Task2 completed.');
+        callback();
+    }, 1000); // Simulating an async operation
+}
+
+function task3() {
+    setTimeout(()=> {
+        console.log('Task3 completed');
+    }, 1000); // Simulating an async operation
+}
+
+task1(() => {
+    task2(() => {
+        task3();
+    });    
+});
+```
 
 ---
 
 Q. What is a `Promise`?
 
-Promises help in managing asynchronous operations, such as server requests in JavaScript. Earlier, **callbacks** were used for the same purpose. However, callbacks have limited functionality and, thus, can make the code unmanageable. 
-
-A promise constructor uses a callback with two parameters - resolve and reject - to create a promise. 
+Link: https://www.youtube.com/watch?v=Xs1EMmBLpn4
 
 ---
 
