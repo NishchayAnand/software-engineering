@@ -10,8 +10,9 @@ data = [[101, 'John', 'A', None],
         [106, 'Ron', 'B', 101]]
 
 # Create the DataFrame
-employee = pd.DataFrame(data, columns=['id', 'name', 'department', 'managerId'])
+employee = (pd.DataFrame(data, columns=['id', 'name', 'department', 'managerId'])
+                .astype({'id': 'int64', 'name': 'object', 'department': 'object', 'managerId': 'Int64'}))
 
 # Perform a self-join using merge to link managerId with manager name
-merged = pd.merge(employee, employee, left_on='managerId', right_on='id', how='left', suffixes=('_employee', '_manager'))
-print(merged)
+merged = pd.merge(employee, employee, left_on='managerId', right_on='id', how='left', 
+                  suffixes=('_employee', '_manager'))

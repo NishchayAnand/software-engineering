@@ -22,6 +22,7 @@ Given an **Employee** dataframe where each row indicates the **id** of the emplo
 - Task is to return the names of managers (employees) whose count of reportees (employees) is greater than or equal to 5. 
 
 - Use the **merge()** function to perform a self-join on the Employee dataframe to associate each managerId with the corresponding manager's name.
+
     ```
     merged = pd.merge(employee, employee how="left", left_on='managerId', right_on='id', suffixes=('_employee', '_manager'))
 
@@ -35,7 +36,8 @@ Given an **Employee** dataframe where each row indicates the **id** of the emplo
     |106          |Ron            |B                    |101                |101         |John          |A                   |NaN                |
     ```
 
-2. Group together rows having same managerId to get the count of employees reporting to each manager. 
+2. Use the **groupby()** method to group rows by managerId and count the number of employees reporting to each manager. 
+
     ```
     SELECT m.name, count(e.id) as reporteeCount FROM Employee e JOIN Employee m ON e.managerId = m.id GROUP BY m.managerId;
     ```

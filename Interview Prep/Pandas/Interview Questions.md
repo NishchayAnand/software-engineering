@@ -1,8 +1,8 @@
 # Pandas Interview Questions
 
-Q. Explain `merge` function.
+Q. Explain `merge()` function.
 
-The `merge` function in pandas provides a powerful and flexible way to join data, similar to SQL joins. It allows merging based on columns or indices from either or both DataFrames.
+The `merge()` function allows us to perform join operations on two dataframes, similar to SQL joins. It allows merging based on columns or indices (used rarely) from either or both DataFrames.
 
 ```
 Syntax: pd.merge(
@@ -18,3 +18,14 @@ Syntax: pd.merge(
         )
 ```
 ---
+
+Q. Explain `groupby()` function.
+
+---
+
+Any groupby process involves the combination of the following 3 steps:
+
+1. **Splitting the Original Object into Groups**:
+
+2. Applying a function to each group:
+3. Combining the results: 
