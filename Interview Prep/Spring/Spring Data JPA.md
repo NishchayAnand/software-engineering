@@ -25,3 +25,11 @@ The choice between using a repository or a DAO depends on the specific responsib
 > NOTE: In a modern Spring Boot application, especially when using JPA or Spring Data, repositories are the preferred abstraction.
 
 ---
+
+Q. Explain Spring Data JPA Repository.
+
+The Spring Data JPA Repository is an abstraction provided by Spring Data to simplify the implementation of the Repository Pattern for data access in JPA-based applications. 
+
+> NOTE: Spring Data JPA Repository eliminates boilerplate code by dynamically generating proxy instances of the repository interface at runtime, allowing developers to focus on business logic.
+
+---

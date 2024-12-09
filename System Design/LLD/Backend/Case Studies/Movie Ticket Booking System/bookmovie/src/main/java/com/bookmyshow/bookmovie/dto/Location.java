@@ -1,16 +1,18 @@
 package com.bookmyshow.bookmovie.dto;
 
+import lombok.Getter;
+
+@Getter
 public class Location {
     private String street;
-    private String city;
-    private String state;
+    private final String city;
+    private final String state;
     private String country;
     private String postalCode;
 
     public Location(String city, String state) {
         this.city = city;
         this.state = state;
-        this.country = "India";
     }
 
     public Location(String street, String city, String state, String country, String postalCode) {
