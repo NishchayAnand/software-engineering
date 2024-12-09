@@ -1,5 +1,9 @@
 # Python Interview Questions
 
+
+
+## EXTRA
+
 Q. Difference between args and kwargs.
 
 `*args` and `**kwargs` are used in Python functions to allow them to accept an arbitrary number of arguments.

@@ -96,8 +96,6 @@ Normalization is performed in stages called Normal Forms (NFs). Each form builds
     | Dr. Brown  | brown@uni.com    |
     ```
 
-
-
 ### EXTRA
 
 
