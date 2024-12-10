@@ -41,3 +41,5 @@ Q. Explain the difference between Simple Factory and Factory Method design patte
    ```
 
 ---
+
+Q. Explain Template pattern.

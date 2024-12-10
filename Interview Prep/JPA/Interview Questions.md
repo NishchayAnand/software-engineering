@@ -54,5 +54,7 @@ An EntityManagerFactory is responsible for creating EntityManager instances.
 
 Q. What is Hibernate?
 
+Hibernate is a Java-based Object-Relational Mapping (ORM) framework that simplifies interaction between Java applications and relational databases. It **automatically maps Java objects to database tables and vice versa**, allowing developers to work with objects instead of SQL queries.
+
 
 

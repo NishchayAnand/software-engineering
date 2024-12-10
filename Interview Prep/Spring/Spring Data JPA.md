@@ -30,6 +30,12 @@ Q. Explain Spring Data JPA Repository.
 
 The Spring Data JPA Repository is an abstraction provided by Spring Data to simplify the implementation of the Repository Pattern for data access in JPA-based applications. 
 
-> NOTE: Spring Data JPA Repository eliminates boilerplate code by dynamically generating proxy instances of the repository interface at runtime, allowing developers to focus on business logic.
+Provides pre-defined repository interfaces (CrudRepository, JpaRepository) for common CRUD operations like save, findById, delete, etc.
+
+Spring Data JPA supports two powerful ways of querying data:
+- **Query Derivation**: Automatically generates queries based on method names.
+- **Custom Queries**: Allows defining JPQL or native SQL queries using the `@Query` annotation.
+
+> NOTE: Spring Data JPA eliminates boilerplate code by **dynamically generating proxy instances of the repository interface at runtime**, allowing developers to focus on business logic.
 
 ---
