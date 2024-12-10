@@ -13,6 +13,12 @@ data = [[101, 'John', 'A', None],
 employee = (pd.DataFrame(data, columns=['id', 'name', 'department', 'managerId'])
                 .astype({'id': 'int64', 'name': 'object', 'department': 'object', 'managerId': 'Int64'}))
 
-# Perform a self-join using merge to link managerId with manager name
-merged = pd.merge(employee, employee, left_on='managerId', right_on='id', how='left', 
-                  suffixes=('_employee', '_manager'))
+# Step 1: Group by managerId and count the number of employees reporting to each manager.
+direct_reports_count = employee.groupby('managerId').size().reset_index(name='direct_reports')
+
+# Step 2: Filter managerIds where the direct report's count is greater than or equal to 5.
+direct_reports_count = direct_reports_count[direct_reports_count['direct_reports'] >= 5]
+
+# Step 3: Perform a left-join between direct_reports_count and employee dataframe to link manager's id with manager's name.
+direct_reports_count.rename(columns={'managerId': 'id'}, inplace=True)
+merged = pd.merge(direct_reports_count, employee, how='left', on='id')

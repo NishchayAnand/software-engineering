@@ -23,30 +23,31 @@ Given an **Employee** dataframe where each row indicates the **id** of the emplo
 
 ## Algorithm
 
-1. Use the **groupby()** method to group rows by managerId and count the number of employees reporting to each manager. 
+1. Use the **groupby()** method to group rows by `managerId` and count the number of employees reporting to each manager. 
 
     ```
-    reportee_count = employee.groupby('managerId').size().reset_index(name='reportee_count')
-    reportee_count.rename(columns={'managerId': 'id'}, inplace=True)
+    direct_reports_count = employee.groupby('managerId').size().reset_index(name='direct_reports')
 
-    | id | reportee_count |
-    |----|-----------------|
-    |101 |5                |
+    | managerId | direct_reports |
+    |-----------|----------------|
+    |101        |5               |
     ```
 
-2. Filter managerIds where the count of reportees is greater than or equal to 5.
-    ```
-    reportee_count = reportee_count[reportee_count['reportee_count'] >= 5]
-
-    | id | reportee_count |
-    |----|-----------------|
-    |101 |5                |
-    ```
-
-3. Use the **merge()** function to perform a self-join to associate each managerId with the corresponding manager's name.
+2. Filter managerIds where the direct report's count is greater than or equal to 5.
 
     ```
-    merged = pd.merge(reportee_count, employee, how='left', on='id')
+    direct_reports_count = direct_reports_count[direct_reports_count['direct_reports'] >= 5]
+
+    | managerId | direct_reports |
+    |-----------|----------------|
+    |101        |5               |
+    ```
+
+3. Use the **merge()** function to perform a left join between `direct_reports_count` and `employee` dataframe to link manager's `id` with manager's `name`.
+
+    ```
+    direct_reports_count.rename(columns={'managerId': 'id'}, inplace=True)
+    merged = pd.merge(direct_reports_count, employee, how='left', on='id')
 
     | id | reportee_count | name | department | managerId |
     |----|----------------|------|------------|-----------|
