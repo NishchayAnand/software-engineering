@@ -2,6 +2,18 @@
 
 Q. What is Spring Data JPA?
 
+Spring Data JPA is a module of the Spring Data project, built on top of JPA and Hibernate (or any other JPA implementation), making it easier to develop robust and database-independent data access logic in Spring applications.
+
+---
+
+Q. Explain key features provided by Spring Data JPA.
+
+1. Provides repository interfaces like `JpaRepository` and `CrudRepository` that include pre-defined methods for common database operations (e.g., save, delete, find, etc.), eliminating the need for boilerplate code. 
+
+2. Supports **query derivation**, i.e., methods in repositories can automatically generate queries based on their names.
+
+3. Supports the use of custom `JPQL` or native SQL queries using the `@Query` annotation.
+
 ---
 
 Q. What is Domain-Driven Design?
