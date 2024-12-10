@@ -14,6 +14,8 @@ Q. Explain key features provided by Spring Data JPA.
 
 3. Supports the use of custom `JPQL` or native SQL queries using the `@Query` annotation.
 
+> NOTE: Spring Data JPA eliminates boilerplate code by **dynamically generating proxy instances of the repository interface at runtime**, allowing developers to focus on business logic.
+
 ---
 
 Q. What is Domain-Driven Design?
@@ -39,19 +41,5 @@ The choice between using a repository or a DAO depends on the specific responsib
 - **Repository**: If your application deals with complex business problems, using Repository simplify the domain logic, making it easier to focus on business processes without getting bogged down by the intricacies of data access.
 
 > NOTE: In a modern Spring Boot application, especially when using JPA or Spring Data, repositories are the preferred abstraction.
-
----
-
-Q. Explain Spring Data JPA Repository.
-
-The Spring Data JPA Repository is an abstraction provided by Spring Data to simplify the implementation of the Repository Pattern for data access in JPA-based applications. 
-
-Provides pre-defined repository interfaces (CrudRepository, JpaRepository) for common CRUD operations like save, findById, delete, etc.
-
-Spring Data JPA supports two powerful ways of querying data:
-- **Query Derivation**: Automatically generates queries based on method names.
-- **Custom Queries**: Allows defining JPQL or native SQL queries using the `@Query` annotation.
-
-> NOTE: Spring Data JPA eliminates boilerplate code by **dynamically generating proxy instances of the repository interface at runtime**, allowing developers to focus on business logic.
 
 ---

@@ -1,13 +1,14 @@
 package com.bookmyshow.bookmovie.repository;
 
 import com.bookmyshow.bookmovie.model.Movie;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class MovieRepository {
+@Repository
+public interface MovieRepository extends JpaRepository<Movie, Long> {
 
-    public List<Movie> findMoviesByLocation(String city, String state) {
-        return new ArrayList<>();
-    }
+    public List<Movie> findMoviesByLocation(String city, String state);
+
 }

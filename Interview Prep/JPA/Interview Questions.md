@@ -81,7 +81,15 @@ Q. Explain common JPA annotations.
 
     - `@OneToOne`, `@OneToMany`, `@ManyToOne`, `@ManyToMany`: Define relationships between entities.
     - `@JoinColumn`: Specifies the foreign key column.
-    
+
+---
+
+Q. Explain the difference between `GenerationType.AUTO` and `GenerationType.IDENTITY`.
+
+- `GenerationType.AUTO`: Allows the persistence provider (e.g., Hibernate) to automatically choose the best strategy for primary key generation based on the underlying database and JPA provider defaults. **The actual strategy chosen can vary depending on the database type and its capabilities**.
+
+- `GenerationType.IDENTITY`: Explicitly instructs the database to generate the primary key value using an auto-increment column, where the database automatically generates the next available key for each new row. **This strategy requires that the underlying database supports auto-increment functionality**.
+
 ---
 
 Q. What is JPQL (Java Persistence Query Language)?

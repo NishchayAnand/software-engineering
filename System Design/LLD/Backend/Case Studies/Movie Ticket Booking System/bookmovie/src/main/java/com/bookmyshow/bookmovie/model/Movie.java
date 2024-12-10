@@ -1,8 +1,14 @@
 package com.bookmyshow.bookmovie.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 import java.time.LocalDate;
 
+@Entity
 public class Movie {
+    @Id
+    @
     private int movieId;
     private String title;
     private String genre;
