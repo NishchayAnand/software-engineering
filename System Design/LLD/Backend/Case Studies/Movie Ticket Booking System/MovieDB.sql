@@ -23,11 +23,10 @@ VALUES
     ('The Matrix', 'Sci-Fi', '1999-03-31', '02:16:00'),
     ('Avengers: Endgame', 'Action', '2019-04-26', '03:01:00'),
     ('Titanic', 'Romance', '1997-12-19', '03:14:00');
-    
-SELECT * FROM movie;
 
 CREATE TABLE theatre (
 	theatre_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50),
     street VARCHAR(100) NOT NULL,
     city VARCHAR(20) NOT NULL,
     state VARCHAR(20) NOT NULL,
@@ -35,13 +34,11 @@ CREATE TABLE theatre (
     postal_code VARCHAR(10)
 );
 
-INSERT INTO theatre (street, city, state, country, postal_code) 
+INSERT INTO theatre (street, name, city, state, country, postal_code) 
 VALUES
-	('1234 Broadway St', 'New York', 'NY', 'USA', '10001'),
-    ('5678 Sunset Blvd', 'Los Angeles', 'CA', 'USA', '90001'),
-    ('9 Elm Street', 'Chicago', 'IL', 'USA', '60601');
-    
-SELECT * FROM theatre;
+	('Broadway Theatre', '1234 Broadway St', 'New York', 'NY', 'USA', '10001'),
+    ('Sunset Cinema', '5678 Sunset Blvd', 'Los Angeles', 'CA', 'USA', '90001'),
+    ('Elm Street Theater', '9 Elm Street', 'Chicago', 'IL', 'USA', '60601');
 
 CREATE TABLE screen (
 	screen_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -57,10 +54,8 @@ VALUES
         ('A', 2),
         ('A', 3),
         ('B', 3);
-        
-SELECT * FROM screen;
 
-CREATE TABLE movie_show (
+CREATE TABLE shows (
 	show_id INT AUTO_INCREMENT PRIMARY KEY,
     movie_id INT NOT NULL,
     theatre_id INT NOT NULL,
@@ -71,12 +66,44 @@ CREATE TABLE movie_show (
     FOREIGN KEY (screen_id) REFERENCES screen (screen_id) ON DELETE CASCADE
 );
 
-INSERT INTO movie_show (movie_id, theatre_id, screen_id, show_time)
+INSERT INTO shows (movie_id, theatre_id, screen_id, show_time)
 VALUES 
 	(1, 1, 1, '10:00:00'),
     (1, 2, 3, '10:00:00'), 
     (2, 2, 3, '14:00:00'),
     (3, 1, 1, '05:00:00');
     
-SELECT * FROM movie_show;
+# Get movies by location
+
+SELECT 
+	m.movie_id,
+    m.title,
+    s.show_id,
+    s.show_time,
+    s.theatre_id,
+    t.name,
+    t.street,
+    t.city,
+    t.state,
+    t.country
+FROM 
+	movie m 
+JOIN 
+	shows s ON m.movie_id = s.movie_id
+JOIN 
+	theatre t ON s.theatre_id = t.theatre_id;
+
+
+SELECT DISTINCT 
+	m.movie_id, 
+    m.title, 
+    m.genre, 
+    m.release_date, 
+    m.duration 
+FROM 
+	movie m 
+JOIN 
+	shows s ON m.movie_id = s.movie_id
+JOIN 
+	theatre t ON s.theatre_id = t.theatre_id;
 
