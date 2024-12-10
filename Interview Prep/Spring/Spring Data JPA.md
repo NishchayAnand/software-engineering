@@ -1,5 +1,9 @@
 # Spring Data JPA Interview Questions
 
+Q. What is Spring Data JPA?
+
+---
+
 Q. What is Domain-Driven Design?
 
 Domain-Driven Design is a methodology and set of principles for designing complex software applications that are closely aligned with the core business domain. The key idea behind DDD is that software should be based on an in-depth understanding of the business, and the design should reflect that understanding.

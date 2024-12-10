@@ -1,5 +1,17 @@
 # Java Persistence API (JPA) Interview Questions
 
+Q. What is JPA (Java Persistence API)?
+
+Java Persistence API (JPA) is a standard specification in Java that defines a set of rules and interfaces for object-relational mapping (ORM) and data persistence. It allows developers to **automatically map Java objects (entities) to database tables** and **handle database operations without writing explicit SQL queries**.
+
+---
+
+Q. What is Hibernate?
+
+Hibernate is a Java-based **Object-Relational Mapping (ORM) framework that implements JPA** and extends its functionality with additional features.
+
+---
+
 Q. Explain DAO (Data Access Object) pattern.
 
 The Data Access Object (or DAO) pattern is a structural design pattern used to separate a data resource's client interface from its data access mechanisms. This allows data access mechanisms to change independently of the code that uses the data.
@@ -52,9 +64,28 @@ An EntityManagerFactory is responsible for creating EntityManager instances.
 
 ---
 
-Q. What is Hibernate?
+Q. Explain common JPA annotations.
 
-Hibernate is a Java-based Object-Relational Mapping (ORM) framework that simplifies interaction between Java applications and relational databases. It **automatically maps Java objects to database tables and vice versa**, allowing developers to work with objects instead of SQL queries.
+1. **Entity Mapping:**
+
+    - `@Entity`: Marks a class as an entity.
+    - `@Table`: Specifies the table name (optional, defaults to class name).
+
+2. **Field Mapping:**
+
+    - `@Id`: Marks the primary key.
+    - `@GeneratedValue`: Specifies how the primary key value is generated.
+    - `@Column`: Customizes the column mapping.
+
+3. **Relationships:**
+
+    - `@OneToOne`, `@OneToMany`, `@ManyToOne`, `@ManyToMany`: Define relationships between entities.
+    - `@JoinColumn`: Specifies the foreign key column.
+    
+---
+
+Q. What is JPQL (Java Persistence Query Language)?
+
 
 
 
