@@ -92,9 +92,15 @@ Q. Explain the difference between `GenerationType.AUTO` and `GenerationType.IDEN
 
 ---
 
+Q. Explain JPA relationships. 
+
+---
+
 Q. What is JPQL (Java Persistence Query Language)?
 
 JPQL (Java Persistence Query Language) is a query language used to interact with relational databases in Java applications that use JPA (Java Persistence API). It allows developers to create queries using the entity model defined in their Java code, rather than using direct SQL queries on the database.
+
+**NOTE:** JPQL is database-agnostic, meaning the same JPQL query should work across different relational databases as long as they are properly mapped with JPA.
 
 ```
 Example: A basic JPQL query to find a movie by its title.
@@ -103,9 +109,15 @@ Example: A basic JPQL query to find a movie by its title.
 Movie findByTitle(@Param("title") String title);
 ```
 
-> NOTE: JPQL is database-agnostic, meaning the same JPQL query should work across different relational databases as long as they are properly mapped with JPA.
+---
+
+Q. Will the following query: `SELECT DISTINCT m FROM Movie m JOIN m.shows s WHERE s.theatre.city = :city")` work if the `Movie` entity does not have a `List<Show> shows` field?
+
+JPQL relies on the mappings defined in your JPA entities to construct queries. If `Movie` does not have a relationship with `Show` (e.g., `@OneToMany` with `List<Show>`), the path expression `m.shows` is invalid because JPQL cannot navigate to the `Show` entity from `Movie`.
 
 ---
+
+
 
 
 

@@ -58,3 +58,9 @@ Q. Explain Proxy Design Pattern.
 
 
 ---
+
+Q. What is the role of `final` keyword in Singleton Pattern?
+
+Declaring the instance variable as `final` ensures that the singleton instance cannot be reassigned once initialized. This guarantees that the same instance is used throughout the application's lifecycle.
+
+> NOTE: Any object assigned to a `final` variable is fully constructed before being visible to other threads (due to Java's memory model). Hence, it is typically used for **eager initialization, where the singleton instance is created at class-loading time**.

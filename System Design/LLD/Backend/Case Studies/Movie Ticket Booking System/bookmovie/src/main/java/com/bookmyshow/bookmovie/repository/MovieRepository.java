@@ -10,8 +10,6 @@ import java.util.List;
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long> {
 
-    @Query("SELECT DISTINCT m FROM Movie m" +
-            "JOIN m.shows s ")
     public List<Movie> findMoviesByLocation(String city, String state);
 
 }

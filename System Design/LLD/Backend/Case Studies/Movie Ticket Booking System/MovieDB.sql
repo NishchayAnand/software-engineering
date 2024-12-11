@@ -1,5 +1,5 @@
 
-CREATE DATABASE movieDB;
+# CREATE DATABASE movieDB;
 
 USE movieDB;
 
@@ -8,21 +8,21 @@ CREATE TABLE movie (
     title VARCHAR(100) NOT NULL,
     genre VARCHAR(20),
     release_date DATE,
-    duration TIME
+    duration INT
 );
 
 INSERT INTO movie (title, genre, release_date, duration)
 VALUES
-	('Inception', 'Sci-Fi', '2010-07-16', '02:28:00'),
-    ('The Shawshank Redemption', 'Drama', '1994-09-23', '02:22:00'),
-    ('The Dark Knight', 'Action', '2008-07-18', '02:32:00'),
-    ('Forrest Gump', 'Drama', '1994-07-06', '02:22:00'),
-    ('Interstellar', 'Sci-Fi', '2014-11-07', '02:49:00'),
-    ('The Godfather', 'Crime', '1972-03-24', '02:55:00'),
-    ('Pulp Fiction', 'Crime', '1994-10-14', '02:34:00'),
-    ('The Matrix', 'Sci-Fi', '1999-03-31', '02:16:00'),
-    ('Avengers: Endgame', 'Action', '2019-04-26', '03:01:00'),
-    ('Titanic', 'Romance', '1997-12-19', '03:14:00');
+	('Inception', 'Sci-Fi', '2010-07-16', 120),
+    ('The Shawshank Redemption', 'Drama', '1994-09-23', 135),
+    ('The Dark Knight', 'Action', '2008-07-18', 150),
+    ('Forrest Gump', 'Drama', '1994-07-06', 150),
+    ('Interstellar', 'Sci-Fi', '2014-11-07', 120),
+    ('The Godfather', 'Crime', '1972-03-24', 180),
+    ('Pulp Fiction', 'Crime', '1994-10-14', 180),
+    ('The Matrix', 'Sci-Fi', '1999-03-31', 180),
+    ('Avengers: Endgame', 'Action', '2019-04-26', 160),
+    ('Titanic', 'Romance', '1997-12-19', 135);
 
 CREATE TABLE theatre (
 	theatre_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -78,9 +78,7 @@ VALUES
 SELECT 
 	m.movie_id,
     m.title,
-    s.show_id,
     s.show_time,
-    s.theatre_id,
     t.name,
     t.street,
     t.city,
