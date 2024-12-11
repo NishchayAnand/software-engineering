@@ -43,11 +43,11 @@ Given an **Employee** dataframe where each row indicates the **id** of the emplo
     |101        |5               |
     ```
 
-3. Use the **merge()** function to perform a left join between `direct_reports_count` and `employee` dataframe to link manager's `id` with manager's `name`.
+3. Use the **merge()** function to perform an inner join between `direct_reports_count` and `employee` dataframe to link manager's `id` with manager's `name`.
 
     ```
     direct_reports_count.rename(columns={'managerId': 'id'}, inplace=True)
-    merged = pd.merge(direct_reports_count, employee, how='left', on='id')
+    merged = pd.merge(direct_reports_count, employee, on='id')
 
     | id | reportee_count | name | department | managerId |
     |----|----------------|------|------------|-----------|
