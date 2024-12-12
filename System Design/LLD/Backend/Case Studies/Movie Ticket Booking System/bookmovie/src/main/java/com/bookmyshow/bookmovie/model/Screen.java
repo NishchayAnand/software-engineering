@@ -13,14 +13,15 @@ public class Screen {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="screen_id")
-    private Long screenId;
+    private Long id;
 
-    @Column(name="screen_name")
-    private String screenName;
+    private String name;
 
-    @OneToOne
-    @JoinColumn(name="theatre_id")
+    @OneToOne // Unidirectional Relationship
+    @JoinColumn(name="theatre_id", referencedColumnName = "id")
     private Theatre theatre; // foreign key column
+
+    @OneToMany(mappedBy = "screen", cascade = CascadeType.ALL)
+    private List<Show> shows;
 
 }

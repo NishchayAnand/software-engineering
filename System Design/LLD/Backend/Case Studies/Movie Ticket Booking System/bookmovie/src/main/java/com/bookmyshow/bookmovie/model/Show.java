@@ -14,15 +14,14 @@ public class Show {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="show_id")
-    private Long showId;
+    private Long id;
 
     @ManyToOne
-    @JoinColumn(name="movie_id") // foreign key column
+    @JoinColumn(name="movie_id", referencedColumnName = "id") // foreign key column
     private Movie movie;
 
     @OneToOne
-    @JoinColumn(name="screen_id") // foreign key column
+    @JoinColumn(name="screen_id", referencedColumnName = "id") // foreign key column
     private Screen screen;
 
     @Column(name="show_time")

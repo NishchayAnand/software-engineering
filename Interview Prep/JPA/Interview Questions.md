@@ -92,7 +92,44 @@ Q. Explain the difference between `GenerationType.AUTO` and `GenerationType.IDEN
 
 ---
 
-Q. Explain JPA relationships. 
+Q. Explain unidirectional relationship.
+
+A unidirectional relationship is a one-way relationship between two entities where only one entity knows about the association. This means that one entity references another, but the other entity does not have any reference back to the first entity.
+
+A unidirectional relationship has only an owning side.
+
+
+
+---
+
+Q. Explain Bidirectional relationship.
+
+The direction of a relationship can be either `bidirectional` or `unidirectional`. A bidirectional relationship has both an owning side and an inverse side. The owning side of a relationship determines how the Persistence runtime makes updates to the relationship in the database.
+
+ relationships must follow these rules.
+
+1. The inverse side of a bidirectional relationship must refer to its owning side by using the mappedBy element of the @OneToOne, @OneToMany, or @ManyToMany annotation. The mappedBy element designates the property or field in the entity that is the owner of the relationship.
+
+The many side of many-to-one bidirectional relationships must not define the mappedBy element. The many side is always the owning side of the relationship.
+
+For one-to-one bidirectional relationships, the owning side corresponds to the side that contains the corresponding foreign key.
+
+For many-to-many bidirectional relationships, either side may be the owning side.
+
+
+
+
+---
+
+Q. Explain `@JoinColumn` annotation. 
+
+The `@JoinColumn` annotation in JPA is used to **specify the foreign key column** for a relationship between two entities. It is **applied on the owning side** of the relationship and **defines how the association is represented and stored in the underlying database**.
+
+ Below are the key attributes of `@JoinColumn` and their explanations:
+
+ - **name**: Specifies the name of the foreign key column in the owning entity's table. Defaults to `{fieldName}_id`.
+
+ - **referencedColumnName**: Specifies the column in the referenced (target) entity table. Defaults to the primary key column of the referenced entity.
 
 ---
 

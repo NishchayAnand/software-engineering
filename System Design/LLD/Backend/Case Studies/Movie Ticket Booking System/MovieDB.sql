@@ -4,7 +4,7 @@
 USE movieDB;
 
 CREATE TABLE movie (
-	movie_id INT AUTO_INCREMENT PRIMARY KEY,
+	id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(100) NOT NULL,
     genre VARCHAR(20),
     release_date DATE,
@@ -25,7 +25,7 @@ VALUES
     ('Titanic', 'Romance', '1997-12-19', 135);
 
 CREATE TABLE theatre (
-	theatre_id INT AUTO_INCREMENT PRIMARY KEY,
+	id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50),
     street VARCHAR(100) NOT NULL,
     city VARCHAR(20) NOT NULL,
@@ -41,13 +41,13 @@ VALUES
     ('Elm Street Theater', '9 Elm Street', 'Chicago', 'IL', 'USA', '60601');
 
 CREATE TABLE screen (
-	screen_id INT AUTO_INCREMENT PRIMARY KEY,
-    screen_name VARCHAR(20) NOT NULL,
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(20) NOT NULL,
     theatre_id INT NOT NULL,
     FOREIGN KEY (theatre_id) REFERENCES theatre (theatre_id) ON DELETE CASCADE
 );
 
-INSERT INTO screen (screen_name, theatre_id) 
+INSERT INTO screen (name, theatre_id) 
 VALUES 
 		('A', 1),
         ('B', 1),
@@ -56,7 +56,7 @@ VALUES
         ('B', 3);
 
 CREATE TABLE shows (
-	show_id INT AUTO_INCREMENT PRIMARY KEY,
+	id INT AUTO_INCREMENT PRIMARY KEY,
     movie_id INT NOT NULL,
     theatre_id INT NOT NULL,
     screen_id INT NOT NULL,
