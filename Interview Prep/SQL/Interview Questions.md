@@ -58,12 +58,45 @@ Q. Different types of JOIN operations supported by SQL.
 
 ---
 
-Q. What is `COALESCE`?
+Q. Explain the `COALESCE()` function.
 
-The `COALESCE` function in SQL is used to return the first non-NULL value from a list of expressions. It is often used to handle NULL values and provide default values in queries.
+The `COALESCE()` function in SQL is used to return the first non-NULL value from a list of expressions. It is often used to handle NULL values and provide default values in queries.
 
 ---
 
+Q. Explain the `CASE` statement.
+
+The CASE statement in SQL is used for **conditional logic within queries**. It allows you to perform operations similar to `IF-THEN-ELSE` statements in programming languages, returning values based on specified conditions.
+
+Syntax:
+```
+CASE
+    WHEN condition1 THEN result1
+    WHEN condition2 THEN result2
+    ...
+    ELSE default_result
+END
+```
+
+---
+
+Q. Explain the `WITH` clause. 
+
+The WITH clause in SQL, also known as **Common Table Expression (CTE)**, is used to create a **temporary result set that can be referenced within the same query**. This is particularly useful for breaking complex queries into smaller, more readable steps.
+
+Syntax:
+```
+WITH cte_name AS (
+    SELECT column1, column2, ...
+    FROM table_name
+    WHERE condition
+)
+SELECT column1, column2
+FROM cte_name
+WHERE another_condition;
+```
+
+---
 
 
 

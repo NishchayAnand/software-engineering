@@ -48,14 +48,77 @@ Output:
 
 ## General Observations
 
-- time_stamp column `signups` table is irrelevant for our problem. 
+- The `time_stamp` column in the `signups` table is irrelevant for the problem. 
+
+- To get the `confirmation_rate` for each user, we need to have the `total_requests_count` and `confirmed_requests_count` for each user.
 
 ## Algorithm
 
-- perform left join between `signups` and `confirmations` table.
+1. **Join the `signups` and `confirmations` tables** to ensure that all users from the `signups` table are included, even if they don't have any entries in the `confirmations` table.
 
-- create a view containing user_id and total_confirmation_messages_count for each user.
+    ```
+    SELECT 
+        s.user_id, 
+        c.time_stamp, 
+        c.action 
+    FROM 
+        signups s 
+    LEFT JOIN 
+        confirmations c 
+    ON 
+        s.user_id = c.user_id;
+    ```
 
-- create a view containing user_id and confirmed_confirmation_messages_count for each user.
+2. **Aggregate (count)** the `total_requests_count` and `confirmed_requests_count` for each user.
 
-- join the above created views and get the result containing user_id and confirmation_rate for each user. 
+    ```
+    SELECT 
+	    s.user_id,
+        COUNT(c.action) AS total_requests_count,
+        SUM(CASE
+			    WHEN c.action = 'confirmed' THEN 1
+                ELSE 0
+		    END) AS confirmed_requests_count
+    FROM 
+	    signups s
+    LEFT JOIN 
+	    confirmations c
+    ON 
+	    s.user_id = c.user_id
+    GROUP BY
+	    s.user_id;
+    ```
+
+3. **Calculate** the `confirmation_rate` for each user.
+
+    ```
+    WITH confirmation_counts AS (
+	    SELECT 
+		    s.user_id,
+		    COUNT(c.action) AS total_requests_count,
+		    SUM(CASE
+			    WHEN c.action = 'confirmed' THEN 1
+                ELSE 0
+		    END) AS confirmed_requests_count
+	    FROM 
+		    signups s
+	    LEFT JOIN 
+		    confirmations c
+	    ON 
+		    s.user_id = c.user_id
+	    GROUP BY
+		    s.user_id
+    )
+    SELECT
+	    user_id,
+        ROUND(
+		    CASE
+			    WHEN total_requests_count = 0 THEN 0
+                ELSE confirmed_requests_count * 1.0 / total_requests_count
+		    END,
+            2
+	    ) AS confirmation_rate
+    FROM 
+	    confirmation_counts;
+    ```
+ 
