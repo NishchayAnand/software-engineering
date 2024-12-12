@@ -10,6 +10,10 @@ import java.util.List;
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long> {
 
+    @Query("SELECT m FROM Movie m " +
+            "JOIN .shows s " +
+            "WHERE s.screen.theatre.city = :city AND " +
+            "s.screen.theatre.state = :state")
     public List<Movie> findMoviesByLocation(String city, String state);
 
 }

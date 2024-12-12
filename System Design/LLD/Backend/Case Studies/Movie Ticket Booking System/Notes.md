@@ -195,17 +195,15 @@ Assume the logic that allows system to display the list of currently running mov
 
 3. **Improve Maintenance:** Adopting the singleton pattern for service and DAO classes reduces the overhead of creating and managing resources, ensures thread safety, maintains consistency in business logic or database operations, minimizes dependency management complexity, and simplifies the overall code structure.
 
-## FUTURE ENHANCEMENTS 
+## EXTRA
 
-1. Add reservation timeouts to hold seats temporarily while the customer completes payment.
+- When a screen is deleted/stopped working, nothing happens to the Theatre table. Hence, the theatre table/entity does not need a field / column to present its association with the screen table/entity. There can be a unidirectional relationship between screen and theatre, where the theatre doesn’t have reference back to the screen. 
 
-2. Use a queuing system for high-concurrency scenarios to serialize booking requests efficiently.
+- When a movie is removed/deleted, all shows associated with that movie should be removed. Hence, we need a bidirectional relationship between show and movie.
 
-## Links:
+- When a screen is deleted/stopped working, all shows associated with that screen should be removed. Hence, we need a bidirectional relationship between show and screen.
 
-- Concurrency: https://codeminion.hashnode.dev/how-does-bookmyshow-handle-concurrent-bookings#heading-db-locking
 
-- Concurrency: https://www.youtube.com/watch?v=ohdu6TUoE5s
  
 
 

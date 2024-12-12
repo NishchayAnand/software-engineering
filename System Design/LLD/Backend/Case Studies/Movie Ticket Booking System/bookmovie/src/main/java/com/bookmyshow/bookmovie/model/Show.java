@@ -20,7 +20,7 @@ public class Show {
     @JoinColumn(name="movie_id", referencedColumnName = "id") // foreign key column
     private Movie movie;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="screen_id", referencedColumnName = "id") // foreign key column
     private Screen screen;
 

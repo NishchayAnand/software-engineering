@@ -43,3 +43,13 @@ The choice between using a repository or a DAO depends on the specific responsib
 > NOTE: In a modern Spring Boot application, especially when using JPA or Spring Data, repositories are the preferred abstraction.
 
 ---
+
+Q. Explain `@Param` annotation.
+
+In Spring Data JPA, the `@Param` annotation is used to bind method parameters to named parameters in JPQL or native SQL queries. This helps improve query readability and provides a way to inject method arguments into the query dynamically.
+
+> NOTE: The `@Param` annotation is not a standard JPA or Hibernate annotation. 
+
+---
+
+

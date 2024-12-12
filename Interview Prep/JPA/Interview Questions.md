@@ -94,30 +94,39 @@ Q. Explain the difference between `GenerationType.AUTO` and `GenerationType.IDEN
 
 Q. Explain unidirectional relationship.
 
-A unidirectional relationship is a one-way relationship between two entities where only one entity knows about the association. This means that one entity references another, but the other entity does not have any reference back to the first entity.
+In a unidirectional relationship, only one entity maintains a reference to the other entity. This means:
 
-A unidirectional relationship has only an owning side.
+- **Owning Entity**: The entity that knows about the relationship and contains the foreign key.
 
+- **Referenced Entity**: The entity that does not maintain any reference back to the owning entity.
 
+The referenced entity is unaware of the relationship, making it a one-way association.
 
 ---
 
-Q. Explain Bidirectional relationship.
+Q. Explain bidirectional relationship.
 
-The direction of a relationship can be either `bidirectional` or `unidirectional`. A bidirectional relationship has both an owning side and an inverse side. The owning side of a relationship determines how the Persistence runtime makes updates to the relationship in the database.
+A bidirectional relationship in JPA is a two-way association between two entities where both entities are aware of each other. This means:
 
- relationships must follow these rules.
+- **Owning Entity**: One entity is designated as the "owner" of the relationship, responsible for managing and updating the foreign key in the database.
 
-1. The inverse side of a bidirectional relationship must refer to its owning side by using the mappedBy element of the @OneToOne, @OneToMany, or @ManyToMany annotation. The mappedBy element designates the property or field in the entity that is the owner of the relationship.
+- **Inverse Entity**: The other entity references the relationship using a `mappedBy` attribute, which links it back to the owning side.
 
-The many side of many-to-one bidirectional relationships must not define the mappedBy element. The many side is always the owning side of the relationship.
+This type of relationship allows navigation in both directions, from one entity to the other and vice versa.
 
-For one-to-one bidirectional relationships, the owning side corresponds to the side that contains the corresponding foreign key.
+> NOTE: The value of `mappedBy` should match the field name in the owning entity.
 
-For many-to-many bidirectional relationships, either side may be the owning side.
+---
 
+Q. Discuss the rules that must be followed while defining a bidirectional relationship.
 
+1. The inverse side of a bidirectional relationship must refer to its owning side by using the `mappedBy` attribute of the `@OneToOne`, `@OneToMany`, or `@ManyToMany` annotation.
 
+2. The many side of many-to-one bidirectional relationships must not define the `mappedBy` attribute. The many side is always the owning side of the relationship.
+
+3. For one-to-one bidirectional relationships, the owning side corresponds to the side that contains the corresponding foreign key.
+
+4. For many-to-many bidirectional relationships, either side may be the owning side.
 
 ---
 
@@ -133,18 +142,19 @@ The `@JoinColumn` annotation in JPA is used to **specify the foreign key column*
 
 ---
 
+Q. Explain `@Embedded` annotation.
+
+The `@Embedded` annotation in JPA is used to indicate that an instance of one class (an embedded object) is part of an entity, and its fields are mapped directly to the database table of the entity.
+
+The class being embedded does not have its own table, its attributes are mapped as columns in the table of the entity in which it is embedded.
+
+---
+
 Q. What is JPQL (Java Persistence Query Language)?
 
 JPQL (Java Persistence Query Language) is a query language used to interact with relational databases in Java applications that use JPA (Java Persistence API). It allows developers to create queries using the entity model defined in their Java code, rather than using direct SQL queries on the database.
 
 **NOTE:** JPQL is database-agnostic, meaning the same JPQL query should work across different relational databases as long as they are properly mapped with JPA.
-
-```
-Example: A basic JPQL query to find a movie by its title.
-
-@Query("SELECT m FROM Movie m WHERE m.title = :title")
-Movie findByTitle(@Param("title") String title);
-```
 
 ---
 
