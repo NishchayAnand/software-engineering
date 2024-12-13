@@ -203,6 +203,8 @@ Assume the logic that allows system to display the list of currently running mov
 
 - When a screen is deleted/stopped working, all shows associated with that screen should be removed. Hence, we need a bidirectional relationship between show and screen.
 
+- We cannot have two shows running on a screen in a theatre at same time. How to make sure this doesn't happen?
+
 
  
 

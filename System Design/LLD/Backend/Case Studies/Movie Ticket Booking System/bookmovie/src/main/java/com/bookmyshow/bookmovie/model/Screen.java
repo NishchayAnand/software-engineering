@@ -17,7 +17,7 @@ public class Screen {
 
     private String name;
 
-    @OneToOne // Unidirectional Relationship
+    @ManyToOne
     @JoinColumn(name="theatre_id", referencedColumnName = "id")
     private Theatre theatre; // foreign key column
 

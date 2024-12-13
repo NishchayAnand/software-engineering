@@ -44,7 +44,7 @@ CREATE TABLE screen (
 	id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(20) NOT NULL,
     theatre_id INT NOT NULL,
-    FOREIGN KEY (theatre_id) REFERENCES theatre (theatre_id) ON DELETE CASCADE
+    FOREIGN KEY (theatre_id) REFERENCES theatre (id) ON DELETE CASCADE
 );
 
 INSERT INTO screen (name, theatre_id) 
@@ -58,27 +58,27 @@ VALUES
 CREATE TABLE shows (
 	id INT AUTO_INCREMENT PRIMARY KEY,
     movie_id INT NOT NULL,
-    theatre_id INT NOT NULL,
     screen_id INT NOT NULL,
-    show_time TIME NULL,
-    FOREIGN KEY (movie_id) REFERENCES movie (movie_id) ON DELETE CASCADE,
-    FOREIGN KEY (theatre_id) REFERENCES theatre (theatre_id) ON DELETE CASCADE,
-    FOREIGN KEY (screen_id) REFERENCES screen (screen_id) ON DELETE CASCADE
+    show_time TIME NOT NULL,
+    FOREIGN KEY (movie_id) REFERENCES movie (id) ON DELETE CASCADE,
+    FOREIGN KEY (screen_id) REFERENCES screen (id) ON DELETE CASCADE
 );
 
-INSERT INTO shows (movie_id, theatre_id, screen_id, show_time)
+INSERT INTO shows (movie_id, screen_id, show_time)
 VALUES 
-	(1, 1, 1, '10:00:00'),
-    (1, 2, 3, '10:00:00'), 
-    (2, 2, 3, '14:00:00'),
-    (3, 1, 1, '05:00:00');
+	(1, 1, '10:00:00'),
+    (1, 3, '10:00:00'), 
+    (2, 3, '14:00:00'),
+    (3, 1, '05:00:00');
+    
+# drop table shows;
     
 # Get movies by location
 
 SELECT 
-	m.movie_id,
+	m.id,
     m.title,
-    s.show_time,
+    sh.show_time,
     t.name,
     t.street,
     t.city,
@@ -87,9 +87,11 @@ SELECT
 FROM 
 	movie m 
 JOIN 
-	shows s ON m.movie_id = s.movie_id
+	shows sh ON m.id = sh.movie_id
+JOIN
+	screen sc ON sc.id = sh.screen_id
 JOIN 
-	theatre t ON s.theatre_id = t.theatre_id;
+	theatre t ON t.id = sc.theatre_id;
 
 
 SELECT DISTINCT 

@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter
@@ -20,5 +20,8 @@ public class Theatre {
 
     @Embedded
     private Location location;
+
+    @OneToMany(mappedBy = "theatre", cascade = CascadeType.ALL)
+    private List<Screen> screens;
 
 }

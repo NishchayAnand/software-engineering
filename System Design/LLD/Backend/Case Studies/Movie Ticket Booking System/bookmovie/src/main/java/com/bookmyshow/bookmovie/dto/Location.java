@@ -9,10 +9,12 @@ import lombok.Setter;
 @Setter
 public class Location {
     private String street;
-    private final String city;
-    private final String state;
+    private String city;
+    private String state;
     private String country;
     private String postalCode;
+
+    public Location() {}
 
     public Location(String city, String state) {
         this.city = city;
