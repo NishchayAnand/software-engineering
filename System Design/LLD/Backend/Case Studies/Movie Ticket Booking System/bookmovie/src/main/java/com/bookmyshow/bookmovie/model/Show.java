@@ -24,7 +24,10 @@ public class Show {
     @JoinColumn(name="screen_id", referencedColumnName = "id") // foreign key column
     private Screen screen;
 
-    @Column(name="show_time")
-    private LocalTime showTime;
+    @Column(name="start_time")
+    private LocalTime startTime;
+
+    @Column(name="end_time")
+    private LocalTime endTime;
 
 }

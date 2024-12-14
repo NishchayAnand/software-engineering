@@ -52,4 +52,6 @@ In Spring Data JPA, the `@Param` annotation is used to **bind method parameters 
 
 ---
 
+Q. Explain `application.properties`.
+
 

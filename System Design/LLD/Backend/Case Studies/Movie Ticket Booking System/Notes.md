@@ -195,6 +195,8 @@ Assume the logic that allows system to display the list of currently running mov
 
 3. **Improve Maintenance:** Adopting the singleton pattern for service and DAO classes reduces the overhead of creating and managing resources, ensures thread safety, maintains consistency in business logic or database operations, minimizes dependency management complexity, and simplifies the overall code structure.
 
+4. **Maintain Data Integrity:** We cannot have two shows running on a screen in a theatre at same time. You use a **trigger** at the database level to catch overlapping shows for ultimate data integrity (guarantees integrity no matter the source of data insertion). Alternatively, you can implement checks in your service layer or DAO to ensure no overlapping shows are added.
+
 ## EXTRA
 
 - When a screen is deleted/stopped working, nothing happens to the Theatre table. Hence, the theatre table/entity does not need a field / column to present its association with the screen table/entity. There can be a unidirectional relationship between screen and theatre, where the theatre doesn’t have reference back to the screen. 
@@ -203,7 +205,11 @@ Assume the logic that allows system to display the list of currently running mov
 
 - When a screen is deleted/stopped working, all shows associated with that screen should be removed. Hence, we need a bidirectional relationship between show and screen.
 
-- We cannot have two shows running on a screen in a theatre at same time. How to make sure this doesn't happen?
+- **Bidirectional Relationship**: Fetch Movies based on its shows location. Fetch shows based on the selected movie.
+
+- If each `Movie` object in the response contains a list of `Show` objects, and each `Show` contains a reference back to the `Movie`, this circular reference can result in unnecessarily large responses and potentially cause infinite recursion issues when serializing the objects (e.g., in JSON).
+
+
 
 
  

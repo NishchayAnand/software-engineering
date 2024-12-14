@@ -3,6 +3,7 @@
 
 USE movieDB;
 
+/*
 CREATE TABLE movie (
 	id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(100) NOT NULL,
@@ -10,6 +11,7 @@ CREATE TABLE movie (
     release_date DATE,
     duration INT
 );
+*/
 
 INSERT INTO movie (title, genre, release_date, duration)
 VALUES
@@ -23,7 +25,10 @@ VALUES
     ('The Matrix', 'Sci-Fi', '1999-03-31', 180),
     ('Avengers: Endgame', 'Action', '2019-04-26', 160),
     ('Titanic', 'Romance', '1997-12-19', 135);
+    
+# SELECT * FROM movie;
 
+/*
 CREATE TABLE theatre (
 	id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50),
@@ -33,6 +38,7 @@ CREATE TABLE theatre (
     country VARCHAR(20) NOT NULL,
     postal_code VARCHAR(10)
 );
+*/
 
 INSERT INTO theatre (street, name, city, state, country, postal_code) 
 VALUES
@@ -40,12 +46,14 @@ VALUES
     ('Sunset Cinema', '5678 Sunset Blvd', 'Los Angeles', 'CA', 'USA', '90001'),
     ('Elm Street Theater', '9 Elm Street', 'Chicago', 'IL', 'USA', '60601');
 
+/*
 CREATE TABLE screen (
 	id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(20) NOT NULL,
     theatre_id INT NOT NULL,
     FOREIGN KEY (theatre_id) REFERENCES theatre (id) ON DELETE CASCADE
 );
+*/
 
 INSERT INTO screen (name, theatre_id) 
 VALUES 
@@ -55,21 +63,25 @@ VALUES
         ('A', 3),
         ('B', 3);
 
+/*
 CREATE TABLE shows (
 	id INT AUTO_INCREMENT PRIMARY KEY,
     movie_id INT NOT NULL,
     screen_id INT NOT NULL,
-    show_time TIME NOT NULL,
+    start_time TIME NOT NULL,
+    end_time TIME NOT NULL,
     FOREIGN KEY (movie_id) REFERENCES movie (id) ON DELETE CASCADE,
     FOREIGN KEY (screen_id) REFERENCES screen (id) ON DELETE CASCADE
 );
+*/
 
-INSERT INTO shows (movie_id, screen_id, show_time)
+INSERT INTO shows (movie_id, screen_id, start_time, end_time)
 VALUES 
-	(1, 1, '10:00:00'),
-    (1, 3, '10:00:00'), 
-    (2, 3, '14:00:00'),
-    (3, 1, '05:00:00');
+	(1, 1, '10:00:00', '14:00:00'),
+    (3, 1, '18:00:00', '20:00:00'),
+    (1, 3, '10:00:00', '14:00:00'), 
+    (2, 3, '14:30:00', '15:30:00');
+    
     
 # drop table shows;
     

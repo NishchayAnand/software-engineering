@@ -118,6 +118,20 @@ This type of relationship allows navigation in both directions, from one entity 
 
 ---
 
+Q. What are the benefits of bidirectional relationship?
+
+With bidirectional mapping, you can ensure consistency between the parent and child object. Both sides of the relationship are synchronized, which helps avoid data integrity issues. 
+
+For example, deleting a Movie should also delete all associated Shows (cascading behavior).
+
+---
+
+Q. What are the disadvantages of bidirectional relationship?
+
+During serialization (e.g., to JSON), bidirectional relationships can cause infinite loops unless properly handled.
+
+---
+
 Q. Discuss the rules that must be followed while defining a bidirectional relationship.
 
 1. The inverse side of a bidirectional relationship must refer to its owning side by using the `mappedBy` attribute of the `@OneToOne`, `@OneToMany`, or `@ManyToMany` annotation.

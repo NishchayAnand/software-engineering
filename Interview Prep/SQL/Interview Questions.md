@@ -98,6 +98,14 @@ WHERE another_condition;
 
 ---
 
+Q. Explain `SELECT 1 FROM table WHERE conditon`.
+
+The `SELECT 1 FROM table WHERE condition` query can be used to verify whether any rows exist in the table that satisfy a given condition. 
+
+> NOTE: Since the purpose of the query is to check for the presence of rows, simply returning the value 1 for each row that matches the conditions makes the query lightweight and efficient.
+
+---
+
 
 
 
