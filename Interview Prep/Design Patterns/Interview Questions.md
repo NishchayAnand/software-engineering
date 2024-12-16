@@ -1,5 +1,17 @@
 # Design Patterns Interview Questions
 
+Q. Explain Singleton Pattern.
+
+---
+
+Q. What is the role of `final` keyword in Singleton Pattern?
+
+Declaring the instance variable as `final` ensures that the singleton instance cannot be reassigned once initialized. This guarantees that the same instance is used throughout the application's lifecycle.
+
+> NOTE: Any object assigned to a `final` variable is fully constructed before being visible to other threads (due to Java's memory model). Hence, it is typically used for **eager initialization, where the singleton instance is created at class-loading time**.
+
+---
+
 Q. Explain Factory Pattern. 
 
 The Factory Design Pattern is a creational design pattern that **provides a way to create objects without specifying the exact class of object that will be created**. It abstracts the instantiation logic and allows the code to depend on an interface or abstract class rather than a concrete class, supporting polymorphism and dependency injection. 
@@ -56,11 +68,13 @@ A template method serves as a template for an algorithm. In the template, each s
 
 Q. Explain Proxy Design Pattern.
 
+---
+
+Q. Explain Builder Pattern.
+
+```
+User.builder().userName("ram").password("***");
+```
 
 ---
 
-Q. What is the role of `final` keyword in Singleton Pattern?
-
-Declaring the instance variable as `final` ensures that the singleton instance cannot be reassigned once initialized. This guarantees that the same instance is used throughout the application's lifecycle.
-
-> NOTE: Any object assigned to a `final` variable is fully constructed before being visible to other threads (due to Java's memory model). Hence, it is typically used for **eager initialization, where the singleton instance is created at class-loading time**.

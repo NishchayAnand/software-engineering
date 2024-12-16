@@ -357,3 +357,20 @@ Nested inner classes are classes defined within another class. They can be categ
 - **Non-Static Inner Class**: A non-static inner class (also called an instance inner class) does not use the static keyword. It is associated with an instance of the enclosing class and can access all members (static and instance) of the outer class.
 
 ---
+
+Q. Explain local variable type inference.
+
+Local variable type inference is a feature introduced in **Java 10**, which allows the type of a local variable to be inferred by the compiler at compile-time. 
+
+This means that instead of explicitly declaring the type of a variable, you can now use the keyword **var**, and the compiler can determine the variable's type based on the value assigned to it.
+
+```
+var list = new ArrayList<Map<String, Integer>>();
+```
+
+**Benefit**: Reduces verbosity in cases where the type is obvious or redundant.
+
+> NOTE: Java remains statically typed. Even though the type is inferred, it is fixed at compile-time and cannot change.
+
+---
+
