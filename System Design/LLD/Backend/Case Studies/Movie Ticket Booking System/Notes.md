@@ -209,6 +209,8 @@ Assume the logic that allows system to display the list of currently running mov
 
 - If each `Movie` object in the response contains a list of `Show` objects, and each `Show` contains a reference back to the `Movie`, this circular reference can result in unnecessarily large responses and potentially cause infinite recursion issues when serializing the objects (e.g., in JSON).
 
+- **Perform integration tests using a test database (e.g. H2 database)** to test out the custom query methods and complex logic in the `MovieRepository` class.
+
 
 
 

@@ -76,5 +76,5 @@ Q. Explain Builder Pattern.
 User.builder().userName("ram").password("***");
 ```
 
----
+--- 
 

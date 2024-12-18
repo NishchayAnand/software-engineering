@@ -52,6 +52,23 @@ In Spring Data JPA, the `@Param` annotation is used to **bind method parameters 
 
 ---
 
-Q. Explain `application.properties`.
+Q. How does Spring Boot support database initialization?
+
+Spring Boot can automatically run **.sql** files placed in the **resources** folder to initialize or populate your database.
+
+These files are typically named as follows:
+
+- **schema.sql**: Used for creating database schema, such as tables or indexes.
+- **data.sql**: Used for inserting data into tables (initialization data).
+
+> NOTE: By default, this feature is enabled when you use an embedded database (e.g., H2, HSQLDB). For external databases, you need to enable it explicitly.
+
+---
+
+Q. Explain `spring.jpa.database-platform=org.hibernate.dialect.H2Dialect` property.
+
+Hibernate, the JPA implementation used in Spring Boot, requires a dialect to translate Java Persistence Query Language (JPQL) or HQL into database-specific SQL.
+
+---
 
 

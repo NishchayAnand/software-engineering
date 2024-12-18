@@ -32,9 +32,9 @@ The `@Test` annotation in JUnit **marks a method as a test case**.
 
 Q. Explain `BeforeEach` annotation.
 
-The `@BeforeEach` annotation in JUnit 5 is used to indicate that the annotated method should be executed before each test method in the current test class. 
+The `@BeforeEach` annotation in JUnit 5 is used to **indicate that the annotated method should be executed before each test method** in the current test class. 
 
-It is commonly used for test setup operations, such as initializing objects or configuring mock behaviors.
+It is **commonly used for** test setup operations, such as initializing objects or **configuring mock behaviors**.
 
 ---
 
@@ -103,7 +103,7 @@ Integration Testing is a level of software testing where individual units or **c
 
 Q. Explain `@SpringBootTest` annotation. 
 
-The `@SpringBootTest` annotation in Spring Boot is used to write integration tests that bootstrap the entire Spring application context. In simple words, this annotation ensures that the Spring application context is loaded during the test.
+The `@SpringBootTest` annotation in Spring Boot is used to write integration tests that **bootstrap the entire Spring application context**. In simple words, this annotation ensures that the Spring application context is loaded during the test.
 
 It is a part of the **Spring Boot Test** module and is used when you need to test how various components of your Spring Boot application interact with each other.
 
@@ -116,4 +116,8 @@ The `@MockBean` annotation in Spring Boot is used to add or replace mock instanc
 The mocked bean behaves according to the behavior defined by the test setup (e.g., using Mockito's when() method).
 
 ---
+
+Q. What is H2 database?
+
+The H2 database is an **in-memory database often used for unit and integration testing** because it doesn't require a persistent database setup and resets with each test run.
 

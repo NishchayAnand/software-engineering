@@ -1,7 +1,7 @@
 
-# CREATE DATABASE movieDB;
+/*CREATE DATABASE movieDB;*/
 
-USE movieDB;
+/*USE movieDB;*/
 
 /*
 CREATE TABLE movie (
@@ -25,8 +25,6 @@ VALUES
     ('The Matrix', 'Sci-Fi', '1999-03-31', 180),
     ('Avengers: Endgame', 'Action', '2019-04-26', 160),
     ('Titanic', 'Romance', '1997-12-19', 135);
-    
-# SELECT * FROM movie;
 
 /*
 CREATE TABLE theatre (
@@ -40,11 +38,11 @@ CREATE TABLE theatre (
 );
 */
 
-INSERT INTO theatre (street, name, city, state, country, postal_code) 
+INSERT INTO theatre (name, street, city, state, country, postal_code) 
 VALUES
 	('Broadway Theatre', '1234 Broadway St', 'New York', 'NY', 'USA', '10001'),
     ('Sunset Cinema', '5678 Sunset Blvd', 'Los Angeles', 'CA', 'USA', '90001'),
-    ('Elm Street Theater', '9 Elm Street', 'Chicago', 'IL', 'USA', '60601');
+    ('Elm Street Theatre', '9 Elm Street', 'Chicago', 'IL', 'USA', '60601');
 
 /*
 CREATE TABLE screen (
@@ -57,11 +55,11 @@ CREATE TABLE screen (
 
 INSERT INTO screen (name, theatre_id) 
 VALUES 
-		('A', 1),
-        ('B', 1),
-        ('A', 2),
-        ('A', 3),
-        ('B', 3);
+		('Screen 1', 1),
+        ('Screen 2', 1),
+        ('Screen 1', 2),
+        ('Screen 1', 3),
+        ('Screen 1', 3);
 
 /*
 CREATE TABLE shows (
@@ -82,10 +80,6 @@ VALUES
     (1, 3, '10:00:00', '14:00:00'), 
     (2, 3, '14:30:00', '15:30:00');
     
-    
-# drop table shows;
-    
-# Get movies by location
 
 SELECT 
 	m.id,
