@@ -52,22 +52,53 @@ In Spring Data JPA, the `@Param` annotation is used to **bind method parameters 
 
 ---
 
-Q. How does Spring Boot support database initialization?
+Q. Explain Spring Boot Database Initialization feature.
 
-Spring Boot can automatically run **.sql** files placed in the **resources** folder to initialize or populate your database.
+Spring Boot can automatically run **.sql** files placed in the **resources** folder to create the schema (DDL scripts) of your DataSource and initialize it (DML scripts).
 
-These files are typically named as follows:
+Three primary SQL files used by Spring Boot to support database initialization include: 
 
-- **schema.sql**: Used for creating database schema, such as tables or indexes.
-- **data.sql**: Used for inserting data into tables (initialization data).
+1. `schema.sql`: Used to define the database schema. Executed first in the initialization process, before Hibernate starts schema generation or any other data loading.
 
-> NOTE: By default, this feature is enabled when you use an embedded database (e.g., H2, HSQLDB). For external databases, you need to enable it explicitly.
+2. `data.sql`: Used to insert data into the database. Executed after `schema.sql` but before Hibernate initializes the schema (if Hibernate is configured for schema management). This can lead to timing issues if you're relying on Hibernate to create tables.
+
+3. `import.sql`: A special file intended to populate the database after Hibernate has created the schema. This file is executed only when Hibernate is responsible for schema generation.
 
 ---
 
-Q. Explain `spring.jpa.database-platform=org.hibernate.dialect.H2Dialect` property.
+Q. Explain `spring.jpa.hibernate.ddl-auto` property.
 
-Hibernate, the JPA implementation used in Spring Boot, requires a dialect to translate Java Persistence Query Language (JPQL) or HQL into database-specific SQL.
+The `spring.jpa.hibernate.ddl-auto` property in Spring Boot configures the behavior of Hibernate with regard to **DDL (Data Definition Language) generation**. 
+
+It controls whether Hibernate should automatically create, update, or validate the database schema when the application starts.
+
+**Possible values:**
+
+1. `none`: Hibernate does not manage the database schema at all. You must create and manage the schema manually.
+
+2. `validate`: Hibernate checks that the database schema matches the entities in the code but does not make any changes. If the schema does not match the entities, an exception is thrown.
+
+3. `update`: Hibernate updates the schema to match the entity definitions, but it does not drop any existing data.
+
+4. `create`: Hibernate drops the existing schema (if any) and creates a new schema based on the entities in the code.
+
+5. `create-drop`: Hibernate creates the schema when the application starts and drops it when the application stops.
+
+---
+
+Q. Explain `spring.jpa.database-platform` property.
+
+The `spring.jpa.database-platform` property in Spring Boot specifies the dialect to be used by Hibernate, the JPA implementation. 
+
+A dialect is a configuration that tells Hibernate how to translate Java-based queries (HQL or JPQL) into SQL specific to the database you are using.
+
+---
+
+Q. What is the significance of `spring.jpa.database-platform` property?
+
+Different databases have different SQL syntaxes and features. For example, PostgreSQL uses `SERIAL` for auto-increment fields, while MySQL uses `AUTO_INCREMENT`. The way **dates**, **joins**, and **native queries** are handled also varies between databases. 
+
+The `spring.jpa.database-platform` property ensures Hibernate generates SQL that works correctly with your database.
 
 ---
 

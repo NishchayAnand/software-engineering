@@ -13,3 +13,11 @@ The `@SpringBootApplication` annotation is a key annotation in Spring Boot that 
 > **NOTE:** The `@SpringBootApplication` annotation simplifies configuration in a Spring Boot project by eliminating the need to declare these annotations individually. 
 
 ---
+
+Q. What is the use of `application.properties` file?
+
+The `application.properties` file in a Spring Boot project is used to define configuration properties for your application. 
+
+It is a central place to configure settings such as database connections, server port, logging levels, and other application-specific configurations. Spring Boot automatically loads this file when the application starts and applies the properties to the appropriate components.
+
+---

@@ -5,9 +5,9 @@ import com.bookmyshow.bookmovie.model.Movie;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -31,21 +31,8 @@ class MovieRepositoryTest {
 
         // then
         assertEquals(1, movies.size()); // Test Case 1
-        //assertEquals("Inception", movies.getFirst().getTitle());
+        assertEquals("Inception", movies.getFirst().getTitle()); // Test Case 2
 
     }
 
-    @Test
-    void shouldFindAllMovies() {
-
-        // when
-        List<Movie> movies = movieRepository.findAll();
-
-        movies.forEach(movie -> {System.out.println(movie.getTitle());});
-
-        // then
-        assertEquals(1, movies.size()); // Test Case 1
-        //assertEquals("Inception", movies.getFirst().getTitle());
-
-    }
 }
