@@ -21,7 +21,7 @@ public class MovieController {
 
     @PostMapping("/by-location")
     public List<MovieDTO> getMovies(@RequestBody Location location) {
-        return movieService.getMovies(location);
+        return movieService.getMoviesLocation(location);
     }
 
 }

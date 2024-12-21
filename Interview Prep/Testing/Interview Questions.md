@@ -46,15 +46,27 @@ Assertions in unit testing are the core mechanism used to validate whether the a
 
 ---
 
+Q. What is Integration Testing?
+
+Integration Testing is a level of software testing where individual units or **components of a system are combined and tested as a group** to verify their interactions. This type of testing focuses on testing the communication between different modules, ensuring that they work together as intended.
+
+---
+
 Q. Do we need to test `Repository` interfaces?
 
 You don't need to write tests for Spring Data JPA's built-in repository methods since they're already well-tested. However, you should test custom query methods and complex logic in repositories, typically using integration tests with a test database.
 
 --- 
 
+Q. What is H2 database?
+
+The H2 database is an **in-memory database often used for unit and integration testing** because it doesn't require a persistent database setup and resets with each test run.
+
+---
+
 Q. What is Mockito?
 
-Mockito is a popular Java mocking framework that allows you to create mock objects that simulate the behavior of real objects without the need for actual implementations.
+Mockito is a popular Java mocking framework that allows you to **create mock objects that simulate the behavior of real objects** without the need for actual implementations.
 
 ---
 
@@ -71,33 +83,54 @@ UserService mockUserService = mock(UserService.class);
 
 ---
 
+Q. Explain `@Mock` annotation.
+
+The `@Mock` annotation is part of the Mockito framework and is used to **automatically create mock objects in your test class**.
+
+Example:
+```
+@Mock
+private UserService userSevice;
+```
+
+---
+
+Q. Explain `@InjectMocks` annotation. 
+
+The `@InjectMocks` annotation in Mockito simplifies the process of setting up the class under test and its dependencies. It can automatically instantiate and inject mocks (created using `@Mock` or `Mockito.mock()`) into the class under test.
+
+> NOTE: The `@InjectMocks` annotation supports constructor injection, setter injection, and field injection.
+
+---
+
 Q. What is Stubbing?
 
-Stubbing allows you to specify what values methods of mock objects should return when they are called. 
+Stubbing is the process of configuring a mock object in a test to return a specific response or behavior when a particular method is invoked. 
 
+It is a key feature of mocking frameworks like Mockito, used to simulate the behavior of dependencies and isolate the unit being tested.
+
+Example:
 ```
 when(mockUserService.getUserById(1)).thenReturn(new User("John Doe"));
 ```
 
 ---
 
-Q. Explain `@Mock` annotation.
+Q. Explain Dynamic Stubbing.
 
-The `@Mock` annotation is part of the Mockito framework and is used to create and inject mock objects automatically in your test class.
+Dynamic stubbing refers to defining the behavior of a mock object based on the inputs provided during the test. 
 
----
+Unlike fixed stubbing (where a specific input always returns a predefined output), dynamic stubbing calculates or generates the response at runtime using the inputs passed to the mocked method.
 
-Q. Explain `@InjectMocks` annotation. 
+Example:
+```
+when(mapper.toDTO(any(Entity.class))).thenAnswer(invocation -> {
+    Entity entity = invocation.getArgument(0);              // retrieve the input argument
+    return new EntityDTO(entity.getId(), entity.getName()); // dynamically create the output
+});
+```
 
-The `@InjectMocks` annotation in Mockito is used to automatically inject mock objects into the class under test. 
-
-> NOTE: The `@InjectMocks` annotation supports constructor injection, setter injection, and field injection.
-
----
-
-Q. What is Integration Testing?
-
-Integration Testing is a level of software testing where individual units or **components of a system are combined and tested as a group** to verify their interactions. This type of testing focuses on testing the communication between different modules, ensuring that they work together as intended.
+> NOTE: `invocation` refers to the **event of calling a mocked method** during the execution of a test. It captures the details of the method call, including the arguments passed, the method being called, and other metadata related to the invocation.
 
 ---
 
@@ -117,7 +150,7 @@ The mocked bean behaves according to the behavior defined by the test setup (e.g
 
 ---
 
-Q. What is H2 database?
+Q. Explain `@WebMvcTest` annotation.
 
-The H2 database is an **in-memory database often used for unit and integration testing** because it doesn't require a persistent database setup and resets with each test run.
+
 

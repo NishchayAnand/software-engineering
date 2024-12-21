@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,7 +25,7 @@ class MovieRepositoryTest {
         Location customerLocation = new Location("New York", "NY");
 
         // when
-        List<Movie> movies = movieRepository.findMoviesByLocation(customerLocation.getCity(),
+        List<Movie> movies = movieRepository.findMoviesByCityAndState(customerLocation.getCity(),
                 customerLocation.getState());
 
         // then

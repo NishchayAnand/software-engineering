@@ -1,10 +1,7 @@
 package com.bookmyshow.bookmovie.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -31,6 +28,14 @@ public class Movie {
     private List<Show> shows;
 
     public Movie(String title, String genre, LocalDate releaseDate, int duration) {
+        this.title = title;
+        this.genre = genre;
+        this.releaseDate = releaseDate;
+        this.duration = duration;
+    }
+
+    public Movie(Long id, String title, String genre, LocalDate releaseDate, int duration) {
+        this.id = id;
         this.title = title;
         this.genre = genre;
         this.releaseDate = releaseDate;

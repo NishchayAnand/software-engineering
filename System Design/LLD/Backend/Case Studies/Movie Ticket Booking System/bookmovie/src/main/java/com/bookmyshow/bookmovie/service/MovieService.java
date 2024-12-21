@@ -23,8 +23,8 @@ public class MovieService {
         this.movieMapper = movieMapper;
     }
 
-    public List<MovieDTO> getMovies(Location location) {
-        List<Movie> movies = movieRepository.findMoviesByLocation(location.getCity(), location.getState());
+    public List<MovieDTO> getMoviesLocation(Location location) {
+        List<Movie> movies = movieRepository.findMoviesByCityAndState(location.getCity(), location.getState());
         return movies.stream()
                 .map(movieMapper::toDTO)
                 .collect(Collectors.toList());

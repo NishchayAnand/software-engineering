@@ -16,6 +16,6 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
             "JOIN s.screen sc " +
             "WHERE sc.theatre.location.city = :city AND " +
             "sc.theatre.location.state = :state")
-    List<Movie> findMoviesByLocation(@Param("city") String city, @Param("state") String state);
+    List<Movie> findMoviesByCityAndState(@Param("city") String city, @Param("state") String state);
 
 }
