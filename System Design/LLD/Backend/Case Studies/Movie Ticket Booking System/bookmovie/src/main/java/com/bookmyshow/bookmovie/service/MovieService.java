@@ -24,6 +24,9 @@ public class MovieService {
     }
 
     public List<MovieDTO> getMoviesLocation(Location location) {
+        if(location == null || location.getCity() == null || location.getState() == null) {
+            throw new IllegalArgumentException("Invalid Location");
+        }
         List<Movie> movies = movieRepository.findMoviesByCityAndState(location.getCity(), location.getState());
         return movies.stream()
                 .map(movieMapper::toDTO)

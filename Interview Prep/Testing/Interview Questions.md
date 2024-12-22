@@ -46,6 +46,20 @@ Assertions in unit testing are the core mechanism used to validate whether the a
 
 ---
 
+Q. Explain `assertThrows()` method.
+
+The `assertThrows()` method in **JUnit** is used to verify that a specific piece of code throws an exception of the expected type during its execution. 
+
+It is commonly used for testing error-handling logic in applications.
+
+Syntax:
+
+```
+<T extends Throwable> T assertThrows(Class<T> expectedType, Executable executable)
+```
+
+---
+
 Q. What is Integration Testing?
 
 Integration Testing is a level of software testing where individual units or **components of a system are combined and tested as a group** to verify their interactions. This type of testing focuses on testing the communication between different modules, ensuring that they work together as intended.

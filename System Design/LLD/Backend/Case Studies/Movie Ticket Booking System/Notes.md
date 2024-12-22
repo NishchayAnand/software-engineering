@@ -193,9 +193,13 @@ Assume the logic that allows system to display the list of currently running mov
 
 2. **Error Handling:** If any part of the booking process fails (e.g., payment or seat update), the method throws an exception, ensuring the transaction is rolled back.
 
-3. **Improve Maintenance:** Adopting the singleton pattern for service and DAO classes reduces the overhead of creating and managing resources, ensures thread safety, maintains consistency in business logic or database operations, minimizes dependency management complexity, and simplifies the overall code structure.
+3. **Maintain Data Integrity:** We cannot have two shows running on a screen in a theatre at same time. You use a **trigger** at the database level to catch overlapping shows for ultimate data integrity (guarantees integrity no matter the source of data insertion). Alternatively, you can implement checks in your service layer or DAO to ensure no overlapping shows are added.
 
-4. **Maintain Data Integrity:** We cannot have two shows running on a screen in a theatre at same time. You use a **trigger** at the database level to catch overlapping shows for ultimate data integrity (guarantees integrity no matter the source of data insertion). Alternatively, you can implement checks in your service layer or DAO to ensure no overlapping shows are added.
+## Best Practices
+
+- Adopting the singleton pattern for service and DAO classes reduces the overhead of creating and managing resources, ensures thread safety, maintains consistency in business logic or database operations, minimizes dependency management complexity, and simplifies the overall code structure.
+
+- Always override `equals()` and `hashCode()` for DTO or entity classes, especially when they are part of collections or when you need logical equality.
 
 ## EXTRA
 
