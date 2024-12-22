@@ -205,6 +205,8 @@ Assume the logic that allows system to display the list of currently running mov
 
     - If any part of the booking process fails (e.g., payment or seat update), the method throws an exception, ensuring the transaction is rolled back.
 
+- **Logging:** Use the Logger from `SLF4J` with `Logback` to log messages in your application.
+
 ## EXTRA
 
 - When a screen is deleted/stopped working, nothing happens to the Theatre table. Hence, the theatre table/entity does not need a field / column to present its association with the screen table/entity. There can be a unidirectional relationship between screen and theatre, where the theatre doesn’t have reference back to the screen. 

@@ -1,20 +1,20 @@
-# Interview Questions
+# SpringBoot Interview Questions
 
-**Q. Explain `@SpringBootApplication` annotation.**
+Q. What is the use of `@SpringBootApplication` annotation?
 
-`@SpringBootApplication` enables **component-scanning** and **auto-configuration**. It is a composite annotation that combines three crucial annotations:
+The `@SpringBootApplication` annotation is a key annotation in Spring Boot that **marks a class as the main configuration class and entry point for a Spring Boot application**. It is a composite annotation that combines three crucial annotations:
 
-1. **Spring's `@Configuration`:** Designates a class as a configuration class using Spring's Java-based configuration.
+- `@EnableAutoConfiguration`: Part of SpringBoot framework. **Automatically configures the Spring application context based on the dependencies on the classpath**. For example, if **spring-boot-starter-web** is on the classpath, it configures a web application context.
 
-2. **Spring's `@ComponentScan`:** Enables component-scanning so that components you write will be automatically discovered and registered as beans in the Spring Application Context.
+- `@Configuration`: Part of Spring framework. **Automatically scans the package where the annotated class is located** and its sub-packages for Spring components (@Component, @Service, @Repository, @Controller, etc.) to **register them as beans in the Spring application context**.
 
-3. **Spring Boot's `@EnableAutoConfiguration`:** This humble little annotation might as well be named **@abracadabra** because it's the one line of configuration that enables the magic of Spring Boot auto-configuration, i.e., automatically configuring beans and settings based on the dependencies present in the project. This one line keeps you from having to write the pages of configuration that would be required otherwise.
+- `@ComponentScan`: Part of Spring Framework. **Indicates that the class contains Spring bean definitions**.
+
+> **NOTE:** The `@SpringBootApplication` annotation simplifies configuration in a Spring Boot project by eliminating the need to declare these annotations individually. 
 
 ---
 
-**Q. Explain starter dependencies.**
-
-**Q. Explain `SpringApplication.run(MySpringBootApplication.class, args);`**
+Q. Explain `SpringApplication.run(MySpringBootApplication.class, args);`
 
 The `SpringApplication.run(MySpringBootApplication.class, args)` method is used to launch the Spring Boot application. Here's a detailed breakdown of what actually happens:
 
@@ -26,29 +26,14 @@ The `SpringApplication.run(MySpringBootApplication.class, args)` method is used 
 
 4. Blocks the main thread so that the application continues running, serving requests if it's a web application, or processing tasks if it's a standalone application.
 
-NOTE: If your application is a web application and you have included the `spring-boot-starter-web` dependency, Spring Boot will start an embedded web server (like Tomcat or Jetty) to serve the application.
+---
+
+Q. What is the use of `application.properties` file?
+
+The `application.properties` file in a Spring Boot project is used to define configuration properties for your application. 
+
+It is a central place to configure settings such as database connections, server port, logging levels, and other application-specific configurations. Spring Boot automatically loads this file when the application starts and applies the properties to the appropriate components.
 
 ---
 
-**Q. What is `JpaRepository` in Spring Data JPA?**
-
-JpaRepository offers methods for basic Create, Read, Update, and Delete (CRUD) operations on your entities.
-
-- **save(entity):** Persists a new entity or updates an existing one.
-- **findById(id):** Retrieves an entity by its ID.
-- **findAll():** Fetches all entities of a particular type.
-- **deleteById(id):** Deletes an entity by its ID.
-
-Additional methods exist for variations like `saveAll()`, `delete(entity)`, etc.
-
----
-
-**Q. Give few annotations provided by JPA for entity fields validations?**
-
-JPA doesn't provide its own annotations for entity field validation. However, it integrates seamlessly with Bean Validation (JSR 380) for defining constraints on your entity fields. Here are some commonly used Bean Validation annotations for JPA entity field validations:
-
----
-
-**Q. What does the following command do: `mvn spring-boot:run`?**
-
-This goal, provided by the Spring Boot Maven Plugin, is specifically designed for running Spring Boot applications directly from the command line. It takes care of setting up the classpath, environment, and starting your application.
+Q. Explain `@ExceptionHandler` annotation.
