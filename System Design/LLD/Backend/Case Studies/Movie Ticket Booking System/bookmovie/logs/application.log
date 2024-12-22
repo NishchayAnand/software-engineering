@@ -1,0 +1,74 @@
+2024-12-23 01:07:46 - Starting Application using Java 23 with PID 20842 (/Users/nishchayanand/Documents/DEV/System Design/LLD/Backend/Case Studies/Movie Ticket Booking System/bookmovie/target/classes started by nishchayanand in /Users/nishchayanand/Documents/DEV/System Design/LLD/Backend/Case Studies/Movie Ticket Booking System/bookmovie)
+2024-12-23 01:07:46 - No active profile set, falling back to 1 default profile: "default"
+2024-12-23 01:07:47 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-23 01:07:47 - Finished Spring Data repository scanning in 17 ms. Found 1 JPA repository interface.
+2024-12-23 01:07:47 - Tomcat initialized with port 8080 (http)
+2024-12-23 01:07:47 - Initializing ProtocolHandler ["http-nio-8080"]
+2024-12-23 01:07:47 - Starting service [Tomcat]
+2024-12-23 01:07:47 - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2024-12-23 01:07:47 - Initializing Spring embedded WebApplicationContext
+2024-12-23 01:07:47 - Root WebApplicationContext: initialization completed in 471 ms
+2024-12-23 01:07:47 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-23 01:07:47 - HHH000412: Hibernate ORM core version 6.6.2.Final
+2024-12-23 01:07:47 - HHH000026: Second-level cache disabled
+2024-12-23 01:07:47 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-23 01:07:47 - HikariPool-1 - Starting...
+2024-12-23 01:07:47 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@44492c06
+2024-12-23 01:07:47 - HikariPool-1 - Start completed.
+2024-12-23 01:07:47 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 9.0.1
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2024-12-23 01:07:48 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-23 01:07:48 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-23 01:07:48 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-12-23 01:07:48 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-23 01:07:48 - Starting ProtocolHandler ["http-nio-8080"]
+2024-12-23 01:07:48 - Tomcat started on port 8080 (http) with context path '/'
+2024-12-23 01:07:48 - Started Application in 2.115 seconds (process running for 2.323)
+2024-12-23 01:09:29 - Commencing graceful shutdown. Waiting for active requests to complete
+2024-12-23 01:09:29 - Graceful shutdown complete
+2024-12-23 01:09:29 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-23 01:09:29 - HikariPool-1 - Shutdown initiated...
+2024-12-23 01:09:29 - HikariPool-1 - Shutdown completed.
+2024-12-23 01:09:54 [main] INFO  c.bookmyshow.bookmovie.Application - Starting Application using Java 23 with PID 20891 (/Users/nishchayanand/Documents/DEV/System Design/LLD/Backend/Case Studies/Movie Ticket Booking System/bookmovie/target/classes started by nishchayanand in /Users/nishchayanand/Documents/DEV/System Design/LLD/Backend/Case Studies/Movie Ticket Booking System/bookmovie)
+2024-12-23 01:09:54 [main] INFO  c.bookmyshow.bookmovie.Application - No active profile set, falling back to 1 default profile: "default"
+2024-12-23 01:09:54 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-23 01:09:54 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 17 ms. Found 1 JPA repository interface.
+2024-12-23 01:09:54 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2024-12-23 01:09:54 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-12-23 01:09:54 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-12-23 01:09:54 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2024-12-23 01:09:54 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-12-23 01:09:54 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 465 ms
+2024-12-23 01:09:55 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-23 01:09:55 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.2.Final
+2024-12-23 01:09:55 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2024-12-23 01:09:55 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-23 01:09:55 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-12-23 01:09:55 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@48d44b46
+2024-12-23 01:09:55 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-12-23 01:09:55 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 9.0.1
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2024-12-23 01:09:55 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-23 01:09:55 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-23 01:09:55 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-12-23 01:09:56 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-23 01:09:56 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-12-23 01:09:56 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2024-12-23 01:09:56 [main] INFO  c.bookmyshow.bookmovie.Application - Started Application in 2.026 seconds (process running for 2.25)
+2024-12-23 01:11:36 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2024-12-23 01:11:36 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2024-12-23 01:11:36 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-23 01:11:36 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2024-12-23 01:11:36 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
