@@ -12,6 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
@@ -95,7 +96,8 @@ class MovieServiceTest {
                 .thenThrow(new RuntimeException("Database Error"));
 
         // Act and assert
-        assertThrows(MovieServiceException.class, () -> movieService.getMoviesLocation(location));
+        RuntimeException ex = assertThrows(MovieServiceException.class,
+                () -> movieService.getMoviesLocation(location));
 
     }
 

@@ -102,4 +102,12 @@ The `spring.jpa.database-platform` property ensures Hibernate generates SQL that
 
 ---
 
+Q. How does Spring handle database exceptions?
+
+Spring's `JpaRepository` catch `SQLExceptions` and wrap them in `DataAccessException` (a **runtime exception**). This approach simplifies exception handling by allowing you to focus on business logic rather than low-level database issues.
+
+For example, if there is a database connection error or constraint violation, Spring would throw a `DataAccessException`, not a `SQLException`, making your code cleaner and easier to manage.
+
+---
+
 

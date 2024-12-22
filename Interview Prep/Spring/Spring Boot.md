@@ -21,3 +21,5 @@ The `application.properties` file in a Spring Boot project is used to define con
 It is a central place to configure settings such as database connections, server port, logging levels, and other application-specific configurations. Spring Boot automatically loads this file when the application starts and applies the properties to the appropriate components.
 
 ---
+
+Q. Explain `@ExceptionHandler` annotation.

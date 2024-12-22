@@ -1,6 +1,6 @@
 # Java Interview Questions
 
-Q. Explain Typecasting in Java.
+Q. Explain Typecasting.
 
 Typecasting in Java is the process of **converting a variable from one data type to another**. It is commonly used to ensure compatibility between data types and to manipulate values more effectively. 
 
@@ -31,11 +31,38 @@ There are two types of typecasting in Java:
 
 ---
 
-Q. Explain Exceptions in Java
+Q. Explain Exceptions.
 
+Exceptions are events that occur during program execution and disrupt the normal flow of the application. They are objects that represent an error or unexpected behavior, and Java provides a robust mechanism to handle them.
 
+> NOTE: The `Throwable` class is the root of all exceptions and errors in Java.
 
 ---
+
+Q. Explain different types of Exceptions.
+
+- **Checked Exceptions**: Checked at compile-time. The programmer is required to handle them using `try-catch` or declare them in the `throws` clause.
+
+- **Unchecked Exceptions (Runtime Exceptions)**: Occur during runtime and are not checked at compile-time.
+Caused by programming bugs, such as logic errors or improper use of APIs.
+
+---
+
+Q. Explain Exception Handling. 
+
+Effective exception handling ensures that your application can gracefully **recover from errors and continue to operate as expected without crashing**. 
+
+Below are the steps to handle exceptions in Java:
+
+1. **Catch Exceptions**: The try-catch block is the primary way of handling exceptions in Java. Always catch the most specific exception first and then catch more general exceptions.
+
+2. **Log the Exception Details**: It’s important to log the details of the exception (e.g., the error message and stack trace) for debugging and future reference.
+
+3. **Re-throwing Exceptions**: Sometimes, after handling an exception, you might need to re-throw it for higher-level components to handle it, often with additional context or custom messages.
+
+> NOTE: In complex applications, especially web applications (e.g., Spring Boot), you can use exception-handling frameworks to handle exceptions globally and return consistent error responses (e.g., HTTP status codes and error messages).
+
+--
 
 ## EXTRA
 
