@@ -102,3 +102,75 @@
 2024-12-25 00:00:49 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
 2024-12-25 00:00:49 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
 2024-12-25 00:00:49 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2024-12-25 00:34:24 [main] INFO  c.b.b.controller.MovieControllerTest - Starting MovieControllerTest using Java 23 with PID 29019 (started by nishchayanand in /Users/nishchayanand/Documents/DEV/System Design/LLD/Backend/Case Studies/Movie Ticket Booking System/bookmovie)
+2024-12-25 00:34:24 [main] INFO  c.b.b.controller.MovieControllerTest - No active profile set, falling back to 1 default profile: "default"
+2024-12-25 00:34:24 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2024-12-25 00:34:24 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2024-12-25 00:34:24 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2024-12-25 00:34:24 [main] INFO  c.b.b.controller.MovieControllerTest - Started MovieControllerTest in 0.927 seconds (process running for 1.378)
+2024-12-25 00:47:03 [main] INFO  c.b.b.service.MovieServiceTest - Starting MovieServiceTest using Java 23 with PID 29107 (started by nishchayanand in /Users/nishchayanand/Documents/DEV/System Design/LLD/Backend/Case Studies/Movie Ticket Booking System/bookmovie)
+2024-12-25 00:47:03 [main] INFO  c.b.b.service.MovieServiceTest - No active profile set, falling back to 1 default profile: "default"
+2024-12-25 00:47:03 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-25 00:47:03 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 16 ms. Found 1 JPA repository interface.
+2024-12-25 00:47:03 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-25 00:47:03 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.2.Final
+2024-12-25 00:47:04 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2024-12-25 00:47:04 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-25 00:47:04 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-12-25 00:47:04 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testDB user=SA
+2024-12-25 00:47:04 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-12-25 00:47:04 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-12-25 00:47:04 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2024-12-25 00:47:04 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-25 00:47:04 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 00:47:04 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-25 00:47:04 [main] INFO  c.b.b.service.MovieServiceTest - Started MovieServiceTest in 1.74 seconds (process running for 2.172)
+2024-12-25 00:47:04 [main] INFO  c.b.bookmovie.service.MovieService - Fetching movies for location: New York, NY
+2024-12-25 00:47:04 [main] INFO  c.b.bookmovie.service.MovieService - Found 1 movies
+2024-12-25 00:47:04 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 00:47:04 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2024-12-25 00:47:04 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2024-12-25 00:49:38 [main] INFO  c.b.b.controller.MovieControllerTest - Starting MovieControllerTest using Java 23 with PID 29140 (started by nishchayanand in /Users/nishchayanand/Documents/DEV/System Design/LLD/Backend/Case Studies/Movie Ticket Booking System/bookmovie)
+2024-12-25 00:49:38 [main] INFO  c.b.b.controller.MovieControllerTest - No active profile set, falling back to 1 default profile: "default"
+2024-12-25 00:49:39 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2024-12-25 00:49:39 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2024-12-25 00:49:39 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2024-12-25 00:49:39 [main] INFO  c.b.b.controller.MovieControllerTest - Started MovieControllerTest in 0.877 seconds (process running for 1.298)
+2024-12-25 01:02:17 [main] INFO  c.b.b.controller.MovieControllerTest - Starting MovieControllerTest using Java 23 with PID 29326 (started by nishchayanand in /Users/nishchayanand/Documents/DEV/System Design/LLD/Backend/Case Studies/Movie Ticket Booking System/bookmovie)
+2024-12-25 01:02:17 [main] INFO  c.b.b.controller.MovieControllerTest - No active profile set, falling back to 1 default profile: "default"
+2024-12-25 01:02:18 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2024-12-25 01:02:18 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2024-12-25 01:02:18 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+2024-12-25 01:02:18 [main] INFO  c.b.b.controller.MovieControllerTest - Started MovieControllerTest in 0.918 seconds (process running for 1.362)
+2024-12-25 01:02:43 [main] INFO  c.b.b.controller.MovieControllerTest - Starting MovieControllerTest using Java 23 with PID 29335 (started by nishchayanand in /Users/nishchayanand/Documents/DEV/System Design/LLD/Backend/Case Studies/Movie Ticket Booking System/bookmovie)
+2024-12-25 01:02:43 [main] INFO  c.b.b.controller.MovieControllerTest - No active profile set, falling back to 1 default profile: "default"
+2024-12-25 01:02:43 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2024-12-25 01:02:43 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2024-12-25 01:02:43 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2024-12-25 01:02:43 [main] INFO  c.b.b.controller.MovieControllerTest - Started MovieControllerTest in 0.864 seconds (process running for 1.262)
+2024-12-25 01:03:12 [main] INFO  c.b.b.controller.MovieControllerTest - Starting MovieControllerTest using Java 23 with PID 29342 (started by nishchayanand in /Users/nishchayanand/Documents/DEV/System Design/LLD/Backend/Case Studies/Movie Ticket Booking System/bookmovie)
+2024-12-25 01:03:12 [main] INFO  c.b.b.controller.MovieControllerTest - No active profile set, falling back to 1 default profile: "default"
+2024-12-25 01:03:13 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2024-12-25 01:03:13 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2024-12-25 01:03:13 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2024-12-25 01:03:13 [main] INFO  c.b.b.controller.MovieControllerTest - Started MovieControllerTest in 0.899 seconds (process running for 1.306)
+2024-12-25 01:10:06 [main] INFO  c.b.b.controller.MovieControllerTest - Starting MovieControllerTest using Java 23 with PID 29448 (started by nishchayanand in /Users/nishchayanand/Documents/DEV/System Design/LLD/Backend/Case Studies/Movie Ticket Booking System/bookmovie)
+2024-12-25 01:10:06 [main] INFO  c.b.b.controller.MovieControllerTest - No active profile set, falling back to 1 default profile: "default"
+2024-12-25 01:10:07 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2024-12-25 01:10:07 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2024-12-25 01:10:07 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+2024-12-25 01:10:07 [main] INFO  c.b.b.controller.MovieControllerTest - Started MovieControllerTest in 0.92 seconds (process running for 1.35)
+2024-12-25 01:53:27 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2024-12-25 01:53:27 [main] INFO  c.b.b.controller.MovieControllerTest - Starting MovieControllerTest using Java 23 with PID 30164 (started by nishchayanand in /Users/nishchayanand/Documents/DEV/System Design/LLD/Backend/Case Studies/Movie Ticket Booking System/bookmovie)
+2024-12-25 01:53:27 [main] INFO  c.b.b.controller.MovieControllerTest - No active profile set, falling back to 1 default profile: "default"
+2024-12-25 01:53:28 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2024-12-25 01:53:28 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2024-12-25 01:53:28 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+2024-12-25 01:53:28 [main] INFO  c.b.b.controller.MovieControllerTest - Started MovieControllerTest in 0.926 seconds (process running for 1.354)

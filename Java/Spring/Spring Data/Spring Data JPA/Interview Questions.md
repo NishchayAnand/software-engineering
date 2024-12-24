@@ -110,4 +110,6 @@ For example, if there is a database connection error or constraint violation, Sp
 
 ---
 
+Q. Explain `@Transactional` annotation.
+
 

@@ -2,8 +2,13 @@ package com.bookmyshow.bookmovie.controller;
 
 import com.bookmyshow.bookmovie.dto.Location;
 import com.bookmyshow.bookmovie.dto.MovieDTO;
+import com.bookmyshow.bookmovie.exception.MovieServiceException;
 import com.bookmyshow.bookmovie.service.MovieService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,8 +25,17 @@ public class MovieController {
     }
 
     @PostMapping("/by-location")
-    public List<MovieDTO> getMovies(@RequestBody Location location) {
-        return movieService.getMoviesLocation(location);
+    public ResponseEntity<List<MovieDTO>> getMovies(@Valid @RequestBody Location location, BindingResult bindingResult) {
+
+        if(bindingResult.hasErrors()) return ResponseEntity.badRequest().body(null);
+
+        try {
+            List<MovieDTO> movies = movieService.getMoviesLocation(location);
+            return ResponseEntity.ok(movies);
+        } catch (MovieServiceException ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
     }
 
 }

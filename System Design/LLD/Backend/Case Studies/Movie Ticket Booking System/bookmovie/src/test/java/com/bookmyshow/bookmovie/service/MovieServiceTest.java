@@ -10,7 +10,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -24,13 +26,16 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 class MovieServiceTest {
 
-    @Mock
+    //@Mock
+    @MockitoBean
     private MovieRepository movieRepository;
 
-    @Mock
+    //@Mock
+    @MockitoBean
     private MovieMapper movieMapper;
 
-    @InjectMocks
+    //@InjectMocks
+    @Autowired
     private MovieService movieService;
 
     @Test
