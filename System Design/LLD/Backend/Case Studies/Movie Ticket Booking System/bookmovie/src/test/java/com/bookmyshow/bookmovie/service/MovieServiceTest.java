@@ -34,7 +34,7 @@ class MovieServiceTest {
     private MovieService movieService;
 
     @Test
-    void shouldFindAllMoviesDTOBasedOnCustomerSelectedCityAndState() {
+    void shouldFindAllMoviesBasedOnCustomerSelectedCityAndState() {
 
         // Arrange
         Location location = new Location("New York", "NY");

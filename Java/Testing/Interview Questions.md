@@ -156,15 +156,51 @@ It is a part of the **Spring Boot Test** module and is used when you need to tes
 
 ---
 
-Q. Explain `@MockBean` annotation.
+Q. Explain `@MockitoBean` annotation.
 
-The `@MockBean` annotation in Spring Boot is used to add or replace mock instances of a bean in the application context for the duration of the test.
+The `@MockitoBean` annotation in Spring Boot is used to add or replace mock instances of a bean in the application context for the duration of the test.
 
 The mocked bean behaves according to the behavior defined by the test setup (e.g., using Mockito's when() method).
 
 ---
 
+Q. Why Test the `@Controller` classes?
+
+1. Ensure that endpoints return the correct HTTP status codes (200, 404, 400, etc.).
+
+2. Verify that request payloads and query parameters are correctly processed. Ensure proper endpoint mapping (@RequestMapping, @PostMapping, etc.).
+
+3. Validate response structures and data.
+
+4. Validate exception handling and error responses.
+
+5. Verify the controller’s interaction with the service layer and other dependencies.
+
+---
+
 Q. Explain `@WebMvcTest` annotation.
+
+The `@WebMvcTest` annotation is a Spring Boot testing annotation designed for testing the web layer of an application in isolation. 
+
+It is commonly used when you want to test Spring MVC components such as controllers, filters, or configuration classes without involving the entire application context, including services or repositories.
+
+Example:
+```
+@WebMvcTest(MyController.class)
+public class MyControllerTest {}
+```
+
+---
+
+Q. What is `MockMvc` class?
+
+MockMvc is a utility provided by the Spring Framework to facilitate testing Spring MVC controllers. 
+
+It allows developers to test controllers by simulating HTTP requests and responses in a lightweight, server-independent way. This makes it easier to write unit tests for web applications without needing to deploy them on a real server.
+
+> NOTE: To use `MockMvc`, you typically include it in a Spring test context.
+
+---
 
 
 
