@@ -75,7 +75,7 @@ The pattern separates object creation into multiple layers:
 
 Q. Explain Builder Pattern.
 
-The Builder Design Pattern is a creational design pattern that allows you to construct objects step-by-step. 
+The Builder Design Pattern is a creational design pattern that allows you to construct objects step-by-step. The pattern allows you to produce different types and representations of an object using the same construction code.
 
 Example:
 ```

@@ -75,17 +75,39 @@ It is commonly used in Spring applications to validate method arguments, particu
 
 ---
 
+Q. Explain `@NotNull` annotation.
+
+The `@NotNull` annotation is a validation constraint used to ensure that a field, method parameter, or method return value is not null. If the element is null, a validation error is triggered.
+
+---
+
 Q. What is `ResponseEntity` class?
 
-The `ResponseEntity` class allows you to return more than just the body of the response — it provides full control over the HTTP response, including status codes, headers, and response body.
+By default, Spring's `@RestController` annotation automatically adds the return value of a controller method to the body of the HTTP response. However, if you need more control (e.g., setting headers or status codes), you can use `ResponseEntity` instead of returning the object directly.
+
+The `ResponseEntity` class allows you to control every aspect of an HTTP response, including the status code, headers, and body. 
 
 --- 
 
-Q. What is `BindingResult` class?
+Q. What is `BindingResult` interface?
 
-    
+In Spring Framework, `BindingResult` is an interface used in conjunction with form validation (e.g., `@Valid`, `@validate`) to capture the results of binding and validation errors. 
+
+It provides details about validation errors (e.g., `MethodArgumentNotValidException`) that occur when mapping request data (e.g., JSON, form inputs) to a model or DTO object. Using `BindingResult`, you can handle these errors gracefully without triggering exceptions.
+
+> NOTE: If you're not performing manual validation handling (e.g., you rely on `@ExceptionHandler` to catch `MethodArgumentNotValidException`), you may not need to use `BindingResult` directly.
 
 ---
+
+Q. Explain `@ExceptionHandler` annotation.
+
+The `@ExceptionHandler` annotation in Spring is used to define a method that will handle exceptions thrown in your application. 
+
+It is part of Spring’s exception-handling framework and is commonly used in controllers to provide custom responses when specific exceptions occur.
+
+---
+
+
 
 
 
