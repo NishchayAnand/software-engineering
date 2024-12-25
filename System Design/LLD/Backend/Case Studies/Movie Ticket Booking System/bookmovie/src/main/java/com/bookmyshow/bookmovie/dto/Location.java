@@ -1,6 +1,7 @@
 package com.bookmyshow.bookmovie.dto;
 
 import jakarta.persistence.Embeddable;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +10,9 @@ import lombok.Setter;
 @Setter
 public class Location {
     private String street;
+    @NotNull
     private String city;
+    @NotNull
     private String state;
     private String country;
     private String postalCode;

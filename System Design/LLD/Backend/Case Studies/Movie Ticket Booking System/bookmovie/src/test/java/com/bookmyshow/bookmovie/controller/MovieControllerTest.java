@@ -3,7 +3,6 @@ package com.bookmyshow.bookmovie.controller;
 import com.bookmyshow.bookmovie.dto.Location;
 import com.bookmyshow.bookmovie.dto.MovieDTO;
 import com.bookmyshow.bookmovie.service.MovieService;
-import jdk.jfr.ContentType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

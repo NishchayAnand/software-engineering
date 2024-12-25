@@ -2,19 +2,15 @@ package com.bookmyshow.bookmovie.service;
 
 import com.bookmyshow.bookmovie.dto.Location;
 import com.bookmyshow.bookmovie.dto.MovieDTO;
-import com.bookmyshow.bookmovie.exception.MovieServiceException;
+import com.bookmyshow.bookmovie.exception.MovieFetchException;
 import com.bookmyshow.bookmovie.mapper.MovieMapper;
 import com.bookmyshow.bookmovie.model.Movie;
 import com.bookmyshow.bookmovie.repository.MovieRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
@@ -83,6 +79,8 @@ class MovieServiceTest {
 
     }
 
+    /*
+    NOTE: Handled in the MovieController class
     @Test
     void shouldThrowExceptionForInvalidLocation() {
 
@@ -91,6 +89,7 @@ class MovieServiceTest {
                 () -> movieService.getMoviesLocation(null));
 
     }
+    */
 
     @Test
     void shouldHandleRepositoryExceptionGracefully() {
@@ -98,11 +97,10 @@ class MovieServiceTest {
         // Arrange
         Location location = new Location("New York", "NY");
         when(movieRepository.findMoviesByCityAndState(anyString(), anyString()))
-                .thenThrow(new RuntimeException("Database Error"));
+                .thenThrow(new MovieFetchException("Database Error"));
 
         // Act and assert
-        RuntimeException ex = assertThrows(MovieServiceException.class,
-                () -> movieService.getMoviesLocation(location));
+        assertThrows(MovieFetchException.class, () -> movieService.getMoviesLocation(location));
 
     }
 
