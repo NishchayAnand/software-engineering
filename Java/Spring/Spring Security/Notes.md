@@ -1,30 +1,9 @@
 # Understanding Spring Security
 
-- `DelegatingFilterProxy` - **springSecurityFilterChain**
+When you add the Spring Security framework to your application, it automatically registers a filters chain that intercepts all incoming requests.
 
-```
-<filter>
-    <filter-name>springSecurityFilterChain</filter-name>
-    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-</filter>
+ After adding `spring-boot-starter-security`, if we rebuild and run the project and then try to access one of the aforementioned URLs instead of viewing the result, we will be redirected to http://localhost:8080/login. This is default behavior because the Spring Security framework requires authentication out of the box for all URLs.
 
-<filter-mapping>
-    <filter-name>springSecurityFilterChain</filter-name>
-    <url-pattern>/*</url-pattern>
-</filter-mapping>
-```
+ This out-of-the-box behavior may be useful for classic MVC web applications where we have session-based authentication, but in the case of single-page applications, it’s usually not useful because in most use cases, we have client-side rendering and JWT-based stateless authentication.
 
-## Spring Security provides annotations for method-level security, allowing you to restrict access to specific service layer methods based on user roles.
 
-Here's how you can achieve this:
-
-1. **Annotating the Service Method:**
-
-Use the `@PreAuthorize` annotation on the service method you want to restrict. This annotation allows you to define a `SpEL` (Spring Expression Language) expression that evaluates to true if the user has the required role.
-
-```
-@PreAuthorize("hasRole('ADMIN')")
-public MyObject doAdminStuff() {
-  // Method logic
-}
-```

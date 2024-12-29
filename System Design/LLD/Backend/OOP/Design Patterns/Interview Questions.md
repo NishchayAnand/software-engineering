@@ -114,5 +114,11 @@ A template method serves as a template for an algorithm. In the template, each s
 
 ---
 
+Q. Explain Adapter pattern.
+
+e.g. WebSecurityAdapter
+
+---
+
 
 

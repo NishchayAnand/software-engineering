@@ -1,8 +1,7 @@
 package com.bookmyshow.bookmovie.model;
 
-public class Customer {
+public class Customer extends User{
     private String name;
     private String emailId;
-    private String password;
     private String phone;
 }
