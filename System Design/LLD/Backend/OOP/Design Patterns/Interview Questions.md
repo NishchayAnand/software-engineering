@@ -71,6 +71,8 @@ The pattern separates object creation into multiple layers:
 
 **Real-World Example**: JDBC provides abstract factories to create connections and other database objects.
 
+### LogFactory - Explore 
+
 ---
 
 Q. Explain Builder Pattern.

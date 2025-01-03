@@ -1,5 +1,15 @@
 # Logging Interview Questions
 
+Q. What is Apache Commons Logging. 
+
+---
+
+Q. What is a Appender?
+
+An Appender is a component that handles the output of log messages, such as writing them to a file, sending them over the network, or displaying them on the console. 
+
+---
+
 Q. What is Logback?
 
 Logback is a logging framework for Java applications, designed as a successor to the `Log4j` framework.

@@ -107,6 +107,24 @@ It is part of Spring’s exception-handling framework and is commonly used in co
 
 ---
 
+Q. Explain the difference between Spring MVC and Spring WebFlux.
+
+- **Spring MVC**: Spring MVC is built on the Servlet API and uses a synchronous blocking I/O architecture with a one-request-per-thread model.
+
+- **Spring WebFlux**: Spring WebFlux is a non-blocking web framework built from the ground up to take advantage of multi-core, next-generation processors and handle massive numbers of concurrent connections.
+
+---
+
+Q. What are the disadvantages of Spring MVC?
+
+Spring MVC is built on the Servlet API and uses a synchronous blocking I/O architecture with a one-request-per-thread model.
+
+A thread is tied up for the duration of the request-response cycle. This can lead to scalability challenges in high-concurrency environments as the number of threads increases.
+
+---
+
+
+
 
 
 
