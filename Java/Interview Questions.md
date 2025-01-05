@@ -64,7 +64,19 @@ Below are the steps to handle exceptions in Java:
 
 > NOTE: In complex applications, especially web applications (e.g., Spring Boot), you can use exception-handling frameworks to handle exceptions globally and return consistent error responses (e.g., HTTP status codes and error messages).
 
---
+---
+
+Q. Explain the difference between StringBuilder and StringBuffer.
+
+The key differences between `StringBuilder` and `StringBuffer` in Java revolve around thread safety.
+
+- **StringBuffer**: It is thread-safe. Methods in StringBuffer are synchronized, which means multiple threads cannot access it simultaneously. This ensures data consistency but introduces overhead due to locking and unlocking mechanisms.
+
+- **StringBuilder**: It is not thread-safe. Methods in StringBuilder are not synchronized, so it does not guarantee thread safety when accessed by multiple threads simultaneously.
+
+> NOTE: Use `StringBuffer`when you need to work with a mutable string in a multi-threaded environment, and synchronization is required. Use `StringBuilder` when you need to work with a mutable string in a single-threaded environment, where performance is a priority and thread safety is not a concern.
+
+---
 
 ## EXTRA
 

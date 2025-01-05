@@ -1,1 +1,1 @@
-# Understanding EC2
+# Understanding Amazon Elastic Compute Cloud (EC2)

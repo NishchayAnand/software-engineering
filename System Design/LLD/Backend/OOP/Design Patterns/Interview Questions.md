@@ -114,7 +114,7 @@ A template method serves as a template for an algorithm. In the template, each s
 
 > NOTE: The template method is usually declared `final` to prevent subclasses from reworking the sequence of steps in the algorithm.
 
----
+--- 
 
 Q. Explain Adapter pattern.
 
