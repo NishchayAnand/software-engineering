@@ -1,24 +1,32 @@
 # AWS Interview Questions
 
-Q. What is Amazon Elastic Compute Cloud (EC2)?
+Q. What is Amazon EC2?
 
 Amazon Elastic Compute Cloud (EC2) is a web service that allows users to run virtual servers, called instances, in the cloud. It is highly scalable, flexible, and enables you to deploy applications quickly without the need to invest in physical hardware.
 
 ---
 
+Q. What is Amazon ECR?
+
+Amazon Elastic Container Registry (ECR) is an AWS managed container image registry service.
+
+---
+
 Q. What is Amazon ECS?
 
----
-
-Q. Explain Amazon Elastic Container Registry (ECR).
+Amazon ECS (Elastic Container Service) is a fully managed container orchestration service that automatically schedules and manages containers across a cluster of EC2 instances. 
 
 ---
 
-Q. What is ECS Fargate?
+Q. What is AWS Fargate?
+
+AWS Fargate is a technology that you can use with Amazon ECS to run containers without having to manage servers or clusters of Amazon EC2 instances. 
 
 ---
 
 Q. What is Amazon EKS?
+
+Amazon Elastic Kubernetes Service (Amazon EKS) is a fully managed Kubernetes service that enables you to run Kubernetes seamlessly in both AWS Cloud and on-premises data centers. 
 
 ---
 
