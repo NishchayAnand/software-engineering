@@ -6,11 +6,19 @@ Amazon Elastic Compute Cloud (EC2) is a web service that allows users to run vir
 
 ---
 
-Q. WHat is AWS Lambda?
+Q. What is Amazon ECS?
 
-AWS Lambda is a serverless compute service that lets you run code without provisioning or managing servers. 
+---
 
-> NOTE: Any applications with variable traffic or that can scale to zero are great candidates for AWS Lambda. 
+Q. Explain Amazon Elastic Container Registry (ECR).
+
+---
+
+Q. What is ECS Fargate?
+
+---
+
+Q. What is Amazon EKS?
 
 ---
 
@@ -24,7 +32,11 @@ You simply upload your application, and Elastic Beanstalk automatically handles 
 
 ---
 
-Q. What is Amazon EKS?
+Q. WHat is AWS Lambda?
+
+AWS Lambda is a serverless compute service that lets you run code without provisioning or managing servers. 
+
+> NOTE: Any applications with variable traffic or that can scale to zero are great candidates for AWS Lambda. 
 
 ---
 
@@ -55,14 +67,6 @@ Q. Explain S3.
 ---
 
 Q. Explain Amazon CodeDeploy.
-
----
-
-Q. Explain Amazon Elastic Container Registry (ECR).
-
----
-
-Q. Explain ECS Fargate. 
 
 ---
 

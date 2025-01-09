@@ -8,9 +8,51 @@ Authentication is the process of **verifying a user's identity (e.g., username a
 
 ---
 
-Q. What is Authorization?
+Q. What is SSL?
 
-Authorization is the process of **granting or denying access to specific resources or actions** based on the authenticated user's roles and permissions. 
+SSL, or Secure Sockets Layer, is a protocol originally developed to provide secure communication over a computer network, particularly the internet. 
+
+It was designed to ensure the confidentiality, integrity, and authenticity of data transmitted between a client (such as a web browser) and a server. Although SSL has been suceeded by Transport Layer Security (TLS), the term **SSL** is still commonly used to refer to the technology that secures web communications. 
+
+> NOTE: SSL/TLS uses digital certificates to authenticate the identity of the server (and optionally the client).
+
+---
+
+Q. What is a server certificate?
+
+A server certificate is a type of digital certificate used to authenticate the identity of a server to clients. 
+
+When a client (like a web browser) connects to a server over HTTPs, the server presents its certificate to the client. The client verifies the certificate's validity, authenticity, and trustworthiness before establishing a secure connection. 
+
+> NOTE: A server certificate contains information such as the server's public key, the domain name, the certificate authority (CA) and issued it, and the certificate's validity period. 
+
+---
+
+Q. What is a client certificate?
+
+A client certificate is a type of digital certificate used to authenticate the identity of a client to a server.
+
+When a client connects to a server that requires client certificates, the server requests the client certificate during the TLS handshake. The client then presents its certificate, allowing the server to verify the client's identity using the certificate's public key and the CA's signature. 
+
+> NOTE: A client certificate is especially important in scenarios where secure access to resources is required, such as in corporate networks, secure APIs, or sensitive online services. 
+
+---
+
+Q. Explain the steps involved in a SSL/TLS handshake process.
+
+1. **Client Hello**: The client initiates the handshake by sending a **Client Hello** message to the server.
+
+2. **Server Hello**: The server responds with a **Server Hello** message.
+
+3. **Server Certificate**: The server sends its SSL/TLS certificate to the client.
+
+4. **Client Certificate Request (Optional)**: For mutual authentication, the server may request the client’s certificate to verify the client’s identity. This step is optional and mostly used in high-security environments.
+
+5. **Client Certificate (Optional)**: If the server requested a client certificate earlier, the client sends its certificate for authentication.
+
+6. **Key Exchange**: The client and server exchange information to securely derive a shared session key.
+
+7. **Finished Messages**: Both the client and the server send a Finished message to indicate that future communications will be encrypted using the session key.
 
 ---
 
@@ -39,6 +81,14 @@ Q. Explain the disadvantages of Session-Based Authenication.
 - **Server Dependency**: Sessions are tied to the server, making it challenging to implement in distributed or cloud-native architectures without additional effort (e.g., shared session storage).
 
 - **Cross-Origin Limitations**: Sessions rely on cookies, which may require special handling for cross-origin requests.
+
+---
+
+Q. What is SSO?
+
+SSO, or Single-Sign-On, is an authentication process that allows a user to access multiple applications or services with a sinhle set of login credentials. 
+
+Instead of having to remember and enter different usernames and passwords for each application, users authenticate once and gain access to all interconnected systems without needing to log in for each one. 
 
 ---
 
@@ -98,5 +148,13 @@ An Authorization Server is responsible for authenticating users and issuing toke
 
 ---
 
-Q. Explain Cookie
+Q. What is a Cookie?
+
+---
+
+Q. What is Authorization?
+
+Authorization is the process of **granting or denying access to specific resources or actions** based on the authenticated user's roles and permissions. 
+
+---
 
