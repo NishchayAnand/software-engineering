@@ -56,6 +56,10 @@ Q. Explain the steps involved in a SSL/TLS handshake process.
 
 ---
 
+Q. What is Session-Based Authentication?
+
+---
+
 Q. How Session-Based Authentication works?
 
 1. **User Login**: The user submits their credentials (e.g., username and password) to the server.
@@ -74,6 +78,30 @@ Q. How Session-Based Authentication works?
 
 ---
 
+Q. Explain the disadvantages of openAM authentication.
+
+---
+
+Q. What is LDAP?
+
+---
+
+Q. What is OAuth2?
+
+---
+
+Q.  What is a Resource Server?
+
+A sesource server is responsible for validating access tokens to ensure the requesting client has the necessary permissions to access specific resources.
+
+---
+
+Q. What is an Authorization Server?
+
+An Authorization Server is responsible for authenticating users and issuing tokens to clients (applications) that want to access protected resources on behalf of the user. 
+
+---
+
 Q. Explain the disadvantages of Session-Based Authenication.
 
 - **Scalability Issues**: Maintaining a session store can be resource-intensive, especially for applications with a large number of users.
@@ -81,14 +109,6 @@ Q. Explain the disadvantages of Session-Based Authenication.
 - **Server Dependency**: Sessions are tied to the server, making it challenging to implement in distributed or cloud-native architectures without additional effort (e.g., shared session storage).
 
 - **Cross-Origin Limitations**: Sessions rely on cookies, which may require special handling for cross-origin requests.
-
----
-
-Q. What is SSO?
-
-SSO, or Single-Sign-On, is an authentication process that allows a user to access multiple applications or services with a sinhle set of login credentials. 
-
-Instead of having to remember and enter different usernames and passwords for each application, users authenticate once and gain access to all interconnected systems without needing to log in for each one. 
 
 ---
 
@@ -136,25 +156,46 @@ Q. Explain the advantages of JWT-Based Authentication.
 
 ---
 
-Q.  What is a Resource Server?
+Q. What is SSO?
 
-A sesource server is responsible for validating access tokens to ensure the requesting client has the necessary permissions to access specific resources.
+SSO, or Single-Sign-On, is an authentication process that allows a user to access multiple applications or services using a single identity provider. 
 
----
-
-Q. What is an Authorization Server?
-
-An Authorization Server is responsible for authenticating users and issuing tokens to clients (applications) that want to access protected resources on behalf of the user. 
+> NOTE: An Identity Provider (IdP) is a centralized system (e.g., Okta, Microsoft Azure AD, ForgeRock OpenAM) responsible for authenticating users and issuing tokens or credentials that other applications trust.
 
 ---
 
-Q. What is a Cookie?
+Q. What is OpenAM?
+
+OpenAM is an open-source Identity and Access Management (IAM) platform that allows us to manage user identities and enforce security policies.
+
+It supports a wide range of authentication mechanisms, including username/password, multi-factor authentication (MFA), OAuth, OpenID Connect, SAML, and more.
 
 ---
+
+Q. How does SSO Works?
+
+1. **Initial Login**: A user attempts to access an application. The application redirects the user to the IdP for authentication.
+
+2. **Authentication at IdP**: The user provides credentials (username/password, biometrics, etc.). The IdP verifies the credentials and, upon success, creates a session.
+
+3. **Token Issuance**: The IdP generates an authentication token (e.g., SAML assertion, OAuth access token, OpenID Connect ID token) and sends it back to the application.
+
+4. **Access to Other Services**: For subsequent requests to other applications, the user is not asked to re-authenticate because the token issued by the IdP is shared across services.
+
+## EXTRA
+
 
 Q. What is Authorization?
 
 Authorization is the process of **granting or denying access to specific resources or actions** based on the authenticated user's roles and permissions. 
+
+---
+
+Q. What is SSH?
+
+SSH (Secure Shell) is a cryptographic network protocol used for securely operating network services over an unsecured network. 
+
+SSH is widely used to access and manage servers remotely. 
 
 ---
 

@@ -1,8 +1,20 @@
 # Networking Interview Questions
 
+Q. What is HTTP?
+
+HTTP (Hypertest Transfer Protocol) is a transport protocol used for transmitting hypertext (such as HTML) over the internet. It is the foundation of communication on the World Wide Web. 
+
+**Key features**
+
+1. **Request-Response Model**: HTTP operates on a request-response model. A client (usually a web browser) sends an HTTP request to a server, and the server responds with an HTTP response. This interaction forms the basis of web communication. 
+
+2. **Stateless**: HTTP is stateless, meaning each request from a client to a server is independent and contains all the necessary information for the server to fulfill the request. The server does not retain any session information between requests. 
+
+---
+
 Q. What is SOAP?
 
-SOAP (Simple Object Access Protocol) is a protocol for exchanging structured information in web services.
+SOAP (Simple Object Access Protocol) is a messaging protocol that allows services running on different operating systems to exchange structured information with each other.
 
 **Key Features**
 
@@ -67,16 +79,6 @@ It's all about event-driven.
 ---
 
 ## EXTRA
-
-Q. What is HTTP?
-
-HTTP (Hypertest Transfer Protocol) is a protocol used for transmitting hypertext (such as HTML) over the internet. It is the foundation of communication on the World Wide Web. 
-
-**Key features**
-
-1. **Request-Response Model**: HTTP operates on a request-response model. A client (usually a web browser) sends an HTTP request to a server, and the server responds with an HTTP response. This interaction forms the basis of web communication. 
-
-2. **Stateless**: HTTP is stateless, meaning each request from a client to a server is independent and contains all the necessary information for the server to fulfill the request. The server does not retain any session information between requests. 
 
 ---
 
