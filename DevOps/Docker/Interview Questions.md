@@ -73,12 +73,21 @@ Q. Explain key commands in Dockerfile.
 1. **FROM**: Specifies the base image to use for building a new image. Every Dockerfile must begin with a `FROM` instruction. 
 
     ```
-    FROM openjdk:17-jdk-slim
+    FROM amazoncorretto:17
     ```
 
-2. **WORKDIR**: Sets the working directory for the following instructions. 
+2. **WORKDIR**: Sets the working directory inside the container for subsequent instructions (COPY, RUN, etc.).
+
+    ```
+    # Creates (if it doesn't exist) and switches to the /app directory in the container.
+    WORKDIR /app
+    ```
 
 3. **COPY**: Copies the files or directories from the build context to the image. 
+
+    ```
+    COPY target/project.jar app.jar
+    ```
 
 4. **RUN**: Executes commands in the shell during image build.
 
@@ -96,7 +105,10 @@ Q. Explain key commands in Dockerfile.
 
 ---
 
-Q. Explain the difference between `CMD` and `ENTRYPOINT` Dockerfile command.
+Q. How Port Mapping Works?????
+
+Container Port: The port inside the container where the service (e.g., a web server) is listening.
+Host Port: The port on your host machine that will forward incoming traffic to the container's port.
 
 ---
 

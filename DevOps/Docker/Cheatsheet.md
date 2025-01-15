@@ -1,16 +1,10 @@
 # Docker Cheatsheet
 
-1. docker run -it ubuntu
+### docker build -t docker-image
 
-2. docker build -t docker-image
+```
+docker build -t book-movie-service:latest .
+```
 
-3. docker images
-
-4. docker ps
-
-5. docker stop docker-container-{id}
-
-6. docker container prune
-
-7. docker rm docker-container-{id}
+### docker images
 
