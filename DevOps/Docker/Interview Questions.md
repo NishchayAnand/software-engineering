@@ -106,9 +106,17 @@ docker run -p <host_port>:<container_port> <image_name>
 
 ---
 
+Q. What is the purpose of `host.docker.internal`?
+
+When you use **`host.docker.internal`** in your container's configuration, it allows the container to refer to the **host machine** and access services running on it (e.g., a local MySQL server, web server).
+
+> NOTE: By default, Docker containers are isolated from the host machine and other containers. The loopback address `127.0.0.1`or `localhost` inside a container refers to the container itself, not the host machine.
+
+---
+
 Q. What is Docker Compose?
 
-An orchestation tool that allows us to define and manage multi-container docker applications. It uses a YML file to configure services, networks, volumes for your application enable us to run and scale entire application with a single command. 
+An orchestration tool that allows us to define and manage multi-container docker applications. It uses a YML file to configure services, networks, volumes for your application enable us to run and scale entire application with a single command. 
 
 > NOTE: Docker Compose is installed automatically when you install Docker. 
 

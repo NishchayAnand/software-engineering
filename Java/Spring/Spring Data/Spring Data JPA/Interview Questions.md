@@ -68,7 +68,7 @@ Three primary SQL files used by Spring Boot to support database initialization i
 
 Q. Explain `spring.jpa.hibernate.ddl-auto` property.
 
-The `spring.jpa.hibernate.ddl-auto` property in Spring Boot configures the behavior of Hibernate with regard to **DDL (Data Definition Language) generation**. 
+The `spring.jpa.hibernate.ddl-auto` property in Spring Boot configures the behaviour of Hibernate with regard to **DDL (Data Definition Language) generation**. 
 
 It controls whether Hibernate should automatically create, update, or validate the database schema when the application starts.
 
@@ -86,19 +86,19 @@ It controls whether Hibernate should automatically create, update, or validate t
 
 ---
 
-Q. Explain `spring.jpa.database-platform` property.
-
-The `spring.jpa.database-platform` property in Spring Boot specifies the dialect to be used by Hibernate, the JPA implementation. 
-
-A dialect is a configuration that tells Hibernate how to translate Java-based queries (HQL or JPQL) into SQL specific to the database you are using.
-
----
-
-Q. What is the significance of `spring.jpa.database-platform` property?
+Q. What is the `spring.jpa.database-platform` property?
 
 Different databases have different SQL syntaxes and features. For example, PostgreSQL uses `SERIAL` for auto-increment fields, while MySQL uses `AUTO_INCREMENT`. The way **dates**, **joins**, and **native queries** are handled also varies between databases. 
 
 The `spring.jpa.database-platform` property ensures Hibernate generates SQL that works correctly with your database.
+
+---
+
+Q. Explain `spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect` property.
+
+The property **`spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect`** is used in **Spring Boot** to specify the Hibernate dialect for a MySQL database.  This ensures that Hibernate generates SQL that is compatible with MySQL’s syntax and capabilities.
+
+> NOTE: A dialect is a configuration that tells Hibernate how to translate Java-based queries (HQL or JPQL) into SQL specific to the database you are using.
 
 ---
 
