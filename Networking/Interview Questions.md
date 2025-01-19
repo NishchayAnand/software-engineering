@@ -2,7 +2,7 @@
 
 Q. What is HTTP?
 
-HTTP (Hypertest Transfer Protocol) is a transport protocol used for transmitting hypertext (such as HTML) over the internet. It is the foundation of communication on the World Wide Web. 
+HTTP (Hypertext Transfer Protocol) is a transport protocol used for transmitting hypertext (such as HTML) over the internet. It is the foundation of communication on the World Wide Web. 
 
 **Key features**
 
@@ -42,7 +42,7 @@ REST (Representational State Transfer) is an architectural style (not a protocol
 
 3. **Representation Neutrality**: Resources are represented in standard formats like JSON, XML, HTML or plain text, but JSON is most commonly used.
 
-3. **Resource Identification**: Resources are identified by URIs (Uniform Resource Identifiers), making them addressable over the web.
+4. **Resource Identification**: Resources are identified by URIs (Uniform Resource Identifiers), making them addressable over the web.
 
 > NOTE: While REST is simpler and more flexible than SOAP, it does not include built-in security and transaction handling, which might require additional layers or protocols for complex enterprise scenarios.
 

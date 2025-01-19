@@ -1,8 +1,8 @@
 # Docker Interview Questions
 
-Q. What is Containerization?
+Q. What is Containerisation?
 
-Containerization is a process of bundling an application’s code with all its dependencies and runtime information it needs to run on any infrastructure. 
+Containerisation is a process of bundling an application’s code with all its dependencies and runtime information it needs to run on any infrastructure. 
 
 ---
 
@@ -70,28 +70,15 @@ A Dockerfile is a text file containing instructions for building a Docker image.
 
 Q. Explain key commands in Dockerfile.
 
-1. **FROM**: Specifies the base image to use for building a new image. Every Dockerfile must begin with a `FROM` instruction. 
+1. **FROM**: Specifies the base image to use for building a new image. Every Dockerfile must begin with a `FROM` instruction. Sample: `FROM amazoncorretto:17`.
 
-    ```
-    FROM amazoncorretto:17
-    ```
+2. **WORKDIR**: Sets the working directory inside the container for subsequent instructions (COPY, RUN, etc.). Sample: `WORKDIR /app` (creates (if it doesn't exist) and switches to the /app directory in the container).
 
-2. **WORKDIR**: Sets the working directory inside the container for subsequent instructions (COPY, RUN, etc.).
+3. **COPY**: Copies the files or directories from the build context to the image. Sample: `COPY target/project.jar app.jar`.
 
-    ```
-    # Creates (if it doesn't exist) and switches to the /app directory in the container.
-    WORKDIR /app
-    ```
+4. **RUN**: Executes a command in the shell during the image build process, typically for installing dependencies or configuring the environment.
 
-3. **COPY**: Copies the files or directories from the build context to the image. 
-
-    ```
-    COPY target/project.jar app.jar
-    ```
-
-4. **RUN**: Executes commands in the shell during image build.
-
-5. **EXPOSE**: Informs Docker that the container listens on specified network ports at runtime. 
+5. **EXPOSE**: Declares the port the container listens on at runtime. It's informational and doesn't publish the port. Sample: `EXPOSE 8080`.
 
 6. **ENV**: Set the environment variables during the build process. 
 
@@ -105,10 +92,17 @@ Q. Explain key commands in Dockerfile.
 
 ---
 
-Q. How Port Mapping Works?????
+Q. What do we need to map container's port to a port on your host machine?
 
-Container Port: The port inside the container where the service (e.g., a web server) is listening.
-Host Port: The port on your host machine that will forward incoming traffic to the container's port.
+A Docker container has its own isolated network, meaning that the services running inside the container (such as a web server) cannot directly communicate with your host machine or the outside world unless you explicitly expose and map the ports.
+
+By mapping a port, you essentially create a tunnel from a specific port on your host machine to the corresponding port inside the container.
+
+**Port Mapping Syntax**
+
+```
+docker run -p <host_port>:<container_port> <image_name>
+```
 
 ---
 
