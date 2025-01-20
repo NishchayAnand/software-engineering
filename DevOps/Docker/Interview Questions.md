@@ -58,17 +58,17 @@ Q. Explain the Docker Workflow.
 
 2. **Docker Host**: The background process responsible for managing containers on the host system. It listens for Docker client commands, creates and manages containers, builds images and handles other Docker related tasks.
 
-3. **Docker Registry (Docker Hub)**: A centralized repository of Docker images. It hosts both public and privates repositories (or packages). When you run a container, Docker may pull the requires images from the registry if it's unavailable locally. 
+3. **Docker Registry (Docker Hub)**: A centralised repository of Docker images. It hosts both public and privates repositories (or packages). When you run a container, Docker may pull the requires images from the registry if it's unavailable locally. 
 
 ---
 
-Q. What is a Dockerfile.
+Q. What is a **Dockerfile**?
 
-A Dockerfile is a text file containing instructions for building a Docker image. It defines the environment, configurations, dependencies, and commands necessary to create and run a containerized application.
+A **Dockerfile** is a text file containing instructions for building a Docker image. It defines the environment, configurations, dependencies, and commands necessary to create and run a containerised application.
 
 ---
 
-Q. Explain key commands in Dockerfile.
+Q. Explain key commands in **Dockerfile**.
 
 1. **FROM**: Specifies the base image to use for building a new image. Every Dockerfile must begin with a `FROM` instruction. Sample: `FROM amazoncorretto:17`.
 
@@ -111,6 +111,24 @@ Q. What is the purpose of `host.docker.internal`?
 When you use **`host.docker.internal`** in your container's configuration, it allows the container to refer to the **host machine** and access services running on it (e.g., a local MySQL server, web server).
 
 > NOTE: By default, Docker containers are isolated from the host machine and other containers. The loopback address `127.0.0.1`or `localhost` inside a container refers to the container itself, not the host machine.
+
+---
+
+Q. What is a Docker volume?
+
+A Docker volume is a directory on the host that you can mount into a container, allowing data to persist beyond the lifecycle of the container.
+
+They are completely managed by Docker and are isolated from the core functionality of the host machine.
+
+> NOTE: Volumes are often a better choice than writing data directly to a container, because a volume doesn't increase the size of the containers using it.
+
+---
+
+Q. Explain "mounting a volume into a container".
+
+When a volume is mounted, Docker takes a directory from the host where the volume is stored (e.g., `/var/lib/docker/volumes/` on Linux) and makes it accessible inside the container at the specified mount point. 
+
+The container can then read and write data to this volume, allowing data to persist even if the container is stopped or removed.
 
 ---
 
