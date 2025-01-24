@@ -2,7 +2,7 @@
 
 Q. What is **Machine Learning**?
 
-**Machine Learning** is the way we "teach" a computer model to make predictions and draw conclusions from data. 
+**Machine Learning** is the way we "teach" a computer model to make predictions and draw conclusions from data.
 
 > NOTE: Machine learning is the foundation behind an AI system.
 
@@ -57,3 +57,14 @@ Q. What is **Generative AI**?
 **Generative AI** is the capabilities within AI that create original content in a variety of formats including natural language, image, code, and more.
 
 ---
+
+Q. Explain the key principles behind Responsible AI.
+
+1. **Fairness**: AI systems should treat all people fairly. **Azure Machine Learning includes the capability to interpret models and quantify the extent to which each feature of the data influences the model's prediction.** This capability helps data scientists and developers identify and mitigate bias in the model.
+
+2. **Privacy and security**:  AI systems should be secure and respect privacy. **The machine learning models on which AI systems are based rely on large volumes of data**, which may contain personal details that must be kept private.
+
+3. **Transparency**: AI systems should be understandable. Users should be made fully aware of the purpose of the system, how it works, and what limitations may be expected.
+
+---
+

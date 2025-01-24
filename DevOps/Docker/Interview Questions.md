@@ -132,17 +132,21 @@ The container can then read and write data to this volume, allowing data to pers
 
 ---
 
+Q. What is **Docker Network**?
+
+---
+
 Q. What is Docker Compose?
 
-An orchestration tool that allows us to define and manage multi-container docker applications. It uses a YML file to configure services, networks, volumes for your application enable us to run and scale entire application with a single command. 
+**Docker Compose** is an **orchestration tool** that enables you to define and manage multi-container Docker applications using a single **YAML file** (`docker-compose.yml`).
 
 > NOTE: Docker Compose is installed automatically when you install Docker. 
 
 ---
 
-Q. Explain the key disadvantages of Docker Compose?
+Q. Explain the key limitations of Docker Compose.
 
-Can only manage services running on a single server. 
+1. **Single Host Limitation**: Docker Compose is designed to work on a single machine.
 
 ---
 
