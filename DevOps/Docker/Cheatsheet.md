@@ -141,3 +141,10 @@ Here:
 - **`-p`**: This flag tells MySQL to prompt you for the password associated with the user (`root` in this case).
 
 ---
+##### Create a Docker Bridge Network
+
+```
+docker network create book-movie-network
+```
+
+---

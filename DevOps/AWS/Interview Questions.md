@@ -1,4 +1,19 @@
-# AWS Interview Questions
+
+Q. Explain Amazon Identity and Access Management (IAM).
+
+
+
+---
+
+Q. What is Amazon CloudWatch?
+
+---
+
+Q. What is Amazon SNS?
+
+---
+
+
 
 Q. What is Amazon EC2?
 
@@ -45,10 +60,6 @@ Q. WHat is AWS Lambda?
 AWS Lambda is a serverless compute service that lets you run code without provisioning or managing servers. 
 
 > NOTE: Any applications with variable traffic or that can scale to zero are great candidates for AWS Lambda. 
-
----
-
-Q. Explain Amazon Identity and Access Management (IAM).
 
 ---
 
