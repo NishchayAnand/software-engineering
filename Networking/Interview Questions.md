@@ -1,6 +1,36 @@
 # Networking Interview Questions
 
-Q. What is HTTP?
+Q. What is **DNS**?
+
+The **Domain Name System (DNS)** is often referred to as the **"phonebook of the internet."** 
+
+It translates **human-readable domain names** (like `www.example.com`) into **IP addresses** (like `192.0.2.1` or `2001:0db8::1`) that computers use to identify each other on a network. 
+
+> **NOTE:** DNS allows users to access websites or services without needing to remember complex numerical IP addresses.
+
+---
+
+Q. How **DNS** works?
+
+1. **User Requests a Domain**: A user types a URL (e.g., `www.example.com`) in their browser. The browser doesn't know the IP address, so it asks a DNS server to resolve it.
+
+2. **DNS Resolution Process**: DNS works through a process called **name resolution**, which involves querying different types of DNS servers in a hierarchy:
+
+	- **Recursive Resolver**: A server (often operated by ISPs or public DNS services like Google DNS or Cloudflare) that handles the user's initial DNS query.
+
+    - **Root Server**: The first stop in the DNS lookup. It directs the resolver to the appropriate **Top-Level Domain (TLD) server** (e.g., `.com`, `.org`).
+
+	- **TLD Server**: Points the resolver to the authoritative DNS server for the domain (e.g., `example.com`).
+
+    - **Authoritative DNS Server**: Holds the actual IP address for the domain and sends it back to the resolver.
+
+    - **Result Returned**: The resolver sends the IP address to the user's device, which can now connect to the target server.
+
+3. **Accessing the Target**: Once the IP address is returned, the user's device establishes a connection to the web server using the IP address.
+
+---
+
+Q. What is **HTTP**?
 
 HTTP (Hypertext Transfer Protocol) is a transport protocol used for transmitting hypertext (such as HTML) over the internet. It is the foundation of communication on the World Wide Web. 
 

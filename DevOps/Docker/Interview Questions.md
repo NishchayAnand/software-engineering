@@ -92,6 +92,38 @@ Q. Explain key commands in **Dockerfile**.
 
 ---
 
+Q. What is **Docker Network**?
+
+A **Docker network** is a virtual network that allows Docker containers to communicate with each other and with external systems, such as the host machine or the internet.
+
+---
+
+Q. Explain **Bridge Docker Network**.
+
+The **Bridge Docker Network** is a **virtual Ethernet switch** created by Docker to enable containers to communicate with each other.
+
+Bridge network allow containers on the same network to communicate with each other without exposing ports to the host machine.
+
+> **NOTE:** Docker creates a default bridge network called `bridge` when you install Docker. By default, containers without any specific network configuration are connected to this network.
+
+---
+
+Q. Explain container-to-container communication on **Bridge Docker Network**.
+
+When a container is created, Docker assigns it a **name** (e.g., `mysql-container`) and an **IP address** within the bridge network's subnet.
+
+Docker automatically provides an **internal DNS service** for bridge networks. This DNS service enables containers to connect to each other using their **container names** instead of IP addresses.
+
+> **NOTE:** Containers can access the internet if the host machine has internet access, thanks to **NAT (Network Address Translation)**.
+
+---
+
+Q. Explain **Host Docker Network**.
+
+The **Host Docker Network** is a networking mode in Docker where containers bypass Docker's virtual networking layer (i.e., doesn't get their own private IP addresses) and directly **share the network stack of the host machine (i.e., host's IP address and network ports)**. 
+
+---
+
 Q. What do we need to map container's port to a port on your host machine?
 
 A Docker container has its own isolated network, meaning that the services running inside the container (such as a web server) cannot directly communicate with your host machine or the outside world unless you explicitly expose and map the ports.
@@ -124,7 +156,7 @@ They are completely managed by Docker and are isolated from the core functional
 
 ---
 
-Q. Explain "mounting a volume into a container".
+Q. Explain **"mounting a volume into a container"**.
 
 When a volume is mounted, Docker takes a directory from the host where the volume is stored (e.g., `/var/lib/docker/volumes/` on Linux) and makes it accessible inside the container at the specified mount point. 
 
@@ -132,15 +164,11 @@ The container can then read and write data to this volume, allowing data to pers
 
 ---
 
-Q. What is **Docker Network**?
-
----
-
-Q. What is Docker Compose?
+Q. What is **Docker Compose**?
 
 **Docker Compose** is an **orchestration tool** that enables you to define and manage multi-container Docker applications using a single **YAML file** (`docker-compose.yml`).
 
-> NOTE: Docker Compose is installed automatically when you install Docker. 
+> **NOTE:** Docker Compose is installed automatically when you install Docker. 
 
 ---
 

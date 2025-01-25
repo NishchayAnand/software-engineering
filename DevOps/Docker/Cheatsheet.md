@@ -113,3 +113,31 @@ Here:
 - `-v book_movie_service_logs:/var/log/book-movie-service`: Mounts a Docker volume called `book_movie_service_logs` to `/var/log/book-movie-service` inside the container.
 
 ---
+##### Pull a Docker image from Docker Hub
+
+```
+docker pull mysql:9.1.0
+```
+
+---
+##### Execute command inside a running Docker container
+
+```
+docker exec -it mysql-container mysql -u root -p
+```
+
+Here:
+
+- **`docker exec`**: Allows you to interact with the container's filesystem and execute commands as if you were directly logged into the container.
+
+- **`-i`**: This option stands for **interactive**. It keeps the input stream open, allowing you to interact with the container.
+
+- **`-t`**: This option allocates a **pseudo-TTY** (terminal), so you get a terminal-like interface. It’s needed for interacting with the command line inside the container.
+
+- **`mysql`**: Command-line client for MySQL, used to interact with a MySQL server directly from the command line.
+
+- **`-u root`**: This flag specifies the **username** to log in with. In this case, `root` is the default MySQL administrator user. You can replace `root` with any valid MySQL user in your database.
+
+- **`-p`**: This flag tells MySQL to prompt you for the password associated with the user (`root` in this case).
+
+---
