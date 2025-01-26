@@ -1,1 +1,8 @@
-# Understanding Identity and Access Management in AWS
+
+Q. What is an **IAM policy**?
+
+---
+
+Q. What is an **IAM role**?
+
+---
