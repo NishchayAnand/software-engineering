@@ -1,3 +1,4 @@
+## Problem Statement
 
 Given an integer array **nums** of length **n** representing the amount of money stashed in n houses, return the maximum amount of money that can be robbed given that you cannot rob 2 adjacent houses.
 
@@ -35,7 +36,7 @@ Example: nums = [1,2,3,1], output = 4
 	- Total combinations = 2^n.
 	- Time Complexity = O(2^n).
 
-## Optimisations:
+## Optimisations
 
 - **Overlapping Subproblems**: 
 	- Can use a cache (e.g. an array) to store the results of previously computed subproblems.
