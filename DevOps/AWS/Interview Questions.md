@@ -1,9 +1,53 @@
 
 Q. What is **Amazon IAM**?
 
-Amazon Identity and Access Management (IAM) is an **AWS** service that allows you to **manage access to AWS resources for users, groups, and applications**.
+**Amazon Identity and Access Management (IAM)** is an **AWS** service that allows you to **manage access to AWS resources for users, groups, and applications**.
 
-It a **distributed system** that involves multiple components working together to ensure secure access to AWS resources.
+At the core, it's a **distributed system** that involves multiple components working together to handle **authentication**, **authorization** and **policy evaluation** services.
+
+---
+
+Q. Explain the low-level workflow of an IAM authorization requests.
+
+1. **User/API Initiates a Request:** The request is signed using **AWS signature version 4**. This signature is included in the request for validation by AWS. 
+
+2. **Authentication**: The request reaches the authentication subsystem which validates credentials against stored values. 
+
+3. **Policy Evaluation**: IAM retrieves all policies associated with the user, group, or role.
+
+4. **Authorization**: The policy engine evaluates the request and returns **Allow** or **Deny**. If denied, a details error (e.g., missing permissions) is returned. 
+
+5. **Action**: If allowed, the request proceeds to the AWS service for execution.
+
+> **NOTE:** All API calls, authentication requests and policy changes are logged in Amazon CloudTrail for auditing and monitoring.
+
+---
+
+Q. What is **Amazon CloudWatch**?
+
+**Amazon CloudWatch** is a **monitoring and observability service** that can provide insights into the performance, operational health, and resource utilisation of your systems in real time.
+
+At the core, it's a distributed system that involves multiple components working together to monitor, collect, store, analyse, and visualise metrics, logs, and events from AWS resources, applications and on-premises servers. 
+
+> NOTE: AWS services (e.g., EC2, RDS, Lambda) automatically emits metrics and logs to CloudWatch. 
+
+---
+
+Q. What is **AWS CloudWatch Logs Insights**?
+
+**AWS CloudWatch Logs Insights** allows us to query logs streamed from AWS resources, applications, or on-premises servers for troubleshooting and analysis.
+
+---
+
+Q. What is **Amazon SNS**?
+
+**Simple Notification Service (SNS)** is a **messaging service** that enables **publish/subscribe messaging** for distributed systems. 
+
+---
+
+Q. What is **AWS CLI**?
+
+The **AWS Command Line Interface (AWS CLI)** is an open source tool that enables you to start running commands that implement functionality equivalent to that provided by the browser-based AWS Management Console from the command prompt in your terminal program.
 
 ---
 
@@ -102,24 +146,6 @@ Q. Explain the difference between public and private subnets.
 ---
 
 Q. What is **VPN**?
-
----
-
-Q. What is **Amazon CloudWatch**?
-
-Metrics
-
----
-
-Q. What is AWS CloudWatch Logs?
-
-Logs
-
----
-
-Q. What is **Amazon SNS**?
-
-**Simple Notification Service (SNS)**
 
 ---
 
