@@ -1,5 +1,11 @@
 # Networking Interview Questions
 
+Q. What is **LAN**?
+
+**Local Area Network (LAN)**, is a network that connects computers, devices, and servers within a limited geographic area, such as a home, office, school, or data centre.
+
+---
+
 Q. What is **DNS**?
 
 The **Domain Name System (DNS)** is often referred to as the **"phonebook of the internet."** 
@@ -39,6 +45,20 @@ HTTP (Hypertext Transfer Protocol) is a transport protocol used for transmitting
 1. **Request-Response Model**: HTTP operates on a request-response model. A client (usually a web browser) sends an HTTP request to a server, and the server responds with an HTTP response. This interaction forms the basis of web communication. 
 
 2. **Stateless**: HTTP is stateless, meaning each request from a client to a server is independent and contains all the necessary information for the server to fulfill the request. The server does not retain any session information between requests. 
+
+---
+
+Q. What is **SSH**?
+
+**SSH (Secure Shell)** is a **cryptographic network protocol** used to securely connect to remote servers.
+
+---
+
+Q. What is **RDP**?
+
+**RDP (Remote Desktop Protocol)** is a proprietary protocol developed by **Microsoft** that allows users to **remotely access and control** another computer over a network. 
+
+It provides a **graphical interface** to interact with a remote Windows machine as if you were sitting in front of it.
 
 ---
 
