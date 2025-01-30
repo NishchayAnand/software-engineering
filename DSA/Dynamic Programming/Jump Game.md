@@ -1,10 +1,10 @@
-### Problem Statement
+## Problem Statement
 
 - Given an integer array nums of length n where nums[i] represent the length of maximum jump you can make from the ith index, return true if you can reach the last index, or false otherwise.
 
 - Example: nums = [2,3,1,1,4], output = true
 
-### General Observations
+## General Observations
 
 - From any **ith** index, we can make a jump of [1 | 2 | … | nums[i]], i.e., we have **nums[i] choices**.
 
@@ -14,7 +14,7 @@
 - **Greedy Intuition:** 
 	- Consider 3 indices: **[start_index, mid_index, end_index]** such that there exist a path between **mid_index** and **end_index**. If **start_index + nums[start_index] >= mid_index**, then we can reach mid_index and ultimately **end_index** from the **start_index** (**no need to explore every possible path from start_index**).
 
-### Recursive Approach
+## Recursive Approach
 
 - **Function Definition:**
 	- **F(nums, start_index)** will return true if there exists a combination of jump lengths starting from **index = start_index** that will take you to **index = n-1**, or false otherwise.
@@ -46,7 +46,7 @@
 		- Can use a loop to fill the cache using recursive steps.
 		- No concerns of stack overflow.
 
-### Greedy Approach
+## Greedy Approach
 
 - **Algorithm:**
 	- last_good_index = nums.length - 1;   
