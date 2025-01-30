@@ -14,6 +14,9 @@
 - **Greedy Intuition:** 
 	- Consider 3 indices: **[start_index, mid_index, end_index]** such that there exist a path between **mid_index** and **end_index**. If **start_index + nums[start_index] >= mid_index**, then we can reach mid_index and ultimately **end_index** from the **start_index** (**no need to explore every possible path from start_index**).
 
+	![Alt Text](jump_game_greedy.jpg)
+
+
 ## Recursive Approach
 
 - **Function Definition:**
