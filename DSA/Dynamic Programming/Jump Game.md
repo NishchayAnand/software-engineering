@@ -37,9 +37,10 @@
 
 - **Optimisations:**
 
-	- **Overlapping Subproblems:** We can use a cache (an array) to store the results of previously computed sub-problems. 
-	- Using caching, we only need to solve n unique sub-problems.
-	- Hence, time complexity = O(k*n).
+	- **Overlapping Subproblems:** 
+		- We can use a cache (an array) to store the results of previously computed sub-problems. 
+		- Using caching, we only need to solve n unique sub-problems.
+		- Hence, time complexity = O(k*n).
 
 	- **Call Stack Utilisation:**
 		- The cache is filled while backtracking from n = [n-1, 0]. 
