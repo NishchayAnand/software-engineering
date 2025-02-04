@@ -148,3 +148,11 @@ docker network create book-movie-network
 ```
 
 ---
+##### View logs of a running container
+
+```
+docker logs book-movie-container
+```
+
+---
+

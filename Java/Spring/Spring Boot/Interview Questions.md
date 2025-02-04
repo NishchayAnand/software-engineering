@@ -36,4 +36,12 @@ It is a central place to configure settings such as database connections, server
 
 ---
 
-Q. Explain `@ExceptionHandler` annotation.
+Q. What are Profiles?
+
+**Profiles** allow you to define different sets of configuration properties to handle environment-specific settings without hardcoding them into your application.
+
+You can have multiple configuration files (e.g., `application-dev.properties`, `application-prod.properties`) to separate properties based on the environment.
+
+> **NOTE**: You can specify the active profile using the command-line argument: `spring.profiles.active` or, can set it in the `docker-compose.yml` using the `SPRING_PROFILES_ACTIVE` environment variable.
+
+---

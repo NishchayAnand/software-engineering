@@ -172,9 +172,16 @@ Q. What is **Docker Compose**?
 
 ---
 
-Q. Explain the key limitations of Docker Compose.
+Q. Explain the key limitations of **Docker Compose**.
 
 1. **Single Host Limitation**: Docker Compose is designed to work on a single machine.
 
 ---
 
+Q. Explain the concept of **service name** in **Docker Compose**.
+
+The service name acts as a **DNS hostname** that can be used to communicate with other services in the same Docker network.
+
+> **NOTE:** By default, Docker Compose creates a **default network** for your services.
+
+---

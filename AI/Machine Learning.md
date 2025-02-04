@@ -100,11 +100,75 @@ In most real scenarios, the data observations used to train and validate the mod
 
 We'll use an algorithm to fit the training data to a function that calculates the _probability_ of the class label being _true_ (e.g., the probability of a patient having diabetes). 
 
-**Confusion Matrix**: a matrix of the number of correct and incorrect predictions for each possible class label. 
+---
+##### Confusion Matrix - Evaluation Matrix
+
+- A matrix of the number of correct and incorrect predictions for each possible class label. 
+- The arrangement of the confusion matrix is such that correct (_true_) predictions are shown in a diagonal line from top-left to bottom-right. 
+- Often, colour intensity is used to indicate the number of predictions in each cell, so a quick glance at a model that predicts well should reveal a deeply shaded diagonal trend.
 
 ![confusion matrix](confusion_matrix.png)
 
 ---
+##### Accuracy - Evaluation Matrix
+
+The proportion of predictions that the model got right. Accuracy is calculated as:
+
+```
+(TN+TP) ÷ (TN+FN+FP+TP)
+```
+
+**Disadvantage**: Accuracy might initially seem like a good metric to evaluate a model, but consider this. Suppose 11% of the population has diabetes. You could create a model that always predicts **0**, and it would achieve an accuracy of 89%, even though it makes no real attempt to differentiate between patients by evaluating their features. 
+
+**NOTE**: We need a deeper understanding of how the model performs at predicting **1** for positive cases and **0** for negative cases.
+
+---
+##### Recall - Evaluation Matrix
+
+Measures the proportion of positive cases that the model identified correctly. In simple words, **out of all the actual positives, what all were correctly predicted as positives.** 
+
+The formula for recall is:
+
+```
+TP ÷ (TP+FN)
+```
+
+**Real World Use Case** 
+
+**Compared to the number of patients who have diabetes, how many did the model predict to have diabetes?**
+
+The model correctly identified 75% of patients who have diabetes as having diabetes.
+
+---
+##### Precision
+
+Measures the proportion of predicted positive cases where the true label is actually positive. In other words, **out of all the predicted positives, what all were actually positives.**
+
+The formula for precision is:
+
+```
+TP ÷ (TP+FP)
+```
+
+**Real World Use Case**
+
+**What proportion of the patients predicted by the model to have diabetes actually have diabetes?**
+
+100% of the patients predicted by our model to have diabetes do in fact have diabetes.
+
+---
+##### F1-score
+
+F1-score is an overall metric that combined recall and precision.
+
+The formula for F1-score is:
+
+```
+(2 x Precision x Recall) ÷ (Precision + Recall)
+```
+
+---
+
 ## Unsupervised Machine Learning
 
 Unsupervised machine learning involves training models using data that consists only of feature values without any known labels. 
