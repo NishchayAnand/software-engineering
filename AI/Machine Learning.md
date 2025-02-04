@@ -102,7 +102,7 @@ We'll use an algorithm to fit the training data to a function that calculates th
 
 **Confusion Matrix**: a matrix of the number of correct and incorrect predictions for each possible class label. 
 
-![[Pasted image 20250204123607.png]]
+![confusion matrix](confusion_matrix.png)
 
 ---
 ## Unsupervised Machine Learning
