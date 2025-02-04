@@ -80,7 +80,7 @@ SOAP (Simple Object Access Protocol) is a messaging protocol that allows service
 
 ---
 
-Q. What is REST?
+Q. What is **REST**?
 
 REST (Representational State Transfer) is an architectural style (not a protocol) for designing networked applications. 
 
@@ -98,7 +98,7 @@ REST (Representational State Transfer) is an architectural style (not a protocol
 
 ---
 
-Q. What is GraphQL?
+Q. What is **GraphQL**?
 
 GraphQL is a query language for APIs that provides a more flexible and efficient alternative to traditional REST APIs. 
 
@@ -108,19 +108,19 @@ In contrast, a GraphQL API typically exposes a single endpoint that can handle a
 
 ---
 
-Q. What is gRPC?
+Q. What is **gRPC**?
 
 Used for inter-service communication. gRPC may pose some challenges when dealing with browser clients due to limited browser support. 
 
 ---
 
-Q. What is WebSocket?
+Q. What is **WebSocket**?
 
 Real-time, bi-directional and persistent communications. Perfect for live chat applications and real-time gaming, where low latency data exchange is crucial. 
 
 ---
 
-Q. What is Webhook?
+Q. What is **Webhook**?
 
 It's all about event-driven. 
 
@@ -128,12 +128,36 @@ It's all about event-driven.
 
 ---
 
-## EXTRA
+Q. What is **VPC**?
 
 ---
 
-Q. Can we run more than one app on the same serverport?
+Q. Explain the difference between public and private subnets.
 
-You can run more than one app on the same server port if the apps use **different procotols**.
+---
+
+Q. What is **Forward Proxy**?
+
+---
+
+Q. What is **VPN**?
+
+---
+
+Q. Can we run more than one app on the same server port?
+
+You can run more than one app on the same server port if the apps use **different protocols**.
+
+---
+
+Q. What is **Reverse Proxy**?
+
+---
+
+Q. What is **CDN**?
+
+---
+
+Q. What is Edge Computing?
 
 ---

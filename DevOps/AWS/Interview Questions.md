@@ -113,13 +113,13 @@ Q. What is **Amazon Elastic File Store (EFS)**?
 
 ---
 
-Q. What is Amazon S3? 
+Q. What is **Amazon S3**? 
 
  Simple Storage Service is a block storage service
  
 ---
 
-Q. Explain Amazon Relational Database Service (RDS).
+Q. What is **RDS**?
 
 Amazon Relational Database Service (Amazon RDS) is a web service that makes it easier to set up, operate, and scale a relational database in the AWS Cloud.
 
@@ -135,17 +135,7 @@ Amazon Aurora is a relational database management system (RDBMS) offered as part
 
 Q. What is **Amazon CloudFront**?
 
----
-
-Q. What is **VPC**?
-
----
-
-Q. Explain the difference between public and private subnets.
-
----
-
-Q. What is **VPN**?
+CDN
 
 ---
 
@@ -174,6 +164,13 @@ Q. What is Amazon CDK?
 ---
 
 Q. What is **Amazon Pay**?
+
+---
+
+Q. What is **AWS Certificate Manager**?
+
+---
+
 
 
 

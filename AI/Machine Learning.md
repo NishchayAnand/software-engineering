@@ -92,12 +92,25 @@ It provides a numerical value (typically between 0 and 1) that indicates the pro
 Classification is a form of supervised machine learning in which the label represents a categorisation, or class.
 
 ---
+#### Binary Classification - Supervised Machine Learning
+
+_Binary classification_ algorithms are used to train a model that predicts one of two possible labels for a single class. Essentially, predicting _**true**_ or _**false**_.
+
+In most real scenarios, the data observations used to train and validate the model consist of multiple feature (_**x**_) values and a _**y**_ value that is either **1** or **0**.
+
+We'll use an algorithm to fit the training data to a function that calculates the _probability_ of the class label being _true_ (e.g., the probability of a patient having diabetes). 
+
+**Confusion Matrix**: a matrix of the number of correct and incorrect predictions for each possible class label. 
+
+![[Pasted image 20250204123607.png]]
+
+---
 ## Unsupervised Machine Learning
 
 Unsupervised machine learning involves training models using data that consists only of feature values without any known labels. 
 
 ---
-## Clustering - Unsupervised Machine Learning
+### Clustering - Unsupervised Machine Learning
 
 A clustering algorithm identifies similarities between observations based on their features, and groups them into discrete clusters. For example:
 
