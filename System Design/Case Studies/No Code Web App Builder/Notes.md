@@ -1,5 +1,7 @@
 Building a **no-code web application builder** that enables users to design custom UIs and set up backend infrastructure visually involves several critical components. Here's a step-by-step breakdown of how you can approach this:
 
+1. Framer + Railway + Rollout.site
+
 ---
 
 ### 1. **Core Architecture**
@@ -122,11 +124,11 @@ The platform should have a modular architecture consisting of:
 
 ### 9. **Development Workflow**
 
-1. Start with a **low-fidelity prototype** to validate the drag-and-drop UX.
-2. Develop the **frontend builder** with reusable UI components.
-3. Build a **backend engine** with modular API and database configuration capabilities.
-4. Implement an **integration layer** for seamless frontend-backend communication.
-5. Add a **deployment pipeline** with cloud hosting integration.
+2. Start with a **low-fidelity prototype** to validate the drag-and-drop UX.
+3. Develop the **frontend builder** with reusable UI components.
+4. Build a **backend engine** with modular API and database configuration capabilities.
+5. Implement an **integration layer** for seamless frontend-backend communication.
+6. Add a **deployment pipeline** with cloud hosting integration.
 
 ---
 

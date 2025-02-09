@@ -116,6 +116,13 @@ They are used to encapsulate repetitive or complex operations that involve datab
 
 ---
 
+Q. Difference between SQL and NoSQL databases.
+
+A relational database works well with read-heavy and write-less frequently workflow. 
+
+NoSQL databases are generally optimised for writes and the relational database works well enough for read-heavy workflow.
+
+---
 
 
 

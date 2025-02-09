@@ -18,10 +18,6 @@ An online platform or application that allows users to browse, select, and book 
 
 - **Notification:** Generates a booking confirmation after successful payment, often with a digital ticket (for example, QR code), sent via email, SMS, or within the app.
 
-## Functional Requirement
-
-Assume the logic that allows system to display the list of currently running movies is already implemented. You are required to implement the **Show Selection**, **Seat Selection**, **Pricing**, **Payment** and **Notification** services.
-
 ## Use Cases
 
 1. The **customer** selects his/her preferred **location**. A **GET request** is sent to **fetch the list of movies currently showing in the theatres near the preferred location**.
@@ -32,9 +28,18 @@ Assume the logic that allows system to display the list of currently running mov
 
 4. The **customer** selects his/her preferred **seats**. A **POST request** is sent to **book the selected seats**.
 
+## Functional Requirements
+
+Assume the logic that allows system to display the list of currently running movies is already implemented. You are required to implement the **Show Selection**, **Seat Selection**, **Pricing**, **Payment** and **Notification** services.
+
+## Non-Functional Requirements
+
+5. **High Concurrency**: At peak times, for example, on the release day, multiple customer may try to book the same ticket. 
+6. **Moderate Latency:** It's ideal to have a fast response time when a user makes a reservation, but it's okay if the system takes a few seconds to process the reservation requests. 
+
 ## Services
 
-1. `MovieService`:
+7. `MovieService`: Provides detailed information on Movies, Theatres, Screens, Shows. Theatres and screens are generally static, so can be easily cached. 
 
     - **Private Data Members**: `MovieDAO` movieDAO, `ShowDAO` showDAO, `SeatDAO` seatDAO, `PaymentService` paymentService, `NotificationService` notificationService, `BookingDAO` bookingDAO.
 
@@ -46,15 +51,23 @@ Assume the logic that allows system to display the list of currently running mov
 
         - `List<Seat>` getAvailableSeats(`Show` show): fetch the list of available seats for the selected show.
 
+8. `ReservationService`: Receives reservation requests and reserves the movie show. This service also tracks seat inventory as tickets are reserved or bookings are cancelled.
+
+	- **Private Data Members**: `BookingDAO` bookingDAO.
+
+	- **Public Member Functions**: 
+
         - `Booking` bookSeats(`Customer` customer, `Show` show, `List<Seat>` seats): book the selected seats for the customer in the selected show. 
 
-2. `PaymentService`:
+9. `RateService`
+
+10. `PaymentService`: executes payment from a customer and updates the reservation status to `paid` once the payment transaction succeeds, or `rejected` if the transaction fails.
 
     - **Public Member Functions**: 
 
         - `boolean` processPayment(`Customer` customer, `double` amount)
 
-3. `NotificationService`:
+11. `NotificationService`:
 
     - **Public Member Functions**:
 
@@ -67,49 +80,51 @@ Assume the logic that allows system to display the list of currently running mov
 
 ## Data Tranfer Objects (DTOs)
 
-1. `Customer`:
+12. `Customer`:
 
     - **Private Data Members**: `int` customerId, `String` name, `Location` location, `String` email, `String` phone, `List<Booking>` bookings.
 
     - **Public Member Functions**: All Getters and Setters.
 
-2. `Location`:
+13. `Location`:
 
     - **Private Data Members**: `String` street, `String` city, `String` state, `String` country, `String` postalCode.
 
     - **Public Member Functions**: All Getters and Setters.
 
-3. `Movie`:
+14. `Movie`:
 
     - **Private Data Members**: `int` movieId, `String` title, `String` genre, `String` releaseDate, `int` duration.
 
     - **Public Member Functions**: All Getters and Setters.
 
-4. `Show`:
+15. `Show`:
 
     - **Private Data Members**: `int` showId, `Movie` movie, `Theatre` theatre, `Screen` screen, `LocalDateTime` showTime.
 
     - **Public Member Functions**: All Getters and Setters. 
 
-5. `Screen`:
+16. `Screen`:
 
     - **Private Data Members**: `int` screenId, `String` screenName, `Theatre` theatre.
 
     - **Public Member Functions**: All Getters and Setters. 
 
-6. `Theatre`:
+17. `Theatre`:
 
     - **Private Data Members**: `int` theatreId, `Location` location.
 
     - **Public Member Functions**: All Getters and Setters.
 
-7. `Seat`:
+18. `Seat`:
 
     - **Private Data Members**: int `seatId`, `String` seatNumber, `SeatType` seatType, `boolean` isBooked. 
 
     - **Public Member Functions**: All Getters and Setters.
 
-8. `Booking`:
+> NOTE: Seat numbers are assigned when a customer books a ticket. 
+
+19. `Booking`:
 
     - **Private Data Members**: `int` bookingId, `Customer` customer, `Show` show, `List<Seat>` bookedSeats, `double` totalAmount, `BookingStatus` status.
 
@@ -121,13 +136,13 @@ Assume the logic that allows system to display the list of currently running mov
 
 ## Enums
 
-1. `SeatType`: NORMAL(price: 250), PREMIUM(price: 400), VIP(price: 550).
+20. `SeatType`: NORMAL(price: 250), PREMIUM(price: 400), VIP(price: 550).
 
-2. `BookingStatus`: CONFIRMED, CANCELED.
+21. `BookingStatus`: CONFIRMED, CANCELED.
 
 ## Data Access Objects (DAOs)
 
-1. `MovieDAO`:
+22. `MovieDAO`:
 
     - **Public Member Functions**:
 
@@ -135,7 +150,7 @@ Assume the logic that allows system to display the list of currently running mov
 
         - `Movie` getMovieById(`int` movieId): SELECT * FROM movie WHERE movieId = ?.
 
-2. `ShowDAO`:
+23. `ShowDAO`:
 
     - **Private Data Members**: `MovieDAO` movieDAO, `ScreenDAO` screenDAO. 
 
@@ -143,13 +158,13 @@ Assume the logic that allows system to display the list of currently running mov
 
         - `List<Show>` getShowsByMovieIdAndDate(int movieId, LocalDate date): SELECT * FROM show WHERE movieId = ? and showTime = ?.
 
-3. `ScreenDAO`:
+24. `ScreenDAO`:
 
     - **Public Member Functions**:
 
         - `Screen` getScreenById(`int` screenId): SELECT * FROM screen WHERE screenId = ?.
 
-4. `SeatDAO`:
+25. `SeatDAO`:
 
     - **Public Member Functions**:
 
@@ -157,7 +172,7 @@ Assume the logic that allows system to display the list of currently running mov
 
         - `boolean` updateSeatBookingStatus(`int` seatId, `boolean` isBooked): UPDATE seat SET isBooked = ? WHERE seatId = ?.
 
-5. `BookingDAO`:
+26. `BookingDAO`:
 
     - **Public Member Functions**: 
 
@@ -165,19 +180,19 @@ Assume the logic that allows system to display the list of currently running mov
         
 ## Entities (Database Schema)
 
-1. `customer`: `int` customerId, `varchar` name, `varchar` city, `varchar` state, `varchar` country, `varchar` email, `varchar` phone.
+27. `customer`: `int` customerId, `varchar` name, `varchar` city, `varchar` state, `varchar` country, `varchar` email, `varchar` phone.
 
-2. `movie`: `int` movieId, `varchar` title, `varchar` genre, `date` releaseDate, `int` duration.
+28. `movie`: `int` movieId, `varchar` title, `varchar` genre, `date` releaseDate, `int` duration.
 
-3. `show`: `int` showId, `int` movieId, `int` theatreId, `int` screenId, `date` showTime.
+29. `show`: `int` showId, `int` movieId, `int` theatreId, `int` screenId, `date` showTime.
 
-4. `theatre`: `int` theatreId, `varchar` street, `varchar` city, `varchar` state, `varchar` country, `varchar` postalCode.
+30. `theatre`: `int` theatreId, `varchar` street, `varchar` city, `varchar` state, `varchar` country, `varchar` postalCode.
 
-5. `screen`: `int` screenId, `varchar` screenName, `int` theatreId. 
+31. `screen`: `int` screenId, `varchar` screenName, `int` theatreId. 
 
-6. `seat`: `int` seatId, `varchar` seatNumber, `varchar` seatType, `int` showId, `boolean` isBooked.
+32. `seat`: `int` seatId, `varchar` seatNumber, `varchar` seatType, `int` showId, `boolean` isBooked.
 
-7. `booking`: `int` bookingId, `int` customerId, `int` showId, `int` totalAmount, `varchar` status.
+33. `booking`: `int` bookingId, `int` customerId, `int` showId, `int` totalAmount, `varchar` status.
 
 **Constraints:**
 
@@ -189,9 +204,9 @@ Assume the logic that allows system to display the list of currently running mov
 
 ## Non-Functional Requirements
 
-1. **Handle Concurrency:** The `MovieService.bookSeats(customer, show, seats)` functionality can leverage database transactions and locking mechanisms (e.g. pessimistic locking) to ensure data consistency when multiple customers attempt to book the same seats simultaneously.
+34. **Handle Concurrency:** The `MovieService.bookSeats(customer, show, seats)` functionality can leverage database transactions and locking mechanisms (e.g. pessimistic locking) to ensure data consistency when multiple customers attempt to book the same seats simultaneously.
 
-2. **Maintain Data Integrity:** We cannot have two shows running on a screen in a theatre at same time. You use a **trigger** at the database level to catch overlapping shows for ultimate data integrity (guarantees integrity no matter the source of data insertion). Alternatively, you can implement checks in your service layer or DAO to ensure no overlapping shows are added.
+35. **Maintain Data Integrity:** We cannot have two shows running on a screen in a theatre at same time. You use a **trigger** at the database level to catch overlapping shows for ultimate data integrity (guarantees integrity no matter the source of data insertion). Alternatively, you can implement checks in your service layer or DAO to ensure no overlapping shows are added.
 
 ## Best Practices
 
@@ -209,8 +224,73 @@ Assume the logic that allows system to display the list of currently running mov
 
 ## High Level Design Decisions
 
-1. **Use MySQL over PostgreSQL** ???
+Q. What is the scale of the system? 
 
+The system caters approx. 1000 theatres (each with approx. 5 screens) and 5000 screens.
+
+---
+
+Q. Do customer's book movie tickets through the website only? Do we need to support other reservations options?
+
+Assume people can book ticket though website or using mobile app. 
+
+---
+
+Q. What should be the average reservation (transaction) per second?
+
+---
+
+Q. Understand QPS of all pages in the system.
+
+There are 3 steps in a typical customer flow:
+
+36. **View Upcoming / Showing Movies Detail Page:** Users browse this page (query).
+37. **View Booking Page:** Users can confirm the booking details, such as dates, number of tickets, payment details before booking (query).
+38. **Reserve the Tickets:** Users click the "book" button to book the movie tickets and the tickets are reserved (transaction).
+
+Assuming only 10% of the user reach the final and 90% of the user drop before reaching the final step.
+
+39. **QPS of View Upcoming / Showing Movies Detail Page:** 300 QPS
+40. **QPS of View Booking Page:** 30 QPS
+41. **QPS (TPS) of Reserve the Tickets:** 3 QPS
+
+---
+
+Q. Understand Data Access Patterns.
+
+For a booking movie system, we need to support the following queries:
+
+42. View detailed information about a movie.
+43. Find available shows for a given date range.
+44. Record a reservation.
+
+The scale of the system is not too large but we need to prepare for traffic surges during big events. 
+
+A relational database works well with read-heavy and write-less frequently workflow. This is because the number of users who visit the website / app is a few orders of magnitude higher than those who actually make the reservations. NoSQL databases are generally optimised for writes and the relational database works well enough for read-heavy workflow.
+
+**IMPORTANT: A relational database provides ACID (atomicity, consistency, isolation, durability) guarantees. ACID properties are important for reservation systems. Without those properties, it's not easy to prevent problems such as double reservations. ACID properties make application code a lot simpler and make the whole system easier to reason about.** 
+
+A relational database can easily model the data. The structure of the business data is very clear and the relationship between different entities (Theatre, Screen, Show, etc) is stable. This kind of data model is easily modelled by a relational database. 
+
+---
+
+Q. Which database to use?
+
+Use MySQL over PostgreSQL
+
+---
+
+Q. What is the use of Public API Gateway?
+
+A fully managed service that supports rate limiting, authentication, etc. The API gateway is configured to direct requests to specific services based on the endpoints.
+
+---
+
+Q. How does the inter-service communication happens?
+
+For production systems, inter-service communication often employs a modern and high-performance remote procedure call (RPC) framework like **gRPC**.  
+
+---
 ## EXTRA
 
 - When a screen is deleted/stopped working, nothing happens to the Theatre table. Hence, the theatre table/entity does not need a field / column to present its association with the screen table/entity. There can be a unidirectional relationship between screen and theatre, where the theatre doesn’t have reference back to the screen. 
