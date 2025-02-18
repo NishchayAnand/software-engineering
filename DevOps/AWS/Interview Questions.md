@@ -23,6 +23,12 @@ Q. Explain the low-level workflow of an IAM authorization requests.
 
 ---
 
+Q. What is **Amazon Cognito**?
+
+User authentication and Authorization
+
+---
+
 Q. What is **Amazon CloudWatch**?
 
 **Amazon CloudWatch** is a **monitoring and observability service** that can provide insights into the performance, operational health, and resource utilisation of your systems in real time.
