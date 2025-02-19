@@ -22,7 +22,13 @@ Design a web application like **BookMyShow** that allows users to book movie tic
 ---
 ## Non-Functional Requirements
 
-1. **Consistency:** Prioritise **consistency** to ensure that no two people can book the same seat, even if it means the system takes a few seconds to process reservations.
+1. **Consistency:** Ensure **strong consistency** for seat reservations to prevent double bookings, even if it means the system takes a few seconds to process reservations.
+
+2. **Scalability:** Should scale horizontally to support growing user traffic, especially during peak times (e.g., movie premieres).
+
+3. **Partition Tolerance:** Should **not lose booking data** even if some nodes (individual servers, databases, or microservices) become unreachable.
+
+> **NOTE:** If network partitions occur, the system might **sacrifice Availability, i.e., deny some requests** rather than allow inconsistent seat bookings.
 
 ---
 

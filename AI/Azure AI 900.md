@@ -68,3 +68,10 @@ Q. Explain the key principles behind Responsible AI.
 
 ---
 
+Q. What is **Azure AI Language**?
+
+**Azure AI Language** is a cloud-based service that includes features for understanding and analysing text. 
+
+Azure AI Language includes various features that support sentiment analysis, key phrase identification, text summarisation, and conversational language understanding.
+
+---

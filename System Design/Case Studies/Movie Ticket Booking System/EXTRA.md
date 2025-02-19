@@ -1,5 +1,6 @@
 **Seat Selection:** Show a seat map for the selected show allowing users to choose their preferred seats (with real-time availability updates).
 
+Every read must return the latest updated data, meaning strong **ACID transactions** are required.
 ## Non-Functional Requirements
 
 1. **High Concurrency**: At peak times, for example, on the release day, multiple customer may try to book the same ticket. 
