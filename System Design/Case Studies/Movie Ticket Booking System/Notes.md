@@ -31,4 +31,11 @@ Design a web application like **BookMyShow** that allows users to book movie tic
 > **NOTE:** If network partitions occur, the system might **sacrifice Availability, i.e., deny some requests** rather than allow inconsistent seat bookings.
 
 ---
+## Load Analysis & Estimation
+
+---
+## Storage Capacity Estimation
+
+---
+
 

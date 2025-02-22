@@ -1,4 +1,153 @@
-# System Design Interview Questions
+# System Design Fundamentals
+---
 
-Q. What is an API Gateway?
+Q. Explain `Reliability`.
+
+> **NOTE:** Even if a system is working reliably today, that doesn't mean it will necessarily work reliably in the future. One common reason for degradation is increased load.
+
+---
+
+Q. Explain `Scalability`.
+
+**Scalability** refers to a **system's ability to handle increasing workloads** efficiently by adding resources (e.g., servers, storage, network capacity) without compromising performance.
+
+---
+
+Q. Explain common **load parameters** used to describe load on a system.
+
+1. **Requests per Second (RPS):** 
+	- Measures how many incoming requests a **web server** processes per second. 
+	- High RPS can **overload** a system, leading to increased response times or failures.
+
+2. **Ratio of Reads to Writes:** 
+	- Describes how frequently data from a **database** is **read vs. modified (written)**.
+	- A **read-heavy** workload (e.g., content streaming) benefits from caching (e.g., Redis).
+	- A **write-heavy** workload (e.g., logging systems) may require database partitioning or NoSQL databases optimised for writes.
+
+3. **Number of Simultaneously Active Users:** 
+	- Measures how many users are **actively interacting** with a system **at the same time**.
+	- More active users mean more concurrent sessions, consuming server resources.
+
+4. **Hit Rate on a Cache:** 
+	- Percentage of requests **served from the cache** rather than the database.
+	- A **high hit rate** (e.g., 90%+) reduces database load and improves response times.
+
+---
+
+Q. Explain common performance parameters used to describe performance of a system.
+
+ 1. **Latency:**
+
+ 2. **Response Time:**
+
+ 3. **Throughput:**
+
+---
+
+Q. Explain `Consistency` in terms of distributed systems. 
+
+Distributed systems often replicate data across multiple nodes, sometimes in real-time, to improve fault tolerance and performance. However, this replication introduces challenges in maintaining **data consistency**.
+
+> **NOTE:** Data consistency is crucial for ensuring that all users and systems have access to the same, up-to-date information.
+
+---
+
+Q. Explain the property of **strong consistency** in distributed systems.
+
+The system guarantees that as soon as a transaction is committed, all subsequent read operations from any user or node will reflect that latest write, regardless of which replica they access. 
+
+This provides the strongest guarantee of consistency, but can potentially impact system performance due to synchronisation overhead.
+
+---
+
+Q. Explain the property of **eventual consistency** in distributed systems.
+
+The system guarantees that all replicas of data **will eventually** converge to the same state, given enough time and in the absence of further updates. However, in the short term, different nodes may return stale or inconsistent data. 
+
+Since updates don’t need immediate synchronisation across all nodes, systems can respond faster.
+
+> **Example:** Imagine a social media platform where a user updates their profile picture. The change is first stored on one server, then gradually propagates to others. Some users may see the old picture until synchronisation completes, but eventually, all servers reflect the change.
+
+---
+
+Q. Explain the property of `Availability` in distributed systems.
+
+Any client which requests data gets a response even if some of the nodes are down.
+
+---
+
+Q. Explain the property of `Partition Tolerance` in distributed systems.
+
+A partition indicates a communication breakdown between two nodes. Partition tolerance means the system continues to operate despite network partitions.
+
+---
+
+Q. Explain CAP Theorem.
+
+CAP theorem states that it is impossible for a distributed system to simultaneously provide more than two of these 3 guarantees: `consistency`, `availability` and `partition tolerance`.
+
+In a distributed system, partitions cannot be avoided. When a partition occurs, we must choose between consistency and availability.
+
+If we choose consistency over availability (CP), we must block all write operations to avoid data inconsistency among nodes (servers), which makes the system unavailable. For example, **Bank systems usually have extremely high consistent requirements.**
+
+If we choose availability over consistency (AP), the system keeps accepting reads, even though it might return stale data.
+
+---
+## EXTRA
+
+Q. What is Load Balancer?
+
+---
+Q. Different algorithms of load balancing
+
+---
+Q. Explain Caching Layer?
+
+---
+Q. Explain different algorithms of caching?
+
+---
+Q. What is Redis?
+
+---
+Q. What is API Gateway?
+
+---
+Q. What is Rate Limiter?
+
+---
+Q. Differences between SQL and NoSQL
+
+---
+Q. Explain Proxy
+
+---
+Q. Explain forward Proxy.
+
+---
+Q. Explain reverse Proxy.
+
+---
+Q. Explain sharding / partitioning of data.
+
+---
+Q. Explain eventual consistency
+
+---
+Q. What is a Message Queue?
+
+---
+Q. What is Apache Kafka?
+
+---
+Q. What is GraphQL?
+
+---
+Q. What is WebSocket?
+
+---
+Q. What is gRPC?
+
+---
+
 
