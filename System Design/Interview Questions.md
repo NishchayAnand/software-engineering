@@ -37,10 +37,29 @@ Q. Explain common **load parameters** used to describe load on a system.
 Q. Explain common performance parameters used to describe performance of a system.
 
  1. **Latency:**
+	 - The time taken for a request to travel from the client to the server and back.
+	 - **Example:** In a chat app, if you send a message and the receiver gets it after **500ms**, that’s the latency.
 
  2. **Response Time:**
+	 - The total time taken to process a request and return a response.
+	 - Includes **network latency + processing time** on the server.
+	 - **Example:** A user submits a form, and it takes **1.5 seconds** to receive a confirmation message, that’s the response time.
 
  3. **Throughput:**
+	 - The number of requests processed **per second** (**RPS** or **transactions per second**).
+	 - **Example:** An e-commerce site handling **10,000 purchases per second** during a sale.
+
+---
+
+Q. How to scale your compute?
+
+---
+
+Q. How to scale your storage?
+
+---
+
+Q. How to scale your network bandwidth?
 
 ---
 
