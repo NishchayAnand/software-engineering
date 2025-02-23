@@ -37,6 +37,7 @@ Table: Employee
     ```
 
 3. Filter manager names where the count of reportees is greater than or equal to 5.
+
     ```
     SELECT m.name FROM Employee e JOIN Employee m ON e.managerId = m.id GROUP BY m.managerId HAVING count(e.id) >= 5;
     ```

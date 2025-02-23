@@ -5,7 +5,7 @@ Design a **URL shortening service** that converts a long URL into a shorter, mor
 ---
 ## Functional Requirements
 
-1. **URL Shortening:** Take a long URL (e.g., `https://www.somewebsite.com/articles/how-to-design-a-url-shortener`) and create an alias with shorter length (e.g., `https://tinyURL/abc123`).
+1. **URL Shortening:** Take a long URL and create an alias with shorter length.
 
 2. **URL Redirecting:** Retrieve the original URL from the shortened version.
 
@@ -25,3 +25,9 @@ Design a **URL shortening service** that converts a long URL into a shorter, mor
 ---
 ## Workflow
 
+---
+## EXTRA
+
+(e.g., `https://www.somewebsite.com/articles/how-to-design-a-url-shortener`)
+
+(e.g., `https://tinyURL/abc123`)
