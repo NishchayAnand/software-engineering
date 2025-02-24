@@ -12,7 +12,7 @@
 
 - **Recursive Approach:**
 
-	- **Function Definition:**
+	- **Hypothesis:**
 		- **F(nums, start_index)** will return true if there exists a combination of jump lengths starting from **index = start_index** that will take you to **index = n-1**, or false otherwise.
 	
 	- **Recursive Steps:**
