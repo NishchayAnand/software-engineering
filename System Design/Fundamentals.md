@@ -1,7 +1,15 @@
 
+Q. Explain `Availability`.
+
+**Availability** refers to a system’s ability to **remain operational**, even in the presence of failures.
+
+---
+
 Q. Explain `Reliability`.
 
-**Reliability** refers to a **system's ability to function correctly and continuously over time**. For software, typical expectations include:
+**Reliability** refers to a system's ability to **function correctly and continuously over time**, even in the presence of failures.
+
+ Typical expectations from a `reliable` system include:
 
 - **Failure Tolerance:** The system should **perform the function that the user expected** and ensure **data integrity** (no corruption or loss) even in the presence of **hardware faults or network partitions**.
 
@@ -11,7 +19,7 @@ Q. Explain `Reliability`.
 
 - **Security & Abuse Prevention:** The system should prevent **unauthorised access** and mitigate potential misuse or attacks.
 
-> **NOTE:** Even if a system is working reliably today, that doesn't mean it will necessarily work reliably in the future. One common reason for degradation is increased load.
+> **NOTE:** If a system is reliable, it is available. However, if it is available, it is not necessarily reliable.
 
 ---
 
@@ -24,32 +32,6 @@ Achieved through **replication** (e.g., database replicas, redundant servers) a
 **Example:** Imagine a **cart service** in an e-commerce platform like **Amazon**. If a user adds an item to their shopping cart, the system must **not lose it**, even if the cart service fails. A **replicated server** should take over to ensure the cart remains intact.
 
 > **NOTE:** Redundancy has a cost, but a reliable system must invest in eliminating every **single point of failure** to maintain resilience.
-
----
-
-Q. Explain `Consistency`. 
-
- Systems often replicate data across multiple nodes, sometimes in real-time, to improve fault tolerance and performance. However, this replication introduces challenges in maintaining **data consistency**.
-
-> **NOTE:** Data consistency is crucial for ensuring that all users and systems have access to the same, up-to-date information.
-
----
-
-Q. Explain the property of `strong consistency` in distributed systems.
-
-The system guarantees that as soon as a transaction is committed, all subsequent read operations from any user or node will reflect that latest write, regardless of which replica they access. 
-
-This provides the strongest guarantee of consistency, but can potentially impact system performance due to synchronisation overhead.
-
----
-
-Q. Explain the property of `eventual consistency` in distributed systems.
-
-The system guarantees that all replicas of data **will eventually** converge to the same state, given enough time and in the absence of further updates. However, in the short term, different nodes may return stale or inconsistent data. 
-
-Since updates don’t need immediate synchronisation across all nodes, systems can respond faster.
-
-> **Example:** Imagine a social media platform where a user updates their profile picture. The change is first stored on one server, then gradually propagates to others. Some users may see the old picture until synchronisation completes, but eventually, all servers reflect the change.
 
 ---
 
@@ -119,23 +101,11 @@ Q. How to scale your compute?
 
 ---
 
-
-
----
-
 Q. Explain `Database Scaling`.
 
 ---
 
 Q. How to scale your network bandwidth?
-
----
-
-Q. Explain the property of `Availability` in distributed systems.
-
-Any client which requests data gets a response even if some of the nodes are down.
-
-Multi-machine redundancy required for systems for which high availability is absolutely essential. 
 
 ---
 
@@ -146,6 +116,32 @@ Q. Explain the property of `Partition Tolerance` in distributed systems.
 Achieved through **eventual consistency** (syncing data once the partition is resolved) and **retry mechanisms** (handling temporary network failures). ?????
 
 > **Example:** In a distributed database, if the network splits into two isolated parts (partition), each part should continue serving requests independently until the partition is resolved.
+
+---
+
+Q. Explain `Consistency`. 
+
+ Systems often replicate data across multiple nodes, sometimes in real-time, to improve fault tolerance and performance. However, this replication introduces challenges in maintaining **data consistency**.
+
+> **NOTE:** Data consistency is crucial for ensuring that all users and systems have access to the same, up-to-date information.
+
+---
+
+Q. Explain the property of `strong consistency` in distributed systems.
+
+The system guarantees that as soon as a transaction is committed, all subsequent read operations from any user or node will reflect that latest write, regardless of which replica they access. 
+
+This provides the strongest guarantee of consistency, but can potentially impact system performance due to synchronisation overhead.
+
+---
+
+Q. Explain the property of `eventual consistency` in distributed systems.
+
+The system guarantees that all replicas of data **will eventually** converge to the same state, given enough time and in the absence of further updates. However, in the short term, different nodes may return stale or inconsistent data. 
+
+Since updates don’t need immediate synchronisation across all nodes, systems can respond faster.
+
+> **Example:** Imagine a social media platform where a user updates their profile picture. The change is first stored on one server, then gradually propagates to others. Some users may see the old picture until synchronisation completes, but eventually, all servers reflect the change.
 
 ---
 
