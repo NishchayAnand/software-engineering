@@ -18,7 +18,7 @@ Design a **URL shortening service** that converts a long URL into a shorter, mor
 
 2. **Low latency:** The system should fetch the long URL and redirect users instantly.
 
-3. **Scalability:** A read heavy system capable of handling handling a traffic volume of 10 Million URL generation requests and 1 Billion redirection requests per day (assuming read / write ratio is 100:1).
+3. **Scalability:** A read heavy system capable of handling a traffic volume of 10 Million URL generation requests and 1 Billion redirection requests per day (assuming read / write ratio is 100:1).
 
 4. **Security and Abuse Prevention:** Shortened URLs shouldn't be guessable / predictable.
 
@@ -45,7 +45,32 @@ Design a **URL shortening service** that converts a long URL into a shorter, mor
 - The browser automatically redirects the user to the **original long URL**.
 
 ---
-## API Design (to be continued...)
+## Schema Design and Storage Estimation
+
+The system requires an efficient schema design to store `short_id → long URL` mappings, ensure fast lookups, and scale to handle billions of requests.
+
+NOTE: There is no semantic relationship between `short_id` and `long URL` .
+
+| Field Name     | Data Type | Description                      |
+| -------------- | --------- | -------------------------------- |
+| `short_id`     | String    | Unique short code                |
+| `long_url`     | String    | Original long URL                |
+| `created_at`   | Timestamp | Timestamp of when it was created |
+| `expiry_date`  | Timestamp | Expiry date                      |
+| `access_count` | Integer   | Number of times accessed         |
+
+- 100 Million URL generation requests per day = 100 Million `shortURL -> longURL` mappings would be added to database daily.
+- Considering the system would operate for the next 10 years, total URLs generated in lifetime = 10 Million x 365 days x 10 years = 10^7  x 10 x 400 = 4 x 10^10 = 40 Billion URLs
+- Average size of each long URL = 100 characters and short URL = 20 characters. Each character consume 1 byte. Therefore 1 long URL will consume 100 bytes and each short URL will consume 20 bytes.
+- Total memory consumption by longURL in lifetime = 100 bytes x 40 Billion = 4 x 10^12 = 4 TB
+- Total memory consumption by short URLs in lifetime = 20 bytes x 40 Billion = 800 GB
+
+
+
+---
+## API Design and Load Estimation
+
+Will use microservices architecture. 
 
  A URL shortener primarily needs 2 APIs:
 
@@ -53,6 +78,9 @@ Use **Base62 encoding** (0-9, a-z, A-Z) or **hash the URL (SHA-256, MD5)** a
 
 e.g., `https://www.somewebsite.com/articles/how-to-design-a-url-shortener`)
 
-> **NOTE:** We will design the APIs REST style.
+> **NOTE:** We will design the APIs using REST architecture.
 
 ---
+
+
+
