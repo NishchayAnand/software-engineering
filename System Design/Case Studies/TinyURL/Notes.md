@@ -45,32 +45,49 @@ Design a **URL shortening service** that converts a long URL into a shorter, mor
 - The browser automatically redirects the user to the **original long URL**.
 
 ---
-## Schema Design and Storage Estimation
+## Storage Capacity Estimation and Schema Design 
 
-The system requires an efficient schema design to store `short_id → long URL` mappings, ensure fast lookups, and scale to handle billions of requests.
+The system requires an efficient **data model** to store the **user details (`users` table)** and the **shortened URL (`short_id → long URL`) mappings (`urls` table)**.
 
-NOTE: There is no semantic relationship between `short_id` and `long URL` .
+For **storage capacity estimation**, the `urls` table should be the primary consideration because the `urls` table will grow rapidly (10 Million new entries per day) in contrast to the `users` table.
 
-| Field Name     | Data Type | Description                      |
-| -------------- | --------- | -------------------------------- |
-| `short_id`     | String    | Unique short code                |
-| `long_url`     | String    | Original long URL                |
-| `created_at`   | Timestamp | Timestamp of when it was created |
-| `expiry_date`  | Timestamp | Expiry date                      |
-| `access_count` | Integer   | Number of times accessed         |
+Let's break down the **storage requirements** of the `urls` table over 10 years:
 
-- 100 Million URL generation requests per day = 100 Million `shortURL -> longURL` mappings would be added to database daily.
-- Considering the system would operate for the next 10 years, total URLs generated in lifetime = 10 Million x 365 days x 10 years = 10^7  x 10 x 400 = 4 x 10^10 = 40 Billion URLs
-- Average size of each long URL = 100 characters and short URL = 20 characters. Each character consume 1 byte. Therefore 1 long URL will consume 100 bytes and each short URL will consume 20 bytes.
-- Total memory consumption by longURL in lifetime = 100 bytes x 40 Billion = 4 x 10^12 = 4 TB
-- Total memory consumption by short URLs in lifetime = 20 bytes x 40 Billion = 800 GB
+- **Daily URL Generation = 10 Million**
+- **Total URLs in 10 Years = 10 Million × 365 days × 10 years = 36.5 × 10<sup>9</sup> ≈ 40 Billion URLs**
+- **Total Storage per Entry = 100 bytes (long URL) + 20 bytes (short ID) + 30 bytes (metadata) = 150 bytes**
+- **Storage required = 40 Billion URLs × 150 bytes = 6 × 10<sup>12</sup> = 6 TB**
+
+Since the system must store **large-scale URL mappings (6TB+ over 10 years)** and process **1 billion read requests daily**, we need a **highly scalable database** that supports **ultra-fast lookups**.
 
 
 
 ---
-## API Design and Load Estimation
 
-Will use microservices architecture. 
+**`users` Table:**
+
+| **Field Name**   | **Data Type**  | **Description**                    |
+| ---------------- | -------------- | ---------------------------------- |
+| `id`             | `Integer`      | Unique User ID                     |
+| `email`          | `String`       | Unique email for the user          |
+| `password`       | `String`       | Securely hashed password           |
+| `created_at`     | `Timestamp`    | Timestamp when the user registered |
+| `shortened_urls` | `List<String>` | List of short IDs created by user  |
+
+**`urls` Table:**
+
+| Field Name     | Data Type   | Description                      |
+| -------------- | ----------- | -------------------------------- |
+| `short_id`     | `String`    | Unique short code                |
+| `long_url`     | `String`    | Original long URL                |
+| `created_at`   | `Timestamp` | Timestamp of when it was created |
+| `expiry_date`  | `Timestamp` | Expiry date                      |
+| `access_count` | `Integer`   | Number of times accessed         |
+
+ensure fast lookups, and scale to handle billions of requests.
+
+---
+## Load Estimation and API Design
 
  A URL shortener primarily needs 2 APIs:
 
@@ -78,7 +95,7 @@ Use **Base62 encoding** (0-9, a-z, A-Z) or **hash the URL (SHA-256, MD5)** a
 
 e.g., `https://www.somewebsite.com/articles/how-to-design-a-url-shortener`)
 
-> **NOTE:** We will design the APIs using REST architecture.
+> **NOTE:** We will design the APIs using microservices architecture.
 
 ---
 
