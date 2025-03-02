@@ -159,6 +159,83 @@ Q. How to implement `read-your-writes` consistency in a system with `leader-base
 
 ---
 
+Q. Explain `Monotonic Reads` consistency.
+
+**Monotonic reads** guarantee that if one user makes several reads in sequence, they will not see time go backward, i.e., they will not read older data after having previously read newer data.
+
+For example, if the user makes same query twice, first to a follower with little lag, then to a follower with greater lag (this scenario is quite likely if the user refreshes a web page, and each request is routed to a random server). **The first query returns a comment that was recently added by user 1234, but the second query doesn’t return anything because the lagging follower has not yet picked up that write.**
+
+> **NOTE: Monotonic reads is a lesser guarantee than strong consistency, but a stronger guarantee than eventual consistency.**
+
+---
+
+Q. How to achieve `Monotonic Reads` consistency.
+
+One way of achieving monotonic reads is to make sure that each user always makes their reads from the same replica (e.g., the replica can be chosen based on a hash of the user ID).
+
+> **NOTE: Different users can read from different replicas**.
+
+---
+
+Q. Explain the disadvantages of `Single Leader Replication`.
+
+- Every write must go over the internet to the datacenter with the leader. This can add significant latency to writes and might contravene the purpose of having multiple data centres in the first place.
+
+
+---
+
+Q. Explain `Multi Leader Replication`.
+
+> **NOTE: Multi-leader replication is often considered dangerous territory that should be avoided if possible**. 
+
+---
+
+Q. Explain the advantages of `Multi Leader Replication`.
+
+- Every write can be processed in the local datacenter and is replicated asynchronously to the other data centres. Thus, the inter-datacenter network delay is hidden from users, which means the perceived performance may be better.
+
+- In a single-leader configuration, if the datacenter with the leader fails, failover can promote a follower in another datacenter to be leader. In a multi-leader configuration, each datacenter can continue operating independently of the others, and replication catches up when the failed datacenter comes back online.
+
+- A multi-leader configuration with asynchronous replication can usually tolerate network problems better: a temporary network interruption does not prevent writes being processed.
+
+---
+
+Q. Explain the limitations of `Multi Leader Replication`.
+
+The same data may be concurrently modified in two different data centres, leading to write conflicts.
+
+---
+
+Q. How to handle write conflicts in `Multi Leader Replication`?
+
+The simplest strategy for dealing with conflicts is to avoid them. If the application can ensure that all writes for a particular record go through the same leader, then conflicts cannot occur.
+
+For example, in an application where a user can edit their own data, you can ensure that requests from a particular user are always routed to the same datacenter and use the leader in that datacenter for reading and writing. 
+
+> **NOTE: Different users may have different “home” data centres (perhaps picked based on geographic proximity to the user), but from any one user’s point of view the configuration is essentially single-leader.**
+
+---
+
+Q. Explain `Leaderless Replication`.
+
+Abandoning the concept of a leader and allowing any replica to directly accept writes from clients.
+
+> **NOTE: In a leaderless configuration, failover does not exist.**
+
+---
+
+Q. Explain the working of a system with `Leaderless Replication`.
+
+The client (user 1234) sends the write to all three replicas in parallel, and the two available replicas accept the write but the unavailable replica misses it.
+
+Let’s say that it’s sufficient for two out of three replicas to acknowledge the write. After user 1234 has received two ok responses, we consider the write to be successful. The client simply ignores the fact that one of the replicas missed the write.
+
+When the unavailable node comes back online, the clients start reading from it. Any writes that happened while the node was down are missing from that node. Thus, if you read from that node, you may get stale (outdated) values as responses.
+
+To solve that problem, when a client reads from the database, it doesn’t just send its request to one replica: read requests are also sent to several nodes in parallel. The client may get different responses from different nodes; i.e., the up-to-date value from one node and a stale value from another. **Version numbers are used to determine which value is newer.**
+
+---
+
 Q. Explain `Scalability`.
 
 **Scalability** refers to a **system's ability to handle increasing workloads** efficiently by adding resources (e.g., servers, storage, network capacity) without compromising performance.
