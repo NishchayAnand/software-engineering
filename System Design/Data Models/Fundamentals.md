@@ -1,7 +1,7 @@
 
 Q. Explain **Relational Model.**
 
-In relational model, the data is organised into **relations** (called _tables_ in SQL).
+In relational model, the data is organised into **relations** (called tables in SQL).
 
 The roots of relational databases lie in business data processing, typically transaction processing (entering sales or banking transactions, airline reservations, stock-keeping in warehouses) and batch processing (customer invoicing, payroll, reporting).
 

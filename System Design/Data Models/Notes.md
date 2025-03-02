@@ -30,11 +30,9 @@ In relational data model, it is often defined like a standard (virtual) view: a 
 
 When the underlying data changes, a materialized view needs to be updated, because it is a denormalized copy of the data. The database can do that automatically, but such updates make writes more expensive, which is why materialized views are not often used in OLTP databases. 
 
-## Data Replication
 
-Replication means keeping a copy of the same data on multiple machines that are connected via a network. 
 
-### Leaders and Followers
+
 
 
 
