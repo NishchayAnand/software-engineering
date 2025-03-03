@@ -68,11 +68,11 @@ Example: For s = `abcbae`, the answer is `cbae`, with the length of 4.
 
 	- If **substring** `s[i,j]` **represents the longest substring starting from** `s[i]` , then **any substring starting from a later index** `s[i+k, j] where i < k ≤ j` **will be shorter** and is therefore **redundant to explore separately**.
 
-	![[longest_substring_1.png]]
+	![image1][longest_substring_1.png]
 
 	- While exploring all substrings `s[i,j]` that contain unique characters starting from `s[i]`, if we encounter a duplicate character `s[l] = s[k]` (where `l = j + 1` and `i < k ≤ j`), instead of **restarting the search from `i+1`, we can shrink the window from left** by moving `i` to `k + 1` to eliminate the duplicate. 
 
-	![[longest_substring_2.png]]
+	![image2][longest_substring_2.png]
 
 - **Sliding Window - Two pointers Approach:**
 
