@@ -32,6 +32,7 @@ Example: For s = `abcbae`, the answer is `cbae`, with the length of 4.
 		- In worst-case scenario (all unique characters), the hash set will store **n** elements.
 		- Thus, total space complexity is **O(n)**.
 
+
 	```
 	public int lengthOfLongestSubstring(String s) {
 	
@@ -91,6 +92,7 @@ Example: For s = `abcbae`, the answer is `cbae`, with the length of 4.
 	- **Space Complexity Analysis:**
 		- In worst-case scenario (all unique characters), the hash set will store **n** elements.
 		- Thus, total space complexity is **O(n)**.
+
 
 	```
 	public int lengthOfLongestSubstring(String s) {
