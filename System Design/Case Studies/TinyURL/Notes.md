@@ -7,7 +7,7 @@ Design a **URL shortening service** that converts a long URL into a shorter, mor
 
 1. **URL Shortening:** Take a long URL and create an alias with shorter length.
 
-2. **URL Redirecting:** Retrieve the original URL from the shortened version.
+2. **URL Redirecting:** Redirect a short URL to the corresponding long URL.
 
 > **NOTE:** A URL shortening service can also **handle custom alias creation** or **provide insights on link clicks, location, and user engagement.**
 
@@ -22,18 +22,39 @@ Design a **URL shortening service** that converts a long URL into a shorter, mor
 
 4. **Security and Abuse Prevention:** Shortened URLs shouldn't be guessable / predictable.
 
----
-## Workflow for Shortening a URL
-
-- The user **inputs a long URL** on the web interface. A **POST request** is sent to the **shortening service**.
-
-- The shortening service **validates the input URL** to ensure it follows a **valid structure**, is **safe to use** and **not already present in the database.** 
-
-- If the URL passes all checks, the shortening service sends an **internal API request (synchronous POST request or gRPC request)** to the **encoding service** to encode the input URL and generate a unique short URL (e.g., `https://tinyURL/abc123`).
-
-- Once the short URL is generated, the shortening service will store the `short_id → long URL` mapping in a database and return the shortened URL to the user.
+> NOTE: Consistency is more important than availability. ?????
 
 ---
+## Workflow for Shortening a Long URL
+
+1. The user inputs a URL on the web interface. A **POST request** (e.g., `POST https://api.tinyurl.com/v1/shorten`), containing the input URL (e.g., `long_url: https://www.example.com/some/very/long/url`), is sent to the **shortening service**.
+
+2. The **shortening service** validates the provided URL to ensure it follows a valid structure, is safe to use and is not already present in the database.
+
+3. If the URL passes all checks, the **shortening service** calls the **encoding service** to encode the long URL into a unique ID (e.g., `abc123`) which can can be used to generate a unique short URL (e.g., `https://tinyURL/abc123`).
+
+4. Once the short URL is generated, the **shortening service** stores the `short_id → long URL` mapping in the database and returns the shortened URL to the user.
+
+
+```mermaid
+flowchart TD
+	A[User] -->|Input Long URL| B{Shortening Service} 
+	B -->|Validate URL| C{URL Valid?} 
+	C -->|Yes| D[Encoding Service] 
+	C -->|No| E[Return Error] 
+	D -->|Generate Unique ID| F[Database] 
+	F -->|Store Mapping| G[Generate Short URL] 
+	G -->|Return Shortened URL| A
+```
+
+---
+## Load Estimation of Shortening Service 
+
+
+
+
+
+----
 ## Workflow for Redirecting a URL
 
 - The user enters a short URL in the browser. A **GET request** is sent to the **redirection service**.
@@ -45,6 +66,18 @@ Design a **URL shortening service** that converts a long URL into a shorter, mor
 - The browser automatically redirects the user to the **original long URL**.
 
 ---
+## Load Estimation and API Design
+
+ A URL shortener primarily needs 2 APIs:
+
+Use **Base62 encoding** (0-9, a-z, A-Z) or **hash the URL (SHA-256, MD5)** and take the first **6-8 characters**.
+
+e.g., )
+
+> **NOTE:** We will design the APIs using microservices architecture.
+
+---
+
 ## Storage Capacity Estimation and Schema Design 
 
 The system requires an efficient **data model** to store the **user details (`users` table)** and the **shortened URL (`short_id → long URL`) mappings (`urls` table)**.
@@ -85,17 +118,6 @@ Since the system must store **large-scale URL mappings (6TB+ over 10 years)** 
 | `access_count` | `Integer`   | Number of times accessed         |
 
 ensure fast lookups, and scale to handle billions of requests.
-
----
-## Load Estimation and API Design
-
- A URL shortener primarily needs 2 APIs:
-
-Use **Base62 encoding** (0-9, a-z, A-Z) or **hash the URL (SHA-256, MD5)** and take the first **6-8 characters**.
-
-e.g., `https://www.somewebsite.com/articles/how-to-design-a-url-shortener`)
-
-> **NOTE:** We will design the APIs using microservices architecture.
 
 ---
 

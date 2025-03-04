@@ -1,0 +1,8 @@
+flowchart TD
+    A[User] -->|Input Long URL| B{Shortening Service}
+    B -->|Validate URL| C{URL Valid?}
+    C -->|Yes| D[Encoding Service]
+    C -->|No| E[Return Error]
+    D -->|Generate Unique ID| F[Database]
+    F -->|Store Mapping| G[Generate Short URL]
+    G -->|Return Shortened URL| A
