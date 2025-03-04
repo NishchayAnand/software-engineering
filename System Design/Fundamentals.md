@@ -1,11 +1,11 @@
 
-Q. Explain `Availability`.
+Q. Explain **`Availability`**.
 
 **Availability** refers to a system’s ability to **remain operational**, even in the presence of failures.
 
 ---
 
-Q. Explain `Reliability`.
+Q. Explain **`Reliability`**.
 
 **Reliability** refers to a system's ability to **function correctly and continuously over time**, even in the presence of failures.
 
@@ -23,7 +23,7 @@ Q. Explain `Reliability`.
 
 ---
 
-Q. Explain `Fault Tolerance`.
+Q. Explain **`Fault Tolerance`**.
 
 Fault tolerance is a **design choice** to handle hardware/software failures effectively. 
 
@@ -35,13 +35,13 @@ Achieved through **replication** (e.g., database replicas, redundant servers) a
 
 ---
 
-Q. What is `Gossip Protocol`.
+Q. What is **`Gossip Protocol`**.
 
 In distributed system, it is insufficient to be that a server is down when another server says so. Usually, it requires at least 2 independent sources of information to mark a server down. 
 
 ---
 
-Q. Explain `Database Replication`.
+Q. Explain **`Database Replication`**.
 
 Replication means keeping a copy of the same data on multiple machines that are connected via a network.
 
@@ -51,7 +51,7 @@ Every write to the database needs to be processed by every replica, otherwise, t
 
 ---
 
-Q. Explain the need for `Database Replication`.
+Q. Explain the need for **`Database Replication`**.
 
 1. To keep data geographically close to your users (and thus reduce latency).
 
@@ -77,7 +77,7 @@ It works as follows:
 
 ---
 
-Q. Explain `Synchronous Replication`.
+Q. Explain **`Synchronous Replication`**.
 
 **Advantage**: The follower is guaranteed to have an update-to-date copy of the data that is consistent with the leader. If the leader suddenly fails, we can we sure that the data is still available on the follower. 
 
@@ -87,7 +87,7 @@ Q. Explain `Synchronous Replication`.
 
 ---
 
-Q. Explain `Asynchronous Replication`.
+Q. Explain **`Asynchronous Replication`**.
 
 **Advantage:** Leader can continue processing writes, even if all of its followers have fallen behind.
 
@@ -97,7 +97,7 @@ Q. Explain `Asynchronous Replication`.
 
 ---
 
-Q. How to handle a `Leader Failure`?
+Q. How to handle a **`Leader Failure`**?
 
 1. **Determining that the leader has failed:** There is no foolproof way of detecting what has gone wrong, so most systems use a **timeout**: nodes frequently bounce messages back and forth between each other, and if a node doesn't respond for some period of time (say, 30 seconds), it is assumed to be dead.
 
@@ -109,7 +109,7 @@ Q. How to handle a `Leader Failure`?
 
 ---
 
-Q. Explain the limitations of `Failover`.
+Q. Explain the limitations of **`Failover`**.
 
 1. If asynchronous replication is used, the new leader may not have received all the writes from the old leader when it failed. While the former leader rejoins the cluster, the new leader may have received **conflicting** writes in the meantime. **The most common solution is for the old leader's unreplicated writes to simply be discarded, which may violate client's durability expectations.**
 
@@ -119,7 +119,7 @@ Q. Explain the limitations of `Failover`.
 
 ---
 
-Q. Explain `statement-based` replication method.
+Q. Explain **`statement-based`** replication method.
 
 - The leader logs every write request (statement) that it executes and sends that statement log to its followers. 
 
@@ -127,7 +127,7 @@ Q. Explain `statement-based` replication method.
 
 ---
 
-Q. Explain the limitations of `statement-based replication`.
+Q. Explain the limitations of **`statement-based replication`**.
 
 1. Any statement that calls a non-deterministic function, such as `NOW()` to get the current date, is likely to generate a different value for each replica. The leader can replace any non-deterministic function calls with a fixed return value when the statement is logged so that the followers all get the same data. 
 
@@ -137,7 +137,7 @@ Q. Explain the limitations of `statement-based replication`.
 
 ---
 
-Q. Explain `Replication Lag`.
+Q. Explain **`Replication Lag`**.
 
 If an application reads from an asynchronous follower, it may see outdated information if the follower has fallen behind. This leads to apparent inconsistencies in the database. 
 
@@ -149,7 +149,7 @@ This inconsistency is just a temporary state. If you stop writing to the databas
 
 ---
 
-Q. Explain `read-after-write (read-your-writes)` consistency.
+Q. Explain **`read-after-write (read-your-writes)`** consistency.
 
 With asynchronous replication, if the user views the data shortly after making a write, the new data may not yet have reached the replica. To the user, it looks as though the data they submitted was lost, so they will be understandably unhappy.
 
@@ -159,7 +159,7 @@ In this situation, we need **read-after-write** consistency, also known as **rea
 
 ---
 
-Q. How to implement `read-your-writes` consistency in a system with `leader-based replication`.
+Q. How to implement **`read-your-writes`** consistency in a system with **`leader-based replication`.**
 
 **When reading something that the user may have modified, read it from the leader**, otherwise, read it from a follower. 
 
@@ -169,7 +169,7 @@ Q. How to implement `read-your-writes` consistency in a system with `leader-base
 
 ---
 
-Q. Explain `Monotonic Reads` consistency.
+Q. Explain **`Monotonic Reads`** consistency.
 
 **Monotonic reads** guarantee that if one user makes several reads in sequence, they will not see time go backward, i.e., they will not read older data after having previously read newer data.
 
@@ -179,7 +179,7 @@ For example, if the user makes same query twice, first to a follower with little
 
 ---
 
-Q. How to achieve `Monotonic Reads` consistency.
+Q. How to achieve **`Monotonic Reads`** consistency.
 
 One way of achieving monotonic reads is to make sure that each user always makes their reads from the same replica (e.g., the replica can be chosen based on a hash of the user ID).
 
@@ -187,20 +187,20 @@ One way of achieving monotonic reads is to make sure that each user always makes
 
 ---
 
-Q. Explain the disadvantages of `Single Leader Replication`.
+Q. Explain the disadvantages of **`Single Leader Replication`**.
 
 - Every write must go over the internet to the datacenter with the leader. This can add significant latency to writes and might contravene the purpose of having multiple data centres in the first place.
 
 
 ---
 
-Q. Explain `Multi Leader Replication`.
+Q. Explain **`Multi Leader Replication`**.
 
 > **NOTE: Multi-leader replication is often considered dangerous territory that should be avoided if possible**. 
 
 ---
 
-Q. Explain the advantages of `Multi Leader Replication`.
+Q. Explain the advantages of **`Multi Leader Replication`**.
 
 - Every write can be processed in the local datacenter and is replicated asynchronously to the other data centres. Thus, the inter-datacenter network delay is hidden from users, which means the perceived performance may be better.
 
@@ -210,13 +210,13 @@ Q. Explain the advantages of `Multi Leader Replication`.
 
 ---
 
-Q. Explain the limitations of `Multi Leader Replication`.
+Q. Explain the limitations of **`Multi Leader Replication`**.
 
 The same data may be concurrently modified in two different data centres, leading to write conflicts.
 
 ---
 
-Q. How to handle write conflicts in `Multi Leader Replication`?
+Q. How to handle write conflicts in **`Multi Leader Replication`**?
 
 The simplest strategy for dealing with conflicts is to avoid them. If the application can ensure that all writes for a particular record go through the same leader, then conflicts cannot occur.
 
@@ -226,7 +226,7 @@ For example, in an application where a user can edit their own data, you can ens
 
 ---
 
-Q. Explain `Leaderless Replication`.
+Q. Explain **`Leaderless Replication`**.
 
 Abandoning the concept of a leader and allowing any replica to directly accept writes from clients.
 
@@ -234,7 +234,7 @@ Abandoning the concept of a leader and allowing any replica to directly accept w
 
 ---
 
-Q. Explain the working of a system with `Leaderless Replication`.
+Q. Explain the working of a system with **`Leaderless Replication`**.
 
 The client (user 1234) sends the write to all three replicas in parallel, and the two available replicas accept the write but the unavailable replica misses it.
 
@@ -246,7 +246,7 @@ To solve that problem, when a client reads from the database, it doesn’t just 
 
 ---
 
-Q. Explain `Quorum Consensus`.
+Q. Explain **`Quorum Consensus`**.
 
 `N` = The number of replicas.
 
@@ -269,17 +269,35 @@ If `W + R > N`, strong consistency is guaranteed because there must be at least 
 
 ---
 
-Q. Explain the limitations of `Quorum Consistency`.
+Q. Explain the limitations of **`Quorum Consistency`**.
 
 - If a write succeeded on some replicas but failed on others (for example because the disks on some nodes are full), and overall succeeded on fewer than w replicas, it is not rolled back on the replicas where it succeeded.
 
+- Allow several clients to concurrently write to the same key, which means that conflicts will occur. In simple terms, if two writes occur concurrently, it is not clear which one happened first. The problem is that events may arrive in a different order at different nodes, due to variable network delays and partial failures. **In order to become eventually consistent, the replicas should converge toward the same value. How do they do that?**
+
+> **NOTE:** If one operation happened before another, the later operation should overwrite the earlier operation, but if the operations are concurrent, we have a conflict that needs to be resolved.
+
 ---
 
-Q. Explain `data partitioning`.
+Q. How **`Last Write Wins (LWW)`** algorithm help resolve concurrent write conflicts?
+
+**Last Write Wins** algorithm is based on the idea that each replica should only store the **most recent value** and allow **older values to be overwritten / discarded**. 
+
+As long as we know which write is more recent, and every write is eventually copied to every replica, the replicas will eventually converge to the same value.  For example, we can attach a timestamp to each write, **pick the biggest timestamp as the most recent, and discard any writes with an earlier timestamp.**
+
+LWW achieves the goal of eventual convergence, but at the cost of durability: if there are several concurrent writes to the same key, even if they were all reported as successful to the client (because they were written to w replicas), only one of the writes will survive and the others will be silently discarded.
+
+If losing data is not acceptable, LWW is a poor choice for conflict resolution. **The only safe way of using a database with LWW is to ensure that a key is only written once and thereafter treated as immutable, thus avoiding any concurrent updates to the same key.**
+
+> **NOTE:** LWW is the only supported conflict resolution method in Cassandra. a recommended way of using Cassandra is to use a `UUID` as the key, thus giving each write operation a unique key.
 
 ---
 
-Q. Explain key challenges with `data partitioning`.
+Q. Explain **`Data Partitioning`**.
+
+---
+
+Q. Explain key challenges with **`Data Partitioning`**.
 
 1. Distribute data across multiple servers evenly.
 2. Minimise data movement when nodes are added or removed.
@@ -288,15 +306,15 @@ Q. Explain key challenges with `data partitioning`.
 
 ---
 
-Q. Explain `consistent hashing`.
+Q. Explain **`Consistent Hashing`**.
 
 ---
 
-Q. Explain how `consistent hashing` works.
+Q. Explain how **`Consistent Hashing`** works.
 
 ---
 
-Q. Explain `Scalability`.
+Q. Explain **`Scalability`**.
 
 **Scalability** refers to a **system's ability to handle increasing workloads** efficiently by adding resources (e.g., servers, storage, network capacity) without compromising performance.
 
@@ -344,7 +362,7 @@ Q. How to scale your compute?
 
 ---
 
-Q. Explain `Database Scaling`.
+Q. Explain **`Database Scaling`**.
 
 ---
 
@@ -352,7 +370,7 @@ Q. How to scale your network bandwidth?
 
 ---
 
-Q. Explain the property of `Partition Tolerance` in distributed systems.
+Q. Explain the property of **`Partition Tolerance`** in distributed systems.
 
  A requirement in distributed systems to ensure **availability** even when network links between nodes fail.
 
@@ -364,7 +382,7 @@ Achieved through **eventual consistency** (syncing data once the partition is r
 
 ---
 
-Q. Explain `Consistency`. 
+Q. Explain **`Consistency`**. 
 
  Systems often replicate data across multiple nodes, sometimes in real-time, to improve fault tolerance and performance. However, this replication introduces challenges in maintaining **data consistency**.
 
@@ -372,7 +390,7 @@ Q. Explain `Consistency`.
 
 ---
 
-Q. Explain the property of `strong consistency` in distributed systems.
+Q. Explain the property of **`Strong Consistency`** in distributed systems.
 
 The system guarantees that as soon as a transaction is committed, all subsequent read operations from any user or node will reflect that latest write, regardless of which replica they access. 
 
@@ -384,7 +402,7 @@ Strong consistency is usually achieved by forcing a replica not to accept new re
 
 ---
 
-Q. Explain the property of `eventual consistency` in distributed systems.
+Q. Explain the property of **`Eventual Consistency`** in distributed systems.
 
 The system guarantees that all replicas of data **will eventually** converge to the same state, given enough time and in the absence of further updates. However, in the short term, different nodes may return stale or inconsistent data. 
 
@@ -394,7 +412,7 @@ Since updates don’t need immediate synchronisation across all nodes, systems c
 
 ---
 
-Q. Explain `CAP Theorem`.
+Q. Explain **`CAP Theorem`**.
 
 CAP theorem states that it is impossible for a distributed system to simultaneously provide more than two of these 3 guarantees: `consistency`, `availability` and `partition tolerance`.
 

@@ -45,7 +45,8 @@ public int maxProfit(int[] prices) {
 }
 ```
 
-#### Redundant Operations
+---
+## Redundant Operations
 
 If we decided to sell at any `prices[j]`, there's no need to check all potential buy `prices[i] where 0 <= i<= j`. We can determine the maximum profit when selling at `prices[j]` by buying at the **lowest price observed** in the range `[0:j]`.
 
@@ -89,10 +90,6 @@ public int maxProfit(int[] prices) {
 	return maxProfit;
 }
 ```
-
-
-
-
 
 
 
