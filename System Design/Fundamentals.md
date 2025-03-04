@@ -35,11 +35,19 @@ Achieved through **replication** (e.g., database replicas, redundant servers) a
 
 ---
 
+Q. What is `Gossip Protocol`.
+
+In distributed system, it is insufficient to be that a server is down when another server says so. Usually, it requires at least 2 independent sources of information to mark a server down. 
+
+---
+
 Q. Explain `Database Replication`.
 
 Replication means keeping a copy of the same data on multiple machines that are connected via a network.
 
-> **NOTE:** Every write to the database needs to be processed by every replica, otherwise, the replicas would no longer contain the same data.
+Every write to the database needs to be processed by every replica, otherwise, the replicas would no longer contain the same data.
+
+> **NOTE:** To achieve high availability and reliability, data must be replicated.
 
 ---
 
@@ -50,6 +58,8 @@ Q. Explain the need for `Database Replication`.
 2. To allow the system to continue working even if some of its components have failed (and thus increase availability).
 
 3. To scale out the number of machines that can serve read queries (and thus increase read throughput).
+
+> **NOTE:** For better reliability, replicas are placed in distinct data centres, and data centres are connected through high-speed networks.
 
 ---
 
@@ -236,6 +246,56 @@ To solve that problem, when a client reads from the database, it doesn’t just 
 
 ---
 
+Q. Explain `Quorum Consensus`.
+
+`N` = The number of replicas.
+
+`W` = For a write operation to be considered as successful, write operation must be acknowledged from `W` replicas. For example, `W = 1` means that the coordinator must receive at least on acknowledgment before write operation is considered as successful.
+
+`R` = For a read operation to be considered as successful, read operation must wait for responses from at least r replicas. For example, `R = 1` means that the coordinator must receive at least on acknowledgment before write read is considered as successful.
+
+In Dynamo-style databases (e.g., DynamoDB, Cassandra), the parameters `N`, `W`, `R` are typically configurable. The configuration of these parameters is a typical tradeoff between **latency** and **consistency**.
+
+If `W | R > 1`, the system offers better consistency, however, the query will be slower because the coordinator must wait for the response from the slowest replica.
+
+If `W + R > N`, strong consistency is guaranteed because there must be at least one overlapping node that has the latest data to ensure consistency. **??????**
+
+**Examples:**
+
+1. If `R = 1` and `W = N`, the system is optimised for a fast read.
+2. If `R = N` and `W = 1`, the system is optimised for fast write.
+
+> **NOTE:** Normally, reads and writes are always sent to all the `N` replicas in parallel.
+
+---
+
+Q. Explain the limitations of `Quorum Consistency`.
+
+- If a write succeeded on some replicas but failed on others (for example because the disks on some nodes are full), and overall succeeded on fewer than w replicas, it is not rolled back on the replicas where it succeeded.
+
+---
+
+Q. Explain `data partitioning`.
+
+---
+
+Q. Explain key challenges with `data partitioning`.
+
+1. Distribute data across multiple servers evenly.
+2. Minimise data movement when nodes are added or removed.
+
+> **NOTE: Consistent hashing is a great technique to solve these problems.**
+
+---
+
+Q. Explain `consistent hashing`.
+
+---
+
+Q. Explain how `consistent hashing` works.
+
+---
+
 Q. Explain `Scalability`.
 
 **Scalability** refers to a **system's ability to handle increasing workloads** efficiently by adding resources (e.g., servers, storage, network capacity) without compromising performance.
@@ -298,7 +358,9 @@ Q. Explain the property of `Partition Tolerance` in distributed systems.
 
 Achieved through **eventual consistency** (syncing data once the partition is resolved) and **retry mechanisms** (handling temporary network failures). ?????
 
-> **Example:** In a distributed database, if the network splits into two isolated parts (partition), each part should continue serving requests independently until the partition is resolved.
+**Example:** In a distributed database, if the network splits into two isolated parts (partition), each part should continue serving requests independently until the partition is resolved.
+
+> **NOTE:** In a distributed system, partitions cannot be avoided, and when a partition occurs, we must choose between consistency and availability.
 
 ---
 
@@ -315,6 +377,10 @@ Q. Explain the property of `strong consistency` in distributed systems.
 The system guarantees that as soon as a transaction is committed, all subsequent read operations from any user or node will reflect that latest write, regardless of which replica they access. 
 
 This provides the strongest guarantee of consistency, but can potentially impact system performance due to synchronisation overhead.
+
+Strong consistency is usually achieved by forcing a replica not to accept new reads / writes until every replica has agreed on current write.
+
+> **NOTE:** This approach is not ideal for systems that require high availability (because it can block new operations).
 
 ---
 
