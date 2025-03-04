@@ -54,33 +54,9 @@ To manage this load efficiently, we can deploy **5 application servers** behin
 
 > NOTE: Since, every URL shortening request involves generating a unique short ID, the **encoding service** would handle the same load as the **shortening service**.
 
-----
-## Workflow for Redirecting a URL
-
-- The user enters a short URL in the browser. A **GET request** is sent to the **redirection service**.
-
-- The redirection service extracts the **short URL ID** (e.g., `abc123`) and use it to query the database to retrieve the corresponding long URL.
-
-- Once retrieved, the redirection service sends an **HTTP 301 (Permanent) or 302 (Temporary) redirect** response to the browser.
-
-- The browser automatically redirects the user to the **original long URL**.
-
 ---
-## Load Estimation and API Design
+## Storage Capacity Estimation for Shortening Service
 
- A URL shortener primarily needs 2 APIs:
-
-Use **Base62 encoding** (0-9, a-z, A-Z) or **hash the URL (SHA-256, MD5)** and take the first **6-8 characters**.
-
-e.g., )
-
-> **NOTE:** We will design the APIs using microservices architecture.
-
----
-
-## Storage Capacity Estimation and Schema Design 
-
-The system requires an efficient **data model** to store the **user details (`users` table)** and the **shortened URL (`short_id → long URL`) mappings (`urls` table)**.
 
 For **storage capacity estimation**, the `urls` table should be the primary consideration because the `urls` table will grow rapidly (10 Million new entries per day) in contrast to the `users` table.
 
@@ -93,9 +69,10 @@ Let's break down the **storage requirements** of the `urls` table over 10 year
 
 Since the system must store **large-scale URL mappings (6TB+ over 10 years)** and process **1 billion read requests daily**, we need a **highly scalable database** that supports **ultra-fast lookups**.
 
-
-
 ---
+## Schema Design
+
+The system requires an efficient **data model** to store the **user details (`users` table)** and the **shortened URL (`short_id → long URL`) mappings (`urls` table)**.
 
 **`users` Table:**
 
@@ -120,6 +97,38 @@ Since the system must store **large-scale URL mappings (6TB+ over 10 years)** 
 ensure fast lookups, and scale to handle billions of requests.
 
 ---
+## Shortening Service API Design
 
+```
+@postMapping("api.tinyurl.com/v1/shorten")
+public String shortenUrl(@Param String longUrl, Integer expiryDays) {
+	String shortId = encodingService.generateShortId();
+	ShortUrl shortUrl = new ShortUrl(shortId, longUrl, createdAt, expiresAt); 
+	urlRepository.save(shortUrl);
+	return "https://tinyurl.com/" + shortId; 
+}
+```
 
+---
+## Workflow for Redirecting a URL
 
+- The user enters a short URL in the browser. A **GET request** is sent to the **redirection service**.
+
+- The redirection service extracts the **short URL ID** (e.g., `abc123`) and use it to query the database to retrieve the corresponding long URL.
+
+- Once retrieved, the redirection service sends an **HTTP 301 (Permanent) or 302 (Temporary) redirect** response to the browser.
+
+- The browser automatically redirects the user to the **original long URL**.
+
+---
+## Load Estimation and API Design
+
+ A URL shortener primarily needs 2 APIs:
+
+Use **Base62 encoding** (0-9, a-z, A-Z) or **hash the URL (SHA-256, MD5)** and take the first **6-8 characters**.
+
+e.g., )
+
+> **NOTE:** We will design the APIs using microservices architecture.
+
+---
