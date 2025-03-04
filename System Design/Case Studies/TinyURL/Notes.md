@@ -22,8 +22,6 @@ Design a **URL shortening service** that converts a long URL into a shorter, mor
 
 4. **Security and Abuse Prevention:** Shortened URLs shouldn't be guessable / predictable.
 
-> NOTE: Consistency is more important than availability. ?????
-
 ---
 ## Workflow for Shortening a Long URL
 
@@ -35,24 +33,26 @@ Design a **URL shortening service** that converts a long URL into a shorter, mor
 
 4. Once the short URL is generated, the **shortening service** stores the `short_id → long URL` mapping in the database and returns the shortened URL to the user.
 
-
-```mermaid
-flowchart TD
-	A[User] -->|Input Long URL| B{Shortening Service} 
-	B -->|Validate URL| C{URL Valid?} 
-	C -->|Yes| D[Encoding Service] 
-	C -->|No| E[Return Error] 
-	D -->|Generate Unique ID| F[Database] 
-	F -->|Store Mapping| G[Generate Short URL] 
-	G -->|Return Shortened URL| A
-```
+![image](url-shortening-sequence.png)
 
 ---
-## Load Estimation of Shortening Service 
+## Load Estimation for Shortening Service
 
+For designing a **scalable** and **highly available** system, analysing **key load parameters** such as the **Requests Per Second (RPS)** and **throughput capacity** is crucial.
 
+**Requests Per Second (RPS)**
+- Daily Average URL Generation Requests = 10 Million
+- Requests Per Second = 10 Million / (24 hours × 3600 seconds ) ~ 100 RPS
 
+**Throughput Capacity**
+- Average Processing Time = 10 milliseconds / request
+- Throughput Capacity = 1 / 0.01 = 100 RPS
 
+A single application server can handle the daily average request load of **100 RPS**. However, assuming peak traffic is **5 times the average**, the system must be designed to handle **500 RPS** during peak hours.
+
+To manage this load efficiently, we can deploy **5 application servers** behind a **load balancer** to distribute requests evenly.
+
+> NOTE: Since, every URL shortening request involves generating a unique short ID, the **encoding service** would handle the same load as the **shortening service**.
 
 ----
 ## Workflow for Redirecting a URL
