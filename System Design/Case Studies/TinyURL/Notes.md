@@ -31,7 +31,7 @@ Design a **URL shortening service** that converts a long URL into a shorter, mor
 
 3. If the URL passes all checks, the **shortening service** calls the **encoding service** to encode the long URL into a unique ID (e.g., `abc123`) which can can be used to generate a unique short URL (e.g., `https://tinyURL/abc123`).
 
-4. Once the short URL is generated, the **shortening service** stores the `short_id → long URL` mapping in the database and returns the shortened URL to the user.
+4. Once the short URL is generated, the **shortening service** stores the `short_URL → long_URL` mapping in the database and returns the shortened URL to the user.
 
 ![image](url-shortening-sequence.png)
 
@@ -40,13 +40,13 @@ Design a **URL shortening service** that converts a long URL into a shorter, mor
 
 For designing a **scalable** and **highly available** system, analysing **key load parameters** such as the **Requests Per Second (RPS)** and **throughput capacity** is crucial.
 
-**Requests Per Second (RPS)**
+**Requests Per Second (RPS):**
 - Daily Average URL Generation Requests = 10 Million
-- Requests Per Second = 10 Million / (24 hours × 3600 seconds ) ~ 100 RPS
+- Requests Per Second = 10 Million / (24 hours × 3600 seconds ) ~ **100 RPS**
 
-**Throughput Capacity**
+**Throughput Capacity:**
 - Average Processing Time = 10 milliseconds / request
-- Throughput Capacity = 1 / 0.01 = 100 RPS
+- Throughput Capacity = 1 / 0.01 = **100 RPS**
 
 A single application server can handle the daily average request load of **100 RPS**. However, assuming peak traffic is **5 times the average**, the system must be designed to handle **500 RPS** during peak hours.
 
@@ -57,22 +57,20 @@ To manage this load efficiently, we can deploy **5 application servers** behin
 ---
 ## Storage Capacity Estimation for Shortening Service
 
+The system requires a **data model** to store the **user details** and the **shortened URL (`short_URL → long_URL`) mappings**.
 
-For **storage capacity estimation**, the `urls` table should be the primary consideration because the `urls` table will grow rapidly (10 Million new entries per day) in contrast to the `users` table.
+Since the **shortened URL (`short_URL → long_URL`) mappings** will grow at a much **faster rate** than the **user details**, analysing their **storage requirements** is crucial for designing an efficient data model and choosing the right database.
 
-Let's break down the **storage requirements** of the `urls` table over 10 years:
+**Storage Requirements Breakdown:**
+- Daily Average URL Generation Requests = 10 Million
+- URLs Generated in 10 Years = 10 Million × 365 days × 10 years = 36.5 × 10<sup>9</sup> ≈ 40 Billion URLs
+- Total Storage per Mapping = 100 bytes (long URL) + 20 bytes (short ID) + 30 bytes (metadata) = 150 bytes
+- Required Storage in 10 years = 40 Billion URLs × 150 bytes = 6 × 10<sup>12</sup> = **6 TB**
 
-- **Daily URL Generation = 10 Million**
-- **Total URLs in 10 Years = 10 Million × 365 days × 10 years = 36.5 × 10<sup>9</sup> ≈ 40 Billion URLs**
-- **Total Storage per Entry = 100 bytes (long URL) + 20 bytes (short ID) + 30 bytes (metadata) = 150 bytes**
-- **Storage required = 40 Billion URLs × 150 bytes = 6 × 10<sup>12</sup> = 6 TB**
-
-Since the system must store **large-scale URL mappings (6TB+ over 10 years)** and process **1 billion read requests daily**, we need a **highly scalable database** that supports **ultra-fast lookups**.
+Since **high read-write throughput** is critical, we can use **Cassandra** to ensure **low-latency queries (sub-10ms latency)**.
 
 ---
 ## Schema Design
-
-The system requires an efficient **data model** to store the **user details (`users` table)** and the **shortened URL (`short_id → long URL`) mappings (`urls` table)**.
 
 **`users` Table:**
 
@@ -94,19 +92,31 @@ The system requires an efficient **data model** to store the **user details (`us
 | `expiry_date`  | `Timestamp` | Expiry date                      |
 | `access_count` | `Integer`   | Number of times accessed         |
 
-ensure fast lookups, and scale to handle billions of requests.
-
 ---
-## Shortening Service API Design
+## API Design
+
+We will design the APIs using microservices architecture.
+
+#### Shortening Service
 
 ```
-@postMapping("api.tinyurl.com/v1/shorten")
+@postMapping("/shorten")
 public String shortenUrl(@Param String longUrl, Integer expiryDays) {
-	String shortId = encodingService.generateShortId();
-	ShortUrl shortUrl = new ShortUrl(shortId, longUrl, createdAt, expiresAt); 
+	String shortId = encodingService.generateShortId(longURL);
+	ShortUrl shortUrl = new ShortUrl(shortId, longUrl); 
 	urlRepository.save(shortUrl);
-	return "https://tinyurl.com/" + shortId; 
+	return shortURL.toString(); 
 }
+```
+
+#### Encoding Service
+
+```
+```
+
+#### Redirection Service
+
+```
 ```
 
 ---
@@ -129,6 +139,6 @@ Use **Base62 encoding** (0-9, a-z, A-Z) or **hash the URL (SHA-256, MD5)** a
 
 e.g., )
 
-> **NOTE:** We will design the APIs using microservices architecture.
+> **NOTE:** 
 
 ---
