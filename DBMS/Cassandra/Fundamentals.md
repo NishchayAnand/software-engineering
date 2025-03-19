@@ -1,12 +1,40 @@
 
-## EXTRA
+Q. Explain the limitations of relational databases.
+
+- Joins are inherent in any relatively normalised relational database of even modest size, and joins can be slow.
+
+- The way that databases gain consistency is typically through the use of **transactions**, which require locking some portion of the database so it’s not available to other clients. This can become untenable under very heavy loads, as the locks mean that competing users start queuing up, waiting for their turn to read or write the data.
+
+---
+
+Q. What are the use cases for ACID?
+
+---
+
+Cassandra data model focuses on writing queries such that we can have constant time data access.
+
+If massive, elastic scalability is not an issue for you, the trade-offs in relative complexity of a system such as Cassandra may simply not be worth it.
+
+
+The relational database still is clearly one of the most successful software applications in history.
 
 Each node can handle 2-4 TB of data.
 
 CQL is a subset of SQL.
 
 ---
-## Data Modeling
+
+Q. Explain the steps to create a logical data model.
+
+1. Create a table schema from the conceptual data model and for each query.
+2. Identify **equality search attributes** (e.g., `select .... where user_id = ?`).
+3. Identify **inequality search attributes** (e.g., `select .... where uploaded_timestamp > ?`).
+4. Identify **ordering attributes** (e.g., `select .... order by uploaded_timestamp desc`).
+
+---
+## Data Modelling
+
+
 
 In case of concurrency, last write wins, hence, primary keys should be unique. 
 

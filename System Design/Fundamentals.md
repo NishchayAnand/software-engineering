@@ -295,6 +295,8 @@ If losing data is not acceptable, LWW is a poor choice for conflict resolution. 
 
 Q. Explain **`Data Partitioning`**.
 
+The main reason for wanting to partition data is scalability.
+
 ---
 
 Q. Explain key challenges with **`Data Partitioning`**.

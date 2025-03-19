@@ -1,8 +1,8 @@
-# Threads System Design
+# Instagram System Design
 
 Threads is a social media platform. Key features **(services)** provided by Threads include:
 
-- **Create Threads (Posts)** to share your ideas, opinions and creativity with the world.
+- **Create Posts** to share your ideas, opinions and creativity with the world.
 
 - **Follow / Unfollow** friends and people who care about whatever it is you're interested in.
 
@@ -22,7 +22,7 @@ Threads is a social media platform. Key features **(services)** provided by Thre
 
 ## Functional Requirements
 
-- **Create Thread (`PostService`)**: Users can publish text-based posts.
+- **Create Post (`PostService`)**: Users can publish text-based posts.
 
 - **Follow / Unfollow People (`FollowService`)**: Users can follow new people or unfollow existing followees.
 

@@ -108,7 +108,7 @@ Since the **shortened URL (`short_URL → long_URL`) mappings** will grow at a
 Since **high read-write throughput** is critical, we can use **Cassandra** to ensure **low-latency queries (sub-10ms latency)**.
 
 ---
-## Schema Design
+## Schema Design - Chebotko Diagram
 
 **`users` Table:**
 
