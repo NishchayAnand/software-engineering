@@ -18,35 +18,69 @@ Design a **URL shortening service** that converts a long URL into a shorter, mor
 
 2. **Low latency:** The system should fetch the long URL and redirect users instantly.
 
-3. **Scalability:** A read heavy system capable of handling a traffic volume of 10 Million URL generation requests and 1 Billion redirection requests per day (assuming read / write ratio is 100:1).
+3. **Scalability:** The system should be capable of handling a traffic volume of 10 Million URL generation requests and 1 Billion redirection requests per day (assuming read / write ratio is 100:1).
 
 4. **Security and Abuse Prevention:** Shortened URLs shouldn't be guessable / predictable.
 
 ---
 ## Workflow for Shortening a Long URL
 
-1. The `user` inputs a URL on the web interface. A **POST request** (e.g., `POST https://api.tinyurl.com/v1/shorten`), containing the input URL (e.g., `long_url: https://www.example.com/some/very/long/url`), is sent to the `shortening service`.
+1. The `user` inputs a URL on the web interface. A **POST request** (e.g., `POST https://api.tinyurl.com/v1/shorten`), containing the input URL (e.g., `long_url: https://www.example.com/some/very/long/url`), is sent to the **`shortening service`**.
 
-2. The `shortening service` validates the provided URL to ensure it follows a valid structure, is safe to use and is not already present in the database.
+2. The **`shortening service`** validates the provided URL to ensure it follows a valid structure, is safe to use and is not already present in the database.
 
-3. If the URL passes all checks, the `shortening service` calls the `encoding service` to encode the long URL into a unique ID (e.g., `abc123`) which can can be used to generate a unique short URL (e.g., `https://tinyURL/abc123`).
+3. If the URL passes all checks, the `shortening service` calls the **`encoding service`** to encode the long URL into a unique ID (e.g., `abc123`) which can can be used to generate a unique short URL (e.g., `https://tinyURL/abc123`).
 
-4. Once the short URL is generated, the `shortening service` stores the `short_url → long_url` mapping in the `database` and returns the shortened URL to the `user`.
+4. Once the short URL is generated, the **`shortening service`** stores the `short_url → long_url` mapping in the `database` and returns the shortened URL to the `user`.
 
-![image](url-shortening-sequence.png)
+![shortening-service-workflow](url-shortening-sequence.png)
+
+---
+## Load Estimation for Shortening Service
+
+Considering the **shortening service** is a **write-heavy service**, its load estimation must involve analysing the following **key load parameters**:
+
+**1. Requests Per Second (RPS):**
+- <span style="color : red">Daily Average URL Generation Requests = 10 Million (Assumption)</span>
+- Requests Per Second = 10 Million / (24 hours × 3600 seconds ) ~ **100 RPS**
+
+**2. Write Throughput Capacity:**
+- <span style="color : red">Average Processing Time = 10 milliseconds / request (Assumption)</span>
+- Throughput Capacity = 1 / 0.01 = **100 RPS**
+
+Assuming peak traffic is **5 times the average**, the system must be designed to handle **500 RPS** during peak hours. Considering a single application server can handle **100 RPS**, we can deploy **5 application servers** behind a **load balancer** to efficiently handle all incoming URL shortening requests.
+
+> NOTE: Since every URL shortening request involves generating a unique short ID, the **encoding service** would handle the same load as the **shortening service**.
 
 ---
 ## Workflow for Redirecting a URL
 
-1. The `user` enters a short URL (e.g., `https://tinyURL/abc123`) in the browser. A **GET request** (e.g., `GET /abc123`) is sent to the `redirection service`.
+1. The **`user`** enters a short URL (e.g., `https://tinyURL/abc123`) in the browser. A **GET request** (e.g., `GET /abc123`) is sent to the **`redirection service`**.
 
-2. The `redirection service` extracts the **short URL ID** (e.g., `abc123`) and use it to query the `database` to retrieve the corresponding long URL.
+2. The **`redirection service`** extracts the **short URL ID** (e.g., `abc123`) and use it to query the `database` to retrieve the corresponding long URL.
 
-3. Once retrieved, the redirection service sends an **HTTP 301 (Permanent) or 302 (Temporary) redirect** response to the browser.
+3. Once retrieved, the **`redirection service`** sends an **HTTP 301 (Permanent) or 302 (Temporary) redirect** response to the browser.
 
-4. The browser automatically redirects the user to the **original long URL**..
+4. The browser automatically redirects the user to the **original long URL**.
 
-![alt](redirection-service-workflow.png)
+![redirection-service-workflow](redirection-service-workflow.png)
+
+---
+## Load Estimation for Redirection Service
+
+Considering the **redirection service** is a **read-heavy service**, its load estimation must involve analysing the following **key load parameters**:
+
+**1. Requests Per Second (RPS):**
+- <span style="color : red">Daily Average Redirection Requests = 10 Million x 100 = 1 Billion  (Assumption)</span>
+- Requests Per Second = 1 Billion / (24 hours × 3600 seconds ) ~ **10,000 RPS**
+
+**2. Read Throughput Capacity:**
+- <span style="color : red">Average Processing Time = 10 milliseconds / request (Assumption)</span>
+- Throughput Capacity = 1 / 0.01 = **100 RPS**
+
+Assuming peak traffic is **5 times the average**, the system must be designed to handle **50,000 RPS** during peak hours. Considering a single application server can handle **100 RPS**, we can deploy **500 application servers** behind a **load balancer** to efficiently handle all URL redirection requests.
+
+> NOTE: Since the system is a read-heavy system, i.e., there will be more reads than writes, we can store the (`short_url → long_url`) mapping in a **cache** to improve performance.
 
 ---
 ## API Design
@@ -93,9 +127,10 @@ Use **Base62 encoding** (0-9, a-z, A-Z) or **hash the URL (SHA-256, MD5)** a
 ```
 
 ---
+
 ## Storage Capacity Estimation
 
-The system requires a **data model** to store the **user details** and the **shortened URL (`short_URL → long_URL`) mappings**.
+The system requires a **data model** to efficiently store the **user details** and their **shortened URL (`short_URL → long_URL`) mappings**.
 
 Since the **shortened URL (`short_URL → long_URL`) mappings** will grow at a much **faster rate** than the **user details**, analysing their **storage requirements** is crucial for designing an efficient data model and choosing the right database.
 
@@ -131,32 +166,14 @@ Since **high read-write throughput** is critical, we can use **Cassandra** to 
 | `access_count` | `Integer`   | Number of times accessed         |
 
 ---
-## Load Estimation for Shortening Service
-
-For designing a **scalable** and **highly available** system, analysing **key load parameters** such as the **Requests Per Second (RPS)** and **throughput capacity** is crucial.
-
-**Requests Per Second (RPS):**
-- Daily Average URL Generation Requests = 10 Million
-- Requests Per Second = 10 Million / (24 hours × 3600 seconds ) ~ **100 RPS**
-
-**Throughput Capacity:**
-- Average Processing Time = 10 milliseconds / request
-- Throughput Capacity = 1 / 0.01 = **100 RPS**
-
-A single application server can handle the daily average request load of **100 RPS**. However, assuming peak traffic is **5 times the average**, the system must be designed to handle **500 RPS** during peak hours.
-
-> NOTE: Since, every URL shortening request involves generating a unique short ID, the **encoding service** would handle the same load as the **shortening service**.
-
----
-## Load Estimation for Redirection Service
-
----
 ## Architectural Diagram
 
 We will design the APIs using microservices architecture.
 
-**Shortening + Encoding Service:** To manage this load efficiently, we can deploy **5 application servers** behind a **load balancer** to distribute requests evenly.
 
-As there will be more reads than writes, we can store the `short_url → long_url` mapping in a cache to improve performance.
+
+To handle **57,500 RPS read requests at peak**, we can:
+- **Deploy multiple instances** of the redirection service behind a **load balancer**
+- **Use Redis as an in-memory cache** to reduce DB queries
 
 ---
