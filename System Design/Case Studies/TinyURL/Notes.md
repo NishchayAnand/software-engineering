@@ -118,7 +118,7 @@ public String shortenUrl(String longUrl) {
 
 #### Encoding Service API (Internal)
 
-The service must implement a functionality that could encode every incoming long URL to a **unique short URL**.
+The service must implement a functionality that could encode every incoming long URL to a **unique short ID**.
 
 Using a **hash function (e.g., SHA-256) to encode long URLs** can lead to **collisions** if multiple people try to encode the same long URL. To avoid such collisions, we can use a **unique ID generator** to assign a unique numeric ID to each incoming long URL.
 
