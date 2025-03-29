@@ -18,9 +18,7 @@ Design a **URL shortening service** that converts a long URL into a shorter, mor
 
 2. **Low latency:** The system should fetch the long URL and redirect users instantly.
 
-3. **Scalability:** The system should be capable of handling a traffic volume of 10 Million URL generation requests and 1 Billion redirection requests per day (assuming read / write ratio is 100:1).
-
-4. **Security and Abuse Prevention:** Shortened URLs shouldn't be guessable / predictable.
+3. **Scalability:** The system should be capable of handling a traffic volume of **10 Million URL generation requests** and **1 Billion redirection requests per day** (assuming **read / write ratio** is **100:1**).
 
 ---
 ## Workflow for Shortening a Long URL
@@ -41,16 +39,18 @@ Design a **URL shortening service** that converts a long URL into a shorter, mor
 Considering the **shortening service** is a **write-heavy service**, its load estimation must involve analysing the following **key load parameters**:
 
 **1. Requests Per Second (RPS):**
-- <span style="color : red">Daily Average URL Generation Requests = 10 Million (Assumption)</span>
+- <span style="color : red"><strong>Assumption:</strong> Daily Average URL Generation Requests = 10 Million</span>
 - Requests Per Second = 10 Million / (24 hours × 3600 seconds ) ~ **100 RPS**
 
 **2. Write Throughput Capacity:**
-- <span style="color : red">Average Processing Time = 10 milliseconds / request (Assumption)</span>
+- <span style="color : red"><strong>Assumption:</strong> Average Processing Time = 10 milliseconds / request</span>
 - Throughput Capacity = 1 / 0.01 = **100 RPS**
 
-Assuming peak traffic is **5 times the average**, the system must be designed to handle **500 RPS** during peak hours. Considering a single application server can handle **100 RPS**, we can deploy **5 application servers** behind a **load balancer** to efficiently handle all incoming URL shortening requests.
+<span style="color : red"><strong>Assumption:</strong> The peak traffic can be <strong>5 times the average</strong>. Hence, the system must be designed to handle <strong>500 RPS</strong> during peak hours.</span>
 
-> NOTE: Since every URL shortening request involves generating a unique short ID, the **encoding service** would handle the same load as the **shortening service**.
+<span style="color : green">Considering a single application server can handle <strong>100 RPS</strong>, we can deploy <strong>5 application servers</strong> behind a <strong>load balancer</strong> to efficiently handle all incoming URL shortening requests.</span>
+
+> NOTE: Since every URL shortening request involves generating a unique short ID, the **encoding service** must be handle the same load as the **shortening service**.
 
 ---
 ## Workflow for Redirecting a URL
@@ -71,16 +71,18 @@ Assuming peak traffic is **5 times the average**, the system must be designed t
 Considering the **redirection service** is a **read-heavy service**, its load estimation must involve analysing the following **key load parameters**:
 
 **1. Requests Per Second (RPS):**
-- <span style="color : red">Daily Average Redirection Requests = 10 Million x 100 = 1 Billion  (Assumption)</span>
+- <span style="color : red"><strong>Assumption:</strong> Daily Average Redirection Requests = 10 Million x 100 = 1 Billion</span>
 - Requests Per Second = 1 Billion / (24 hours × 3600 seconds ) ~ **10,000 RPS**
 
 **2. Read Throughput Capacity:**
-- <span style="color : red">Average Processing Time = 10 milliseconds / request (Assumption)</span>
+- <span style="color : red"><strong>Assumption:</strong> Average Processing Time = 10 milliseconds / request</span>
 - Throughput Capacity = 1 / 0.01 = **100 RPS**
 
-Assuming peak traffic is **5 times the average**, the system must be designed to handle **50,000 RPS** during peak hours. Considering a single application server can handle **100 RPS**, we can deploy **500 application servers** behind a **load balancer** to efficiently handle all URL redirection requests.
+<span style="color : red"><strong>Assumption:</strong> The peak traffic can be <strong>5 times the average</strong>. Hence, the system must be designed to handle <strong>50,000 RPS</strong> during peak hours.</span>
 
-> NOTE: Since the system is a read-heavy system, i.e., there will be more reads than writes, we can store the (`short_url → long_url`) mapping in a **cache** to improve performance.
+<span style="color : green">Considering a single application server can handle <strong>100 RPS</strong>, we can deploy <strong>500 application servers</strong> behind a <strong>load balancer</strong> to efficiently handle all URL redirection requests.</span>
+
+> NOTE: Since the system is a read-heavy system, i.e., there will be more reads than writes, we can store the (`short_url → long_url`) mapping in a **cache** (e.g., `Redis`) to improve performance.
 
 ---
 ## API Design
@@ -88,7 +90,7 @@ Assuming peak traffic is **5 times the average**, the system must be designed t
 The system consists of three primary services:
 
 - **Shortening Service**: Handles user requests to create short URLs.
-- **Encoding Service**: Generates unique short IDs for long URLs.
+- **Encoding Service**: Generates unique IDs for given long URLs.
 - **Redirection Service**: Resolves short URLs to their original long URLs.
 
 #### Shortening Service API
@@ -101,7 +103,7 @@ public String shortenUrl(String longUrl) {
 	if (existing != null) return existing.getShortUrl(); 
 	
 	// Call Encoding Service to generate uniqueID 
-	String shortId =encodingServiceClient.generateShortId(longUrl); 
+	String shortId =encodingService.generateShortId(); 
 	
 	// Create Short URL 
 	String shortUrl = "https://tinyurl.com/" + shortId; 
@@ -116,10 +118,32 @@ public String shortenUrl(String longUrl) {
 
 #### Encoding Service API (Internal)
 
-Use **Base62 encoding** (0-9, a-z, A-Z) or **hash the URL (SHA-256, MD5)** and take the first **6-8 characters**.
+The service must implement a functionality that could encode every incoming long URL to a **unique short URL**.
+
+Using a **hash function (e.g., SHA-256) to encode long URLs** can lead to **collisions** if multiple people try to encode the same long URL. To avoid such collisions, we can use a **unique ID generator** to assign a unique numeric ID to each incoming long URL.
+
+<span style="color : red"><strong>Assumption:</strong> Considering that the system processes an average of <strong>10 million URL generation requests per day</strong> and is expected to operate for <strong>10 years</strong>, the total number of URLs generated over its lifetime would be: <strong>10 million × 365 days × 10 years = 36.5 billion ≈ 40 billion URLs</strong>.</span>
+
+The service must be capable of generating **40 billion unique short IDs** without collisions.
+
+<span style="color : red"><strong>Assumption:</strong> Each short ID consists of characters from <strong>[0-9, a-z, A-Z]</strong>, containing 10 + 26 + 26 = 62 possible characters. Considering 62<sup>6</sup> = 56 Billion, a <strong>6-character long Base-62 ID</strong> must be enough to accommodate all URL shortening requests over the system's lifetime.</span>
+
+<span style="color : LightSkyBlue">Q. How to generate 6 character long unique Base-62 IDs in a distributed system?</span>
+
+<span style="color : green">The service can act as a <strong>centralised authority</strong> responsible for generating <strong>unique, sequentially increasing IDs</strong> and then converting those numeric IDs into a <strong>Base-62 encoded string</strong>.</span>
 
 ```
+public String generateShortId() {
+    long id = counter.getAndIncrement(); // Get the next sequential ID
+    return toBase62(id);
+}
 ```
+
+<span style="color : LightSkyBlue">Using a single <strong>centralised ID generator</strong> can become a bottleneck under high traffic.</span>
+
+<span style="color : LightSkyBlue">We can use <strong>multiple ID generators</strong> with unique ID prefixes (e.g., timestamp + machine ID + counter) to allow horizontal scaling. However, adding extra components (like machine ID and timestamp) increases the <strong>length of the short ID</strong>, which may reduce the compactness of the shortened URLs.</span>
+
+<span style="color : green">To eliminate this, we can use a coordination service (e.g., ZooKeeper) to pre-allocate <strong>ID ranges</strong> to each machine (e.g., Machine 1 → 1 to 1M, Machine 2 → 1M+1 to 2M, etc.). This ensures each machine generates IDs from its assigned range <strong>without conflicts</strong>.</span>
 
 #### Redirection Service API
 
@@ -127,7 +151,6 @@ Use **Base62 encoding** (0-9, a-z, A-Z) or **hash the URL (SHA-256, MD5)** a
 ```
 
 ---
-
 ## Storage Capacity Estimation
 
 The system requires a **data model** to efficiently store the **user details** and their **shortened URL (`short_URL → long_URL`) mappings**.
@@ -171,9 +194,10 @@ Since **high read-write throughput** is critical, we can use **Cassandra** to 
 We will design the APIs using microservices architecture.
 
 
-
-To handle **57,500 RPS read requests at peak**, we can:
-- **Deploy multiple instances** of the redirection service behind a **load balancer**
-- **Use Redis as an in-memory cache** to reduce DB queries
-
 ---
+## EXTRA
+
+
+
+
+
