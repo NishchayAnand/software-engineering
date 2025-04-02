@@ -41,6 +41,57 @@ In distributed system, it is insufficient to be that a server is down when anoth
 
 ---
 
+Q. Explain **`Scalability`**.
+
+**Scalability** refers to a **system's ability to handle increasing workloads** efficiently by adding resources (e.g., servers, storage, network capacity) without compromising performance.
+
+---
+
+Q. Explain common **load parameters** used to describe load on a system.
+
+1. **Requests per Second (RPS):** 
+	- Measures how many incoming requests a **web server** processes per second. 
+	- High RPS can **overload** a system, leading to increased response times or failures.
+
+2. **Ratio of Reads to Writes:** 
+	- Describes how frequently data from a **database** is **read vs. modified (written)**.
+	- A **read-heavy** workload (e.g., content streaming) benefits from caching (e.g., Redis).
+	- A **write-heavy** workload (e.g., logging systems) may require database partitioning or NoSQL databases optimised for writes.
+
+3. **Number of Simultaneously Active Users:** 
+	- Measures how many users are **actively interacting** with a system **at the same time**.
+	- More active users mean more concurrent sessions, consuming server resources.
+
+4. **Hit Rate on a Cache:** 
+	- Percentage of requests **served from the cache** rather than the database.
+	- A **high hit rate** (e.g., 90%+) reduces database load and improves response times.
+
+---
+
+Q. Explain common performance parameters used to describe performance of a system.
+
+ 1. **Latency:**
+	 - The time taken for a request to travel from the client to the server and back.
+	 - **Example:** In a chat app, if you send a message and the receiver gets it after **500ms**, that’s the latency.
+
+ 2. **Response Time:**
+	 - The total time taken to process a request and return a response.
+	 - Includes **network latency + processing time** on the server.
+	 - **Example:** A user submits a form, and it takes **1.5 seconds** to receive a confirmation message, that’s the response time.
+
+ 3. **Throughput:**
+	 - The number of requests processed **per second** (**RPS** or **transactions per second**).
+	 - **Example:** An e-commerce site handling **10,000 purchases per second** during a sale.
+
+---
+
+Q. How to increase your **`throughput`**?
+
+1. **Data Replication**
+2. **Data Partitioning**
+
+---
+
 Q. Explain **`Database Replication`**.
 
 Replication means keeping a copy of the same data on multiple machines that are connected via a network.
@@ -295,16 +346,32 @@ If losing data is not acceptable, LWW is a poor choice for conflict resolution. 
 
 Q. Explain **`Data Partitioning`**.
 
-The main reason for wanting to partition data is scalability.
+Partitioning is necessary when you have so much data that storing and **processing it** on a single machine is no longer feasible. 
+
+Normally, partitions are defined in such a way that each piece of data (each record, row, or document) belongs to exactly one partition.
+
+> **NOTE:** The main reason for wanting to partition data is scalability.
+
+---
+
+Q. Explain different **`Data Partitioning`** schemes.
+
+
 
 ---
 
 Q. Explain key challenges with **`Data Partitioning`**.
 
-1. Distribute data across multiple servers evenly.
-2. Minimise data movement when nodes are added or removed.
+1. Distribute data across multiple servers evenly (`routing`).
+2. Minimise data movement when nodes are added or removed (`rebalancing`).
 
 > **NOTE: Consistent hashing is a great technique to solve these problems.**
+
+---
+
+Q. Explain `hot spot`.
+
+A partition with disproportionately high load is called a `hot spot`.
 
 ---
 
@@ -313,62 +380,6 @@ Q. Explain **`Consistent Hashing`**.
 ---
 
 Q. Explain how **`Consistent Hashing`** works.
-
----
-
-Q. Explain **`Scalability`**.
-
-**Scalability** refers to a **system's ability to handle increasing workloads** efficiently by adding resources (e.g., servers, storage, network capacity) without compromising performance.
-
----
-
-Q. Explain common **load parameters** used to describe load on a system.
-
-1. **Requests per Second (RPS):** 
-	- Measures how many incoming requests a **web server** processes per second. 
-	- High RPS can **overload** a system, leading to increased response times or failures.
-
-2. **Ratio of Reads to Writes:** 
-	- Describes how frequently data from a **database** is **read vs. modified (written)**.
-	- A **read-heavy** workload (e.g., content streaming) benefits from caching (e.g., Redis).
-	- A **write-heavy** workload (e.g., logging systems) may require database partitioning or NoSQL databases optimised for writes.
-
-3. **Number of Simultaneously Active Users:** 
-	- Measures how many users are **actively interacting** with a system **at the same time**.
-	- More active users mean more concurrent sessions, consuming server resources.
-
-4. **Hit Rate on a Cache:** 
-	- Percentage of requests **served from the cache** rather than the database.
-	- A **high hit rate** (e.g., 90%+) reduces database load and improves response times.
-
----
-
-Q. Explain common performance parameters used to describe performance of a system.
-
- 1. **Latency:**
-	 - The time taken for a request to travel from the client to the server and back.
-	 - **Example:** In a chat app, if you send a message and the receiver gets it after **500ms**, that’s the latency.
-
- 2. **Response Time:**
-	 - The total time taken to process a request and return a response.
-	 - Includes **network latency + processing time** on the server.
-	 - **Example:** A user submits a form, and it takes **1.5 seconds** to receive a confirmation message, that’s the response time.
-
- 3. **Throughput:**
-	 - The number of requests processed **per second** (**RPS** or **transactions per second**).
-	 - **Example:** An e-commerce site handling **10,000 purchases per second** during a sale.
-
----
-
-Q. How to scale your compute?
-
----
-
-Q. Explain **`Database Scaling`**.
-
----
-
-Q. How to scale your network bandwidth?
 
 ---
 
@@ -426,6 +437,10 @@ If we choose availability over consistency (AP), the system keeps accepting read
 
 ---
 ## EXTRA
+
+Q. Explain the concept of two-phase commit in caching.
+
+---
 
 Q. What is Load Balancer?
 

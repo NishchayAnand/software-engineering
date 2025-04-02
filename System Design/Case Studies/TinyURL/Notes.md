@@ -14,7 +14,9 @@ Design a **URL shortening service** that converts a long URL into a shorter, mor
 ---
 ## Non-Functional Requirements
 
-1. **Availability:** The system should ensure that users can always access the shortened URLs.
+1. **Availability:** The system should ensure that users can always access the shortened URLs. 
+
+<span style="color: cyan">In a system like TinyURL, is consistency more important than availability?</span>
 
 2. **Low latency:** The system should fetch the long URL and redirect users instantly.
 
@@ -29,7 +31,7 @@ Design a **URL shortening service** that converts a long URL into a shorter, mor
 
 3. If the URL passes all checks, the `shortening service` calls the **`encoding service`** to encode the long URL into a unique ID (e.g., `abc123`) which can can be used to generate a unique short URL (e.g., `https://tinyURL/abc123`).
 
-4. Once the short URL is generated, the **`shortening service`** stores the `short_url → long_url` mapping in the `database` and returns the shortened URL to the `user`.
+4. Once the short URL is generated, the **`shortening service`** stores the (`short_url → long_url`) mapping in the `database` and returns the shortened URL to the `user`.
 
 ![shortening-service-workflow](url-shortening-sequence.png)
 
@@ -99,7 +101,7 @@ The system consists of three primary services:
 public String shortenUrl(String longUrl) {
 
 	// Check if URL already exists in DB
-	UrlMapping existing = urlRepository.findByLongUrl(longUrl); 
+	UrlMapping existing = urlMappingRepository.findByLongUrl(longUrl); 
 	if (existing != null) return existing.getShortUrl(); 
 	
 	// Call Encoding Service to generate uniqueID 
@@ -148,22 +150,53 @@ public String generateShortId() {
 #### Redirection Service API
 
 ```
+public class RedirectionController {
+
+	@GetMapping("/{shortId}")
+    public ResponseEntity<Void> redirect(String shortId) {
+        String longUrl = redirectionService.getLongUrl(shortId);
+        return ResponseEntity.status(HttpStatus.FOUND)
+                .location(URI.create(longUrl))
+                .build();
+    }
+    
+}
+
+public class RedirectionService {
+
+    public String getLongUrl(String shortId) {
+        return urlMappingRepository.findById(shortId)
+                .map(urlMapping -> urlMapping.getLongUrl())
+                .orElse(null);
+    }
+    
+}
 ```
+
+> **NOTE:** The redirection service can implement **caching (Redis)** to optimise performance and reduce database lookups.
 
 ---
 ## Storage Capacity Estimation
 
-The system requires a **data model** to efficiently store the **user details** and their **shortened URL (`short_URL → long_URL`) mappings**.
+The system needs to persist the **user details** and their **shortened URL mappings**.
 
-Since the **shortened URL (`short_URL → long_URL`) mappings** will grow at a much **faster rate** than the **user details**, analysing their **storage requirements** is crucial for designing an efficient data model and choosing the right database.
+Considering the **`url_mapping`** dataset will grow at a much faster rate than the **`user`** dataset, analysing its **storage requirement** is crucial for designing an efficient data model and choosing the right database.
 
-**Storage Requirements Breakdown:**
-- Daily Average URL Generation Requests = 10 Million
-- URLs Generated in 10 Years = 10 Million × 365 days × 10 years = 36.5 × 10<sup>9</sup> ≈ 40 Billion URLs
-- Total Storage per Mapping = 100 bytes (long URL) + 20 bytes (short ID) + 30 bytes (metadata) = 150 bytes
+**Storage Requirement:**
+- <span style="color : red"><strong>Assumption:</strong> Daily Average URL Generation Requests = 10 Million</span>
+- <span style="color : red"><strong>Assumption:</strong> URLs Generated in 10 Years = 10 Million × 365 days × 10 years = 36.5 × 10<sup>9</sup> ≈ 40 Billion URLs</span>
+- <span style="color : red"><strong>Assumption:</strong> Total Storage per Mapping = 100 bytes (long URL) + 20 bytes (short ID) + 30 bytes (metadata) = 150 bytes</span>
 - Required Storage in 10 years = 40 Billion URLs × 150 bytes = 6 × 10<sup>12</sup> = **6 TB**
 
-Since **high read-write throughput** is critical, we can use **Cassandra** to ensure **low-latency queries (sub-10ms latency)**.
+To support  **`low-latency (sub-10ms) queries`** and **`high availability`** requirement, we may need to add **read replicas** and perform **data partitioning** on the **`url_mapping`** dataset.
+
+**Data Replication Strategy:** 
+- Single Leader Replication
+
+**Data Partitioning Strategy:** 
+- Can partition based on `short_ID`
+
+> NOTE: Introducing caching layer could be efficient considering we can have `hot links`. 
 
 ---
 ## Schema Design - Chebotko Diagram
@@ -195,9 +228,8 @@ We will design the APIs using microservices architecture.
 
 
 ---
-## EXTRA
+## Final AI Prompt
 
 
 
-
-
+---
