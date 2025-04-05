@@ -354,12 +354,6 @@ Normally, partitions are defined in such a way that each piece of data (each rec
 
 ---
 
-Q. Explain different **`Data Partitioning`** schemes.
-
-
-
----
-
 Q. Explain key challenges with **`Data Partitioning`**.
 
 1. Distribute data across multiple servers evenly (`routing`).
@@ -369,13 +363,47 @@ Q. Explain key challenges with **`Data Partitioning`**.
 
 ---
 
-Q. Explain `hot spot`.
+Q. Explain different **`Data Partitioning`** strategies.
 
-A partition with disproportionately high load is called a `hot spot`.
+Our goal with partitioning is to spread the data and query load evenly across nodes. Different partitioning strategies include:
+
+**Partitioning by Key Range:**
+
+- **Assign a continuous range of keys** (from some minimum to some maximum) to each partition. This partitioning strategy is used by databases like `Bigtable`, `MongoDB`, etc.
+
+- If you know the boundaries between the ranges, you can easily determine which partition contains a given key. If you also know which partition is assigned to which node, you can make your request directly to the appropriate node. 
+
+- The ranges of keys are not necessarily evenly spaced, because your data may not be evenly distributed. Therefore, in order to distribute data evenly, the partition boundaries need to adapt to the data.
+
+- With each partition, we can keep keys in sorted order. This has the advantage that range scans are easy. 
+
+- **Disadvantage:** Certain access patterns can lead to hot spots (a partition with disproportionately high load). 
+
+> **NOTE:** The simplest approach for avoiding hot spots would be to **assign records to nodes randomly.** That would distribute the data quite evenly across the nodes, but it has a big disadvantage: when you’re trying to read a particular item, you have no way of knowing which node it is on, so you have to **query all nodes in parallel**.
+
+**Partitioning by Hash of Key:**
+
+- Because of this risk of skew and hot spots, many distributed data stores use a hash function to determine the partition for a given key.
+
+- A good hash function takes skewed data and makes it uniformly distributed. Once you have a suitable hash function for keys, you can assign each partition a range of hashes (rather than a range of keys), and every key whose hash falls within a partition's range will be stored in that partition. 
+
+- **Disadvantage:** By using the hash of the key for partitioning, we lose a nice property of key-range partitioning: **the ability to do efficient range queries**. Keys that were once adjacent are now scattered across all the partitions, so their sort order is lost. 
+
+> **NOTE:** In MongoDB, if you enable hash-based sharding mode, any range query has to be sent to all partitions.
+
+**EXTRA:** 
+
+<span style="color: cyan">Cassandra achieves a compromise between the two partitioning strategies. A table in Cassandra can be declared with a compound primary key consisting of several columns. Only the first part of that key is hashed to determine the partition, but the other columns are used as a concatenated index for sorting the data.</span>
+
+<span style="color: cyan">The concatenated index approach enables an elegant data model for one-to-many relationships. For example, on a social media site, one user may post many updates. If the primary key for updates is chosen to be (user_id, update_timestamp), then you can efficiently retrieve all updates made by a particular user within some time interval, sorted by timestamp. Different users may be stored on different partitions, but within each user, the updates are stored ordered by timestamp on a single partition.</span>
 
 ---
 
 Q. Explain **`Consistent Hashing`**.
+
+A way to evenly distribute load across an internet-wide system. It uses randomly chosen partition boundaries to avoid the need for central control or distributed consensus. However, this approach actually doesn't work very well for databases, so it is rarely used in practice (the documentation of some databases still refers to consistent hashing, but it is often inaccurate).
+
+> NOTE: Consistent here has nothing to with replica consistency or ACID consistency, but rather describes a particular approach to rebalancing. 
 
 ---
 

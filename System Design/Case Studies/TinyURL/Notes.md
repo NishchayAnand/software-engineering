@@ -42,11 +42,11 @@ Considering the **shortening service** is a **write-heavy service**, its load
 
 **1. Requests Per Second (RPS):**
 - <span style="color : red"><strong>Assumption:</strong> Daily Average URL Generation Requests = 10 Million</span>
-- Requests Per Second = 10 Million / (24 hours × 3600 seconds ) ~ **100 RPS**
+- <span style="color : green">Requests Per Second = 10 Million / (24 hours × 3600 seconds ) ~ <strong>100 RPS</strong></span>
 
 **2. Write Throughput Capacity:**
 - <span style="color : red"><strong>Assumption:</strong> Average Processing Time = 10 milliseconds / request</span>
-- Throughput Capacity = 1 / 0.01 = **100 RPS**
+- <span style="color : green">Throughput Capacity = 1 / 0.01 = <strong>100 RPS</strong></span>
 
 <span style="color : red"><strong>Assumption:</strong> The peak traffic can be <strong>5 times the average</strong>. Hence, the system must be designed to handle <strong>500 RPS</strong> during peak hours.</span>
 
@@ -74,11 +74,11 @@ Considering the **redirection service** is a **read-heavy service**, its load
 
 **1. Requests Per Second (RPS):**
 - <span style="color : red"><strong>Assumption:</strong> Daily Average Redirection Requests = 10 Million x 100 = 1 Billion</span>
-- Requests Per Second = 1 Billion / (24 hours × 3600 seconds ) ~ **10,000 RPS**
+- <span style="color : green">Requests Per Second = 1 Billion / (24 hours × 3600 seconds ) ~ <strong>10,000 RPS</strong></span>
 
 **2. Read Throughput Capacity:**
 - <span style="color : red"><strong>Assumption:</strong> Average Processing Time = 10 milliseconds / request</span>
-- Throughput Capacity = 1 / 0.01 = **100 RPS**
+- <span style="color : green">Throughput Capacity = 1 / 0.01 = <strong>100 RPS</strong></span>
 
 <span style="color : red"><strong>Assumption:</strong> The peak traffic can be <strong>5 times the average</strong>. Hence, the system must be designed to handle <strong>50,000 RPS</strong> during peak hours.</span>
 
@@ -186,7 +186,7 @@ Considering the **`url_mapping`** dataset will grow at a much faster rate tha
 - <span style="color : red"><strong>Assumption:</strong> Daily Average URL Generation Requests = 10 Million</span>
 - <span style="color : red"><strong>Assumption:</strong> URLs Generated in 10 Years = 10 Million × 365 days × 10 years = 36.5 × 10<sup>9</sup> ≈ 40 Billion URLs</span>
 - <span style="color : red"><strong>Assumption:</strong> Total Storage per Mapping = 100 bytes (long URL) + 20 bytes (short ID) + 30 bytes (metadata) = 150 bytes</span>
-- Required Storage in 10 years = 40 Billion URLs × 150 bytes = 6 × 10<sup>12</sup> = **6 TB**
+- <span style="color : green">Required Storage in 10 years = 40 Billion URLs × 150 bytes = 6 × 10<sup>12</sup> = <strong>6 TB</strong></span>
 
 To support  **`low-latency (sub-10ms) queries`** and **`high availability`** requirement, we may need to add **read replicas** and perform **data partitioning** on the **`url_mapping`** dataset.
 
