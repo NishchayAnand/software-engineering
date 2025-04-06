@@ -194,7 +194,10 @@ To support  **`low-latency (sub-10ms) queries`** and **`high availability`** req
 - Single Leader Replication
 
 **Data Partitioning Strategy:** 
+- <span style="color : yellow">if hot spot is not an issue, we can use key-range partitioning strategy.</span>
+- <span style="color : yellow">if we do not need to perform range queries, we can use hash partitioning.</span>
 - Can partition based on `short_ID`
+- <span style="color : yellow">What indexes are we gonna use???</span>
 
 > NOTE: Introducing caching layer could be efficient considering we can have `hot links`. 
 

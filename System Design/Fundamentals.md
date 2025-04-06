@@ -363,7 +363,7 @@ Q. Explain key challenges with **`Data Partitioning`**.
 
 ---
 
-Q. Explain different **`Data Partitioning`** strategies.
+Q. Explain different **`Key-Value Data Partitioning`** strategies.
 
 Our goal with partitioning is to spread the data and query load evenly across nodes. Different partitioning strategies include:
 
@@ -393,9 +393,81 @@ Our goal with partitioning is to spread the data and query load evenly across no
 
 **EXTRA:** 
 
-<span style="color: cyan">Cassandra achieves a compromise between the two partitioning strategies. A table in Cassandra can be declared with a compound primary key consisting of several columns. Only the first part of that key is hashed to determine the partition, but the other columns are used as a concatenated index for sorting the data.</span>
+<span style="color: green">Cassandra achieves a compromise between the two partitioning strategies. A table in Cassandra can be declared with a compound primary key consisting of several columns. Only the first part of that key is hashed to determine the partition, but the other columns are used as a concatenated index for sorting the data.</span>
 
-<span style="color: cyan">The concatenated index approach enables an elegant data model for one-to-many relationships. For example, on a social media site, one user may post many updates. If the primary key for updates is chosen to be (user_id, update_timestamp), then you can efficiently retrieve all updates made by a particular user within some time interval, sorted by timestamp. Different users may be stored on different partitions, but within each user, the updates are stored ordered by timestamp on a single partition.</span>
+<span style="color: green">The concatenated index approach enables an elegant data model for one-to-many relationships. For example, on a social media site, one user may post many updates. If the primary key for updates is chosen to be (user_id, update_timestamp), then you can efficiently retrieve all updates made by a particular user within some time interval, sorted by timestamp. Different users may be stored on different partitions, but within each user, the updates are stored ordered by timestamp on a single partition.</span>
+
+---
+
+Q. How to deal with **`hot spots`**.
+
+In the extreme case where all reads and writes are for the same key, you still end up with all requests being routed to the same partition. This kind of workload is perhaps unusual, but not unheard of: for example, on a social media site, a celebrity user with millions of followers may cause a storm of activity when they do something. This event can result in a large volume of writes to the same key (where the key is perhaps the user ID of the celebrity, or the ID of the action that people are commenting on).
+
+Today, most data systems are not able to automatically compensate for such a highly skewed workload, so it’s the responsibility of the application to reduce the skew. For example, if one key is known to be very hot, a simple technique is to add a random number to the beginning or end of the key. Just a two-digit decimal random number would split the writes to the key evenly across 100 different keys, allowing those keys to be distributed to different partitions.
+
+However, having split the writes across different keys, any reads now have to do additional work, as they have to read the data from all 100 keys and combine it. This technique also requires additional bookkeeping: it only makes sense to append the random number for the small number of hot keys; for the vast majority of keys with low write throughput this would be unnecessary overhead. Thus, you also need some way of keeping track of which keys are being split.
+
+---
+
+Q. How to choose the right number of partitions?
+
+Choosing the right number of partitions is difficult if the total size of the dataset is highly variable (for example, if it starts small but may grow much larger over time).
+
+Since each partition contains a fixed fraction of the total data, the size of each partition grows proportionally to the total amount of data in the cluster. If partitions are very large, rebalancing and recovery from node failures become expensive. But if partitions are too small, they incur too much overhead.
+
+---
+
+Q. What is **`Rebalancing`**.
+
+Over time, things change in a database:
+
+- The query throughput increases, so you want to add more CPUs to handle the load.
+- <span style="color: yellow">The dataset size increases, so you want to add more disks and RAM to store it.</span>
+- A machine fails, and other machines need to take over the failed machine’s responsibilities.
+
+All of these changes call for data and requests to be moved from one node to another. The process of moving load (data storage, read and write requests) from one node in the cluster to another is called **rebalancing**.
+
+> **NOTE:** While rebalancing is happening, the database should continue accepting reads and writes.
+
+---
+
+Q. Explain different **`Rebalancing`** strategies. 
+
+**Hash mod N:**
+
+For example, hash(key) mod 10 would return a number between 0 and 9 (if we write the hash as a decimal number, the hash mod 10 would be the last digit). If we have 10 nodes, numbered 0 to 9, that seems like an easy way of assigning each key to a node.
+
+The problem with the **mod N approach** is that if the number of nodes N changes, most of the keys will need to be moved from one node to another.
+
+**Fixed Number of Partitions:**
+
+Create many more partitions than there are nodes, and assign several partitions to each node.
+
+Now, if a node is added to the cluster, the new node can steal a few partitions from every existing node until partitions are fairly distributed once again. If a node is removed from the cluster, the same happens in reverse.
+
+Only entire partitions are moved between nodes. The number of partitions does not change, nor does the assignment of keys to partitions. The only thing that changes is the assignment of partitions to nodes.
+
+This change of assignment is not immediate. It takes some time to transfer a large amount of data over the network, so the old assignment of partitions is used for any reads and writes that happen while the transfer is in progress.
+
+<span style="color: yellow">For databases that use key range partitioning, a fixed number of partitions with fixed boundaries would be very inconvenient: if you got the boundaries wrong, you could end up with all of the data in one partition and all of the other partitions.</span> ??
+
+**Dynamic Partitioning:**
+
+When a partition grows to exceed a configured size (on HBase, the default is 10 GB), it is split into two partitions so that approximately half of the data ends up on each side of the split. Conversely, if lots of data is deleted and a partition shrinks below some threshold, it can be merged with an adjacent partition.
+
+An advantage of dynamic partitioning is that the number of partitions adapts to the total data volume. If there is only a small amount of data, a small number of partitions is sufficient, so overheads are small; if there is a huge amount of data, the size of each individual partition is limited to a configurable maximum.
+
+However, a caveat is that an empty database starts off with a single partition. While the dataset is small—until it hits the point at which the first partition is split—all writes have to be processed by a single node while the other nodes sit idle.
+
+With dynamic partitioning, the number of partitions is proportional to the size of the dataset, since the splitting and merging processes keep the size of each partition between some fixed minimum and maximum. However, the number of partitions is independent of the number of nodes.
+
+**Partitioning proportionally to nodes:**
+
+Have a fixed number of partitions per node. In this case, the size of each partition grows proportionally to the dataset size while the number of nodes remains unchanged, but when you increase the number of nodes, the partitions become smaller again. 
+
+Since a larger data volume generally requires a larger number of nodes to store, this approach also keeps the size of each partition fairly stable.
+
+> **NOTE:** By assigning more partitions to nodes that are more powerful, you can force those nodes to take a greater share of the load. 
 
 ---
 
@@ -408,6 +480,22 @@ A way to evenly distribute load across an internet-wide system. It uses randomly
 ---
 
 Q. Explain how **`Consistent Hashing`** works.
+
+---
+
+Q. Does the rebalancing happen automatically or manually?
+
+Fully automated rebalancing can be convenient, because there is less operational work to do for normal maintenance. However, it can be unpredictable. Rebalancing is an expensive operation, because it requires rerouting requests and moving a large amount of data from one node to another. 
+
+Such automation can be dangerous in combination with automatic failure detection. For example, say one node is overloaded and is temporarily slow to respond to requests. The other nodes conclude that the overloaded node is dead, and automatically rebalance the cluster to move load away from it. This puts additional load on the overloaded node, other nodes, and the network—making the situation worse and potentially causing a cascading failure.
+
+For that reason, it can be a good thing to have a human in the loop for rebalancing. It’s slower than a fully automatic process, but it can help prevent operational surprises.
+
+---
+
+Q. Explain **`Service Discovery`**.
+
+Answer to the question: **`When a client wants to make a request, how does it know which node to connect to?`**
 
 ---
 
