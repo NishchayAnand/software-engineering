@@ -191,7 +191,8 @@ Considering the **`url_mapping`** dataset will grow at a much faster rate tha
 To support  **`low-latency (sub-10ms) queries`** and **`high availability`** requirement, we may need to add **read replicas** and perform **data partitioning** on the **`url_mapping`** dataset.
 
 **Data Replication Strategy:** 
-- Single Leader Replication
+- 
+- Single Leader v/s Leaderless Replication
 
 **Data Partitioning Strategy:** 
 - <span style="color : yellow">if hot spot is not an issue, we can use key-range partitioning strategy.</span>

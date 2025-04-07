@@ -495,7 +495,7 @@ For that reason, it can be a good thing to have a human in the loop for rebalanc
 
 Q. Explain **`Service Discovery`**.
 
-Answer to the question: **`When a client wants to make a request, how does it know which node to connect to?`**
+Answer to the question: **`When a client wants to make a request, how does it know which node to connect to?`
 
 ---
 
