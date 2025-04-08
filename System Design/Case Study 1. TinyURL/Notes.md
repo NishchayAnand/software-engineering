@@ -1,6 +1,6 @@
 # TinyURL System Design
 
-Design a **URL shortening service** that converts a long URL into a shorter, more manageable link. 
+Design a **URL shortening service** that converts a long URL into a shorter, more manageable link.
 
 ---
 ## Functional Requirements
@@ -15,8 +15,6 @@ Design a **URL shortening service** that converts a long URL into a shorter, mor
 ## Non-Functional Requirements
 
 1. **Availability:** The system should ensure that users can always access the shortened URLs. 
-
-<span style="color: cyan">In a system like TinyURL, is consistency more important than availability?</span>
 
 2. **Low latency:** The system should fetch the long URL and redirect users instantly.
 
@@ -150,26 +148,10 @@ public String generateShortId() {
 #### Redirection Service API
 
 ```
-public class RedirectionController {
-
-	@GetMapping("/{shortId}")
-    public ResponseEntity<Void> redirect(String shortId) {
-        String longUrl = redirectionService.getLongUrl(shortId);
-        return ResponseEntity.status(HttpStatus.FOUND)
-                .location(URI.create(longUrl))
-                .build();
-    }
-    
-}
-
-public class RedirectionService {
-
-    public String getLongUrl(String shortId) {
-        return urlMappingRepository.findById(shortId)
-                .map(urlMapping -> urlMapping.getLongUrl())
-                .orElse(null);
-    }
-    
+public String getLongUrl(String shortId) {
+    return urlMappingRepository.findById(shortId)
+            .map(urlMapping -> urlMapping.getLongUrl())
+            .orElse(null);
 }
 ```
 
@@ -178,7 +160,7 @@ public class RedirectionService {
 ---
 ## Storage Capacity Estimation
 
-The system needs to persist the **user details** and their **shortened URL mappings**.
+The system needs to persist the **user details** and their **shortened URL mappings**. 
 
 Considering the **`url_mapping`** dataset will grow at a much faster rate than the **`user`** dataset, analysing its **storage requirement** is crucial for designing an efficient data model and choosing the right database.
 
@@ -188,17 +170,15 @@ Considering the **`url_mapping`** dataset will grow at a much faster rate tha
 - <span style="color : red"><strong>Assumption:</strong> Total Storage per Mapping = 100 bytes (long URL) + 20 bytes (short ID) + 30 bytes (metadata) = 150 bytes</span>
 - <span style="color : green">Required Storage in 10 years = 40 Billion URLs × 150 bytes = 6 × 10<sup>12</sup> = <strong>6 TB</strong></span>
 
-To support  **`low-latency (sub-10ms) queries`** and **`high availability`** requirement, we may need to add **read replicas** and perform **data partitioning** on the **`url_mapping`** dataset.
+To handle **`massive read traffic`** and **`high availability`** requirements, we may need to add **read replicas** and perform **data partitioning** on the **`url_mapping`** dataset.
 
-**Data Replication Strategy:** 
-- 
-- Single Leader v/s Leaderless Replication
+**Data Replication Strategy:**
+- **`Single-Leader Replication`** offers **high read throughput** by allowing reads from both the **leader** and **follower replicas**. All **writes** are routed through the **leader**, ensuring data consistency. Even if the leader fails, the system remains **highly available for reads**.
 
 **Data Partitioning Strategy:** 
-- <span style="color : yellow">if hot spot is not an issue, we can use key-range partitioning strategy.</span>
-- <span style="color : yellow">if we do not need to perform range queries, we can use hash partitioning.</span>
-- Can partition based on `short_ID`
-- <span style="color : yellow">What indexes are we gonna use???</span>
+- **`Hash-Based Partitioning`** is ideal because the primary access pattern involves exact lookups using the `short_id`, and there’s no need for range queries. This strategy distributes data uniformly across partitions, preventing hot spots and ensuring balanced load.
+
+**`MongoDB`** is an ideal choice, considering, it offers leader-follower replication, ensuring high availability and consistency during read-heavy operations. It supports horizontal scaling via sharding, which is crucial for managing billions of short URL mappings over time. MongoDB's flexible schema allows for easy storage of additional metadata.
 
 > NOTE: Introducing caching layer could be efficient considering we can have `hot links`. 
 
