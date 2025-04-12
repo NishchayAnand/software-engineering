@@ -149,9 +149,7 @@ public String generateShortId() {
 
 ```
 public String getLongUrl(String shortId) {
-    return urlMappingRepository.findById(shortId)
-            .map(urlMapping -> urlMapping.getLongUrl())
-            .orElse(null);
+    return urlMappingRepository.findById(shortId).getLongUrl()
 }
 ```
 
@@ -173,17 +171,17 @@ Considering the **`url_mapping`** dataset will grow at a much faster rate tha
 To handle **`massive read traffic`** and **`high availability`** requirements, we may need to add **read replicas** and perform **data partitioning** on the **`url_mapping`** dataset.
 
 **Data Replication Strategy:**
-- **`Single-Leader Replication`** offers **high read throughput** by allowing reads from both the **leader** and **follower replicas**. All **writes** are routed through the **leader**, ensuring data consistency. Even if the leader fails, the system remains **highly available for reads**.
+- **`Single-Leader Replication`** is ideal because it offers **high read throughput** by allowing reads from both the **leader** and **follower replicas**. All **writes** are routed through the **leader**, ensuring data consistency. Even if the leader fails, the system remains **highly available for reads**.
 
 **Data Partitioning Strategy:** 
 - **`Hash-Based Partitioning`** is ideal because the primary access pattern involves exact lookups using the `short_id`, and there’s no need for range queries. This strategy distributes data uniformly across partitions, preventing hot spots and ensuring balanced load.
 
-**`MongoDB`** is an ideal choice, considering, it offers leader-follower replication, ensuring high availability and consistency during read-heavy operations. It supports horizontal scaling via sharding, which is crucial for managing billions of short URL mappings over time. MongoDB's flexible schema allows for easy storage of additional metadata.
+**`MongoDB`** seems to be an ideal choice. Its **leader-follower replication model** aligns well with your **Single-Leader Replication** strategy, ensuring **strong consistency for writes** and **high read throughput** from followers. It also supports **hash-based partitioning**, making it capable of horizontally scaling to billions of records.
 
-> NOTE: Introducing caching layer could be efficient considering we can have `hot links`. 
+> **NOTE:** **Cassandra** follows an **eventual consistency** model by default, which might not be ideal for a shortening service that **requires strong consistency for mapping uniqueness**.
 
 ---
-## Schema Design - Chebotko Diagram
+## Schema Design
 
 **`users` Table:**
 
@@ -210,6 +208,17 @@ To handle **`massive read traffic`** and **`high availability`** requirements, 
 
 We will design the APIs using microservices architecture.
 
+1. deploy **5 application servers** behind a **load balancer** to efficiently handle all incoming URL shortening requests.
+
+2. Since every URL shortening request involves generating a unique short ID, the **encoding service** must be handle the same load as the **shortening service**.
+
+3. we can deploy **500 application servers** behind a **load balancer** to efficiently handle all URL redirection requests.
+
+4. we can use a coordination service (e.g., ZooKeeper) to pre-allocate **ID ranges** to each machine (e.g., Machine 1 → 1 to 1M, Machine 2 → 1M+1 to 2M, etc.). This ensures each machine generates IDs from its assigned range **without conflicts**.
+
+5. **`MongoDB`** seems to be an ideal choice.
+
+![[diagram-export-11-4-2025-11_44_56-PM.png]]
 
 ---
 ## Final AI Prompt
