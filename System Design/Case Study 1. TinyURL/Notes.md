@@ -87,13 +87,9 @@ Considering the **redirection service** is a **read-heavy service**, its load
 ---
 ## API Design
 
-The system consists of three primary services:
+The system consists of three primary services (APIs):
 
-- **Shortening Service**: Handles user requests to create short URLs.
-- **Encoding Service**: Generates unique IDs for given long URLs.
-- **Redirection Service**: Resolves short URLs to their original long URLs.
-
-#### Shortening Service API
+**Shortening Service:** Handles user requests to create short URLs.
 
 ```
 public String shortenUrl(String longUrl) {
@@ -116,7 +112,7 @@ public String shortenUrl(String longUrl) {
 }
 ```
 
-#### Encoding Service API (Internal)
+**Encoding Service (Internal):**
 
 The service must implement a functionality that could encode every incoming long URL to a **unique short ID**.
 
@@ -145,7 +141,7 @@ public String generateShortId() {
 
 <span style="color : green">To eliminate this, we can use a coordination service (e.g., ZooKeeper) to pre-allocate <strong>ID ranges</strong> to each machine (e.g., Machine 1 → 1 to 1M, Machine 2 → 1M+1 to 2M, etc.). This ensures each machine generates IDs from its assigned range <strong>without conflicts</strong>.</span>
 
-#### Redirection Service API
+**Redirection Service:** Resolves short URLs to their original long URLs.
 
 ```
 public String getLongUrl(String shortId) {
@@ -171,7 +167,7 @@ Considering the **`url_mapping`** dataset will grow at a much faster rate tha
 To handle **`massive read traffic`** and **`high availability`** requirements, we may need to add **read replicas** and perform **data partitioning** on the **`url_mapping`** dataset.
 
 **Data Replication Strategy:**
-- **`Single-Leader Replication`** is ideal because it offers **high read throughput** by allowing reads from both the **leader** and **follower replicas**. All **writes** are routed through the **leader**, ensuring data consistency. Even if the leader fails, the system remains **highly available for reads**.
+- **`Single-Leader Replication`** is ideal because it offers **high read throughput** by allowing reads from both the **leader** and **follower replicas**. All **writes** are routed through the **leader**, ensuring **data consistency**. Even if the leader fails, the system remains **highly available for reads**.
 
 **Data Partitioning Strategy:** 
 - **`Hash-Based Partitioning`** is ideal because the primary access pattern involves exact lookups using the `short_id`, and there’s no need for range queries. This strategy distributes data uniformly across partitions, preventing hot spots and ensuring balanced load.
@@ -183,7 +179,9 @@ To handle **`massive read traffic`** and **`high availability`** requirements, 
 ---
 ## Schema Design
 
-**`users` Table:**
+The system needs to persist two primary datasets:
+
+**`users`:** stores user-related information.
 
 | **Field Name**   | **Data Type**  | **Description**                    |
 | ---------------- | -------------- | ---------------------------------- |
@@ -193,35 +191,34 @@ To handle **`massive read traffic`** and **`high availability`** requirements, 
 | `created_at`     | `Timestamp`    | Timestamp when the user registered |
 | `shortened_urls` | `List<String>` | List of short IDs created by user  |
 
-**`urls` Table:**
+**`url_mapping`:** stores mappings between `short_id` and `long_url`.
 
 | Field Name     | Data Type   | Description                      |
 | -------------- | ----------- | -------------------------------- |
 | `short_id`     | `String`    | Unique short code                |
 | `long_url`     | `String`    | Original long URL                |
 | `created_at`   | `Timestamp` | Timestamp of when it was created |
-| `expiry_date`  | `Timestamp` | Expiry date                      |
 | `access_count` | `Integer`   | Number of times accessed         |
 
 ---
-## Architectural Diagram
+## Final System Architecture
 
-We will design the APIs using microservices architecture.
+Design the system following a **microservices architecture** to account for **scalability**, **fault tolerance**, and **high availability**. It should consist of the following major components:
 
-1. deploy **5 application servers** behind a **load balancer** to efficiently handle all incoming URL shortening requests.
+1. **Load Balancer:** Deploy a minimum of **2 load balancers** to distribute incoming traffic across **`shortening service`** and **`redirection service`** to ensure even load distribution and minimise response time.
 
-2. Since every URL shortening request involves generating a unique short ID, the **encoding service** must be handle the same load as the **shortening service**.
+ 2. **Shortening Service:** Deploy **5+ instances** to efficiently handle the peak load of **~500 RPS**.
 
-3. we can deploy **500 application servers** behind a **load balancer** to efficiently handle all URL redirection requests.
+3. **Encoding Service:** Deploy **10+ instances** with dedicated ID ranges (`40 Billion / 10 = 4 Billion IDs per instance`) to avoid collisions and central bottlenecks. <span style="color : LightSkyBlue">No read replicas needed considering each instance generates its own IDs from allocated space. If an instance fails, its range can be re-assigned to another new instance.</span>
 
-4. we can use a coordination service (e.g., ZooKeeper) to pre-allocate **ID ranges** to each machine (e.g., Machine 1 → 1 to 1M, Machine 2 → 1M+1 to 2M, etc.). This ensures each machine generates IDs from its assigned range **without conflicts**.
+4. **Redirection Service:** Deploy **500+ instances** to efficiently handle the peak load of **~50,000 RPS**. Can add **Redis** or **CDN caching** in front of database for hot URLs.
 
-5. **`MongoDB`** seems to be an ideal choice.
+5. **Database Cluster:** Deploy **3 replicas per shard (1 primary for writes, 2 secondaries for reads and failover)**. For a setup with **10 shards**, this results in **30+ MongoDB nodes** (3 replicas × 10 shards), ensuring **high availability**, **fault tolerance**, and **horizontal scalability** for handling massive traffic and data volume.
 
-![[diagram-export-11-4-2025-11_44_56-PM.png]]
+> **NOTE:** Deploy centralised **monitoring tools** (e.g., Prometheus, Grafana) and **logging pipelines** (e.g., ELK stack) for observability, latency tracking, error reporting, and alerting. Use **circuit breakers**, **rate limiting**, and **retry logic** in services to maintain reliability under failure scenarios.
 
 ---
-## Final AI Prompt
+## AI Prompt
 
 
 
