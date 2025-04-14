@@ -1,4 +1,3 @@
-# Understanding useEffect Hook
 
 The `useEffect` hook in React is a powerful tool that allows you to perform side effects in function components. Side effects can include **data fetching** or **manually changing the DOM**.
 

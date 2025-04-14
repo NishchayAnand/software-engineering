@@ -3,7 +3,7 @@
 Design a **URL shortening service** that converts a long URL into a shorter, more manageable link.
 
 ---
-## Functional Requirements
+### Functional Requirements
 
 1. **URL Shortening:** Take a long URL and create an alias with shorter length.
 
@@ -12,7 +12,7 @@ Design a **URL shortening service** that converts a long URL into a shorter, mor
 > **NOTE:** A URL shortening service can also **handle custom alias creation** or **provide insights on link clicks, location, and user engagement.**
 
 ---
-## Non-Functional Requirements
+### Non-Functional Requirements
 
 1. **Availability:** The system should ensure that users can always access the shortened URLs. 
 
@@ -21,7 +21,7 @@ Design a **URL shortening service** that converts a long URL into a shorter, mor
 3. **Scalability:** The system should be capable of handling a traffic volume of **10 Million URL generation requests** and **1 Billion redirection requests per day** (assuming **read / write ratio** is **100:1**).
 
 ---
-## Workflow for Shortening a Long URL
+### Workflow for Shortening a Long URL
 
 1. The `user` inputs a URL on the web interface. A **POST request** (e.g., `POST https://api.tinyurl.com/v1/shorten`), containing the input URL (e.g., `long_url: https://www.example.com/some/very/long/url`), is sent to the **`shortening service`**.
 
@@ -34,7 +34,7 @@ Design a **URL shortening service** that converts a long URL into a shorter, mor
 ![shortening-service-workflow](url-shortening-sequence.png)
 
 ---
-## Load Estimation for Shortening Service
+### Load Estimation for Shortening Service
 
 Considering the **shortening service** is a **write-heavy service**, its load estimation must involve analysing the following **key load parameters**:
 
@@ -53,7 +53,7 @@ Considering the **shortening service** is a **write-heavy service**, its load
 > NOTE: Since every URL shortening request involves generating a unique short ID, the **encoding service** must be handle the same load as the **shortening service**.
 
 ---
-## Workflow for Redirecting a URL
+### Workflow for Redirecting a URL
 
 1. The **`user`** enters a short URL (e.g., `https://tinyURL/abc123`) in the browser. A **GET request** (e.g., `GET /abc123`) is sent to the **`redirection service`**.
 
@@ -66,7 +66,7 @@ Considering the **shortening service** is a **write-heavy service**, its load
 ![redirection-service-workflow](redirection-service-workflow.png)
 
 ---
-## Load Estimation for Redirection Service
+### Load Estimation for Redirection Service
 
 Considering the **redirection service** is a **read-heavy service**, its load estimation must involve analysing the following **key load parameters**:
 
@@ -85,7 +85,7 @@ Considering the **redirection service** is a **read-heavy service**, its load
 > NOTE: Since the system is a read-heavy system, i.e., there will be more reads than writes, we can store the (`short_url → long_url`) mapping in a **cache** (e.g., `Redis`) to improve performance.
 
 ---
-## API Design
+### API Design
 
 The system consists of three primary services (APIs):
 
@@ -152,7 +152,7 @@ public String getLongUrl(String shortId) {
 > **NOTE:** The redirection service can implement **caching (Redis)** to optimise performance and reduce database lookups.
 
 ---
-## Storage Capacity Estimation
+### Storage Capacity Estimation
 
 The system needs to persist the **user details** and their **shortened URL mappings**. 
 
@@ -172,12 +172,12 @@ To handle **`massive read traffic`** and **`high availability`** requirements, 
 **Data Partitioning Strategy:** 
 - **`Hash-Based Partitioning`** is ideal because the primary access pattern involves exact lookups using the `short_id`, and there’s no need for range queries. This strategy distributes data uniformly across partitions, preventing hot spots and ensuring balanced load.
 
-**`MongoDB`** seems to be an ideal choice. Its **leader-follower replication model** aligns well with your **Single-Leader Replication** strategy, ensuring **strong consistency for writes** and **high read throughput** from followers. It also supports **hash-based partitioning**, making it capable of horizontally scaling to billions of records.
+<span style="color:Green"><strong>MongoDB</strong> seems to be an ideal choice. Its <strong>leader-follower replication model</strong> aligns well with your <strong>Single-Leader Replication</strong> strategy, ensuring <strong>strong consistency for writes</strong> and <strong>high read throughput</strong> from followers. It also supports <strong>hash-based partitioning</strong>, making it capable of horizontally scaling to billions of records.</span>
 
 > **NOTE:** **Cassandra** follows an **eventual consistency** model by default, which might not be ideal for a shortening service that **requires strong consistency for mapping uniqueness**.
 
 ---
-## Schema Design
+### Schema Design
 
 The system needs to persist two primary datasets:
 
@@ -201,7 +201,7 @@ The system needs to persist two primary datasets:
 | `access_count` | `Integer`   | Number of times accessed         |
 
 ---
-## Final System Architecture
+### System Architecture
 
 Design the system following a **microservices architecture** to account for **scalability**, **fault tolerance**, and **high availability**. It should consist of the following major components:
 
@@ -215,10 +215,15 @@ Design the system following a **microservices architecture** to account for *
 
 5. **Database Cluster:** Deploy **3 replicas per shard (1 primary for writes, 2 secondaries for reads and failover)**. For a setup with **10 shards**, this results in **30+ MongoDB nodes** (3 replicas × 10 shards), ensuring **high availability**, **fault tolerance**, and **horizontal scalability** for handling massive traffic and data volume.
 
+![system-architecture](system-architecture.svg)
+
 > **NOTE:** Deploy centralised **monitoring tools** (e.g., Prometheus, Grafana) and **logging pipelines** (e.g., ELK stack) for observability, latency tracking, error reporting, and alerting. Use **circuit breakers**, **rate limiting**, and **retry logic** in services to maintain reliability under failure scenarios.
 
 ---
-## AI Prompt
+### Technology Stack
+
+---
+### AI Prompt
 
 
 
