@@ -220,11 +220,3 @@ Design the system following a **microservices architecture** to account for *
 > **NOTE:** Deploy centralised **monitoring tools** (e.g., Prometheus, Grafana) and **logging pipelines** (e.g., ELK stack) for observability, latency tracking, error reporting, and alerting. Use **circuit breakers**, **rate limiting**, and **retry logic** in services to maintain reliability under failure scenarios.
 
 ---
-### Technology Stack
-
----
-### AI Prompt
-
-
-
----
