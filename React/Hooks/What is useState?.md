@@ -31,23 +31,57 @@ export default App;
 
 **Fix:** Avoid calling `setCount` directly inside the body of the component. Instead, trigger the state update inside an event handler or a side effect (e.g., `useEffect`).
 
+```
+import { useState } from 'react';
+
+function App() {
+	const [count, setCount] = useState(0);
+
+	const increment = () => {
+		setCount(count + 1);
+	};
+	
+	return (
+		<div>
+			<h1>{count}</h1>
+		    <button onClick={increment}>Increment</button>
+	    </div>
+    );
+}
+
+export default App;
+```
+
 ---
 
-When you call a `setState` function, React doesn't immediately update the state and trigger a re-render of the component.
+React state updates are **asynchronous**. This means that when you call a `setState` function, React doesn't immediately update the state and trigger a re-render of the component.
 
+```
+import { useState } from 'react';
 
----
+function App() {
+  const [count, setCount] = useState(0);
 
-React state updates are **asynchronous**. This means that w
+  const increment = () => {
+    console.log(count); // This will log the old value of count
+    setCount(count + 1);  // State update
+    console.log(count); // This will still log the old value of count
+  };
 
-block the current process 
+  return (
+	<div>
+		<h1>{count}</h1>
+	    <button onClick={increment}>Increment</button>
+	</div>
+  );
+}
 
+export default App;
+```
 
-> NOTE: If every `setState` call triggered an immediate re-render, your app would re-render too many times, which can degrade performance, especially in large applications.
+<strong><span style="color:red; background: #FFF1E8">Instead, React schedules that update to be handled in its next render cycle, using its Virtual DOM system.</span></strong> This scheduling allows React to **group together multiple updates that happen in quick succession, i.e., within a single event loop cycle**, reducing the number of renders and improving the performance of the app.
 
-Instead, React schedules the update to be applied later. Multiple state updates that happen in quick succession (e.g., within the same event handler) are **batched** together. 
-
-> NOTE: The **commit phase** is when React actually commits all the changes to the DOM.
+> **NOTE:** If every `setState` call triggered an immediate re-render, your app would re-render too many times, which can degrade performance, especially in large applications. <strong><span style="color:red; background: #FFF1E8">(explain)</span></strong>
 
 ---
 
@@ -73,10 +107,72 @@ function App() {
 export default App;
 ```
 
+**Output:** `1`
+
+**What's happening:** Since updates are not applied immediately, both `setCount(count + 1)` calls use the same stale value of `count`, which is 0.
+
+**Fix:** To handle asynchronous state updates properly, especially when you're updating based on the previous state, you can use the **functional update form** of `setState`.
+
+```
+function App() {
+	const [count, setCount] = useState(0);
+
+	const increment = () => {
+		setCount(prev => prev + 1);
+		setCount(prev => prev + 1);
+	};
+
+	return (
+		<div>
+			<h1>{count}</h1>
+			<button onClick={increment}>Increment</button>
+		</div>
+	);
+}
+
+export default App;
+```
+
+When you use the **functional update form** of `setState`, React does **not** capture the stale value. Instead, it takes the **most recent value of state (`prev`)**.
+
+> **NOTE:** Always use the functional form of `setState` when the next state depends on the previous one.
 
 --- 
-### Internal Working of useState Hook
 
+**Q. Design a custom `useState` Hook.** <strong><span style="color:red; background: #FFF1E8">(revisit)</span></strong>
 
+Implement a simplified `useState` hook that:
+- Stores a value (state)
+- Returns the current value and an updater function
+- Re-renders the component (simulated via function calls)
 
+```
+let state = [];
+let stateIndex = 0;
+
+function useState(initialValue) {
+  const currentIndex = stateIndex;
+
+  // Initialize only once
+  if (state[currentIndex] === undefined) {
+    state[currentIndex] = initialValue;
+  }
+
+  const setState = (newValue) => {
+    state[currentIndex] = newValue;
+    rerender(); // Simulate re-render
+  };
+
+  stateIndex++; // Move to next hook slot
+
+  return [state[currentIndex], setState];
+}
+```
+
+React does a LOT more:
+- Tracks dependencies and diffs
+- Handles batching, context, and effects
+- Uses Fiber architecture for async rendering
+
+---
 
