@@ -1,16 +1,15 @@
 # Understanding Evolution of Frontend Development
 
-## Early days of web development, i.e., early 2000s
+### Early days of web development, i.e., early 2000s
 
-Websites were designed as a collection of individual web pages built using static `HTML` and `CSS`.
+Websites were designed as a collection of individual web pages built using static HTML and CSS. `JavaScript` was primarily used for basic tasks like form validation and simple `DOM` manipulations. It lacked the capabilities to perform asynchronous requests to the server.
 
-`JavaScript` was primarily used for basic tasks like form validation and simple `DOM` manipulations. It lacked the capabilities to perform asynchronous requests to the server.
+Due to the blocking behaviour (web pages becoming unresponsive while awaiting server responses) associated with synchronous server requests and the absence of a standardised data interchange format for cross-system communication, **Server-Side Rendering (SSR)** became the predominant method for generating web content. Every user interaction, such as submitting a form or clicking a link, resulted in a new server request and a full-page reload.
 
-Due to the blocking behavior (web pages becoming unresponsive while awaiting server responses) associated with synchronous server requests and the absence of a standardized data interchange format for cross-system communication, **Server-Side Rendering (SSR)** became the predominant method for generating web content. Every user interaction, such as submitting a form or clicking a link, resulted in a new server request and a full-page reload.
+---
+### Rise of Asynchronous JavaScript and XML (AJAX), i.e., mid 2000s
 
-## Rise of Asynchronous JavaScript and XML (AJAX), i.e., mid 2000s
-
-The emergence of **Asynchronous JavaScript** and **XML** (`AJAX`) provided a solution for non-blocking server requests and established a standardized data exchange format for cross-system communication. It empowered JavaScript to dynamically update web content without full-page reloads.
+The emergence of **Asynchronous JavaScript** and **XML** (`AJAX`) provided a solution for non-blocking server requests and established a standardised data exchange format for cross-system communication. It empowered JavaScript to dynamically update web content without full-page reloads.
 
 While AJAX was a significant step toward creating more interactive and responsive web applications, it still had some limitations:
 
@@ -18,7 +17,8 @@ While AJAX was a significant step toward creating more interactive and responsiv
 
 - Navigating to a new page still required a full-page reload.
 
-## Introduction of Single-Page Applications (SPAs), i.e., late 2000s and early 2010s
+---
+### Introduction of Single-Page Applications (SPAs), i.e., late 2000s and early 2010s
 
 To resolve the issue of full page reloads, developers started shifting the responsibility of generating web pages from the server to the client's browser. This lead to the evolution of **Client-Side Rendering (CSR)**.
 
@@ -35,7 +35,6 @@ Web applications employing CSR usually have a single `HTML` page serving as the 
 The development of SPAs has indeed seen the emergence of multiple libraries and frameworks (for example, `Angular`, `React`), each with its own set of ideologies and approaches.
 
 ---
-
 ## EXTRA:
 
 In client-side rendering (CSR), the server renders only the bare bones HTML container for a page. The logic, data fetching, templating, and routing required to display content on the page are handled by JavaScript code that executes on the client. CSR became popular as a method of building SPAs.
