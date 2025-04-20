@@ -141,3 +141,10 @@ Understand what services we need to incorporate in our design to fulfill our req
 ## Links
 
 - https://www.youtube.com/watch?v=QmX2NPkJTKg&t=200s
+
+---
+### UI Coding
+
+![[Pasted image 20250419215138.png]]
+
+![[Pasted image 20250419215131.png]]
