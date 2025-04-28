@@ -29,6 +29,14 @@ clearInterval(intervalID)
 
 ---
 
+Q. array.map
+
+---
+
+Q. array.filter
+
+---
+
 
 
 
