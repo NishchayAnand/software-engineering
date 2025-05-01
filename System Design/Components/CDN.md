@@ -11,3 +11,5 @@ When a user visits a website, a CDN server closest to the user will deliver stat
 ## When to use CDN?
 
 - CDNs are run by third-party providers, and you are charged for data tranfers in and out of the CDN. Caching infrequently used assets provides no significant benefits so you should consider moving them out of the CDN.
+
+Static assets must remain accessible even during backend outages via cached CDN delivery.

@@ -28,6 +28,11 @@ Q. Explain the limitations of **`Server-Side Components`**.
 - Cannot maintain State
 - Cannot use Effects
 
+- Server Components cannot support interaction as event handlers must be registered and triggered by a client.
+    - For example, event handlers like `onClick` can only be defined in Client Components.
+- Server Components cannot use most Hooks.
+    - When Server Components are rendered, their output is essentially a list of components for the client to render. Server Components do not persist in memory after render and cannot have their own state.
+
 ---
 
 Q. What are `Client-Side Components`?
@@ -36,6 +41,16 @@ Q. What are `Client-Side Components`?
 - Necessary for **interactivity**, **state management**, and **event handling**.
 
 ---
+
+Q. Explain the advantages of client side rendering.
+
+There are a couple of benefits to doing the rendering work on the client, including:
+
+- **Interactivity**: Client Components can use state, effects, and event listeners, meaning they can provide immediate feedback to the user and update the UI.
+- **Browser APIs**: Client Components have access to browser APIs, like [geolocation](https://developer.mozilla.org/docs/Web/API/Geolocation_API)or [localStorage](https://developer.mozilla.org/docs/Web/API/Window/localStorage).
+
+---
+
 
 Two types of logic inside React components:
 
