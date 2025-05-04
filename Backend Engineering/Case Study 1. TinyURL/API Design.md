@@ -1,4 +1,6 @@
 
+The system consists of three primary services (APIs):
+
 ---
 ### Data Flow
 
@@ -12,10 +14,9 @@ GraphQL allows us to fetch different set of fields from a single endpoint.
 should be selected based on the type of queries. 
 
 ---
+### Shortening Service
 
-The system consists of three primary services (APIs):
-
-**Shortening Service:** Handles user requests to create short URLs.
+Handles user requests to create short URLs.
 
 ```
 public String shortenUrl(String longUrl) {
@@ -38,7 +39,8 @@ public String shortenUrl(String longUrl) {
 }
 ```
 
-**Encoding Service (Internal):**
+---
+### Encoding Service (Internal)
 
 The service must implement a functionality that could encode every incoming long URL to a **unique short ID**.
 
@@ -67,7 +69,10 @@ public String generateShortId() {
 
 <span style="color : green">To eliminate this, we can use a coordination service (e.g., ZooKeeper) to pre-allocate <strong>ID ranges</strong> to each machine (e.g., Machine 1 → 1 to 1M, Machine 2 → 1M+1 to 2M, etc.). This ensures each machine generates IDs from its assigned range <strong>without conflicts</strong>.</span>
 
-**Redirection Service:** Resolves short URLs to their original long URLs.
+---
+### Redirection Service 
+
+Resolves short URLs to their original long URLs.
 
 ```
 public String getLongUrl(String shortId) {
