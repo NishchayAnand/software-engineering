@@ -11,12 +11,14 @@ Input: s = "()[]{}"
 Output: true
 ```
 
+> **Link:** [Leetcode 20](https://leetcode.com/problems/valid-parentheses/)
+
 ---
 ### Metadata
 
-- **Difficulty Level:** Easy
+**Difficulty Level:** Easy
 
-- **Asked in Companies:** #Google #Amazon #Microsoft #Adobe #Oracle #Flipkart
+**Recently Asked in Companies:** #Amazon `26`, #Meta `21`, #linkedIn `17`, #Google `15`, #Microsoft `3`, #Intuit `10`, #BlackRock `41`, #Adobe `29`
 
 ---
 ### General Observations

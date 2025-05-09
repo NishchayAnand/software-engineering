@@ -22,6 +22,8 @@ Explanation: No sub-expressions are surrounded by multiple (redundant) parenthes
 
 ```
 
+> **Link:** [Naukri - Coding Ninjas](http://codingninjas.com/codestudio/problems/duplicate-parenthesis_2663296?leftPanelTab=1)
+
 ---
 ### Metadata
 

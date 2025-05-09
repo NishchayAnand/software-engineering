@@ -1,3 +1,4 @@
+### Problem Statement
 
 Given an array of strings `tokens` that represents an arithmetic expression in **Reverse Polish Notation (RPN)**. Evaluate the expression and return the result as an **integer**.
 
@@ -12,6 +13,8 @@ Output: 9
 
 Explanation: ((2 + 1) * 3) = 9
 ```
+
+> Link: [Leetcode 150](https://leetcode.com/problems/evaluate-reverse-polish-notation/description/)
 
 ---
 ### Metadata
