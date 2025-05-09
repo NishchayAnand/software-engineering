@@ -1,4 +1,3 @@
-### Problem Statement
 
 Given an array of strings `tokens` that represents an arithmetic expression in **Reverse Polish Notation (RPN)**. Evaluate the expression and return the result as an **integer**.
 

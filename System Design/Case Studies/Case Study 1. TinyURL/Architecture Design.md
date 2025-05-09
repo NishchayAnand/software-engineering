@@ -131,7 +131,7 @@ Design the system following a **microservices architecture** to account for *
 ### Other Documentations
 
 1. Schema Design: [[Data Engineering/Case Study 1. TinyURL/Schema Design]]
-2. API Design (LLD): [[API Design]]
+2. API Design (LLD): [[Backend Engineering/Case Studies/Case Study 1. TinyURL/API Design]]
 3. UI Design: [[Frontend Engineering/Case Study 1. TinyURL/UI Design]]
 
 ---
