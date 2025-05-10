@@ -136,7 +136,7 @@ Q. How JWT-Based Authentication works?
 
 4. **Token Sent to Client**: The JWT is sent to the client, typically in the response body, a cookie, or a query parameter. The client stores the token (e.g., in localStorage, sessionStorage, or a cookie).
 
-5. **Subsequent Requests**: For every subsequent request, the client includes the JWT in the Authorization header as a Bearer token: Authorization: Bearer <JWT>. Alternatively, the token can be sent in cookies.
+5. **Subsequent Requests**: For every subsequent request, the client includes the JWT in the Authorization header as a Bearer token: Authorization: Bearer `<JWT>`. Alternatively, the token can be sent in cookies. 
 
 6. **Server Verification**: The server verifies the token by checking the signature using the secret key (HMAC) or public key (RSA/ECDSA).
 
