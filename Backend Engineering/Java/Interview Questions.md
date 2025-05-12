@@ -1,35 +1,3 @@
-# Java Interview Questions
-
-Q. Explain Typecasting in Java.
-
-Typecasting in Java is the process of **converting a variable from one data type to another**. It is commonly used to ensure compatibility between data types and to manipulate values more effectively. 
-
-There are two types of typecasting in Java: 
-
-1. **Upcasting / Implicit / Widening Typecasting**: Converting a smaller data type to a larger data type. Done automatically by the compiler. 
-
-    ```
-    // Primitive Type
-    int myInt = 10;
-    double myDouble = myInt;
-
-    // Non-Primitive Type
-    Parent obj = new Child();  
-    ```
-
-2. **Downcasting / Explicit / Narrowing Typecasting**: Converting a larger data type into a smaller data type. Done manually by the programmer.
-
-    ```
-    // Primitive Type
-    double myDouble = 9.78;
-    int myInt = (int) myDouble; 
-
-    // Non-Primitive Type
-    Parent obj = new Child();
-    Child childObj = (Child) obj; 
-    ```
-
----
 
 Q. Explain Exceptions in Java.
 
@@ -80,7 +48,7 @@ The key differences between `StringBuilder` and `StringBuffer` in Java revolve a
 
 ## EXTRA
 
-### Q. Write a solution to sort strings based on their length. If the length of two strings are equal, compare the two strings aphabetically.
+Q. Write a solution to sort strings based on their length. If the length of two strings are equal, compare the two strings aphabetically.
 
 We can create a custom comparator (by implementing `Comparator` interface) to define custom sorting logic for strings objects.
 
