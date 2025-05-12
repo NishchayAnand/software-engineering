@@ -1,4 +1,9 @@
 
+> Link: [Leetcode 150](https://leetcode.com/problems/evaluate-reverse-polish-notation/description/)
+
+---
+### Problem Statement
+
 Given an array of strings `tokens` that represents an arithmetic expression in **Reverse Polish Notation (RPN)**. Evaluate the expression and return the result as an **integer**.
 
 > **NOTE:** In Reverse Polish Notation (RPN), **operators appear after their operands**, i.e., you first see the numbers, and then the operator that applies to them. For example, `[1,2,+]` represents expression `(1+2)`.
@@ -13,12 +18,10 @@ Output: 9
 Explanation: ((2 + 1) * 3) = 9
 ```
 
-> Link: [Leetcode 150](https://leetcode.com/problems/evaluate-reverse-polish-notation/description/)
-
 ---
 ### Metadata
 
-- **Difficulty:** Easy
+- **Difficulty:** #Easy
 
 - **Recently Asked in Companies:** #Amazon #Google #Microsoft 
 
