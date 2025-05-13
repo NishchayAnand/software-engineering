@@ -6,7 +6,7 @@
 
 Given two **distinct integer arrays** `nums1`and `nums2`, where `nums1` is a subset of `nums2`. 
 
-For each `0 <= i < nums1.length`, find the index `j` such that `nums1[i] == nums2[j]` and determine the **next greater element** of `nums2[j]` in `nums2`. If there is no next greater element, return `-1`.
+For each `0 <= i < nums1.length`, find the index `j` such that `nums1[i] == nums2[j]` and determine the <span style="color:red;background:#FAEBD7;font-weight:bold">next greater element</span> of `nums2[j]` in `nums2`. If there is no next greater element, return `-1`.
 
 > **NOTE:** The **next greater element** of some element `x` in an array is the **first greater** element that is **to the right** of `x` in the same array.
 
@@ -33,7 +33,7 @@ Explanation:
 ---
 ### Brute Force Approach - Using Nested Loops
 
-Use **nested loops** to iterate over each integer in `nums1` array, find the current element in `nums2` array, and then linearly search **to the right** in `nums2` to find the **first greater element**.
+Use **nested loops** to iterate over each integer in `nums1` array, find the current element in `nums2` array, and then linearly search **to the right** in `nums2` to find the <span style="color:red;background:#FAEBD7;font-weight:bold">first greater element</span>.
 
 **Algorithm**
 
