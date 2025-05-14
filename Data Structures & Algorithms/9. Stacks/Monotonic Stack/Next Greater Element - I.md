@@ -71,6 +71,8 @@ We are not using any extra memory to compute the `result`. Hence, overall space 
 
 For every element in `nums2`, we want to find the **first greater element** to its **right**. Doing this by scanning right for each element takes **O(n²)** time. 
 
+**Key Observation:** <span style="color:green;">Every element can serve as the <span style="color:red;background:#FAEBD7;font-weight:bold">next greater element</span> for all the smaller elements that appear <strong>before it</strong> in the array.</span>
+
 To optimize, we can **pre-process `nums2`** to find the next greater element for each of its element in a **single left-to-right pass**. 
 
 <span style="color:green;">We can iterate over</span> `nums2` <span style="color:green;">and use a data structure to temporarily store the <strong>unresolved elements (i.e., those still waiting to find their next greater element)</strong>. This ensures that at any point in time, the data structure only holds elements in <strong>decreasing order</strong>, each waiting for a next greater number that hasn't appeared yet.</span>
@@ -119,7 +121,7 @@ We are iterating over `nums1` of length `n` to populate the resultant array. Pre
 
 **Space Complexity**
 
-In the worst-case scenario, i.e., when the entire `nums2` array is sorted in decreasing order, the stack will hold `m` elements simultaneously. The map will store the NGE of all `m` elements in `nums2`. Hence, overall space complexity = `O(m)`.
+In the worst-case scenario, i.e., when the `nums2` array is sorted in descending (decreasing) order, the stack will hold `m` elements simultaneously. The map will store the NGE of all `m` elements in `nums2`. Hence, overall space complexity = `O(m)`.
 
 ---
 ### Java Implementation
