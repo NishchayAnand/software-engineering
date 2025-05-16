@@ -6,4 +6,5 @@
 | 3      | [[Crawler Log Folder]]                   | 8-May-2025  |             |             |
 | 4      | [[Evaluate Reverse Polish Notation]]     | 9-May-2025  |             |             |
 | 5      | [[Next Greater Element - I]]             | 12-May-2025 |             |             |
-| 6      | [[Final Prices With a Special Discount]] |             |             |             |
+| 6      | [[Final Prices With a Special Discount]] | 14-May-2025 |             |             |
+| 7      | [[Asteroid Collision]]                   |             |             |             |
