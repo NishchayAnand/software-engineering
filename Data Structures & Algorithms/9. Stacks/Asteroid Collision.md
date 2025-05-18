@@ -70,7 +70,7 @@ Explanation: The 2 and -5 collide resulting in -5. The -10 and -5 never collide.
 
 We can use a **Stack** to keep track of the **unresolved asteroids** in the correct relative order as we process the list.
 
-**Algorithm**
+**Algorithm:**
 
 ```
 - stack = [];
@@ -114,11 +114,11 @@ Step 3: return the resultant array
 - return output;
 ```
 
-**Time Complexity**
+**Time Complexity:**
 
 Each element in `asteroids` array will be processed at most twice. Hence, overall time complexity = **`O(n)`**.
 
-**Space Complexity**
+**Space Complexity:**
 
 In the worst-case scenario, i.e., when all elements in `asteroids` array are either positive (`+`) or negative (`-`), the stack will hold `n` elements simultaneously. Hence, overall space complexity = **`O(n)`**. 
 
