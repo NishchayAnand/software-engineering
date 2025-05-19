@@ -95,7 +95,7 @@ This allows us to **pre-process** `prices` to find the <span style="color:red
 
 > <span style="color:red;font-weight:bold">IMPORTANT: Need to store index in stack since input array contains duplicate integers. (revisit this)</span>
 
-**Algorithm**
+**Algorithm:**
 
 ```
 - answer = [] * n;
@@ -127,7 +127,7 @@ function get_next_smaller_element(prices):
 	- return NSE;
 ```
 
-**Time Complexity**
+**Time Complexity:**
 
 We are iterating over the `prices` array of length `n` to populate the `answer` array. 
 
@@ -135,7 +135,7 @@ Pre-processing `prices` to get the next smaller element for all `n` element ensu
 
 Hence, overall time complexity = `O(n)`.
 
-**Space Complexity**
+**Space Complexity:**
 
 The `NSE` map will store the next smaller element of all `n` elements.
 
