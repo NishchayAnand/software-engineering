@@ -84,7 +84,7 @@ For every element in `prices`, we primarily want to find the <span style="col
 
 **Key Observation:** <span style="color:green;">Every element can serve as the <span style="color:red;background:#FAEBD7;font-weight:bold">next smaller element</span> for all the greater elements that appear <strong>before it</strong> in the array.</span> 
 
-**Intuition:** As we iterate over `prices` array, we can use a data structure to efficiently track the unresolved elements waiting for a smaller value to appear. <span style="color:green;">When we encounter an element <strong>smaller than</strong> the <strong>most recent unresolved element</strong>, we know we've found the <strong>next smaller element</strong> for that <strong>top value</strong>. We can <strong>pop</strong> and map it accordingly, repeating this process until the top value is no longer smaller.</span>
+**Intuition:** As we iterate over `prices` array, we can use a data structure to efficiently track the unresolved elements waiting for a smaller value to appear. <span style="color:green;">When we encounter an element <strong>smaller than</strong> the <strong>most recent unresolved element</strong>, we know we've found the <strong>next smaller element</strong> for that <strong>top value</strong>. We can <strong>pop</strong> and map it accordingly, repeating this process until the top value is no longer greater.</span>
 
 This allows us to **pre-process** `prices` to find the <span style="color:red;background:#FAEBD7;font-weight:bold">next smaller element</span> for each of its element in a **single left-to-right pass**. 
 
