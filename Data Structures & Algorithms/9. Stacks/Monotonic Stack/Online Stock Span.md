@@ -46,6 +46,11 @@ Explanation
 - **0 - 6 months:** #Bloomberg `2`, #Adobe `3`, #Meta `2`, #Apple `2`, 
 
 ---
+### High-Level Design
+
+<span style="color:green;">To design the</span> `StockSpanner` <span style="color:green">class, we need a way to <strong>store </strong>and <strong>compute the span of each stock price</strong> efficiently.</span>
+
+---
 ### General Observations
 
 - <span style="color:red;">What will be today's stock span if <strong>today is the first day</strong> and the stock price is 2?</span>
@@ -78,44 +83,59 @@ Explanation:
 ```
 
 ---
-### High-Level Design
-
-<span style="color:green;">To design the</span> `StockSpanner` <span style="color:green">class, we need a way to <strong>store </strong>and <strong>compute the span of each stock price</strong> efficiently.</span>
-
----
-### Brute Force Approach
+### Brute-Force Approach
 
 **Use a list to store all previous prices** and, for each new price, **use a loop to iterate backward** through the list until we find a price greater than the current one.
 
 **Algorithm**
 
 ```
-- list = []; // instance variable
+- prices = []; // instance variable
 
 - function next(price):
 
-	- list.append(price); // store today's price in list
+	- prices.append(price); // store today's price in list
 
 	// find the next greater element to the left of today's price
-	- n = list.length;
+	- n = prices.length;
 	- for i in range [n-2, 0, -1]:
-		- if list[i] > price: return (n-1) - i;	
+		- if prices[i] > price: return (n-1) - i;	
 ```
 
 **Time Complexity**
 
-In the worst-case scenario, i.e., when the elements are inserted in the list in ascending (increasing) order, the loop will perform `n` operations per query. Hence, time complexity = `O(n)` per query.
+In the worst-case scenario, i.e., when the elements are inserted in the list in ascending (increasing) order, each `next(price)` query will perform `n` operations. 
+
+Considering, there are `n` total `next(price)` calls, the worst-case time complexity is: **`O(n²)`**.
 
 **Space Complexity**
 
-
-
-
----
-### Time-Based Optimisation
+We are using a list to store all previous stock prices. Considering, there are `n` total `next(price)` calls, the space complexity is: **`O(n)`**.
 
 ---
-### Optimised Approach
+### Redundant Operations
+
+For each `next(price)` query, we are iterating over all the precious prices (from right-to-left) to find the nearest greater element.
+
+When we call `next(75)`, it returns `4`. This tells us that it took `4` days to find a price greater than `75`. When we call `next(85)`, we can use this information to our advantage - if it took `4` days to find a price greater than `75`, then it will definitely take at least `4 + 1 = 5` days to find a price greater than `85`.
+
+If we save the stock span for `75`, then we can use it to save time on the call to `next(85)`.
+
+![stack-insight](online-stock-span-1.png)
+
+**Optimisation:** By storing both the price and its span in a stack, we can efficiently pop and accumulate spans of smaller or equal prices, allowing us to compute the span of the current price in amortized constant time.
+
+---
+### Stack-Based Approach
+
+**Algorithm**
+
+```
+```
+
+**Time Complexity**
+
+**Space Complexity**
 
 ---
 ### Java Implementation
