@@ -1,0 +1,26 @@
+{
+	"nodes":[
+		{"id":"eeb182b48b3770e1","type":"group","x":-2240,"y":1200,"width":2580,"height":1240,"color":"6","label":"Get Data Publishing Jobs Service"},
+		{"id":"60055c927a8dd068","type":"text","text":"DBSendInfo\n---------------------------------------------------\njobName: string\nrowCount: int\nschemaName: String","x":-820,"y":1220,"width":440,"height":160},
+		{"id":"8f24bbac3a40ff68","type":"text","text":"scanLogFilesForDbsend()-> void\n---\n\t- get list of job log directories which have been updated after the last log scan.\n\t- create a fixed thread pool of 5.\n\t- for each directory: \n\t\t- get list of log files updated updated after last log scan.\n\t\t- for each line in file:\n\t\t\t- if line contains \"dbsend\" keyword:\n\t\t\t\t- extract  ts_measure, ts_type, ts_name and generate a unique key.\n\t\t\t\t- extract job name, schema name and row count and create dBSendInfo.\n\t\t\t\t- synchronized():\n\t\t\t\t\t- key = [ts_measure, ts_type, ts_name];\n\t\t\t\t\t- lastScanResult.dbsend.computeIfAbsent(key, key -> new TreeMap<>())\n\t\t\t\t\t- lastScanResult.dbsend.get(key).put(date, dBSendInfo);\n\n","x":-806,"y":2000,"width":906,"height":420,"color":"1"},
+		{"id":"e1779b8a34dfbd75","type":"text","text":"UtilityTask\n---\n-lastScanResult: LogScanResult\n\n+scanLogFilesForDbsend(): void","x":-600,"y":1740,"width":328,"height":140},
+		{"id":"e2a5174f8dc724c2","type":"text","text":"LogScanResult\n---\n-DbSendLastUpdated: long\n-dbSend: ConcurrentHashMap< String, Map< Date, DbSendInfo >>\n\n+getDbSendScanResult(): DBSendScanResult","x":-300,"y":1490,"width":620,"height":170},
+		{"id":"2c4d913c9f71edd5","type":"text","text":"EtoolsJobMonitoringService","x":-2220,"y":1600,"width":275,"height":60},
+		{"id":"afdf754f9a82f880","type":"text","text":"EtoolsJobMonitoringController","x":-1580,"y":1600,"width":295,"height":60},
+		{"id":"613d025f2ede50d8","type":"text","text":"DBSendScanResult\n---------------------------------------------------\nlastUpdated: long\nseriesSendInfo: Map< String, List< DBSendInfo > >","x":-1260,"y":1420,"width":440,"height":139},
+		{"id":"ef4d3bd7c39a971e","type":"text","text":"whoIsSavingSeries(seriesId, fromDate, toDate)","x":-1160,"y":1760,"width":410,"height":60}
+	],
+	"edges":[
+		{"id":"ff9f366390d22e87","fromNode":"2c4d913c9f71edd5","fromSide":"right","toNode":"afdf754f9a82f880","toSide":"left","label":"api/etools/job"},
+		{"id":"b654cf580c2e73f5","fromNode":"2c4d913c9f71edd5","fromSide":"right","toNode":"afdf754f9a82f880","toSide":"left"},
+		{"id":"58edcb4fcbc35671","fromNode":"afdf754f9a82f880","fromSide":"bottom","toNode":"ef4d3bd7c39a971e","toSide":"bottom","label":"/whoIsSaving"},
+		{"id":"dd510045f1f6899e","fromNode":"ef4d3bd7c39a971e","fromSide":"top","toNode":"afdf754f9a82f880","toSide":"right","label":"DBSendScanResult"},
+		{"id":"d63790a0459c4246","fromNode":"613d025f2ede50d8","fromSide":"right","toNode":"60055c927a8dd068","toSide":"bottom"},
+		{"id":"343f6d6318069071","fromNode":"ef4d3bd7c39a971e","fromSide":"right","toNode":"e1779b8a34dfbd75","toSide":"left"},
+		{"id":"3d18391d2cc59361","fromNode":"e2a5174f8dc724c2","fromSide":"left","toNode":"613d025f2ede50d8","toSide":"right"},
+		{"id":"f58e0a57ef3f8c0f","fromNode":"e2a5174f8dc724c2","fromSide":"top","toNode":"60055c927a8dd068","toSide":"right"},
+		{"id":"79710a3b97b3b74a","fromNode":"e1779b8a34dfbd75","fromSide":"right","toNode":"e2a5174f8dc724c2","toSide":"bottom"},
+		{"id":"949122d1208a40b7","fromNode":"e1779b8a34dfbd75","fromSide":"bottom","toNode":"8f24bbac3a40ff68","toSide":"top"},
+		{"id":"90e45babb090ccba","fromNode":"2c4d913c9f71edd5","fromSide":"right","toNode":"afdf754f9a82f880","toSide":"left"}
+	]
+}
