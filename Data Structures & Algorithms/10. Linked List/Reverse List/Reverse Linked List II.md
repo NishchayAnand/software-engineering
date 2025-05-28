@@ -28,11 +28,38 @@ Given the `head` of a singly linked list and two integers `left`and `right`�
 - **6 months ago**: #Microsoft `17`, #Adobe `10`, #Apple `9`, #Nvidia `4`, #Uber `2`, #Walmart `2`
 
 ---
-### Basic Intuition
+### General Observations
 
-In a singly linked list, each node only knows about the next one. 
-
+- <span style="color:red;font-weight:bold;">Is it guaranteed that</span> `1 ≤ left ≤ right ≤ length of list`<span style="color:red;font-weight:bold;">?</span>
+- **Yes**
 
 ---
-### Brute Force Approach
+### Basic Algorithm
+
+**Step 1**
+
+```
+```
+
+**Step 2**
+
+```
+```
+
+**Step 3**
+
+```
+```
+
+---
+### Time Complexity
+
+---
+### Space Complexity
+
+---
+### Java Implementation
+
+---
+
 
