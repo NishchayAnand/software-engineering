@@ -34,32 +34,56 @@ Given the `head` of a singly linked list and two integers `left`and `right`�
 - **Yes**
 
 ---
-### Basic Algorithm
+### Recursive Approach
 
-**Step 1**
 
-```
-```
 
-**Step 2**
+
+**Algorithm**
 
 ```
+Hypotheses:
 ```
 
-**Step 3**
+```
+Recursive Steps: 
+```
 
 ```
+Base Conditions:
 ```
 
----
-### Time Complexity
+**Time Complexity**
 
----
-### Space Complexity
+**Space Complexity**
 
 ---
 ### Java Implementation
 
 ---
+### Iterative Approach
 
 
+
+**Algorithm**
+
+```
+Step 1:
+```
+
+```
+Step 2: 
+```
+
+```
+Step 3:
+```
+
+**Time Complexity**
+
+**Space Complexity**
+
+---
+### Java Implementation
+
+---

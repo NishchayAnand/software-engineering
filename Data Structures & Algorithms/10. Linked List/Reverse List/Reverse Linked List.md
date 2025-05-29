@@ -24,7 +24,69 @@ Given the `head` of a singly linked list, reverse the list, and **return the 
 - **6 months ago**: #Adobe `22`, #Uber `4`, #Goldman-Sachs `3`, #Siemens `3`
 
 ---
-### Basic Intuition
+### Recursive Intuition
+
+**Key Observation:** A linked list is made up of nodes, where <span style="color:red;font-weight:bold;background:beige">each node points to the rest of the list.</span> So it’s naturally structured like this: `head → rest_of_list`.
+
+**Intuition:** Reversing a list starting at node `head` is **the same problem** as reversing the list starting at `head.next`.
+
+---
+### Recursive Approach
+
+Reverse the rest of the list, then fix the link from the current node.
+
+![reverse-linked-list-recursive](reverse-linked-list-recursive.png)
+
+**Hypotheses**
+
+`F(head)` will reverse the linked list starting from `head.next` and return the new `head` of that reversed list.
+
+**Recursive Steps**
+
+```
+new_head = F(head.next);
+head.next.next = head;
+head.next = null;
+return new_head;
+```
+
+**Base Conditions**
+
+```
+if head.next == null: return head;
+```
+
+**Time Complexity**
+
+For a linked list of `n` nodes, you make `n` recursive calls. In each call, we are performing **constant work (pointer updates)**. Hence, overall time complexity = `O(n)`.
+
+**Space Complexity**
+
+For a linked list of `n` nodes, the call stack will hold `n` recursive calls simultaneously. Hence, overall space complexity = `O(n)`.
+
+---
+### Java Implementation
+
+```
+public ListNode reverseList(ListNode head) {
+
+	// base conditions
+	if(head == null || head.next == null) return head;
+
+	// recursive steps
+	ListNode newHead = reverseList(head.next);
+	head.next.next = head;
+	head.next = null;
+
+	return newHead;
+
+}
+```
+
+---
+
+---
+### Iterative Intuition
 
 In a singly linked list, each node only knows about the next one, so to reverse the list, you need to go through each node and carefully redirect its `next` pointer to the node that came before it.
 
@@ -85,64 +147,10 @@ public ListNode reverseList(ListNode head) {
 ```
 
 ---
-### Recursive Intuition
+### Intuitive Iterative Approach 
 
-**Key Observation:** A linked list is made up of nodes, where <span style="color:red;font-weight:bold;background:beige">each node points to the rest of the list.</span> So it’s naturally structured like this: `head → rest_of_list`.
+take the next element and add to the front.
 
-**Intuition:** Reversing a list starting at node `head` is **the same problem** as reversing the list starting at `head.next`.
-
----
-### Recursive Approach
-
-Reverse the rest of the list, then fix the link from the current node.
-
-![reverse-linked-list-recursive](reverse-linked-list-recursive.png)
-
-**Hypotheses**
-
-`F(head)` will reverse the linked list starting from `head.next` and return the new `head` of that reversed list.
-
-**Recursive Steps**
-
-```
-new_head = F(head.next);
-head.next.next = head;
-head.next = null;
-return new_head;
-```
-
-**Base Conditions**
-
-```
-if head.next == null: return head;
-```
-
-**Time Complexity**
-
-For a linked list of `n` nodes, you make `n` recursive calls. In each call, we are performing **constant work (pointer updates)**. Hence, overall time complexity = `O(n)`.
-
-**Space Complexity**
-
-For a linked list of `n` nodes, the call stack will hold `n` recursive calls simultaneously. Hence, overall space complexity = `O(n)`.
-
----
-### Java Implementation
-
-```
-public ListNode reverseList(ListNode head) {
-
-	// base conditions
-	if(head == null || head.next == null) return head;
-
-	// recursive steps
-	ListNode newHead = reverseList(head.next);
-	head.next.next = head;
-	head.next = null;
-
-	return newHead;
-
-}
-```
 
 ---
 ### Follow-Up Questions
