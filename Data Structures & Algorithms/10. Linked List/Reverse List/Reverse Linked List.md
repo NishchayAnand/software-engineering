@@ -84,8 +84,6 @@ public ListNode reverseList(ListNode head) {
 ```
 
 ---
-
----
 ### Iterative Intuition
 
 In a singly linked list, each node only knows about the next one, so to reverse the list, you need to go through each node and carefully redirect its `next` pointer to the node that came before it.
@@ -147,10 +145,67 @@ public ListNode reverseList(ListNode head) {
 ```
 
 ---
-### Intuitive Iterative Approach 
+### Head Insertion Method - Intuitive Iterative Variation
 
-take the next element and add to the front.
+Instead of reversing the links of each node, we can **take each node and insert it at the front of the list**.
 
+![head-insertion](reverse-linked-list-intuitive.png)
+
+---
+### Intuitive Iterative Approach
+
+Use the dummy node as a new head and iterate over each node in the linked list and insert it to the **front** of the list. 
+
+**Algorithm**
+
+```
+- dummy = Node(-1);
+- dummy.next = head;
+
+- curr = head.next;
+- head.next = null;
+
+- while curr is not null:
+	- next = curr.next;
+	- curr.next = dummy.next;
+	- dummy.next = curr;
+	- curr = next;
+
+- return dummy.next;
+```
+
+**Time Complexity**
+
+We are iterating over all elements in the linked list. Considering we have `n` elements in the list, overall time complexity = `O(n)`.
+
+**Space Complexity**
+
+We are not using any extra space. Hence, overall space complexity = `O(1)`.
+
+---
+### Java Implementation
+
+```
+public ListNode reverseList(ListNode head) {
+
+	if(head == null || head.next == null) return head;
+
+	ListNode dummy = new ListNode(-1);
+	dummy.next = head;
+	ListNode curr = head.next;
+	head.next = null;
+
+	while(curr != null) {
+		ListNode next = curr.next;
+		curr.next = dummy.next;
+		dummy.next = curr;
+		curr = next;
+	}
+
+	return dummy.next;
+
+}
+```
 
 ---
 ### Follow-Up Questions
