@@ -24,74 +24,14 @@ Given the `head` of a singly linked list, reverse the list, and **return the 
 - **6 months ago**: #Adobe `22`, #Uber `4`, #Goldman-Sachs `3`, #Siemens `3`
 
 ---
-### Recursive Intuition
-
-**Key Observation:** A linked list is made up of nodes, where <span style="color:red;font-weight:bold;background:beige">each node points to the rest of the list.</span> So it’s naturally structured like this: `head → rest_of_list`.
-
-**Intuition:** Reversing a list starting at node `head` is **the same problem** as reversing the list starting at `head.next`.
-
----
-### Recursive Approach
-
-Reverse the rest of the list, then fix the link from the current node.
-
-![reverse-linked-list-recursive](reverse-linked-list-recursive.png)
-
-**Hypotheses**
-
-`F(head)` will reverse the linked list starting from `head.next` and return the new `head` of that reversed list.
-
-**Recursive Steps**
-
-```
-new_head = F(head.next);
-head.next.next = head;
-head.next = null;
-return new_head;
-```
-
-**Base Conditions**
-
-```
-if head.next == null: return head;
-```
-
-**Time Complexity**
-
-For a linked list of `n` nodes, you make `n` recursive calls. In each call, we are performing **constant work (pointer updates)**. Hence, overall time complexity = `O(n)`.
-
-**Space Complexity**
-
-For a linked list of `n` nodes, the call stack will hold `n` recursive calls simultaneously. Hence, overall space complexity = `O(n)`.
-
----
-### Java Implementation
-
-```
-public ListNode reverseList(ListNode head) {
-
-	// base conditions
-	if(head == null || head.next == null) return head;
-
-	// recursive steps
-	ListNode newHead = reverseList(head.next);
-	head.next.next = head;
-	head.next = null;
-
-	return newHead;
-
-}
-```
-
----
-### Iterative Intuition
+### Iterative Link Reversal - Intuition
 
 In a singly linked list, each node only knows about the next one, so to reverse the list, you need to go through each node and carefully redirect its `next` pointer to the node that came before it.
 
 ![reverse-linked-list](reverse-linked-list.png)
 
 ---
-### Iterative Approach
+### Iterative Link Reversal - Approach
 
 Iterate through the linked list and use three pointers: `prev`, `curr`, and `next` (to temporarily store the next node) to reverse the direction of each `curr` node’s `next` pointer.
 
@@ -145,14 +85,74 @@ public ListNode reverseList(ListNode head) {
 ```
 
 ---
-### Head Insertion Method - Intuitive Iterative Variation
+### Recursive Link Reversal - Intuition
+
+**Key Observation:** A linked list is made up of nodes, where <span style="color:red;font-weight:bold;background:beige">each node points to the rest of the list.</span> So it’s naturally structured like this: `head → rest_of_list`.
+
+**Intuition:** Reversing a list starting at node `head` is **the same problem** as reversing the list starting at `head.next`.
+
+---
+### Recursive Link Reversal - Approach
+
+Reverse the rest of the list, then fix the link from the current node.
+
+![reverse-linked-list-recursive](reverse-linked-list-recursive.png)
+
+**Hypotheses**
+
+`F(head)` will reverse the linked list starting from `head.next` and return the new `head` of that reversed list.
+
+**Recursive Steps**
+
+```
+new_head = F(head.next);
+head.next.next = head;
+head.next = null;
+return new_head;
+```
+
+**Base Conditions**
+
+```
+if head.next == null: return head;
+```
+
+**Time Complexity**
+
+For a linked list of `n` nodes, you make `n` recursive calls. In each call, we are performing **constant work (pointer updates)**. Hence, overall time complexity = `O(n)`.
+
+**Space Complexity**
+
+For a linked list of `n` nodes, the call stack will hold `n` recursive calls simultaneously. Hence, overall space complexity = `O(n)`.
+
+---
+### Java Implementation
+
+```
+public ListNode reverseList(ListNode head) {
+
+	// base conditions
+	if(head == null || head.next == null) return head;
+
+	// recursive steps
+	ListNode newHead = reverseList(head.next);
+	head.next.next = head;
+	head.next = null;
+
+	return newHead;
+
+}
+```
+
+---
+### Iterative Head Insertion - Intuition
 
 Instead of reversing the links of each node, we can **take each node and insert it at the front of the list**.
 
 ![head-insertion](reverse-linked-list-intuitive.png)
 
 ---
-### Intuitive Iterative Approach
+### Iterative Head Insertion - Approach
 
 Use the dummy node as a new head and iterate over each node in the linked list and insert it to the **front** of the list. 
 

@@ -34,56 +34,100 @@ Given the `head` of a singly linked list and two integers `left`and `right`�
 - **Yes**
 
 ---
-### Recursive Approach
+### Recursive Link Reversal
 
+To reverse a portion of the list between positions `left` and `right`:
 
+1. **Traverse** the list until the `left` position.
+2. **Reverse the links** between `left` and `right` using recursion.
+3. **Reconnect** the reversed sublist with the nodes <span style="color:red;font-weight:bold">before</span> and <span style="color:red;font-weight:bold">after</span> it.
 
+> **NOTE:** <span style="color:green;">Add a dummy node before the head of the list. This ensures that <strong>every node</strong>, even the head, has a <strong>preceding node</strong>, which makes reconnection logic clean and consistent.</span>
 
 **Algorithm**
 
 ```
-Hypotheses:
+Step 1: Traverse the list until the left position
 ```
 
 ```
-Recursive Steps: 
+Step 2: Reverse the links between left and right using recursion
 ```
 
 ```
-Base Conditions:
+Step 3: Reconnect the reversed sublist with the nodes before and after it
 ```
 
 **Time Complexity**
 
 **Space Complexity**
 
----
-### Java Implementation
+**Java Implementation**
+
+```
+```
 
 ---
-### Iterative Approach
+### Iterative Link Reversal
 
-
+Instead of identifying the sublist head and tail, cutting the list and reversing separately, we can reverse the sublist **in-place** using a loop.
 
 **Algorithm**
 
 ```
-Step 1:
+Step 1: Traverse the list until the left position
+
+- dummy = ListNode(-1);
+- dummy.next = head;
+
+- prevNode = dummy;
+- run loop for (left-1) times and do: prev = prev.next;
 ```
 
 ```
-Step 2: 
+Step 2: Reverse the links between left and right using a loop
+
+- prev = null;
+- curr (sublist head) = prevNode.next;
+
+- run loop for (right-left+1) times and do: curr = curr.next;
+	- next = curr.next;
+	- curr.next = prev;
+	- prev = curr;
 ```
 
 ```
-Step 3:
+Step 3: Reconnect the reversed sublist with the nodes before and after it.
+
+- prevNode.next.next = curr;
+- prev.next = prev;
+```
+
+```
+Step 4: Return the head of the modified list
+
+- return dummy.next;
 ```
 
 **Time Complexity**
 
 **Space Complexity**
 
+**Java Implementation**
+
+```
+
+```
+
 ---
-### Java Implementation
+### Iterative Front Insertion
+
+**Algorithm**
+
+**Time Complexity**
+
+**Space Complexity**
+
+**Java Implementation**
 
 ---
