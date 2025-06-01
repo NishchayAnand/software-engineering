@@ -111,12 +111,43 @@ Step 4: Return the head of the modified list
 
 **Time Complexity**
 
+We are iterating over the linked list once. Considering the list contains `n` elements, overall time complexity = `O(n)`.
+
 **Space Complexity**
+
+We are not using any extra space. Hence, overall space complexity = `O(1)`.
 
 **Java Implementation**
 
 ```
+public ListNode reverseBetween(ListNode head, int left, int right) {
 
+	if(head == null || head.next == null || left == right) return head;
+
+	ListNode dummy = new ListNode(-1);
+	dummy.next = head;
+
+	// Step 1: Traverse the list until the left position.
+	ListNode prevNode = dummy;
+	for(int i=0; i<(left-1); i++) prevNode = prevNode.next;
+
+	// Step 2: Reverse the links between left and right using a loop.
+	ListNode prev = null;
+	ListNode curr = prevNode.next;
+	for(int i=0; i<(right-left+1); i++) {
+		ListNode next = curr.next;
+		curr.next = prev;
+		prev = curr;
+		curr = next;
+	}
+
+	// Step 3: Reconnect the reversed sublist with the nodes before and after it.
+	prevNode.next.next = curr;
+	prevNode.next = prev;
+
+	return dummy.next;
+
+}
 ```
 
 ---
