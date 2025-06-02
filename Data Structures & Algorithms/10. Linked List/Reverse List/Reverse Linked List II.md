@@ -153,12 +153,73 @@ public ListNode reverseBetween(ListNode head, int left, int right) {
 ---
 ### Iterative Front Insertion
 
+Instead of reversing pointers **in place**, you **extract each node from the sublist and insert it at the front of the reversed section**.
+
 **Algorithm**
+
+```
+Step 1: Traverse the list until the left position
+
+- dummy = ListNode(-1);
+- dummy.next = head;
+
+- prevNode = dummy;
+- run loop for (left-1) times and do: prev = prev.next to get to the node where    the head of the reversed sublist would be attached;
+```
+
+```
+Step 2: Pick each element positioned in the range [left,right] and insert it to          the front, making it the head of the reversed sublist 
+
+- curr (sublist head) = prevNode.next;
+
+- run loop for (right-left) times and do: curr = curr.next to iterate over         each element of the sublist to be reversed;
+	- temp = curr.next;
+	- curr.next = temp.next;
+	- temp.next = prevNode.next;
+	- prevNode.next = temp;
+```
+
+```
+Step 3: Return the head of the modified list
+
+- return dummy.next;
+```
 
 **Time Complexity**
 
+In the worst-case scenario, i.e., when `left = 1 & right = n`, we will iterate over the entire linked list. Hence, overall time complexity = `O(n)`.
+
 **Space Complexity**
 
+No extra space is used. Hence, overall space complexity = `O(1)`.
+
 **Java Implementation**
+
+```
+public ListNode reverseBetween(ListNode head, int left, int right) {
+
+	if(head == null || head.next == null || left == right) return head;
+
+	ListNode dummy = new ListNode(-1);
+	dummy.next = head;
+	ListNode prevNode = dummy;
+
+	// Step 1: Move `prevNode` to the node before left.
+	for(int i=0; i<(left-1); i++) prevNode = prevNode.next;
+
+	// Step 2: Reverse sublist using front insertion method
+	ListNode curr = prevNode.next;
+	for(int i=0; i<(right-left); i++) {
+		ListNode temp = curr.next;
+		curr.next = temp.next;
+		temp.next = prevNode.next;
+		prevNode.next = temp;
+	}
+
+	// Step 3: Return the head of the modified list
+	return dummy.next;
+
+}
+```
 
 ---
