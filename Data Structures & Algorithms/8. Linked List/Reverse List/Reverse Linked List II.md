@@ -30,32 +30,25 @@ Given the `head` of a singly linked list and two integers `left`and `right`�
 ---
 ### General Observations
 
-- <span style="color:red;font-weight:bold;">Is it guaranteed that</span> `1 ≤ left ≤ right ≤ length of list`<span style="color:red;font-weight:bold;">?</span>
-- **Yes**
+- <span style="color:red;font-weight:bold;">Is it guaranteed that</span> `1 ≤ left ≤ right ≤ n, where n = length of the linked list`<span style="color:red;font-weight:bold;">?</span>
+- **Yes**, if `left == right`, no reversal is required.
 
 ---
-### Recursive Link Reversal
+### Iterative Link Reversal - Brute Force
 
 To reverse a portion of the list between positions `left` and `right`:
 
-1. **Traverse** the list until the `left` position.
-2. **Reverse the links** between `left` and `right` using recursion.
+1. **Traverse** the list to find the nodes <span style="color:red;font-weight:bold">before the head</span> and <span style="color:red;font-weight:bold">after the tail</span> of the sublist to be reversed. 
+2. **Reverse the links** between `left` and `right`.
 3. **Reconnect** the reversed sublist with the nodes <span style="color:red;font-weight:bold">before</span> and <span style="color:red;font-weight:bold">after</span> it.
 
 > **NOTE:** <span style="color:green;">Add a dummy node before the head of the list. This ensures that <strong>every node</strong>, even the head, has a <strong>preceding node</strong>, which makes reconnection logic clean and consistent.</span>
 
+![reverse-in-k-groups](reverse-in-two-pass.png)
+
 **Algorithm**
 
 ```
-Step 1: Traverse the list until the left position
-```
-
-```
-Step 2: Reverse the links between left and right using recursion
-```
-
-```
-Step 3: Reconnect the reversed sublist with the nodes before and after it
 ```
 
 **Time Complexity**
@@ -68,7 +61,7 @@ Step 3: Reconnect the reversed sublist with the nodes before and after it
 ```
 
 ---
-### Iterative Link Reversal
+### Iterative Link Reversal - In One Pass
 
 Instead of identifying the sublist head and tail, cutting the list and reversing separately, we can reverse the sublist **in-place** using a loop.
 
@@ -151,7 +144,7 @@ public ListNode reverseBetween(ListNode head, int left, int right) {
 ```
 
 ---
-### Iterative Front Insertion
+### Iterative Front Insertion - Extra
 
 Instead of reversing pointers **in place**, you **extract each node from the sublist and insert it at the front of the reversed section**.
 
