@@ -43,10 +43,15 @@ Given the `head` of a linked list, reverse the nodes of the list `k` at a ti
 ---
 ### Basic Intuition
 
-The problem statement also mentions that if there are `< k nodes` left in the linked list, then we don't have to reverse them. This implies that we first need to `count k nodes` before we get on with our reversal.
+However, the problem statement also mentions that if there are `< k nodes` left in the linked list, then we don't have to reverse them. This implies that we first need to `count k nodes` before we get on with our reversal. If at any point, we find that we don't have `k nodes`, then we don't reverse that portion of the linked list. Right off the bat, this implies at least two traversals of the list overall. One for counting, and the next, for reversals.
+
+
 
 ---
-### Approach
+### Recursive Approach
+
+The remaining list is a linked list in itself and hence, it's a perfect fit
+for a recursive strategy.
 
 
 **Algorithm**
@@ -54,6 +59,12 @@ The problem statement also mentions that if there are `< k nodes` left in the 
 **Time Complexity**
 
 at least two traversals of the list overall. One for counting, and the next, for reversals.
+
+The best part about recursion is that when a recursive call returns, we know that all the hard work has already been done and we just need
+to do some minor stick work and return
+
+---
+### Iterative Approach
 
 
 
