@@ -10,6 +10,8 @@ All this data is collected, transformed if needed, and integrated into a **struc
 
 Data warehouses are large, typically larger than 100 GB. 
 
+Data warehouses support the work of analysts and data scientists.
+
 ---
 
 <span style="color:red;font-weight:bold;">Q. Why not query the different transactional databases when performing an analysis versus using a data warehouse?</span>
