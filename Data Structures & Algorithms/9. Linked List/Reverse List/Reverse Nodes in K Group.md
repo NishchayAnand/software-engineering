@@ -136,6 +136,105 @@ public ListNode reverseKGroup(ListNode head, int k) {
 ---
 ### Iterative Approach
 
+Iterate over the linked list in chunks of `k`, reverse each group, connect it to the previous group's tail, and repeat the process for the remaining list.
 
+> **NOTE:** <span style="color:green;">Add a dummy node before the head of the list. This ensures that <strong>every chunk</strong>, including the first, has a <strong>preceding group</strong>, which makes reconnection logic clean and consistent.</span>
 
+![reverse-k-groups-iterative](reverse-nodes-k-group-iterative.png)
+
+**Algorithm**
+
+```
+Step 1: Add a dummy node to the start of the list
+- dummy = ListNode(-1);
+- dummy.next = head;
+- prev_group_tail = dummy;
+
+- ptr = head;
+- run loop while ptr is not null, i.e., there are nodes in the list:
+
+	Step 2: Check if there are at least k nodes to reverse
+	- curr_head = ptr, count = 0;
+	- run loop while count < k and ptr is not null:
+		- count++;
+		- ptr = ptr.next;
+
+	- if count == k:
+
+		Step 3: Reverse the first k nodes
+		- new_curr_head = reverse(curr_head, k);
+
+		Step 4: Connect previous group to the new head
+		- prev_group_tail.next = new_curr_head;
+
+		Step 5: Point previous group tail to the current reversed group
+		- prev_group_tail = curr_head;
+
+	- else:
+
+		- Step 3: No reversal needed since we have left with fewer than k nodes
+		- prev_group_tail = curr_head;
+
+Step 4: Return the new head of the linked list
+- return dummy.next;
+```
+
+**Time Complexity**
+
+We will iterate over each node at most twice (once when counting, next during reversal). Hence, overall time complexity = `O(n)`.
+
+**Space Complexity**
+
+We are not using any extra space. Hence, overall space complexity = `O(1)`.
+
+**Java Implementation**
+
+```
+public ListNode reverseKGroup(ListNode head, int k) {
+
+	// Step 1: Add a dummy node to the start of the linked list
+	ListNode dummy = new ListNode(-1, head);
+	ListNode prevGroupTail = dummy; 
+
+	// Step 2: Loop over the linked list in chunks of k
+	ListNode ptr = head;
+	while(ptr != null) {
+		
+		// Step 3: Check if there are atleast k nodes to reverse
+		ListNode currHead = ptr;
+		int count = 0;
+		while(count < k && ptr != null) {
+			count++;
+			ptr = ptr.next;
+		}
+
+		if(count == k) {
+
+			// Step 4: Reverse the first k nodes
+			ListNode reversedCurrHead = reverse(currHead, k);
+
+			// Step 5: Connect previous group's tail to the head of current                             reversed group
+			prevGroupTail.next = reversedCurrHead;
+
+			// Step 6: Move prevGroupTail point to the tail of the current                              reversed group
+			prevGroupTail = currHead;
+
+		} else {
+
+			// Step 4: No reversal needed. Connect previous group's tail to the                         current group's head
+			prevGroupTail.next = currHead;
+
+		}
+
+	}
+
+	// Step 7: Return the head of the modified linked list
+	return dummy.next;
+
+}
+```
+
+> **NOTE:** Recursive approach connects forward to the rest of the list, while iterative approach connects backward to the previous group's tail.
+
+---
 
