@@ -1,6 +1,4 @@
 
----
-### When to Use What?
 
 |Use `Runnable` when:|Use `Callable` when:|
 |---|---|
