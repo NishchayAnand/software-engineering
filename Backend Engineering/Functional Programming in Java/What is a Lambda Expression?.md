@@ -1,4 +1,7 @@
-# Understanding Lambda Expressions
+
+Handy way to implement certain kinds of interfaces.
+
+---
 
 > **_IMPORTANT NOTE:_** A lambda expression is created without using new. Hence, the JVM does not create a new object every time every time we use a lambda expression.
 
@@ -45,3 +48,51 @@
 Link:
 
 - For understanding differences between `Local Classes`, `Anonymous Classes` and `Lambda Expressions`: https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html
+
+---
+
+Functional interfaces allow you to treat functions as **first-class citizens**. This means you can <span style="color:green;font-weight:bold;background:beige;">assign functions to variables, pass them as arguments, and return them from other functions</span>.
+
+**Example**
+
+```
+@FunctionalInterface
+interface Converter {
+    int convert(String s);
+}
+```
+
+```
+public class Main {
+    public static void main(String[] args) {
+        
+        Converter stringToLength = new Converter() {
+            @Override
+            public int convert(String s) {
+                return s.length();
+            }
+        };
+
+        System.out.println(stringToLength.convert("hello")); // Output: 5
+    }
+}
+```
+
+---
+
+
+
+
+
+
+```
+@FunctionalInterface
+public interface MyFunctionalInterface {
+    ...
+}
+```
+
+> **NOTE:** Functional interfaces are the foundation for using **lambda expressions** and **method references** in Java.
+
+---
+
