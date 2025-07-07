@@ -53,3 +53,14 @@ Streams can leverage multi-core architectures without you having to write a sing
 
 Just replace `stream()` with `parallelStream()` and the Streams API will internally decompose your query to leverage the multiple cores on your computer.
 
+---
+
+How would you use `Stream.filter()` with a lambda to remove null or empty strings?
+
+```
+list.stream()
+    .filter(s -> s != null && !s.isEmpty())
+    .collect(Collectors.toList());
+```
+
+---
