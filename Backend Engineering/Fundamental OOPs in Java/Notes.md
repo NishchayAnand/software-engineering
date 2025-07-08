@@ -1,5 +1,11 @@
 # What is Object-Oriented Programming?
 
+| Concept              | Description | How They Work Together                                                                                                                              |
+| -------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **4 Pillars of OOP** | Foundation  | Provide the **basic constructs** (e.g., inheritance, interfaces) that make SOLID principles and patterns possible                                   |
+| **SOLID Principles** | Guidelines  | Help you **apply OOP pillars wisely**. For example: use **abstraction** + **SRP** to break code into smaller, maintainable units                    |
+| **Design Patterns**  | Solutions   | Build on **OOP & SOLID**. For example: the **Strategy Pattern** applies **Open/Closed** & **Liskov Substitution** principles using **polymorphism** |
+
 Object-Oriented Programming is a programming paradigm based on the ideology of representing real-world entities through self-contained units, each encapsulating its own state (attributes or fields describing the entity) and behavior (methods that allow users to operate on the entity).
 
 Object-Oriented approach of programming offers a more intuitive and structured way of designing and organizing code, making it suitable for building large and complex applications.
