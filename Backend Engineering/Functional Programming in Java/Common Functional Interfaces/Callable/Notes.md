@@ -1,1 +1,0 @@
-# Understanding Callable Functional Interface
