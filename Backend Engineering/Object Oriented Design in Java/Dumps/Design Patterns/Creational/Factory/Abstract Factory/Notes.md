@@ -1,1 +1,0 @@
-# Understanding Abstract Factory Pattern
