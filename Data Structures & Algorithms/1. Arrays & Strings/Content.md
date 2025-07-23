@@ -4,4 +4,5 @@
 | 1.     | [[Missing Number]]   | 7-Jul-2025  |             |             |
 | 2.     | [[Remove Element]]   | 9-Jul-2025  |             |             |
 | 3.     | [[Majority Element]] | 10-Jul-2025 |             |             |
+| 4.     |                      |             |             |             |
 

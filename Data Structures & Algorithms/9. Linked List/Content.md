@@ -4,3 +4,4 @@
 | 2.     | [[Reverse Linked List II]]            | 02-Jun-2025 |             |             |
 | 3.     | [[Reverse Nodes in K Group]]          | 07-Jun-2025 |             |             |
 | 4.     | [[Remove Duplicate from Sorted List]] |             |             |             |
+| 5.     | [[Remove Nth Node From End of List]]  | 23-Jul-2025 |             |             |
