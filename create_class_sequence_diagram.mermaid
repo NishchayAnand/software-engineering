@@ -1,0 +1,151 @@
+sequenceDiagram
+    participant T as Teacher
+    participant AMS as AttendanceManagementSystem
+    participant CS as ClassServiceImpl
+    participant SC as SchoolClass
+    participant CR as InMemoryClassRepository
+    participant S as Student
+    
+    Note over T,CR: Phase 1: Create New Class
+    
+    T->>+AMS: createClass("Mathematics Grade 10", "John Smith")
+    Note right of T: Teacher provides class name<br/>and teacher name
+    
+    AMS->>+CS: createClass("Mathematics Grade 10", "John Smith")
+    Note right of AMS: Facade delegates to<br/>ClassService implementation
+    
+    alt Input Validation Success
+        CS->>CS: validateInput()
+        Note right of CS: Check if className != null/empty<br/>Check if teacherName != null/empty
+        
+        CS->>CS: generateClassId()
+        Note right of CS: Generate unique ID:<br/>"CLASS_0001"
+        
+        CS->>+SC: new SchoolClass("CLASS_0001", "Mathematics Grade 10", "John Smith")
+        Note right of CS: Create new class object<br/>with current date
+        SC->>SC: Initialize empty student collections
+        SC-->>-CS: SchoolClass instance
+        
+        CS->>+CR: saveClass(schoolClass)
+        Note right of CS: Persist class in<br/>in-memory storage
+        CR->>CR: classes.put("CLASS_0001", schoolClass)
+        CR-->>-CS: "CLASS_0001"
+        
+        CS-->>-AMS: "CLASS_0001"
+        AMS-->>-T: "CLASS_0001"
+        Note left of T: Success! Class created<br/>with ID: CLASS_0001
+        
+    else Input Validation Failure
+        CS->>CS: validateInput()
+        CS-->>AMS: throw AttendanceSystemException("Class name cannot be empty")
+        AMS-->>T: AttendanceSystemException
+        Note left of T: Error: Invalid input
+    end
+    
+    Note over T,CR: Phase 2: Register First Student
+    
+    T->>+AMS: addStudentToClass("CLASS_0001", "Alice Johnson")
+    Note right of T: Teacher adds student<br/>to the created class
+    
+    AMS->>+CS: addStudentToClass("CLASS_0001", "Alice Johnson")
+    
+    alt Input Validation Success
+        CS->>CS: validateInput()
+        Note right of CS: Check classId != null/empty<br/>Check studentName != null/empty
+        
+        CS->>+CR: findById("CLASS_0001")
+        Note right of CS: Retrieve class from repository
+        CR->>CR: classes.get("CLASS_0001")
+        CR-->>-CS: Optional<SchoolClass> with class
+        
+        CS->>CS: generateStudentId()
+        Note right of CS: Generate unique ID:<br/>"STUDENT_000001"
+        
+        CS->>+S: new Student("STUDENT_000001", "Alice Johnson")
+        Note right of CS: Create student object<br/>with current enrollment date
+        S-->>-CS: Student instance
+        
+        CS->>+SC: addStudent(student)
+        Note right of CS: Add student to class
+        SC->>SC: Check if student already exists
+        alt Student Not Exists
+            SC->>SC: students.add(student)
+            SC->>SC: studentMap.put("STUDENT_000001", student)
+            SC-->>CS: true (success)
+        else Student Already Exists
+            SC-->>CS: false (duplicate)
+        end
+        
+        CS->>+CR: saveClass(updatedSchoolClass)
+        Note right of CS: Update class in repository<br/>with new student
+        CR->>CR: classes.put("CLASS_0001", updatedSchoolClass)
+        CR-->>-CS: success
+        
+        CS-->>-AMS: true
+        AMS-->>-T: true
+        Note left of T: Success! Student added<br/>Alice Johnson enrolled
+        
+    else Class Not Found
+        CS->>+CR: findById("CLASS_0001")
+        CR-->>-CS: Optional.empty()
+        CS-->>AMS: throw AttendanceSystemException("Class not found")
+        AMS-->>T: AttendanceSystemException
+        Note left of T: Error: Class doesn't exist
+    end
+    
+    Note over T,CR: Phase 3: Register Additional Students
+    
+    T->>+AMS: addStudentToClass("CLASS_0001", "Bob Wilson")
+    AMS->>+CS: addStudentToClass("CLASS_0001", "Bob Wilson")
+    
+    CS->>CS: validateInput()
+    CS->>+CR: findById("CLASS_0001")
+    CR-->>-CS: Optional<SchoolClass> with class (now has Alice)
+    
+    CS->>CS: generateStudentId() // "STUDENT_000002"
+    CS->>+S: new Student("STUDENT_000002", "Bob Wilson")
+    S-->>-CS: Student instance
+    
+    CS->>+SC: addStudent(bobStudent)
+    SC->>SC: students.add(bobStudent) // Now has Alice + Bob
+    SC->>SC: studentMap.put("STUDENT_000002", bobStudent)
+    SC-->>-CS: true
+    
+    CS->>+CR: saveClass(updatedSchoolClass)
+    CR-->>-CS: success
+    CS-->>-AMS: true
+    AMS-->>-T: true
+    Note left of T: Success! Bob Wilson enrolled<br/>Class now has 2 students
+    
+    Note over T,CR: Phase 4: Attempt Duplicate Student Registration
+    
+    T->>+AMS: addStudentToClass("CLASS_0001", "Alice Johnson")
+    Note right of T: Teacher accidentally tries<br/>to add Alice again
+    
+    AMS->>+CS: addStudentToClass("CLASS_0001", "Alice Johnson")
+    CS->>CS: validateInput()
+    CS->>+CR: findById("CLASS_0001")
+    CR-->>-CS: Optional<SchoolClass> with class
+    
+    CS->>CS: generateStudentId() // "STUDENT_000003"
+    CS->>+S: new Student("STUDENT_000003", "Alice Johnson")
+    Note right of CS: New ID generated but<br/>same name
+    S-->>-CS: Student instance
+    
+    CS->>+SC: addStudent(duplicateAlice)
+    SC->>SC: Check students collection
+    Note right of SC: SchoolClass allows same name<br/>but different IDs (business rule)
+    SC->>SC: students.add(duplicateAlice)
+    SC->>SC: studentMap.put("STUDENT_000003", duplicateAlice)
+    SC-->>-CS: true
+    
+    CS->>+CR: saveClass(updatedSchoolClass)
+    CR-->>-CS: success
+    CS-->>-AMS: true
+    AMS-->>-T: true
+    Note left of T: Success! Another Alice added<br/>(same name, different ID)
+    
+    Note over T,CR: Final State: Class with 3 students
+    rect rgb(240, 248, 255)
+        Note over SC: SchoolClass "CLASS_0001"<br/>- Alice Johnson (STUDENT_000001)<br/>- Bob Wilson (STUDENT_000002)<br/>- Alice Johnson (STUDENT_000003)
+    end
