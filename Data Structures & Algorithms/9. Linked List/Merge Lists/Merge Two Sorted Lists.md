@@ -31,20 +31,6 @@ This way, you can build the merged list uniformly using a **`tail`** pointer, 
 
 Use two pointers: **`current1`** and **`current2`** to iterate over both lists **simultaneously**, and always <span style="color:green;font-weight:bold;background:beige;">pick the smaller of the two current nodes</span> to add to the **`tail`** the result list.
 
-**Dry Run**
-
-```
-Example 1
-
-	Input: 
-```
-
-```
-Example 2
-
-	Input: 
-```
-
 **Algorithm**
 
 ```
@@ -85,7 +71,11 @@ Step 4: Return the head of the result list
 
 **Time Complexity**
 
+We are iterating over both lists once. Hence, overall time complexity = **`O(m+n)`**, where **`m`** and **`n`** represent the size of **`list1`** and **`list2`** respectively.
+
 **Space Complexity**
+
+Except for the **`dummy`** node, we are not using any extra space. Hence, overall space complexity = **`O(1)`**.
 
 **Java Implementation**
 
