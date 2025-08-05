@@ -6,5 +6,5 @@
 | 4.     | [[Remove Duplicates from Sorted List]]    | 03-Aug-2025 |             |             |
 | 5.     | [[Remove Duplicates from Sorted List II]] | 04-Aug-2025 |             |             |
 | 6.     | [[Remove Nth Node From End of List]]      | 23-Jul-2025 |             |             |
-| 7.     | [[Merge Two Sorted Lists]]                |             |             |             |
+| 7.     | [[Merge Two Sorted Lists]]                | 05-Aug-2025 |             |             |
 | 8.     | [[Merge k Sorted Lists]]                  |             |             |             |
