@@ -1,5 +1,3 @@
-# Understanding Facade Design Pattern
-
 **DEFINITION: Provides a unified interface to a set of interfaces in a subsystem. Facade defines a higher-level interface that makes the subsystem easier to use.**
 
 Facade Pattern can be used to hide all the complexity of one or more classes behind a clean, well-lit facade.
