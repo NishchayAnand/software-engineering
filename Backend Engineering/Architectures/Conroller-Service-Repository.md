@@ -1,0 +1,2 @@
+
+The **service layer is the implementation of the business logic design** in code. It’s where the application’s brain lives, turning business requirements into actionable logic while shielding other layers from complexity.
