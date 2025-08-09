@@ -130,9 +130,9 @@ Design the system following a **microservices architecture** to account for *
 ---
 ### Other Documentations
 
-1. Schema Design: [[System Design/Case Studies/Case Study 1. TinyURL/Schema Design]]
-2. API Design (LLD): [[System Design/Case Studies/Case Study 1. TinyURL/API Design]]
-3. UI Design: [[System Design/Case Studies/Case Study 1. TinyURL/UI Design]]
+1. Schema Design: [[Distributed Systems/Case Studies/Case Study 1. TinyURL/Schema Design]]
+2. API Design (LLD): [[Distributed Systems/Case Studies/Case Study 1. TinyURL/API Design]]
+3. UI Design: [[Distributed Systems/Case Studies/Case Study 1. TinyURL/UI Design]]
 
 ---
 
