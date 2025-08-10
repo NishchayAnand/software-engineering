@@ -1,15 +1,5 @@
 # SpringBoot Interview Questions
 
-Q. What is the use of `@SpringBootApplication` annotation?
-
-
-
----
-
-Q. Explain `SpringApplication.run(MySpringBootApplication.class, args);`
-
-
-
 ---
 
 Q. What is the use of `application.properties` file?
