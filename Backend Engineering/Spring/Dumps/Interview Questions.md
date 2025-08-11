@@ -4,19 +4,7 @@ Q. Explain **`@RestController`** annotation.
 
 The **`@RestController`** annotation is designed to simplify the creation of RESTful web services. <span style="color: red">It combines the functionality of <strong>@Controller</strong> and <strong>@ResponseBody</strong> into a single annotation.</span>
 
-- **`@Controller`**: Marks the class as a <span style="color: green">Spring MVC controller that can handle HTTP requests</span> in a web application. 
 
-- **`@ResponseBody`**: <span style="color: green">Automatically serialises the returned object of a controller method into JSON or XML</span> (depending on the content type in the request header) and writes it directly to the HTTP response body.
-
-> NOTE: Works seamlessly with Spring’s HTTP message converters, such as **Jackson** for JSON serialisation.
-
----
-
-Q. Explain **`@RequestMapping`** annotation.
-
-The **`@RequestMapping`** annotation in Spring MVC is used to <span style="color: red">map HTTP requests to handler methods</span> in a controller. 
-
-> **NOTE:** <span style="color: green">Can be used at both the <strong>class level</strong> and <strong>method level</strong></span> to define hierarchical mappings.
 
 ---
 
