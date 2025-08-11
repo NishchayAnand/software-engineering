@@ -5,6 +5,7 @@ import com.example.Java_Implementation.service.ClassService;
 import com.example.Java_Implementation.service.ReportService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -25,7 +26,7 @@ public class AttendanceManagementSystem {
     // ========== CLASS MANAGEMENT OPERATIONS ==========
 
     @RequestMapping(value = "/create-class", method = RequestMethod.POST)
-    public String createClass(String className, String teacherName) {
+    public String createClass(@RequestParam String className, @RequestParam String teacherName) {
         return "Class Name: " + className + ", Teacher Name: " + teacherName;
     }
 
