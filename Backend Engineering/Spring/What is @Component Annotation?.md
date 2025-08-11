@@ -53,3 +53,31 @@ public class EmailService { ... }
 ```
 
 ---
+
+<span style="color:red;font-weight:bold">Q. In a Spring application, you have the following setup:</span>
+
+```
+@Configuration
+public class AppConfig {
+
+    @Bean
+    public EmailService emailService() {
+        return new EmailService();
+    }
+}
+```
+
+```
+@Component
+public class EmailService {
+    public void send(String to) { ... }
+}
+```
+
+<span style="color:red;font-weight:bold">Both definitions are detected by Spring’s component scanning and configuration processing. What happens when the application context starts?</span>
+
+<span style="color:green;font-weight:bold;">A:</span> By default, Spring will fail at startup if two beans with the same name exist and bean definition overriding is disabled (default behavior in Boot is `false` for `spring.main.allow-bean-definition-overriding`).
+
+> **NOTE:** If overriding is allowed, the later definition (in processing order) replaces the earlier one.
+
+---
