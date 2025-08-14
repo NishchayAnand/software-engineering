@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class CreateClassRequest {
+
     private String className;
     private String teacherName;
 }
