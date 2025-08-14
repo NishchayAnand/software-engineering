@@ -7,13 +7,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Getter @Setter
-public class SchoolClass {
+public class ClassEntity {
     private final String classId;
     private final String name;
     private final String teacherName;
-    private final Map<String, Student> students = new HashMap<>();
+    private final Map<String, StudentEntity> students = new HashMap<>();
 
-    public SchoolClass(String classId, String name, String teacherName) {
+    public ClassEntity(String classId, String name, String teacherName) {
         this.classId = classId;
         this.name = name;
         this.teacherName = teacherName;

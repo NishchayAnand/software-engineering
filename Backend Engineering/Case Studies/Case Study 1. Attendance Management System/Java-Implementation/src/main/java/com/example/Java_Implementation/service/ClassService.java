@@ -6,5 +6,5 @@ import com.example.Java_Implementation.dto.CreateClassResponse;
 public interface ClassService {
     CreateClassResponse createClass(CreateClassRequest req);
     //AddStudentResponse addStudentToClass(AddStudentRequest req);
-    //List<SchoolClass> getAllClasses();
+    //List<ClassEntity> getAllClasses();
 }

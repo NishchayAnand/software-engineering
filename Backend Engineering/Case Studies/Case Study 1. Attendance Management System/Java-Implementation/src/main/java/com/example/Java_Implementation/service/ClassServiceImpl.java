@@ -2,17 +2,15 @@ package com.example.Java_Implementation.service;
 
 import com.example.Java_Implementation.dto.CreateClassRequest;
 import com.example.Java_Implementation.dto.CreateClassResponse;
-import com.example.Java_Implementation.model.SchoolClass;
+import com.example.Java_Implementation.model.ClassEntity;
 
-import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 public class ClassServiceImpl implements ClassService {
 
     // In-memory storage
-    private final Map<String, SchoolClass> classMap = new ConcurrentHashMap<>();
+    private final Map<String, ClassEntity> classMap = new ConcurrentHashMap<>();
     private int classCounter;
 
     @Override
@@ -24,18 +22,16 @@ public class ClassServiceImpl implements ClassService {
         if(exists) {
             return new CreateClassResponse(
                     null,
-                    LocalDateTime.now(),
                     "Class with name: " + req.getClassName() + " already exists.");
         }
 
         // Create a new class
         String classId = generateClassId();
-        SchoolClass newClass = new SchoolClass(classId, req.getClassName(), req.getTeacherName());
+        ClassEntity newClass = new ClassEntity(classId, req.getClassName(), req.getTeacherName());
         classMap.put(classId, newClass);
 
         return new CreateClassResponse(
                 classId,
-                LocalDateTime.now(),
                 "Class created successfully");
 
     }

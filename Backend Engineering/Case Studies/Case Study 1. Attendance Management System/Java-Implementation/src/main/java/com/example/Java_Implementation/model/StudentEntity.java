@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @AllArgsConstructor @Getter @Setter
-public class Student {
+public class StudentEntity {
     private final String rollNumber;
     private final String name;
 }

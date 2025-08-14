@@ -11,6 +11,5 @@ import java.time.LocalDateTime;
 @Setter
 public class CreateClassResponse {
     private String classId;
-    private LocalDateTime createAt;
     private String statusMessage;
 }
