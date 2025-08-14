@@ -4,6 +4,7 @@ import com.example.Java_Implementation.service.AttendanceService;
 import com.example.Java_Implementation.service.ClassService;
 import com.example.Java_Implementation.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,9 +20,10 @@ public class AttendanceManagementSystem {
 
     // ========== CLASS MANAGEMENT OPERATIONS ==========
 
-    @GetMapping("/create-class")
-    public String createClass(@RequestParam String className, @RequestParam String teacherName) {
-        return "Class Name: " + className + ", Teacher Name: " + teacherName;
+    @PostMapping("/create-class")
+    public ResponseEntity<CreateClassResponse> createClass(@RequestBody CreateClassRequest req) {
+        CreateClassResponse res = classService.createClass(req);
+        return ResponseEntity.status(201).body(res);
     }
 
 
