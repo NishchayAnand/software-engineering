@@ -17,10 +17,23 @@ It becomes much cleaner and **more scalable** to:
 
 ---
 
-The **Attendance Management System (AMS)** can be designed using a **Layered Architecture**. This approach organizes the system into **distinct layers (Controller–Service–Repository)**, allowing each layer to focus on a single responsibility.
+`201 Created` is reserved for cases where **a new resource is created on the server**, such as creating a new student, class, or attendance record entity that is independently retrievable via its own URI.
 
-Additionally, we can leverage **Object-Oriented Programming (OOP) principles** to model real-world entities such as **`Teacher`**, **`SchoolClass`**, and **`Student`** as objects, encapsulating both their data and behaviors. This makes the system more intuitive by aligning the software design closely with real-world scenarios.
+In most attendance marking scenarios, you’re **updating an existing resource** (the class’s attendance list) rather than creating a new top-level entity. Therefore:
 
-Let's discuss each component, explaining how the **Layered Architecture** and **OOP design** shape their implementation.
+- **HTTP 200 OK** → if the update succeeds.
+- **HTTP 204 No Content** → if you don’t need to send back a message body.
 
-<span style="color:red;">(talk about data transfer objects - explain the importance of DTO objects as well)</span>
+You’d use **`201 Created`** only if your system treats each attendance submission as a **new resource** with its own unique identifier/URL (e.g., `/attendance/{attendanceId}`).
+
+I can give you both **design options** for this if you want to handle it either way.
+
+---
+
+It's better to store **attendance records as a separate entity** rather than embedding them inside the **`Class`** object. 
+
+While storing attendance within `Class` object keeps everything in one place, it tightly couples responsibilities and makes the class harder to manage. Let the **`Class`** object focus only on class metadata and enrolled students. 
+
+This aligns with the **Single Responsibility Principle** and makes the system easier to extend for features like reporting or persistence later.
+
+---

@@ -1,9 +1,0 @@
-package com.example.Java_Implementation.dto;
-
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
-public class CreateClassResponse {
-    private String classId;
-    private String statusMessage;
-}
