@@ -3,10 +3,12 @@ package com.example.Java_Implementation.service;
 import com.example.Java_Implementation.dto.AddStudentRequest;
 import com.example.Java_Implementation.dto.AttendanceRecord;
 import com.example.Java_Implementation.dto.CreateClassRequest;
+import com.example.Java_Implementation.model.AttendanceStatus;
 import com.example.Java_Implementation.model.ClassEntity;
 import com.example.Java_Implementation.model.StudentEntity;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -47,8 +49,15 @@ public class ClassServiceImpl implements ClassService {
 
     @Override
     public boolean markAttendance(String classId, LocalDate date, List<AttendanceRecord> records) {
-        // to handle queries like check if a student was present in a class on a specific date, its better
-        // to store attendance records as Map<enrollmentId, Status> rather than List<AttendanceRecord>
+        // Step 1: Convert List<AttendanceRecord> to Map<String, AttendanceStatus>
+        Map<String, AttendanceStatus> attendanceRecords = new HashMap<>();
+        for(AttendanceRecord record: records) {
+            AttendanceStatus status = AttendanceStatus.valueOf(record.getStatus().toUpperCase());
+            attendanceRecords.put(record.getEnrollmentId(), status);
+        }
+        // Step 2: Add attendance records for today's date to the target class
+        ClassEntity classEntity = classMap.get(classId);
+        classEntity.getAttendanceRecords().put(date, attendanceRecords);
         return true;
     }
 

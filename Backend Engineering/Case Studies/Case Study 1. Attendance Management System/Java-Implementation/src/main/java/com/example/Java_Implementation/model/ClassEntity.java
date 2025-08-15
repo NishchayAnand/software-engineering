@@ -3,6 +3,7 @@ package com.example.Java_Implementation.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ public class ClassEntity {
     private final String name;
     private final String teacherName;
     private final Map<String, StudentEntity> students = new HashMap<>();
+    private final Map<LocalDate, Map<String, AttendanceStatus>> attendanceRecords = new HashMap<>();
 
     public ClassEntity(String id, String name, String teacherName) {
         this.id = id;
