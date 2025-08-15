@@ -7,8 +7,10 @@ import lombok.Setter;
 
 @NoArgsConstructor @Setter @Getter
 public class AddStudentRequest {
-    @NotBlank(message = "Roll number cannot be empty")
-    private String rollNumber;
-    @NotBlank(message = "Student name cannot be empty")
+    @NotBlank(message = "Class Id cannot be empty")
+    private String classId;
+    @NotBlank(message = "Student name cannot be blank")
     private String name;
+    @NotBlank(message = "Student enrollment number cannot be empty")
+    private String enrollmentNumber;
 }

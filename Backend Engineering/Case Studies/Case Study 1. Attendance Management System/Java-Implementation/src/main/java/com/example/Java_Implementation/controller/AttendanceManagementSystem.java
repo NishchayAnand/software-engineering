@@ -27,14 +27,30 @@ public class AttendanceManagementSystem {
     public ResponseEntity<CreateClassResponse> createClass(@Valid @RequestBody CreateClassRequest req) {
         String classId = classService.createClass(req);
         if (classId == null) {
-            return ResponseEntity.status(409).body(new CreateClassResponse(null, "Class already exists"));
+            return ResponseEntity.status(409).body(new CreateClassResponse(
+                    null,
+                    "Class with name: " + req.getClassName() + " already exists")
+            );
         }
-        return ResponseEntity.status(201).body(new CreateClassResponse(classId, "Class created successfully"));
+        return ResponseEntity.status(201).body(new CreateClassResponse(
+                classId,
+                "Class created successfully")
+        );
     }
 
     @PostMapping("add-student")
     public ResponseEntity<AddStudentResponse> addStudent(@Valid @RequestBody AddStudentRequest req) {
         String studentId = classService.addStudent(req);
+        if (studentId == null) {
+            return ResponseEntity.status(409).body(new AddStudentResponse(
+                    null,
+                    "Student already exists in class: " + req.getClassId())
+            );
+        }
+        return ResponseEntity.status(201).body(new AddStudentResponse(
+                studentId,
+                "Student successfully added to class: " + req.getClassId())
+        );
     }
 
 

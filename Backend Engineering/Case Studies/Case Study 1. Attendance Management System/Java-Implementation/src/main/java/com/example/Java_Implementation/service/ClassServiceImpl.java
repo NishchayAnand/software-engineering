@@ -30,6 +30,10 @@ public class ClassServiceImpl implements ClassService {
 
     @Override
     public String addStudent(AddStudentRequest req) {
+        // Step 1: check if the student already exists in the class
+        // Step 2: generate a roll number for the student
+        // step 3: create a student object
+        // step 4: add student to class
         return null;
     }
 
