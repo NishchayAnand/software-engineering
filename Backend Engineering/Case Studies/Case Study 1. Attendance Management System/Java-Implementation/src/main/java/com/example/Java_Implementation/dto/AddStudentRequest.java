@@ -6,9 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @NoArgsConstructor @Setter @Getter
-public class CreateClassRequest {
-    @NotBlank(message = "Class name is required")
-    private String className;
-    @NotBlank(message = "Teacher name is required")
-    private String teacherName;
+public class AddStudentRequest {
+    @NotBlank(message = "Roll number cannot be empty")
+    private String rollNumber;
+    @NotBlank(message = "Student name cannot be empty")
+    private String name;
 }

@@ -1,5 +1,6 @@
 package com.example.Java_Implementation.service;
 
+import com.example.Java_Implementation.dto.AddStudentRequest;
 import com.example.Java_Implementation.dto.CreateClassRequest;
 import com.example.Java_Implementation.dto.CreateClassResponse;
 import com.example.Java_Implementation.model.ClassEntity;
@@ -14,26 +15,22 @@ public class ClassServiceImpl implements ClassService {
     private int classCounter;
 
     @Override
-    public CreateClassResponse createClass(CreateClassRequest req) {
-
+    public String createClass(CreateClassRequest req) {
         // Check if class with same name already exists
         boolean exists = classMap.values().stream()
                 .anyMatch(obj -> obj.getName().equalsIgnoreCase(req.getClassName()));
-        if(exists) {
-            return new CreateClassResponse(
-                    null,
-                    "Class with name: " + req.getClassName() + " already exists.");
-        }
+        if(exists) return null;
 
         // Create a new class
         String classId = generateClassId();
         ClassEntity newClass = new ClassEntity(classId, req.getClassName(), req.getTeacherName());
         classMap.put(classId, newClass);
+        return classId;
+    }
 
-        return new CreateClassResponse(
-                classId,
-                "Class created successfully");
-
+    @Override
+    public String addStudent(AddStudentRequest req) {
+        return null;
     }
 
     // ========== UTILITY METHODS ==========

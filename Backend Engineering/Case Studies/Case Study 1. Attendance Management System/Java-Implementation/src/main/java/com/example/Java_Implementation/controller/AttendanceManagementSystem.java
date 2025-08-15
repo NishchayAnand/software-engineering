@@ -1,5 +1,7 @@
 package com.example.Java_Implementation.controller;
 
+import com.example.Java_Implementation.dto.AddStudentRequest;
+import com.example.Java_Implementation.dto.AddStudentResponse;
 import com.example.Java_Implementation.dto.CreateClassRequest;
 import com.example.Java_Implementation.dto.CreateClassResponse;
 import com.example.Java_Implementation.service.AttendanceService;
@@ -23,8 +25,16 @@ public class AttendanceManagementSystem {
 
     @PostMapping("/create-class")
     public ResponseEntity<CreateClassResponse> createClass(@Valid @RequestBody CreateClassRequest req) {
-        CreateClassResponse res = classService.createClass(req);
-        return ResponseEntity.status(201).body(res);
+        String classId = classService.createClass(req);
+        if (classId == null) {
+            return ResponseEntity.status(409).body(new CreateClassResponse(null, "Class already exists"));
+        }
+        return ResponseEntity.status(201).body(new CreateClassResponse(classId, "Class created successfully"));
+    }
+
+    @PostMapping("add-student")
+    public ResponseEntity<AddStudentResponse> addStudent(@Valid @RequestBody AddStudentRequest req) {
+        String studentId = classService.addStudent(req);
     }
 
 
