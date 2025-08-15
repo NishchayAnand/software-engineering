@@ -6,6 +6,6 @@ import lombok.Setter;
 
 @AllArgsConstructor @Getter @Setter
 public class StudentEntity {
-    private final String rollNumber;
+    private final String enrollmentId;
     private final String name;
 }
