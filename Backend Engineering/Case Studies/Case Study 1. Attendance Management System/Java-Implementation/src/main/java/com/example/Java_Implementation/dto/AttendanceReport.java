@@ -10,5 +10,5 @@ public class AttendanceReport {
     private final String className;
     private final LocalDate startDate;
     private final LocalDate endDate;
-    private final List<AttendanceStats> attendanceSummary;
+    private final List<StudentAttendanceStats> attendanceSummary;
 }

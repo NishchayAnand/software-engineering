@@ -14,5 +14,5 @@ public class MarkAttendanceRequest {
     @NotNull
     private LocalDate date;
     @NotEmpty
-    private List<AttendanceRecord> records;
+    private List<StudentAttendanceRecord> records;
 }

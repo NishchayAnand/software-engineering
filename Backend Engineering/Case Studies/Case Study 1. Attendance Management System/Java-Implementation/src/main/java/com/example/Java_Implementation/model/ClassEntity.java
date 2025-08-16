@@ -1,6 +1,6 @@
 package com.example.Java_Implementation.model;
 
-import com.example.Java_Implementation.dto.AttendanceRecord;
+import com.example.Java_Implementation.dto.StudentAttendanceRecord;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,7 +15,7 @@ public class ClassEntity {
     private final String name;
     private final String teacherName;
     private final Map<String, StudentEntity> students = new HashMap<>();
-    private final Map<LocalDate, List<AttendanceRecord>> attendanceRecords = new HashMap<>();
+    private final Map<LocalDate, List<StudentAttendanceRecord>> attendanceRecords = new HashMap<>();
 
     public ClassEntity(String id, String name, String teacherName) {
         this.id = id;

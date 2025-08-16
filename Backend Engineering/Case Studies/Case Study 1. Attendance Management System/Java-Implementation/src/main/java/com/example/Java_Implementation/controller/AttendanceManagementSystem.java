@@ -41,12 +41,9 @@ public class AttendanceManagementSystem {
     }
 
     @GetMapping("attendance-report/{classId}")
-    public ResponseEntity<?> generateReport(@PathVariable String classId, @Valid @RequestBody GenerateReportRequest req) {
+    public ResponseEntity<AttendanceReport> generateReport(@PathVariable String classId, @Valid @RequestBody GenerateReportRequest req) {
         AttendanceReport report = classService.generateReport(classId, req.getStartDate(), req.getEndDate());
-        return report == null ? ResponseEntity.status(500).body("Unable to generate report") :
-                ResponseEntity.ok(report);
+        return ResponseEntity.ok(report);
     }
-
-
-
+    
 }
