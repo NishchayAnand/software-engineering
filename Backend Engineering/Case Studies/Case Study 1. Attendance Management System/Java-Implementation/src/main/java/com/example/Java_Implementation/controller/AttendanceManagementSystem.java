@@ -38,7 +38,8 @@ public class AttendanceManagementSystem {
     public ResponseEntity<String> markAttendance(@PathVariable String classId,
                                                  @Valid @RequestBody MarkAttendanceRequest req) {
         boolean ok = classService.markAttendance(classId, req.getDate(), req.getRecords());
-        return null;
+        return ok ? ResponseEntity.ok("Attendance marked successfully") :
+                ResponseEntity.status(500).body("Failed to save");
     }
 
 
