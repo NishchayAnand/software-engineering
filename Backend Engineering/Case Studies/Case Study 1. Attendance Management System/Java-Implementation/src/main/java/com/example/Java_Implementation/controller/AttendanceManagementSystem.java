@@ -1,8 +1,6 @@
 package com.example.Java_Implementation.controller;
 
-import com.example.Java_Implementation.dto.AddStudentRequest;
-import com.example.Java_Implementation.dto.CreateClassRequest;
-import com.example.Java_Implementation.dto.MarkAttendanceRequest;
+import com.example.Java_Implementation.dto.*;
 import com.example.Java_Implementation.service.ClassService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,20 +25,28 @@ public class AttendanceManagementSystem {
                 ResponseEntity.status(409).body("Class already exists");
     }
 
-    @PostMapping("/add-student")
+    @PostMapping("/add-student/{clasId}")
     public ResponseEntity<String> addStudent(@PathVariable String classId, @Valid @RequestBody AddStudentRequest req) {
         boolean added = classService.addStudent(classId, req.getEnrollmentId(), req.getName());
         return added ? ResponseEntity.status(201).body("Student added successfully") :
                 ResponseEntity.status(409).body("Student already exists");
     }
 
-    @PostMapping("mark-attendance")
+    @PostMapping("mark-attendance/{classId}")
     public ResponseEntity<String> markAttendance(@PathVariable String classId,
                                                  @Valid @RequestBody MarkAttendanceRequest req) {
         boolean ok = classService.markAttendance(classId, req.getDate(), req.getRecords());
         return ok ? ResponseEntity.ok("Attendance marked successfully") :
                 ResponseEntity.status(500).body("Failed to save");
     }
+
+    @GetMapping("attendance-report/{classId}")
+    public ResponseEntity<?> generateReport(@PathVariable String classId, @Valid @RequestBody GenerateReportRequest req) {
+        AttendanceReport report = classService.generateReport(classId, req.getStartDate(), req.getEndDate());
+        return report == null ? ResponseEntity.status(500).body("Unable to generate report") :
+                ResponseEntity.ok(report);
+    }
+
 
 
 }

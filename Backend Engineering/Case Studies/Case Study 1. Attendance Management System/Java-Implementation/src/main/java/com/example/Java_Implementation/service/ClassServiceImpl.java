@@ -1,15 +1,15 @@
 package com.example.Java_Implementation.service;
 
+import com.example.Java_Implementation.dto.AttendanceReport;
 import com.example.Java_Implementation.dto.AttendanceRecord;
-import com.example.Java_Implementation.model.AttendanceStatus;
 import com.example.Java_Implementation.model.ClassEntity;
 import com.example.Java_Implementation.model.StudentEntity;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 public class ClassServiceImpl implements ClassService {
 
@@ -54,6 +54,20 @@ public class ClassServiceImpl implements ClassService {
         // Step 2: Add attendance records for today's date to the target class
         classEntity.getAttendanceRecords().put(date, records);
         return true;
+    }
+
+    @Override
+    public AttendanceReport generateReport(String classId, LocalDate startDate, LocalDate endDate) {
+        // Step 1: Filter AttendanceRecords between startDate and endDate
+        ClassEntity classEntity = classMap.get(classId);
+        Map<LocalDate, List<AttendanceRecord>> records = classEntity.getAttendanceRecords();
+        List<AttendanceRecord> filteredRecords = records.entrySet().stream()
+                .filter(entry -> !entry.getKey().isBefore(startDate) && !entry.getKey().isAfter(endDate))
+                .flatMap(entry -> entry.getValue().stream())
+                .toList();
+        // Step 2: Iterate over each filtered AttendanceRecord and populate each student's AttendanceStats
+
+        return null;
     }
 
     // ========== UTILITY METHODS ==========
