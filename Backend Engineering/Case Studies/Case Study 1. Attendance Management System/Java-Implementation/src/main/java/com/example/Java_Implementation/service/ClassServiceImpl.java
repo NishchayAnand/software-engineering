@@ -1,6 +1,6 @@
 package com.example.Java_Implementation.service;
 
-import com.example.Java_Implementation.dto.AttendanceReport;
+import com.example.Java_Implementation.dto.ClassAttendanceReport;
 import com.example.Java_Implementation.dto.StudentAttendanceRecord;
 import com.example.Java_Implementation.dto.StudentAttendanceStats;
 import com.example.Java_Implementation.model.ClassEntity;
@@ -70,11 +70,11 @@ public class ClassServiceImpl implements ClassService {
     }
 
     @Override
-    public AttendanceReport generateReport(String classId, LocalDate startDate, LocalDate endDate) {
+    public ClassAttendanceReport generateAttendanceReport(String classId, LocalDate startDate, LocalDate endDate) {
 
         // Step 1: Filter AttendanceRecords between startDate and endDate
         ClassEntity classEntity = classMap.get(classId);
-        Map<LocalDate, List<StudentAttendanceRecord>> records = classEntity.getAttendanceRecords();
+        Map<LocalDate, List<StudentAttendanceRecord>> records = classEntity.getStudentAttendanceRecords();
         List<StudentAttendanceRecord> filteredRecords = records.entrySet().stream()
                 .filter(entry -> !entry.getKey().isBefore(startDate) && !entry.getKey().isAfter(endDate))
                 .flatMap(entry -> entry.getValue().stream())
@@ -100,7 +100,7 @@ public class ClassServiceImpl implements ClassService {
 
         // Step 4: Create the attendance report
         List<StudentAttendanceStats> attendanceSummary = (List<StudentAttendanceStats>) statsMap.values();
-        return new AttendanceReport(classEntity.getName(), startDate, endDate, attendanceSummary);
+        return new ClassAttendanceReport(classEntity.getName(), startDate, endDate, attendanceSummary);
     }
 
     // ========== UTILITY METHODS ==========

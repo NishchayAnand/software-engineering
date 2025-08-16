@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @AllArgsConstructor
-public class AttendanceReport {
+public class ClassAttendanceReport {
     private final String className;
     private final LocalDate startDate;
     private final LocalDate endDate;

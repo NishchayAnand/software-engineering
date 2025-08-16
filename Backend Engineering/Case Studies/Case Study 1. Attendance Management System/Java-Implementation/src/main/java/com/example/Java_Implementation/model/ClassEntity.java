@@ -15,7 +15,7 @@ public class ClassEntity {
     private final String name;
     private final String teacherName;
     private final Map<String, StudentEntity> students = new HashMap<>();
-    private final Map<LocalDate, List<StudentAttendanceRecord>> attendanceRecords = new HashMap<>();
+    private final Map<LocalDate, List<StudentAttendanceRecord>> studentAttendanceRecords = new HashMap<>();
 
     public ClassEntity(String id, String name, String teacherName) {
         this.id = id;
