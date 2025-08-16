@@ -59,11 +59,11 @@ public class ClassServiceImpl implements ClassService {
 
         ClassEntity classEntity = classMap.get(classId);
         // Step 1: Check if attendance for today's date is already marked
-        boolean exists = classEntity.getAttendanceRecords().containsKey(date);
+        boolean exists = classEntity.getStudentAttendanceRecords().containsKey(date);
         if(exists) return false;
 
         // Step 2: Add attendance records for today's date to the target class
-        classEntity.getAttendanceRecords().put(date, records);
+        classEntity.getStudentAttendanceRecords().put(date, records);
 
         return true;
 
@@ -85,7 +85,7 @@ public class ClassServiceImpl implements ClassService {
         for(StudentAttendanceRecord record: filteredRecords) {
             StudentAttendanceStats stats = statsMap.computeIfAbsent(record.getEnrollmentId(),
                     k -> new StudentAttendanceStats(record.getEnrollmentId(), record.getName()));
-            switch(record.getStatus()) {
+            switch(record.getAttendanceStatus()) {
                 case "PRESENT": stats.setTotalPresent(stats.getTotalPresent()+1); break;
                 case "ABSENT": stats.setTotalAbsent(stats.getTotalAbsent()+1); break;
             }

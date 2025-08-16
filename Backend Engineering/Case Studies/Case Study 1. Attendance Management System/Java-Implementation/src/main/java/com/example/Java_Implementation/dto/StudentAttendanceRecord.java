@@ -8,5 +8,5 @@ import lombok.Setter;
 public class StudentAttendanceRecord {
     private String enrollmentId;
     private String name;
-    private String status; // PRESENT / ABSENT
+    private String attendanceStatus; // PRESENT / ABSENT
 }
