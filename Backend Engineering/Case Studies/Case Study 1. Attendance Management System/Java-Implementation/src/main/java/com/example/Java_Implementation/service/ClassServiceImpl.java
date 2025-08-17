@@ -14,14 +14,14 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ClassServiceImpl implements ClassService {
 
     // In-memory storage
-    private final Map<String, ClassEntity> classMap = new ConcurrentHashMap<>();
+    private final Map<String, ClassEntity> classRegistry = new ConcurrentHashMap<>();
     private int classCounter;
 
     @Override
     public boolean createClass(String name, String teacherName) {
 
         // Step 1: Check if class with same name already exists
-        boolean exists = classMap.values().stream()
+        boolean exists = classRegistry.values().stream()
                 .anyMatch(obj -> obj.getName().equalsIgnoreCase(name));
         if(exists) return false;
 
@@ -30,7 +30,7 @@ public class ClassServiceImpl implements ClassService {
 
         // Step 3: Create a new class
         ClassEntity newClass = new ClassEntity(classId, name, teacherName);
-        classMap.put(classId, newClass);
+        classRegistry.put(classId, newClass);
 
         return true;
 
@@ -39,7 +39,7 @@ public class ClassServiceImpl implements ClassService {
     @Override
     public boolean addStudent(String classId, String enrollmentId, String name) {
 
-        ClassEntity classEntity = classMap.get(classId);
+        ClassEntity classEntity = classRegistry.get(classId);
 
         // Step 1: Check if the student already exists in the class
         boolean exists = classEntity.getStudentRegistry().containsKey(enrollmentId);
@@ -56,7 +56,7 @@ public class ClassServiceImpl implements ClassService {
     @Override
     public boolean markAttendance(String classId, LocalDate date, List<StudentAttendanceRecord> records) {
 
-        ClassEntity classEntity = classMap.get(classId);
+        ClassEntity classEntity = classRegistry.get(classId);
         // Step 1: Check if attendance for today's date is already marked
         boolean exists = classEntity.getAttendanceRegistry().containsKey(date);
         if(exists) return false;
@@ -72,7 +72,7 @@ public class ClassServiceImpl implements ClassService {
     public ClassAttendanceReport generateAttendanceReport(String classId, LocalDate startDate, LocalDate endDate) {
 
         // Step 1: Filter AttendanceRecords between startDate and endDate
-        ClassEntity classEntity = classMap.get(classId);
+        ClassEntity classEntity = classRegistry.get(classId);
         Map<LocalDate, List<StudentAttendanceRecord>> records = classEntity.getAttendanceRegistry();
         List<StudentAttendanceRecord> filteredRecords = records.entrySet().stream()
                 .filter(entry -> !entry.getKey().isBefore(startDate) && !entry.getKey().isAfter(endDate))
