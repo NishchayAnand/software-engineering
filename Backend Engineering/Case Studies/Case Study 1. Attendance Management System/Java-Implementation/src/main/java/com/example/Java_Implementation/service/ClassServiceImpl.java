@@ -37,6 +37,11 @@ public class ClassServiceImpl implements ClassService {
     }
 
     @Override
+    public List<ClassEntity> getClasses() {
+        return (List<ClassEntity>) classRegistry.values();
+    }
+
+    @Override
     public boolean addStudent(String classId, String enrollmentId, String name) {
 
         ClassEntity classEntity = classRegistry.get(classId);
@@ -51,6 +56,11 @@ public class ClassServiceImpl implements ClassService {
 
         return true;
 
+    }
+
+    @Override
+    public List<StudentEntity> getStudents(String classId) {
+        return (List<StudentEntity>) classRegistry.get(classId).getStudentRegistry().values();
     }
 
     @Override
