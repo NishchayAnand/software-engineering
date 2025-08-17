@@ -1,0 +1,6 @@
+{
+	"nodes":[
+		{"id":"24cfe4a8549c946f","x":-280,"y":-30,"width":500,"height":270,"type":"text","text":"ClassEntity\n---\n+id: String \n\n"}
+	],
+	"edges":[]
+}

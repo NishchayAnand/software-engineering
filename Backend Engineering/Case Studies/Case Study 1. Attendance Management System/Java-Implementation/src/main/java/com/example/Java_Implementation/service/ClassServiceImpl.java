@@ -1,11 +1,10 @@
 package com.example.Java_Implementation.service;
 
 import com.example.Java_Implementation.dto.ClassAttendanceReport;
-import com.example.Java_Implementation.dto.StudentAttendanceRecord;
+import com.example.Java_Implementation.model.StudentAttendanceRecord;
 import com.example.Java_Implementation.dto.StudentAttendanceStats;
 import com.example.Java_Implementation.model.ClassEntity;
 import com.example.Java_Implementation.model.StudentEntity;
-
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -43,12 +42,12 @@ public class ClassServiceImpl implements ClassService {
         ClassEntity classEntity = classMap.get(classId);
 
         // Step 1: Check if the student already exists in the class
-        boolean exists = classEntity.getStudents().containsKey(enrollmentId);
+        boolean exists = classEntity.getStudentRegistry().containsKey(enrollmentId);
         if(exists) return false;
 
         // step 2: Create a student and add it to the target class
         StudentEntity student = new StudentEntity(enrollmentId, name);
-        classEntity.getStudents().put(enrollmentId, student);
+        classEntity.getStudentRegistry().put(enrollmentId, student);
 
         return true;
 
@@ -59,11 +58,11 @@ public class ClassServiceImpl implements ClassService {
 
         ClassEntity classEntity = classMap.get(classId);
         // Step 1: Check if attendance for today's date is already marked
-        boolean exists = classEntity.getStudentAttendanceRecords().containsKey(date);
+        boolean exists = classEntity.getAttendanceRegistry().containsKey(date);
         if(exists) return false;
 
         // Step 2: Add attendance records for today's date to the target class
-        classEntity.getStudentAttendanceRecords().put(date, records);
+        classEntity.getAttendanceRegistry().put(date, records);
 
         return true;
 
@@ -74,7 +73,7 @@ public class ClassServiceImpl implements ClassService {
 
         // Step 1: Filter AttendanceRecords between startDate and endDate
         ClassEntity classEntity = classMap.get(classId);
-        Map<LocalDate, List<StudentAttendanceRecord>> records = classEntity.getStudentAttendanceRecords();
+        Map<LocalDate, List<StudentAttendanceRecord>> records = classEntity.getAttendanceRegistry();
         List<StudentAttendanceRecord> filteredRecords = records.entrySet().stream()
                 .filter(entry -> !entry.getKey().isBefore(startDate) && !entry.getKey().isAfter(endDate))
                 .flatMap(entry -> entry.getValue().stream())

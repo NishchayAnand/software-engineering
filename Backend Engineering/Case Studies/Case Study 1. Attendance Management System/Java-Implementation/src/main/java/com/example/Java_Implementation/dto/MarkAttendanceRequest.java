@@ -1,5 +1,6 @@
 package com.example.Java_Implementation.dto;
 
+import com.example.Java_Implementation.model.StudentAttendanceRecord;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;

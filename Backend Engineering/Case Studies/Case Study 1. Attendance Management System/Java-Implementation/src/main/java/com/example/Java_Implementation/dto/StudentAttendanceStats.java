@@ -15,6 +15,4 @@ public class StudentAttendanceStats {
         this.enrollmentId = enrollmentId;
         this.name = name;
     }
-
-
 }

@@ -1,7 +1,7 @@
 package com.example.Java_Implementation.service;
 
 import com.example.Java_Implementation.dto.ClassAttendanceReport;
-import com.example.Java_Implementation.dto.StudentAttendanceRecord;
+import com.example.Java_Implementation.model.StudentAttendanceRecord;
 
 import java.time.LocalDate;
 import java.util.List;

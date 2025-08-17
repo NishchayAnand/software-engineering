@@ -1,4 +1,4 @@
-package com.example.Java_Implementation.dto;
+package com.example.Java_Implementation.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
