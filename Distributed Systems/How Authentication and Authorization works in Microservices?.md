@@ -174,6 +174,16 @@ However, this approach has a few potential drawbacks:
 ---
 ### Using JWT-based access tokens for authorization
 
+From the perspective of a service developer, the `provide` strategy - passing remote authorization data in the access token - can seem like an ideal solution. Their service’s `isAllowed()` function has everything it needs to make the authorization decision.
+
+Before using a JWT to authorize a request, a recipient, such as a backend service, must validate it by checking:
+
+- The `iss` (issuer) claim the expected `IAM Service`
+- The `exp` (expiration) claim is in the future
+- The signature is valid, by recomputing it using the same algorithm and key and comparing it to the token’s signature
+
+Once the JWT is validated, the recipient can use the claims in the JWT to make the authorization decision.
+
 ---
 ### EXTRA
 
