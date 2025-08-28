@@ -1,24 +1,4 @@
 
-![security-in-microservices](security-microservices.png)
-
-The architecture consists of the following elements:
-
-1. Backend for front-end (BFF): A dedicated **API Gateway** for the UI that handles login and forwards requests from the UI to the services.
-
-2. `Customer Service`: Manages customers, employees, employees’s roles and the customer’s locations.
-
-3. `Customer Service Database`: Stores customer information and is private to the `Customer Service`.
-
-4. `Security System Service`: Manages security systems.
-
-5. `Security System Database`: Stores security system information and is private to the `Security Service`.
-
-6. Message broker: Used for inter-service communication including the service collaboration patterns that rely on asynchronous messaging.
-
-7. `User Service`: Manages users, credentials and their roles.
-
-8. `User Service Database`: Stores user information and is private to the `User Service`
-
 ---
 ### Authentication in a microservice architecture
 
@@ -105,11 +85,94 @@ There are two options for deploying an IAM service.
 2. The other option is to use a cloud-based SaaS solution, such as Okta, AWS Cognito, or Google Identity Platform.
 
 ---
-## Implementing authentication using OAuth 2.0 and OIDC
+### How a backend service obtains the authorization data?
 
-Together, OAuth 2.0 and OpenID connect provide an authentication and authorization mechanism that works well in a microservice architecture. The BFF plays the role of the OAuth 2.0 client, and the backend services are resource servers.
+When a backend service, such as the `Security System Service`, receives a request it must perform an authorization check. An authorization check can be modeled by the `isAllowed(user, operation, resource)` function, which verifies that a user can perform a specific operation on a given resource.
 
+For some operations, a `isAllowed()` can make the authorization decision using just the service’s own data and the user identity and roles provided by the access token. A common example is RBAC. The service simply needs the user’s identity and roles from the access token to authorize the request.
 
+However, not all authorization decisions can rely solely on built-in or local data. For many operations, the isAllowed() function also requires remote authorization data—information that is owned by other services. Accessing this remote data introduces additional complexity and service collaboration challenges.
+
+The challenge is that in a microservice architecture, each service’s data is accessible only through its API. To preserve [loose design-time coupling](https://microservices.io/post/architecture/2023/03/28/microservice-architecture-essentials-loose-coupling.html#design-time-coupling-and-development-velocity), which is a defining characteristic of the microservice architecture, the `Security System Service` cannot directly access the `Customer Service’s database.
+
+---
+### Strategies for obtaining remote authorization data
+
+There are three different strategies that a backend service’s `isAllowed()` function can use to obtain remote data. In addition, there’s a fourth strategy that uses an entirely different approach to authorization: delegating the authorization decision to a centralized authorization service.
+
+The following diagram summarizes the four strategies:
+
+![backend-service-authorization-server-strategies](backend-service-authorization-server-strategies.png)
+
+There are four strategies:
+
+| Strategy  | Description                                                                         |
+| --------- | ----------------------------------------------------------------------------------- |
+| Provide   | JWT-based access token provides the remote authorization data                       |
+| Fetch     | Backend service fetches the remote authorization                                    |
+| Replicate | Backend service maintains a replica of the remote authorization data                |
+| Delegate  | Backend service delegates authorization decision-making to an authorization service |
+
+In practice, a backend service’s endpoint will either:
+
+- Use a combination of the first three strategies to obtain the authorization data it needs.
+- Delegate to an authorization service
+
+Let’s look at each strategy in more detail.
+#### Provide remote authorization data in the access token
+
+One convenient way for a backend service is to obtain the authorization data from other services is to provide it in the access token. When the `IAM Service` issues an access token, it can include the authorization data in the JWT’s claims in addition to the user’s identity and roles. It uses some combination of the `fetch` or `replicate` strategies to obtain the authorization data from the services that own it.
+
+This strategy has some important benefits:
+- It simplifies the service
+- It can improve runtime behavior by avoid additional inter-service requests
+
+However, this strategy works best with authorization data is:
+- small - coarse-grained authorization rather than fine-grained
+- stable - unlikely to change frequently
+
+> **NOTE:** It’s also important to remember that the contents of the access token is an application-level design decision. It might not be possible to satisfy the needs of all services using the `provide` strategy. As a result, while convenient in some scenarios, the `provide` strategy is often not the best choice for handling complex authorization requirements in a microservice architecture.
+#### Fetch remote authorization data dynamically
+
+If the remote authorization data cannot be passed in the access token, then the backend service can fetch the information from the service that owns it. For example, when handling a `disarm()` request, the `Security System Service` can make an HTTP request to the `Customer Service` to retrieve the user’s organization and their roles in that organization. Not only does this keep the access token lean, but also avoids the risk of stale information in the access token.
+
+However, since this is service collaboration, there are several critical issues that you must carefully consider:
+
+- [Simplicity of communication](https://microservices.io/articles/dark-energy-dark-matter/dark-matter/simple-interactions.html) - the interactions between the two services should be simple and easy to understand
+    
+- [Efficiency of communication](https://microservices.io/articles/dark-energy-dark-matter/dark-matter/efficient-interactions.html) - the interactions between the two services should be efficient
+    
+- [Increased runtime coupling](https://microservices.io/articles/dark-energy-dark-matter/dark-matter/minimize-runtime-coupling.html) - the backend service depends on the other service at runtime, which increases its latency and reduces its availability
+    
+- [Increased design-time coupling](https://microservices.io/articles/dark-energy-dark-matter/dark-matter/minimize-design-time-coupling.html) - the backend service uses the other service’s API, and so there’s a risk that both services need to change in lockstep
+
+As a result, while the `fetch` strategy can work well in some scenarios, it is not always the best solution. For example, in cases where runtime coupling is unacceptable, you may need to consider the `replicate` strategy instead.
+#### Replicate remote authorization data from other services
+
+An alternative to a service fetching the information each time, is for it to use the [CQRS pattern](https://microservices.io/patterns/data/cqrs.html) and maintain a local replica of the data within the service’s database. For example, the `Security System Service` can maintain a replica of a customer’s employees, roles and security systems by subscribing to domain events published by the `Customer Service` whenever its data changes.
+
+This strategy has the benefits of keeping the access token lean without the inherent runtime coupling of the `fetch` strategy. Yet at the same, the `replica` strategy is also a form of service collaboration and so has its own drawbacks and limitations:
+
+- Increased complexity and storage requirements - the backend service needs to maintain the replica
+    
+- [Increased risk of inconsistent data](https://microservices.io/articles/dark-energy-dark-matter/dark-matter/prefer-acid-over-base.html) - the replica may lag behind the source data, leading to authorization decisions based on stale information.
+    
+- [Increased design-time coupling](https://microservices.io/articles/dark-energy-dark-matter/dark-matter/minimize-design-time-coupling.html) - the backend service uses the other service’s event publishing API, and so there’s a risk that both services need to change in lockstep
+
+#### Delegate to an authorization service
+
+The fourth strategy is for a backend service to delegate the authorization decision to an authorization service, such as [Oso](https://www.osohq.com/cloud/authorization-service) or [AWS Verified Permissions](https://aws.amazon.com/verified-permissions/). Instead of the backend service implementing `isAllowed()`, it simply calls the authorization service to make the decision. The authorization service responds with either `PERMIT` or `DENY`.
+
+A key benefit of this approach is that it simplifies the backend service. It’s no longer responsible for implementing the authorization logic, including obtaining the necessary authorization data. This strategy can significantly reduce application complexity, especially when multiple backend services have complex authorization requirements. Moreover, a centralized authorization service can provide a consistent and correct authorization model across the application, making it easier to manage and maintain.
+
+However, this approach has a few potential drawbacks:
+
+- increased runtime coupling - The backend service is dependent on the availability and performance of the authorization service.
+    
+- coupling through data dependencies - The authorization service typically needs authorization data from the backend services, which must be obtained using either the `provide`, `fetch` or `replicate`strategies. This creates either design-time or runtime coupling between the authorization service and the backend services.
+
+---
+### Using JWT-based access tokens for authorization
 
 ---
 ### EXTRA
