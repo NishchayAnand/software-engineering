@@ -130,9 +130,9 @@ Design the system following a **microservices architecture** to account for *
 ---
 ### Other Documentations
 
-1. Schema Design: [[Distributed Systems/Case Studies/Case Study 2. TinyURL - Tiny URL Generation System/Schema Design]]
-2. API Design (LLD): [[Distributed Systems/Case Studies/Case Study 2. TinyURL - Tiny URL Generation System/API Design]]
-3. UI Design: [[Distributed Systems/Case Studies/Case Study 2. TinyURL - Tiny URL Generation System/UI Design]]
+1. Schema Design: [[Distributed Systems/Case Studies/Case Study 2. TinyURL - URL Shortening System/Schema Design]]
+2. API Design (LLD): [[Distributed Systems/Case Studies/Case Study 2. TinyURL - URL Shortening System/API Design]]
+3. UI Design: [[Distributed Systems/Case Studies/Case Study 2. TinyURL - URL Shortening System/UI Design]]
 
 ---
 
