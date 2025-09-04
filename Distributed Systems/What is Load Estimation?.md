@@ -1,4 +1,10 @@
 
+Understanding **how much traffic the system will handle** is crucial for designing a scalable and resilient architecture. It allows us to size infrastructure appropriately, anticipate bottlenecks, and decide where optimizations like **caching** or **load balancing** are required.
+
+To quantify this, estimate the <span style="color:green;font-weight:bold;background:beige;">Requests Per Second (RPS)</span> the system must support under both normal and peak load conditions for core user interactions.
+
+---
+
 there’s a systematic way to size how many instances you need for peak.
 
 https://chatgpt.com/c/68b1d467-9404-8321-8e22-f1c004c55713
