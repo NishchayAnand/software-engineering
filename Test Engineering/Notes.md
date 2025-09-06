@@ -1,2 +1,0 @@
-
-A written test can be re-run after you make changes to check if there were any unexpected effects. Also, changes in dependencies can sometimes break your code. Automated tests can alert you problems like this and more.
