@@ -16,6 +16,13 @@ export default function Page() {
 }
 ```
 
+It’s optimized for performance and automatically handles things like:
+
+- **Image optimization** (resizing, compressing, and serving modern formats like WebP).
+- **Responsive images** (different sizes for different screen widths).
+- **Lazy loading** (images outside the viewport load only when scrolled into view).
+- **CDN delivery** (images can be cached and served efficiently).
+
 ---
 ### Common Props and their Use Cases
 
