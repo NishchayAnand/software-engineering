@@ -21,6 +21,10 @@ Deadlocks may occur when multiple resources are locked. Writing deadlock-free ap
 ---
 ### Optimistic Locking
 
+If two processes / threads are trying to update a single entity, we want one transaction to complete and the other to fail. 
+
+We get to pick how we want to resolve conflicts.
+
 It allows multiple concurrent users to attempt to update the same resource.
 
 Two ways to implement:
