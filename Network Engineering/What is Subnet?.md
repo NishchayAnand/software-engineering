@@ -12,8 +12,5 @@ When you create a network, you start with a **block of IP addresses** (like `10.
 ```
 
 ---
-### Private Subnet
 
----
-### Public Subnet
 

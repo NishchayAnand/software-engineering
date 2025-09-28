@@ -1,4 +1,3 @@
-# Understanding URL (Uniform Resource Locator)
 
 Every resource on the web has its own unique address, in the URL format.
 

@@ -1,4 +1,3 @@
-# Understanding Web Servers
 
 A web server is a software program that can deliver the contents of a web application to its clients over the internet.
 
