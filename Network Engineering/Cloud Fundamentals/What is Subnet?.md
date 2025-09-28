@@ -9,11 +9,22 @@ In the context of **cloud (like AWS VPCs)** or traditional networking:
 ---
 ### Private Subnet
 
-A **public subnet** is a subnet that has a direct route to the **Internet Gateway (IGW)** of your VPC.
-
-
+A **private subnet** does **not** have a route to the Internet Gateway.
 
 ---
 ### Public Subnet
 
+A **public subnet** is a subnet that has a direct route to the **Internet Gateway (IGW)** of your VPC.
+
 ---
+### Putting it Together
+
+Imagine a **2-tier architecture** in AWS:
+
+- **Public subnet (`10.0.1.0/24`)** → hosts web servers that serve traffic from the internet.
+- **Private subnet (`10.0.2.0/24`)** → hosts a database that only the web servers can talk to, never exposed publicly.
+
+This setup gives you **security (private subnet)** + **internet accessibility (public subnet)** while keeping the architecture organized.
+
+---
+
