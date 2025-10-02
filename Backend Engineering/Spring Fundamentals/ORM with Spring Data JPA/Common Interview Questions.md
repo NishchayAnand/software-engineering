@@ -66,42 +66,6 @@ Three primary SQL files used by Spring Boot to support database initialization i
 
 ---
 
-Q. Explain `spring.jpa.hibernate.ddl-auto` property.
-
-The `spring.jpa.hibernate.ddl-auto` property in Spring Boot configures the behaviour of Hibernate with regard to **DDL (Data Definition Language) generation**. 
-
-It controls whether Hibernate should automatically create, update, or validate the database schema when the application starts.
-
-**Possible values:**
-
-1. `none`: Hibernate does not manage the database schema at all. You must create and manage the schema manually.
-
-2. `validate`: Hibernate checks that the database schema matches the entities in the code but does not make any changes. If the schema does not match the entities, an exception is thrown.
-
-3. `update`: Hibernate updates the schema to match the entity definitions, but it does not drop any existing data.
-
-4. `create`: Hibernate drops the existing schema (if any) and creates a new schema based on the entities in the code.
-
-5. `create-drop`: Hibernate creates the schema when the application starts and drops it when the application stops.
-
----
-
-Q. What is the `spring.jpa.database-platform` property?
-
-Different databases have different SQL syntaxes and features. For example, PostgreSQL uses `SERIAL` for auto-increment fields, while MySQL uses `AUTO_INCREMENT`. The way **dates**, **joins**, and **native queries** are handled also varies between databases. 
-
-The `spring.jpa.database-platform` property ensures Hibernate generates SQL that works correctly with your database.
-
----
-
-Q. Explain `spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect` property.
-
-The property **`spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect`** is used in **Spring Boot** to specify the Hibernate dialect for a MySQL database.  This ensures that Hibernate generates SQL that is compatible with MySQL’s syntax and capabilities.
-
-> NOTE: A dialect is a configuration that tells Hibernate how to translate Java-based queries (HQL or JPQL) into SQL specific to the database you are using.
-
----
-
 Q. How does Spring handle database exceptions?
 
 Spring's `JpaRepository` catch `SQLExceptions` and wrap them in `DataAccessException` (a **runtime exception**). This approach simplifies exception handling by allowing you to focus on business logic rather than low-level database issues.
