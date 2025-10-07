@@ -1,4 +1,7 @@
 
+
+
+
 ---
 ### What is a Unidirectional Relationship?
 
@@ -60,6 +63,53 @@ private List<Hotel> hotels = new ArrayList<>();
 | You plan to use JPQL from both sides                              | e.g., SELECT l FROM Location l JOIN l.hotels h WHERE h.name = :name |
 
 ---
+### Types of Relationships
+
+`@OneToMany`:
+
+`@ManyToOne`:
+
+`@OneToOne`:
+
+`@ManyToMany`:
+
+---
+### What is MappedBy attribute?
 
 
+---
+### What is Fetched attribute?
+
+
+---
+### What is @JoinColumn?
+
+A JPA annotation used to define the foreign key column that joins two entities in a relationship.
+
+**Example:**
+
+```
+public class Hotel {
+
+	...
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "location_id")
+	private Location location;
+	
+}
+```
+
+---
+### What is @JoinTable Annotation?
+
+`@JoinTable` is a JPA annotation used to define a **third table (join table)** that manages the relationship between two entities.
+
+It specifies:
+- The **name** of the join table,
+- The **foreign keys** that connect both sides of the relationship.
+
+> **NOTE:** In relational databases, a **join table** is a table that holds **pairs of foreign keys** to represent associations between two entities.
+
+---
 

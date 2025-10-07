@@ -28,3 +28,17 @@ SELECT
     last_name
 FROM student;
 ```
+
+---
+
+Insert the room type only if the hotel doesn’t already have a room type with the same (case-insensitive) name.
+
+```
+INSERT INTO public.room_types (hotel_id, name, description, capacity, beds)
+SELECT 1, 'Standard Room', 'Comfortable room with essential amenities', 2, 1
+WHERE NOT EXISTS (
+  SELECT 1 FROM public.room_types r WHERE r.hotel_id = 1 AND lower(r.name) = lower('Standard Room')
+);
+```
+
+---

@@ -83,3 +83,14 @@ The overlay `div` stretches to cover the entire gray parent box.
 `max-w-*`:
 
 ---
+
+`overflow-y-auto`: controls **vertical scrolling behavior** of an element.
+
+> means: “Show a vertical scrollbar _only if_ the content overflows the element’s height.”
+
+**Behavior**
+
+- If the content **fits** inside the element → ✅ No scrollbar appears.
+- If the content **overflows vertically** → 🧭 A vertical scrollbar appears automatically.
+
+---
