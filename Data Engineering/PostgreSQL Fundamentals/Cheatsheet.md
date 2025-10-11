@@ -95,4 +95,17 @@ A special **auto-incrementing column type** used to generate unique integer va
 `serial`: auto-incrementing four-byte integer.
 
 ---
+### How to Perform Round Off?
 
+`ROUND()` function rounds a numeric value to its nearest [integer](https://neon.com/postgresql/postgresql-tutorial/postgresql-integer) or a number with the number of decimal places.
+
+```
+ROUND (source [ , n ] )
+```
+
+The `ROUND()` function accepts 2 arguments:
+
+1) **source**: a number or a numeric expression that is to be rounded.
+2) **n**: an integer that determines the number of decimal places after rounding. The n argument is optional. If you omit the n argument, its default value is 0.
+
+---
