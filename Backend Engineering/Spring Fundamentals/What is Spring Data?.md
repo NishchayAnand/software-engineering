@@ -1,58 +1,15 @@
-# Understanding Spring Data
-
-Provides the basic tools ypu can use to connect to SQL databases to implement persistence layer of your app.
 
 The **Spring Data** enables you to easily connect to databases and use the persistence layer with a minimum number of lines of code written.
 
-> **NOTE:** We have **Spring Data Access**, which is a module of Spring Core, and we also have an independent project in the Spring ecosystem named **Spring Data**.
+Spring Data provides support for interacting with repositories. The central interface abstracting the Spring Data repository is named exactly `Repository<T, ID>`.
 
----
-
-Spring Data provides support for interacting with repositories.
-
-The central interface astracting the Spring Data repository is named exactly `Repository<T, ID>`.
-
-The purpose of the query methods from the repositories is to retrieve information from the database. Spring Data provides a **query builder mechanism** that will create the bahavior of the repository methods based on their names.
+The purpose of the query methods from the repositories is to retrieve information from the database. Spring Data provides a **query builder mechanism** that will create the behaviour of the repository methods based on their names.
 
 The `Java Persistence Query Language (JPQL)` is a platform independent object-oriented query language part of JPA.
 
----
+`spring-boot-starter-data-jpa`: library containing all the functionality related to spring data JPA.
 
-Java Persistence API (JPA) - An API that helps to standarize the Java Persistence world.
-
-- `ApplicationContext ctx = ClassPathXmlApplicationContext("datasources-beans.xml");` creates a container forming the beans from the datasource xml file.
-
-- The JPA defines an `EntityManager` interface, which is basically the heart of API. It is similar to Hibernate's `Session`, forming the core of the application to perform database operations.
-
-> NOTE: Create `persistence.xml` file under a folder named `META-INF`.
-
-A domain object is also known as a persistence entity.
-
----
-
-- JPA stands for Java Persistance API. JPA focused on object-relational mapping or commonly referred to as just an ORM design principle.
-
-- Originally, it was part of the J2EE specification, but was later extracted out to be available just on its own.
-
-- Java Persistance Frameworks like JDBC have a tendency to focus more on the database side of things. They tend to have some bad object-oriented development practices.
-
-- JPA specification focused on good OO design.
-
-- It helps remove a lot of boiler-plate code, helping developers build objects and bridge that gap between our relational database and our object-oriented code.
-
-- Spring Data JPA is a framework to help eliminate boilerplate code with regards to the DAO layer.
-
-- Example Code:
-
-```
-public Car findCar(String id) {
-    return getEntityManager().find(Car.class, id);
-}
-```
-
-- `spring-boot-starter-data-jpa`: library containing all the functionality related to spring data jpa.
-
-- **persistence.xml:** We need this file to configure database connections when dealing with plain JPA. Spring has removed its dependency on our application. Hence, if you are using Spring, you no longer need to have this file in your application. Hurray!
+<span style="color:red;">We need</span> `persistence.xml` <span style="color:red;">file to configure database connections when dealing with plain JPA. Spring has removed its dependency on our application. Hence, if you are using Spring, you no longer need to have this file in your application. Hurray!</span>
 
 ## Simple JPA code :
 
@@ -68,7 +25,6 @@ em.getTransaction().commit();
 em.close();
 emf.close();
 ```
-
 ## Simple Spring Data JPA code:
 
 ```
@@ -78,8 +34,9 @@ public void createRegistration(Registration reg) {
 }
 ```
 
-We can use **orm.xml** files or Hiberate's **hbm.xml** files to work with JPA. However, the industry trend is develop through annotations.
+> **NOTE:** We can use **`orm.xml`** files or Hiberate's **`hbm.xml`** files to work with JPA. However, the industry trend is develop through annotations.
 
+---
 ## JPA Annotations
 
 ### @Entity:
@@ -161,6 +118,7 @@ public class User {
 - Centered around objects.
 - `Query q = em.createQuery("select r from registration");`: will query the object of `Registration` class.
 
+---
 ## Spring Annotations
 
 ### @PersistenceContext

@@ -1,4 +1,4 @@
-# Understanding Spring JDBC
+
 
 Spring provided implementations of DataSource interface:
 
