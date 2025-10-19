@@ -11,3 +11,4 @@ It’s like the **gateway** between your application and the persistence layer
 The **EntityManager** automates all of that for you.
 
 ---
+

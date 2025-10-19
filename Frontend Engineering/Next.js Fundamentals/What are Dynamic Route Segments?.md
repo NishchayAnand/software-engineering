@@ -35,6 +35,16 @@ export default async function Page({
 
 Dynamic Segments are passed as the `params` prop to [`layout`](https://nextjs.org/docs/app/api-reference/file-conventions/layout), [`page`](https://nextjs.org/docs/app/api-reference/file-conventions/page), [`route`](https://nextjs.org/docs/app/api-reference/file-conventions/route), and [`generateMetadata`](https://nextjs.org/docs/app/api-reference/functions/generate-metadata#generatemetadata-function) functions.
 
+> **NOTE:** You **can’t** just use `params.slug` directly, because `params` is no longer an object — it’s a **Promise** that _eventually_ gives you the object.
+> 
+> Making `params` a `Promise` allows:
+> 
+> 1. **Better parallel data fetching**: params can be resolved concurrently with data fetching.
+> 
+> 2. **Consistent async API**: everything (like `searchParams`, `headers`, etc.) can be awaited if needed.
+> 
+> 3. **Future compatibility** with server actions and async layouts.
+
 ### In Client Components
 
 In a Client Component **page**, dynamic segments from props can be accessed using the [`use`](https://react.dev/reference/react/use) hook.
