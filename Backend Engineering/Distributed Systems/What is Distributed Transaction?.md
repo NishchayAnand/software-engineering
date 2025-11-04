@@ -11,4 +11,6 @@ persist reservation before external calls. If not possible, have reconciliation 
     
 5. Use an outbox pattern for reliably publishing events (payment_succeeded, reservation.created) and a separate dispatcher to push to the broker. This prevents message loss when your process crashes after DB commit but before publishing.
 
+> **NOTE:** Make every remote operation idempotent, classify errors, retry only transient failures with exponential backoff + jitter and circuit breakers, and for long-running or multi-step flows use asynchronous retries via sagas/outbox + DLQ rather than blocking database transactions. Compensate with explicit compensating actions where needed.
+
 ---
