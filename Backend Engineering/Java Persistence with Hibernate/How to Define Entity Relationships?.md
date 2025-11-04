@@ -76,6 +76,24 @@ private List<Hotel> hotels = new ArrayList<>();
 ---
 ### What is MappedBy attribute?
 
+It tells Hibernate which side actually manages the join column. 
+
+**Example:**
+
+```
+@Entity
+public class Hold {
+    @Id
+    private UUID id;
+
+    @OneToMany(mappedBy = "hold", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<HoldItem> items = new ArrayList<>();
+}
+```
+
+This tells JPA that the **foreign key is owned by the other side** (`HoldItem`).
+
+> **NOTE:** Without `mappedBy`, Hibernate would try to create an extra join table which you don’t want here.
 
 ---
 ### What is Fetched attribute?
@@ -112,4 +130,26 @@ It specifies:
 > **NOTE:** In relational databases, a **join table** is a table that holds **pairs of foreign keys** to represent associations between two entities.
 
 ---
+### What is CascadeType.ALL?
 
+Cascade means:
+
+> “When I do something to the parent, automatically do it to the children.”
+
+`CascadeType.ALL` includes all these operations:
+
+- `PERSIST` → When you save a Hold, all HoldItems are saved automatically.
+- `MERGE` → Updating the Hold will also update the HoldItems.
+- `REMOVE` → Deleting the Hold will delete all its HoldItems.
+
+**Example:**
+
+```
+Hold hold = new Hold();
+hold.getItems().add(new HoldItem());
+holdRepository.save(hold);
+```
+
+This will automatically persist both the `Hold` and its `HoldItems` in a single transaction, no need to save `HoldItem`separately.
+
+---
