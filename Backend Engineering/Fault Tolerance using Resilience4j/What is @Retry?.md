@@ -78,3 +78,29 @@ resilience4j:
 ✅ Fallback is invoked after retries fail.
 
 ---
+
+|                   **HTTP Status Code** | **Category / Meaning**                      |      **Retry?**      | **Reason**                                                                 |     |
+| -------------------------------------: | ------------------------------------------- | :------------------: | -------------------------------------------------------------------------- | --- |
+|                                **1xx** | Informational (e.g., 100 Continue)          |         ❌ No         | Rarely seen by clients; not retryable.                                     |     |
+|                             **200 OK** | Success                                     |         ❌ No         | Request succeeded.                                                         |     |
+|                        **201 Created** | Success                                     |         ❌ No         | Resource already created successfully.                                     |     |
+|                       **202 Accepted** | Request accepted for processing             |         ❌ No         | Wait for async completion instead.                                         |     |
+|                     **204 No Content** | Success without content                     |         ❌ No         | Completed successfully.                                                    |     |
+|                                **3xx** | Redirection                                 |    ❌ No (usually)    | Handled automatically by Feign/HTTP client.                                |     |
+|              **301 Moved Permanently** | Resource permanently moved                  |         ❌ No         | Update client configuration instead.                                       |     |
+| **302 Found / 307 Temporary Redirect** | Temporary redirect                          |         ❌ No         | Follow redirect automatically if supported.                                |     |
+|                   **304 Not Modified** | Cache response                              |         ❌ No         | Nothing to retry.                                                          |     |
+|                    **400 Bad Request** | Client sent invalid data                    |         ❌ No         | Client error — fix input, not retry.                                       |     |
+|                   **401 Unauthorized** | Missing or invalid credentials              |         ❌ No         | Retry won’t help until token refreshed.                                    |     |
+|                      **403 Forbidden** | Access denied                               |         ❌ No         | Permanent authorization failure.                                           |     |
+|                      **404 Not Found** | Resource doesn’t exist                      |         ❌ No         | Permanent; retrying won’t help.                                            |     |
+|             **405 Method Not Allowed** | Invalid HTTP method                         |         ❌ No         | Client configuration error.                                                |     |
+|                       **409 Conflict** | Resource conflict (e.g., duplicate request) |       ⚠️ Maybe       | Retry only if operation is idempotent (e.g., reservation already created). |     |
+|                           **410 Gone** | Resource permanently removed                |         ❌ No         | Permanent error.                                                           |     |
+|           **422 Unprocessable Entity** | Validation or business rule failed          |         ❌ No         | Logical failure, not transient.                                            |     |
+|              **429 Too Many Requests** | Rate limit exceeded                         | ✅ Yes (after delay)  | Transient; retry after `Retry-After` header.                               |     |
+|          **500 Internal Server Error** | Server-side error                           |        ✅ Yes         | Transient error, safe to retry.                                            |     |
+|                    **502 Bad Gateway** | Upstream dependency failed                  |        ✅ Yes         | Temporary backend failure.                                                 |     |
+|            **503 Service Unavailable** | Server temporarily overloaded or down       | ✅ Yes (with backoff) | Classic retry candidate.                                                   |     |
+|                **504 Gateway Timeout** | Server didn’t respond in time               |        ✅ Yes         | Transient connectivity issue.                                              |     |
+|                     **Network Errors** | Timeouts, Connection refused, I/O errors    |        ✅ Yes         | Transient network issue, safe to retry.                                    |     |
