@@ -10,7 +10,7 @@
 
 **`HTTP 404 Not Found`**: This happens when a user tries to access a URL that has been mistyped, moved, or deleted, but the server is still accessible. <span style="color:red;">The browser can successfully connect to the server, but the server reports that the specific resource is missing.</span>
 
-**`HTTP 422 Unprocessable Content`**: The server cannot fulfill the request because the data provided is semantically incorrect or violates certain rules or constraints. The client should not repeat the exact same request without modification, as the problem lies with the data itself.
+**`HTTP 422 Unprocessable Content`**: The server cannot fulfill the request because the data provided is semantically incorrect or <span style="color:red;">violates certain business rules or constraints</span>. The client should not repeat the exact same request without modification, as the problem lies with the data itself.
 
 **`HTTP 429 Too Many Requests`**: A client error status code indicating that the user has sent too many requests to the server within a specified time frame. This mechanism, known as "rate limiting," is implemented by servers to prevent overload, abuse, and potential <span style="color:red;">denial-of-service (DDoS)</span> attacks.
 

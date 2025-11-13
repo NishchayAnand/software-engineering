@@ -1,0 +1,2 @@
+
+The persistence context is one of the main concepts in JPA. You can think of it as a set of all entity objects that you used in your current use case. Each of them represents a record in the database.

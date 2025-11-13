@@ -7,6 +7,16 @@
 
 Use it on service-layer methods that call repositories so you get consistent reads, automatic rollback on runtime exceptions, and optional optimizations (`readOnly = true)`.
 
+> **IMPORTANT:** The ordering inside the same transaction is largely a matter of semantics/readability.
+
+---
+
+If the constraint violation is detected at the commit-time flush, the exception is thrown when the transaction is committing. That means:
+
+- If you expect to handle it inside the same transactional method, it may be too late (transaction is rolling back).
+
+- The exception will bubble out of the transactional boundary (e.g., to controller) as a `DataIntegrityViolationException` or wrapped in a `TransactionSystemException`.
+
 ---
 ### @Transactional(readOnly = true)
 
