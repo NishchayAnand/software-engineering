@@ -17,6 +17,24 @@ Each octet is written in **decimal (0–255)**, separated by dots. So `a.b.c.d` 
 ```
 
 ---
+### What is CIDR notation?
+
+A CIDR block has **two parts**:
+
+1. **Base IP address** → starting point
+2. **Prefix length** (e.g., `/24`) → how many bits are fixed for the network
+
+Example:
+
+```
+192.168.1.0/24
+```
+
+- `192.168.1` = network portion
+- `/24` = first **24 bits** identify the network
+- Last **8 bits** are for hosts → 2⁸ = **256 IPs**
+
+---
 ### Limitations of IPv4
 
 IPv4 addresses are 32-bit numbers, which allow for about 4.3 billion unique combinations. While that initially seemed sufficient, a significant portion of these addresses was reserved for private networks, multicast, and other special uses, reducing the pool of usable public addresses. 
