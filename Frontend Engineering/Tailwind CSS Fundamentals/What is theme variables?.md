@@ -27,3 +27,31 @@ Since they do more than regular CSS variables, Tailwind uses special syntax so t
 Defining regular CSS variables with `:root` can still be useful in Tailwind projects when you want to define a variable that isn't meant to be connected to a utility class. Use `@theme` when you want a design token to map directly to a utility class, and use `:root` for defining regular CSS variables that shouldn't have corresponding utility classes.
 
 ---
+### Theme variable namespaces
+
+Theme variables are defined in _namespaces_ and each namespace corresponds to one or more utility class or variant APIs.
+
+Defining new theme variables in these namespaces will make new corresponding utilities and variants available in your project:
+
+|Namespace|Utility classes|
+|---|---|
+|`--color-*`|Color utilities like `bg-red-500`, `text-sky-300`, and many more|
+|`--font-*`|Font family utilities like `font-sans`|
+|`--text-*`|Font size utilities like `text-xl`|
+|`--font-weight-*`|Font weight utilities like `font-bold`|
+|`--tracking-*`|Letter spacing utilities like `tracking-wide`|
+|`--leading-*`|Line height utilities like `leading-tight`|
+|`--breakpoint-*`|Responsive breakpoint variants like `sm:*`|
+|`--container-*`|Container query variants like `@sm:*` and size utilities like `max-w-md`|
+|`--spacing-*`|Spacing and sizing utilities like `px-4`, `max-h-16`, and many more|
+|`--radius-*`|Border radius utilities like `rounded-sm`|
+|`--shadow-*`|Box shadow utilities like `shadow-md`|
+|`--inset-shadow-*`|Inset box shadow utilities like `inset-shadow-xs`|
+|`--drop-shadow-*`|Drop shadow filter utilities like `drop-shadow-md`|
+|`--blur-*`|Blur filter utilities like `blur-md`|
+|`--perspective-*`|Perspective utilities like `perspective-near`|
+|`--aspect-*`|Aspect ratio utilities like `aspect-video`|
+|`--ease-*`|Transition timing function utilities like `ease-out`|
+|`--animate-*`|Animation utilities like `animate-spin`|
+
+---
