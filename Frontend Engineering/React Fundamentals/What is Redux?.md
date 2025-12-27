@@ -1,4 +1,8 @@
 
+<span style="color:purple;font-weight:bold;">Redux provides a centralized store that serves as an in-memory cache for the data fetched during the current user session.</span>
+
+---
+
 store, action and reducer
 
 store = global state
