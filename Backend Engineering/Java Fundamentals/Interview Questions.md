@@ -1,4 +1,61 @@
 
+Q. Given an array `nums` containing `n` distinct numbers in the range `[0, n]`, return the only number in the range that is missing from the array.
+
+**Example 1:**
+
+```
+Input: nums = [9,6,4,2,3,5,7,0,1]
+
+Output: 
+```
+
+<span style="color:green">A. Sum of the first `n` nums subtracted by the sum of numbers in `nums` should give us the missing number.</span>
+
+```java
+public int missingNumber(int[] nums) {
+	int n = nums.length;
+	// Sum of the first N numbers
+	int firstNSum = (n*(n+1))/2;
+	// Sum of numbers in nums array
+	int totalSum = 0;
+	for(int num: nums) totalSum += num;
+	// return the difference 
+	return firstNSum - totalSum;   
+}
+```
+
+---
+
+
+<span style="color:purple;">Q. What is Comparator Interface?</span>
+
+
+---
+
+<span style="color:purple;">Q. How does custom sorting works in Java 8?</span>
+
+Java 8 introduced `Comparator` + `Lambda` expressions.
+
+
+---
+
+<span style="color:purple;">Q. Build a custom sorting method that behaves like Collections.sort()</span>
+
+
+---
+Q Difference between Arrays.sort() and Collections.sort()
+
+---
+
+ 
+
+---
+### EXTRA
+
+long vs Long, long vs float vs double
+
+type casting
+
 Q. Explain Exceptions in Java.
 
 Exceptions are events that occur during program execution and disrupt the normal flow of the application. They are objects that represent an error or unexpected behavior, and Java provides a robust mechanism to handle them.
@@ -45,8 +102,6 @@ The key differences between `StringBuilder` and `StringBuffer` in Java revolve a
 > NOTE: Use `StringBuffer`when you need to work with a mutable string in a multi-threaded environment, and synchronization is required. Use `StringBuilder` when you need to work with a mutable string in a single-threaded environment, where performance is a priority and thread safety is not a concern.
 
 ---
-
-## EXTRA
 
 Q. Write a solution to sort strings based on their length. If the length of two strings are equal, compare the two strings aphabetically.
 
