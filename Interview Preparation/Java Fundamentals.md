@@ -1,34 +1,284 @@
 
-Q. Given an array `nums` containing `n` distinct numbers in the range `[0, n]`, return the only number in the range that is missing from the array.
+Here’s a clean, interview-oriented list of important Java topics, ordered roughly from must-know to good-to-have.
 
-**Example 1:**
+---
 
-```
-Input: nums = [9,6,4,2,3,5,7,0,1]
+<span style="color:indigo;font-weight:bold;">Q. What is</span>`Comparable` <span style="color:indigo;font-weight:bold;"> interface?</span>
 
-Output: 
-```
-
-<span style="color:green">A. Sum of the first `n` nums subtracted by the sum of numbers in `nums` should give us the missing number.</span>
+- An interface in `java.lang`
 
 ```java
-public int missingNumber(int[] nums) {
-	int n = nums.length;
-	// Sum of the first N numbers
-	int firstNSum = (n*(n+1))/2;
-	// Sum of numbers in nums array
-	int totalSum = 0;
-	for(int num: nums) totalSum += num;
-	// return the difference 
-	return firstNSum - totalSum;   
+public interface Comparable<T> {
+	int compareTo(T o);
+}
+```
+
+- Implemented by the class itself.
+- Defines a natural ordering inside the class.
+
+```java
+class Employee implements Comparable<Employee> {
+	int id;
+	String name;
+	
+	public Employee(int id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+	
+	@Override
+	public int compareTo(Employee other) {
+		return this.id - other.id; // ascending by id
+	}
+}
+```
+
+```java
+Collections.sort(employeeList); // uses compareTo()
+```
+
+- Used when objects have a single, obvious way to be sorted.
+
+---
+
+<span style="color:indigo;font-weight:bold;">Q. Explain the internal working of</span> `Collections.sort(employeeList)`. 
+
+Java does roughly this internally:
+
+```java
+for(int i=0; i<employeeList.size(); i++) {
+	for(int j=i+1; j<employeeList.size(); j++) {
+		if( employeeList.get(i).compareTo(employeeList.get(j)) > 0 ) {
+			swap(employeeList, i, j);
+		}
+	}
 }
 ```
 
 ---
 
+<span style="color:indigo;font-weight:bold;">Q. What is an abstract class?</span>
+
+An abstract class is a class that:
+
+1. Is declared using the `abstract` keyword
+2. Cannot be instantiated
+3. Can have both abstract and concrete methods
+4. Can maintain state (fields)
+
+```java
+abstract class Vehicle {
+	
+	int speed; // state
+	
+	abstract void start(); // abstract method
+	
+	void accelerate() { // concrete method
+		speed+=10; 
+	}
+
+}
+```
+
+```java
+class Car extends Vehicle {
+	@Override
+	void start() {
+		System.out.println("Car starts with key");
+	}
+}
+```
+
+```java
+Vehicle v = new Car(); // polymorphism
+v.start();
+v.accelerate();
+```
+
+Key Rules:
+
+- <span style="color:green;">Interfaces <strong>cannot hold mutable state</strong>. Abstract classes can.</span>
+- Abstract class allows you to protect internal logic by providing access to `protected` methods, `private` helper methods and controlled extension. In interfaces, all methods are `public` by default.
+
+---
+
+<span style="color:indigo;font-weight:bold;">Q. What are default methods in an interface?</span>
+
+A default method is a method inside an interface that has:
+
+1. The `default` keyword
+2. A method body (implementation)
+
+```java
+interface Vehicle {
+	default void start() {
+		System.out.println("Vehicle is starting");
+	}
+}
+```
+
+**Before Java 8:**
+
+- Interfaces could only have **abstract methods**
+- Adding a new method to an interface would **break all implementing classes**.
+
+Default methods solved this.
+
+---
+
+<span style="color:indigo;font-weight:bold;">Q. What are static methods in an interface?</span>
+
+A static method in an interface is:
+
+1. Declared using the `static` keyword
+2. Has a method body
+3. Belongs to the interface itself, not to any implementing class
+
+**Introduced in Java 8 (along with default methods)**
+
+```java
+interface Validator {
+	boolean isValid(String s);
+	
+	static boolean isEmpty(String s) {
+		return s == null || s.isEmpty();
+	}
+}
+```
+
+The primary reason for static methods in interface is to <span style="color:green;">allow related utility methods to be defined alongside the interface without being inherited, overridden</span>, or affecting implementing classes.
+
+---
+
+<span style="color:indigo; font-weight:bold;">Q. What is Functional Interface?</span>
+
+An interface with exactly one abstract method.
+
+```java
+@FunctionalInterface
+interface Calculator {
+	int add(int a, int b);
+}
+```
+
+Usage with a lambda:
+
+```java
+Calculator cal = (a, b) -> a + b;
+System.out.println(cal(2, 3));
+```
+
+> **NOTE**: A functional interface can have multiple `default` and `static` methods. 
+
+---
+
+<span style="color:indigo; font-weight:bold;">Q. Can a functional interface extend another interface?</span>
+
+Yes, only if the parent interface **does not introduce an additional abstract method**.
+
+**Example**
+
+```java
+interface Logger {
+	default void log(String msg) { // default method
+		System.out.println(msg);
+	}
+}
+```
+
+```java
+@FunctionInterface
+interface Task extends Logger {
+	void execute(); // only one abstract method
+}
+```
+
+**Mental Model**: Count abstract methods across the entire inheritance chain. If the total is exactly one, it's a functional interface.
+
+---
+
+<span style="color:indigo; font-weight:bold;">Q. Explain different types of functional interfaces.</span>
+
+1. `Predicate<T>`: Contains an abstract function: `boolean test(T t)` that tests a condition and returns `true` or `false`.
+
+```java
+Predicate<Integer> isEven = n -> n % 2 == 0;
+isEven.test(10);
+```
+
+2. `Function<T, R>`: Contains an abstract function: `R apply(T t)` that takes input of type `T` and returns output of type `R`.
+
+```java
+Function<String, Integer> length = s -> s.length();
+length.apply("Java"); // 4
+```
+
+3. `Consumer<T>`: Contains an abstract function: `void accept(T t)` that consumes input but returns nothing.
+
+```java
+Consumer<String> print = s -> System.out.println(s);
+print.accept("Hello");
+```
+
+4. `Supplier<T>`: Contains an abstract function: `T get()` that supplies a value without any input.
+
+```java
+Supplier<Double> random = () -> Math.random();
+random.get();
+```
+
+5. `Runnable`: Contains an abstract function: `void run()` that neither takes an input nor returns an output.
+
+```java
+Runnable task = () -> System.out.println("Running");
+new Thread(task).start();
+```
+
+6. `Callable<V>`: Contains an abstract function: `V call() throws Exception` that takes no input but returns an output. 
+
+```java
+Callable<Integer> task = () -> 42;
+```
+
+**Quick Comparison Table**
+
+| Interface      | Input | Output  | Use Case         |
+| -------------- | ----- | ------- | ---------------- |
+| Predicate      | 1     | boolean | Filter           |
+| Function       | 1     | 1       | Transform        |
+| Consumer       | 1     | none    | Side effects     |
+| Supplier       | 0     | 1       | Lazy creation    |
+| UnaryOperator  | 1     | same    | Update           |
+| BinaryOperator | 2     | same    | Reduce           |
+| BiFunction     | 2     | 1       | Combine          |
+| Runnable       | 0     | none    | Task             |
+| Callable       | 0     | 1       | Task with result |
+
+---
 
 <span style="color:purple;">Q. What is Comparator Interface?</span>
 
+Comparator allows you to define custom, external sorting logic without modifying the class itself.
+
+When you call `Collections.sort(list, comparator)`, internally Java does **three things**:
+
+1. Chooses a **sorting algorithm** (TimSort)
+2. Repeatedly **compares elements**
+3. Uses your **`Comparator.compare()`** method to decide order
+
+Your comparator is treated as a **callback function**.
+
+```
+int result = comparator.compare(o1, o2);
+```
+
+Based on the result:
+
+| Result | Action                          |
+| ------ | ------------------------------- |
+| `< 0`  | `o1` stays before `o2`          |
+| `> 0`  | swap                            |
+| `0`    | keep relative order (stability) |
 
 ---
 
@@ -48,6 +298,56 @@ Q Difference between Arrays.sort() and Collections.sort()
 ---
 
  
+
+
+Q. Given an array `nums` containing `n` distinct numbers in the range `[0, n]`, return the only number in the range that is missing from the array.
+
+**Example 1:**
+
+```
+Input: nums = [9,6,4,2,3,5,7,0,1]
+
+Output: 8
+```
+
+<span style="color:green">A. Sum of the first `n` nums subtracted by the sum of numbers in `nums` should give us the missing number.</span>
+
+```java
+public int missingNumber(int[] nums) {
+	int n = nums.length;
+	// Sum of the first N numbers
+	int firstNSum = (n*(n+1))/2;
+	// Sum of numbers in nums array
+	int totalSum = 0;
+	for(int num: nums) totalSum += num;
+	// return the difference 
+	return firstNSum - totalSum;   
+}
+```
+
+---
+
+Q. Given an integer array `nums`, return `true` if any value appears **at least twice** in the array, and return `false` if every element is distinct.
+
+**Example 1:**
+
+```
+Input: nums = [1,2,3,1]
+
+Output: true
+
+Explanation: The element 1 occurs at the indices 0 and 3.
+```
+
+<span style="color:green">A.The most efficient way is to use a HashSet to track elements seen so far.</span>
+
+- **Time Complexity:** `O(n)`
+- **Space Complexity:** `O(n)`
+
+If you don’t want extra space:
+
+- Sort the array → check adjacent elements
+- Time: `O(n log n)`, Space: `O(1)` (if in-place)
 
 ---
 ### EXTRA
