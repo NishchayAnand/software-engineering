@@ -3,60 +3,6 @@ Here’s a clean, interview-oriented list of important Java topics, ordered roug
 
 ---
 
-<span style="color:indigo;font-weight:bold;">Q. What is</span>`Comparable` <span style="color:indigo;font-weight:bold;"> interface?</span>
-
-- An interface in `java.lang`
-
-```java
-public interface Comparable<T> {
-	int compareTo(T o);
-}
-```
-
-- Implemented by the class itself.
-- Defines a natural ordering inside the class.
-
-```java
-class Employee implements Comparable<Employee> {
-	int id;
-	String name;
-	
-	public Employee(int id, String name) {
-		this.id = id;
-		this.name = name;
-	}
-	
-	@Override
-	public int compareTo(Employee other) {
-		return this.id - other.id; // ascending by id
-	}
-}
-```
-
-```java
-Collections.sort(employeeList); // uses compareTo()
-```
-
-- Used when objects have a single, obvious way to be sorted.
-
----
-
-<span style="color:indigo;font-weight:bold;">Q. Explain the internal working of</span> `Collections.sort(employeeList)`. 
-
-Java does roughly this internally:
-
-```java
-for(int i=0; i<employeeList.size(); i++) {
-	for(int j=i+1; j<employeeList.size(); j++) {
-		if( employeeList.get(i).compareTo(employeeList.get(j)) > 0 ) {
-			swap(employeeList, i, j);
-		}
-	}
-}
-```
-
----
-
 <span style="color:indigo;font-weight:bold;">Q. What is an abstract class?</span>
 
 An abstract class is a class that:
@@ -256,41 +202,188 @@ Callable<Integer> task = () -> 42;
 
 ---
 
-<span style="color:purple;">Q. What is Comparator Interface?</span>
+<span style="color:indigo;font-weight:bold;">Q. What is</span>`Comparable` <span style="color:indigo;font-weight:bold;"> interface?</span>
 
-Comparator allows you to define custom, external sorting logic without modifying the class itself.
+- An interface in `java.lang`
 
-When you call `Collections.sort(list, comparator)`, internally Java does **three things**:
-
-1. Chooses a **sorting algorithm** (TimSort)
-2. Repeatedly **compares elements**
-3. Uses your **`Comparator.compare()`** method to decide order
-
-Your comparator is treated as a **callback function**.
-
-```
-int result = comparator.compare(o1, o2);
+```java
+public interface Comparable<T> {
+	int compareTo(T o);
+}
 ```
 
-Based on the result:
+- Implemented by the class itself.
+- Defines a natural ordering inside the class.
 
-| Result | Action                          |
-| ------ | ------------------------------- |
-| `< 0`  | `o1` stays before `o2`          |
-| `> 0`  | swap                            |
-| `0`    | keep relative order (stability) |
+```java
+class Employee implements Comparable<Employee> {
+	int id;
+	String name;
+	
+	public Employee(int id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+	
+	@Override
+	public int compareTo(Employee other) {
+		return this.id - other.id; // ascending by id
+	}
+}
+```
+
+```java
+Collections.sort(employeeList); // uses compareTo()
+```
+
+- Used when objects have a single, obvious way to be sorted.
 
 ---
 
-<span style="color:purple;">Q. How does custom sorting works in Java 8?</span>
+<span style="color:indigo;font-weight:bold;">Q. Explain the internal working of</span> `Collections.sort(employeeList)`. 
 
-Java 8 introduced `Comparator` + `Lambda` expressions.
+Java does roughly this internally:
 
+```java
+for(int i=0; i<employeeList.size(); i++) {
+	for(int j=i+1; j<employeeList.size(); j++) {
+		if( employeeList.get(i).compareTo(employeeList.get(j)) > 0 ) {
+			swap(employeeList, i, j);
+		}
+	}
+}
+```
 
 ---
 
-<span style="color:purple;">Q. Build a custom sorting method that behaves like Collections.sort()</span>
+<span style="color:indigo;font-weight:bold;">Q. What is</span>`Comparator` <span style="color:indigo;font-weight:bold;"> interface?</span>
 
+- An interface in `java.util`
+
+```java
+public interface Comparator<T> {
+    int compare(T o1, T o2);
+}
+```
+
+- Implemented as a **separate class or lambda** to define a custom ordering **outside** the main class.
+
+```java
+class Employee {
+    int id;
+    String name;
+    double salary;
+}
+```
+
+```java
+class NameComparator implements Comparator<Employee> {
+    @Override
+    public int compare(Employee e1, Employee e2) {
+        return e1.name.compareTo(e2.name);
+    }
+}
+```
+
+- Used when you need **multiple sorting strategies**
+
+```java
+Collections.sort(employeeList, new NameComparator());
+```
+
+<span style="color:green;font-weight:bold;">Key Insights:</span>
+
+Now ask yourself:
+
+- Sort by `id` → for DB writes
+- Sort by `name` → for UI display
+- Sort by `salary` → for reports
+- Sort by `(salary desc, name asc)` → for HR dashboards
+
+With `Comparable`, you get **ONLY ONE** `compareTo()`. This is the **core limitation** that `Comparator` solves.
+
+<span style="color:green;font-weight:bold;">Common Use Cases:</span>
+
+1. Sort integers in descending order
+
+```java
+Collections.sort(list, Comparator.reverseOrder);
+```
+
+2. Sort strings by length
+
+```java
+list.sort((a, b) -> a.length() - b.length());
+```
+
+3. Sort strings ignoring case
+
+```java
+list.sort(String::compareToIgnoreCase);
+```
+
+---
+
+<span style="color:indigo;font-weight:bold;">Q. Explain the difference between</span> `Collections.sort()` <span style="color:indigo;font-weight:bold;">and</span> `List.sort()`<span style="color:indigo;font-weight:bold;">.</span>
+
+`List.sort()` is the modern, preferred way introduced in Java 8, while `Collections.sort()` is the older utility method.
+
+| Method               | Introduced in |
+| -------------------- | ------------- |
+| `Collections.sort()` | Java 1.2      |
+| `List.sort()`        | Java 8        |
+
+Java 8 added **default methods** → allowed interfaces to evolve without breaking implementations.
+
+---
+
+<span style="color:indigo;font-weight:bold;">Q. Build a custom sorting method that behaves like</span> `Collections.sort()`<span style="color:indigo;font-weight:bold;">.</span>
+
+At a behavior level, `Collection.sort()`:
+
+1. Sorts the list **in place**.
+2. If a `Comparator` is provided, use it.
+3. Else, use natural ordering (`Comparable`).
+
+We’ll replicate **this behavior** (not Java’s internal TimSort).
+
+```java
+// Version 1: With Comparator
+public static void mySort(List<T> list, Comparator<? super T> comparator) {
+	if (list == null || list.size <= 1) return;
+	
+	int n = list.size();
+	
+	for(int i=0; i<n-1; i++) {
+		for(int j=i+1; j<n; j++) {
+			T obj1 = list.get(i);
+			T obj2 = list.get(j);
+			
+			int cmp;
+			if(comparator != null) {
+				cmp = comparator.compare(obj1, obj2);
+			} else {
+				// Use natural ordering
+				Comparable<? super T> c1 = (Comparable<? super T>) obj1;
+				cmp = c1.compareTo(obj2);
+			}
+			
+			if(cmp > 0) {
+				// swap
+				list.set(i, obj2);
+				list.set(j, obj1);
+			}
+		} 
+	}
+}
+```
+
+```java
+// natural ordering only
+public static void mySort(List<T> list) {
+	mySort(list, null);
+}
+```
 
 ---
 Q Difference between Arrays.sort() and Collections.sort()
