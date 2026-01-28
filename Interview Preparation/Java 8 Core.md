@@ -96,6 +96,12 @@ The primary reason for static methods in interface is to <span style="color:gree
 
 ---
 
+<span style="color:indigo; font-weight:bold;">Q. What is Generics?</span>
+
+
+
+---
+
 <span style="color:indigo; font-weight:bold;">Q. What is Functional Interface?</span>
 
 An interface with exactly one abstract method.
@@ -349,7 +355,7 @@ We’ll replicate **this behavior** (not Java’s internal TimSort).
 
 ```java
 // Version 1: With Comparator
-public static void mySort(List<T> list, Comparator<? super T> comparator) {
+public static <T> void mySort(List<T> list, Comparator<? super T> comparator) {
 	if (list == null || list.size <= 1) return;
 	
 	int n = list.size();
@@ -386,24 +392,17 @@ public static void mySort(List<T> list) {
 ```
 
 ---
-Q Difference between Arrays.sort() and Collections.sort()
 
----
-
- 
-
-
-Q. Given an array `nums` containing `n` distinct numbers in the range `[0, n]`, return the only number in the range that is missing from the array.
-
-**Example 1:**
+<span style="color:indigo;font-weight:bold;">Q. Given an array</span> `nums` <span style="color:indigo;font-weight:bold;">containing</span> `n` <span style="color:indigo;font-weight:bold;">distinct numbers in the range</span> `[0, n]`<span style="color:indigo;font-weight:bold;">, return the only number in the range that is missing from the array.</span>
 
 ```
-Input: nums = [9,6,4,2,3,5,7,0,1]
+Example 1:
 
+Input: nums = [9,6,4,2,3,5,7,0,1]
 Output: 8
 ```
 
-<span style="color:green">A. Sum of the first `n` nums subtracted by the sum of numbers in `nums` should give us the missing number.</span>
+A. Sum of the first `n` nums subtracted by the sum of numbers in `nums` should give us the missing number.
 
 ```java
 public int missingNumber(int[] nums) {
@@ -420,19 +419,17 @@ public int missingNumber(int[] nums) {
 
 ---
 
-Q. Given an integer array `nums`, return `true` if any value appears **at least twice** in the array, and return `false` if every element is distinct.
-
-**Example 1:**
+<span style="color:indigo;font-weight:bold;">Q. Given an integer array</span> `nums`<span style="color:indigo;font-weight:bold;">, return</span> `true` <span style="color:indigo;font-weight:bold;">if any value appears at least twice in the array, and return</span> `false` <span style="color:indigo;font-weight:bold;">if every element is distinct.</span>
 
 ```
+Example 1:
+
 Input: nums = [1,2,3,1]
-
 Output: true
-
 Explanation: The element 1 occurs at the indices 0 and 3.
 ```
 
-<span style="color:green">A.The most efficient way is to use a HashSet to track elements seen so far.</span>
+A.The most efficient way is to use a HashSet to track elements seen so far.
 
 - **Time Complexity:** `O(n)`
 - **Space Complexity:** `O(n)`
@@ -443,6 +440,8 @@ If you don’t want extra space:
 - Time: `O(n log n)`, Space: `O(1)` (if in-place)
 
 ---
+
+
 ### EXTRA
 
 long vs Long, long vs float vs double
